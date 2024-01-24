@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
 <%@include file="../include/header.jsp" %>
 <div class="wrap con">
     <div class="boarder_top">
@@ -23,6 +23,14 @@
                     <th>제목</th>
                     <th>등록일</th>
                 </tr>
+                <%--${board}--%>
+                <c:forEach var="board" items="${board}" varStatus="status">
+                    <tr>
+                        <td>${status.count}</td>
+                        <td><a href="/detail?bno=${board.boardIdx}">${board.boardSubject}</a></td>
+                        <td>${board.boardDate}</td>
+                    </tr>
+                </c:forEach>
                 <%--${board.content}--%>
                 <%--<c:if test="${not empty board}">
                     <!-- board 데이터가 있을 때 수행할 작업 -->
@@ -40,7 +48,7 @@
                         <td colspan="3">자료가 없습니다.</td>
                     </tr>
                 </c:if>--%>
-                <c:choose>
+                <%--<c:choose>
                     <c:when test="${board ne null}">
                         <c:forEach var="board" items="${board}">
                             <tr>
@@ -55,7 +63,7 @@
                             <td colspan="3">자료가 없습니다.</td>
                         </tr>
                     </c:otherwise>
-                </c:choose>
+                </c:choose>--%>
 
             </table>
         </div>

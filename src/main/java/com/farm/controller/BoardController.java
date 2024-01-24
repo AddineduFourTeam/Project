@@ -21,7 +21,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    private Member loginUser;
+    //private Member loginUser;
 
     @GetMapping("/board")
     public String boardList(@RequestParam(value="nowPage", defaultValue="1") int page ,Model model) {
@@ -35,6 +35,7 @@ public class BoardController {
         //System.out.println("board : "+board);
         Page<Board> result = boardService.listAll(pageable);
         List<Board> content = result.getContent();
+        System.out.println(content);
         model.addAttribute("board", content);
         return "/board";
     }
