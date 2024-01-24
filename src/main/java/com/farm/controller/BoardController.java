@@ -29,13 +29,22 @@ public class BoardController {
 
         int nPage = page - 1; // 시작페이지
         Pageable pageable = PageRequest.ofSize(10).withPage(nPage); //ofsize(페이지당 게시물) , withPage(현재페이지)
-
-        //model.addAttribute("board",boardService.listAll(pageable));
-        //model.addAttribute("board", boardService.listAll(PageRequest.of(nowPage, 10))) ;
-        //System.out.println("board : "+board);
         Page<Board> result = boardService.listAll(pageable);
         List<Board> content = result.getContent();
+
+        long totalElements = result.getTotalElements();
+        int totalPages = result.getTotalPages();
+        int size = result.getSize(); // 페이지당 페이지 수
+        int pageNumber = result.getNumber() + 1; // 현재페이지
+        int numberOfElements = result.getNumberOfElements(); // 현재페이지의 content개수
+
         model.addAttribute("board", content);
+        model.addAttribute("totalElements", totalElements);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("size", size);
+        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("numberOfElements", numberOfElements);
+
         return "/board";
     }
 

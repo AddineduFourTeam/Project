@@ -9,12 +9,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name="BOARD")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class Board {
     @Id
     @SequenceGenerator(
@@ -30,8 +30,6 @@ public class Board {
     @Column(insertable=false, columnDefinition="NUMBER DEFAULT 0")
     private Long boardCount;
     private Long boardWfIdx;
-    @CreatedDate
-    private LocalDateTime boardDate;
-    @LastModifiedDate
-    private LocalDateTime boardUpdateDate;
+    private Date boardDate;
+    private Date boardUpdateDate;
 }

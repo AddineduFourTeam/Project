@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@include file="../include/header.jsp" %>
 <div class="wrap con">
     <div class="boarder_top">
@@ -16,6 +15,7 @@
         </div>
     </div>
     <div class="board_con">
+        <div class="baord_right">현재 페이지 ${pageNumber} / ${totalPages}</div>
         <div class="board_tb">
             <table>
                 <tr>
@@ -42,11 +42,11 @@
                 </c:if>--%>
                 <c:choose>
                     <c:when test="${board ne null}">
-                        <c:forEach var="board" items="${board}">
+                        <c:forEach var="board" items="${board}" varStatus="status">
                             <tr>
-                                <td>1</td>
-                                <td><a href="/detail?bno=">제목</a></td>
-                                <td>2023.12.29</td>
+                                <td>${status.count}</td>
+                                <td><a href="/detail?bno=${board.boardIdx}">${board.boardSubject}</a></td>
+                                <td><fmt:formatDate value="${board.boardDate}" pattern="yyyy-MM-dd" /></td>
                             </tr>
                         </c:forEach>
                     </c:when>

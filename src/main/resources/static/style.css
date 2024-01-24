@@ -247,7 +247,7 @@ footer div {
     border: 0;
     font-size: 16px;
     letter-spacing: -0.03em;
-    width: calc(100% - 100px);
+    width: calc(100% - 105px);
 }
 
 .boarder_top .search button {
