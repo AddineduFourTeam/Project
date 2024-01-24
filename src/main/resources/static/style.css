@@ -1,0 +1,382 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
+@font-face {
+    font-family: 'NanumSquareNeo';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot');
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot?#iefix') format('embedded-opentype'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff2') format('woff2'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff') format('woff'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareNeo';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot');
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot?#iefix') format('embedded-opentype'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff2') format('woff2'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff') format('woff'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareNeo';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot');
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot?#iefix') format('embedded-opentype'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff2') format('woff2'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff') format('woff'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareNeo';
+    font-weight: 800;
+    font-style: normal;
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot');
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot?#iefix') format('embedded-opentype'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff2') format('woff2'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff') format('woff'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareNeo';
+    font-weight: 900;
+    font-style: normal;
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot');
+    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot?#iefix') format('embedded-opentype'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff2') format('woff2'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff') format('woff'),
+         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src: url('fonts/AppleSDGothicNeoL.eot?#iefix') format('embedded-opentype');
+    src: /*url('fonts/AppleSDGothicNeoL.otf?#iefix'),*/
+            url('fonts/AppleSDGothicNeoL.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoL.woff') format('woff');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src: url('fonts/AppleSDGothicNeoR.eot?#iefix') format('embedded-opentype');
+    src: /*url('fonts/AppleSDGothicNeoR.otf?#iefix'),*/
+            url('fonts/AppleSDGothicNeoR.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoR.woff') format('woff');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src: url('fonts/AppleSDGothicNeoM.eot?#iefix');
+    src: 	/*url('fonts/AppleSDGothicNeoM.otf?#iefix') format('embedded-opentype'),*/
+            url('fonts/AppleSDGothicNeoM.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoM.woff') format('woff');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src: url('fonts/AppleSDGothicNeoB.eot?#iefix') format('embedded-opentype');
+    src: /*url('fonts/AppleSDGothicNeoB.otf?#iefix'),*/
+            url('fonts/AppleSDGothicNeoB.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoB.woff') format('woff');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src:url('fonts/AppleSDGothicNeoEB.eot?#iefix') format('embedded-opentype');
+    src: /*url('fonts/AppleSDGothicNeoEB.otf?#iefix'),*/
+            url('fonts/AppleSDGothicNeoEB.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoEB.woff') format('woff');
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'AppleSDGothicNeo';
+    src:url('fonts/AppleSDGothicNeoH.eot?#iefix') format('embedded-opentype');
+    src: /*url('fonts/AppleSDGothicNeoH.otf?#iefix'),*/
+            url('fonts/AppleSDGothicNeoH.ttf') format('truetype'),
+            local(※), url('fonts/AppleSDGothicNeoH.woff') format('woff');
+    font-weight: 800;
+}
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
+    /*font-family:'AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;*/
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight:800;
+}
+ul,li,dl,dt,dd,ol{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+body,a{
+    font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
+    font-size:16px;
+    font-weight:400;
+    /*letter-spacing: 0.03em;*/
+    font-style: normal;
+    /*line-height: 1.6;*/
+    color:#222;
+}
+
+img{
+    border:0;
+    vertical-align:top;
+}
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+.ellipsis{
+    display:block;
+    /*text-overflow:ellipsis; */
+    /*overflow:hidden;*/
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    height: 1.2em;
+    line-height: 1.2em;
+}
+.inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+}
+input,input[type="submit"]{
+    appearance: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+input[type="radio"],
+input[type="checkbox"]{
+    appearance: auto;
+    -webkit-appearance: auto;
+}
+input:focus,
+textarea:focus,
+select:focus,
+button:focus{ outline: none;}
+button,
+label{ cursor:pointer}
+b{font-weight:600;}
+
+:root {
+    --color : #FF9000;
+    --border : rgba(140, 140, 140, 0.15);
+    --line : #ddd;
+} 
+
+/*main_common*/
+
+.wrap {
+    max-width: 1230px;
+    padding:0 24px;
+    margin: 0 auto;
+    width: 100%;
+
+}
+.wrap:after {content:"";display:block;clear:both}
+header {
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+}
+.con {
+    flex: 1;
+}
+footer {
+    background:#333;
+    text-align: center;
+    color: #FFF;
+}
+footer .wrap {
+    padding: 20px 25px;
+}
+footer div {
+    margin-top: 20px;
+}
+
+/*board*/
+
+.boarder_top {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 0 30px;
+}
+.boarder_top .search {
+    position: relative;
+    max-width: 360px;
+    width: 100%;
+    border: 1px solid rgba(140, 140, 140, 0.2);
+    border-radius: 20px;
+    padding: 12px 15px 9px;
+}
+.boarder_top .search form {
+    display: flex;
+}
+.boarder_top .search select {
+    border:0;
+    padding:0 10px;
+    border-radius: 0;
+    margin-right:10px
+}
+.boarder_top .search input {
+    border: 0;
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    width: calc(100% - 100px);
+}
+
+.boarder_top .search button {
+    border: 0;
+    background: transparent;
+}
+.board_tb {
+    min-height: 300px;
+    margin-top: 50px;
+}
+.board_con table th{
+    padding:10px;
+    border-bottom:1.5px solid #000
+}
+.board_con table th:first-child ,.board_con table td:first-child {
+    width: 150px;
+    text-align: center;
+}
+.board_con table th:last-child ,.board_con table td:last-child {
+    width: 200px;
+    text-align: center;
+}
+.board_con table td  {
+    padding:10px;
+    border-bottom: 1px solid var(--line);
+}
+/*.board_con table tr:hover td {
+    background:rgba(0,0,0,0.05);
+}*/
+.board_con table tr td a:hover {
+    color: var(--color);
+}
+.paging ul {
+    text-align: center;
+}
+.paging li{
+    display: inline-block;
+}
+.paging li a {
+    color: var(--line);
+}
+.paging li.on a {
+    color: #000
+}
+
+.paging li:first-child a , .paging li:last-child a {
+    color: #000
+}
+.paging li:hover a {
+    color: var(--color);
+}
+.paging li + li {
+    margin-left: 10px;
+}
+.board_view_tt {
+    padding: 10px;
+    border-bottom:1.5px solid #000;
+    text-align: center;
+    font-size:24px;
+    border-top:1px solid var(--line);
+}
+.board_view_con {
+    padding:30px 10px;
+}
+.board_btn {
+    text-align: right;
+    margin: 30px 0 50px;
+}
+.board_btn a {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.board_btn a:hover {
+    border:1px solid var(--color);
+    background:var(--color);
+    color: #fff;
+}
+
+/** list **/
+.list-wrap{
+    display: flex;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    max-width: 1920px;
+}
+.container{
+    width: 50%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.container > ul{
+    width: 100%;
+}
+.container > ul > li {
+    float: left;
+    width: 44%;
+    margin-left: 3%;
+    padding-bottom: 20px;
+}
+.container > ul > li:nth-child(odd){
+    margin-left: 0;
+}
+.container > ul > li > a{
+    width: 100%;
+}
+.container > ul > li > a > .view{
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom : 5px;
+}
+.container > ul > li > a > .view > img{
+    width: 100%;
+}
+.container > ul > li .desc{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+.container > ul > li .desc .left .title{
+    font-weight: bold;
+}
+/* map */
+.map-wrap{
+    position: sticky;
+    width: 50%;
+}
+.map{
+    width: 100%;
+    height: 100vh;
+}
