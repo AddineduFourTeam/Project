@@ -15,7 +15,7 @@ public class BoardService {
     BoardRepository boardRepository;
 
     public Page<Board> list(String name, String keyword, Pageable page) {
-        Page<Board> board = boardRepository.findByBoardSubjectLike(keyword, page);
+        Page<Board> board = boardRepository.    findByBoardSubjectLike(keyword, page);
         if(name.equals("board_subject")) {
             //board = boardRepository.findByBoardSubjectLike(keyword , page);
         }

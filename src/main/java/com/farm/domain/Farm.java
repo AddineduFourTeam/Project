@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 
-@Entity()
+@Entity
 @Data
 @Builder
 @AllArgsConstructor

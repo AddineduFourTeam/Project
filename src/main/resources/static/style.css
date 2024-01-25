@@ -328,49 +328,120 @@ footer div {
 }
 
 /** list **/
-.list-wrap{
+
+/* search-bar */
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 20px;
+  margin: 50px auto;
+  width: 70%;
+  border-radius: 50px;
+  background-color: #adc852;
+  box-shadow: 2px 6px 20px 0px rgba(0, 0, 0, .2);
+  transition: all .5s;
+}
+.search-form:focus-within{
+    background-color: #fff;
+}
+.list-select{
+    border: none;
+    background: transparent;
+}
+
+.list-search {
+  width: 80%;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.list-search::-webkit-search-cancel-button {
+  position: relative;
+  right: 0;
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: url(/img/xmark.svg);
+  display: inline-block;
+  color: #000;
+  cursor: pointer;
+}
+
+.search-form > button {
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #fff;
+}
+
+.search-form > button >.fa-magnifying-glass:before,
+.search-form > button > .fa-search:before {
+  color: darkgreen;
+  font-size: 16px;
+}
+
+.container{
     display: flex;
     margin: 0 auto;
     padding: 0 24px;
     width: 100%;
     max-width: 1920px;
 }
-.container{
+.farm-list{
     width: 50%;
     height: 100vh;
     overflow-y: scroll;
 }
-.container > ul{
+.farm-list > ul{
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
+
 }
-.container > ul > li {
-    float: left;
-    width: 44%;
-    margin-left: 3%;
+.farm-list > ul > li {
+    width: calc(50% - 15px);
     padding-bottom: 20px;
+    margin-left: 20px;
 }
-.container > ul > li:nth-child(odd){
+.farm-list > ul > li:nth-child(odd){
     margin-left: 0;
 }
-.container > ul > li > a{
+.farm-list > ul > li > a{
     width: 100%;
 }
-.container > ul > li > a > .view{
+.farm-list > ul > li > a > .view{
     overflow: hidden;
     border-radius: 10px;
     margin-bottom : 5px;
 }
-.container > ul > li > a > .view > img{
+.farm-list > ul > li > a > .view > img{
     width: 100%;
 }
-.container > ul > li .desc{
+.farm-list > ul > li .desc{
     display: flex;
     justify-content: space-between;
     padding-top: 5px;
 }
-.container > ul > li .desc .left .title{
+.farm-list > ul > li .desc .left .title{
     font-weight: bold;
+    padding-bottom: 4px;
 }
+.farm-list > ul > li .desc .left .theme{
+    font-size: 14px;
+    font-weight: 700;
+    color: darkgreen;
+}
+.farm-list::-webkit-scrollbar,
+.farm-list::-webkit-scrollbar-thumb,
+.farm-list::-webkit-scrollbar-track{
+    opacity: 0;
+}
+
 /* map */
 .map-wrap{
     position: sticky;
