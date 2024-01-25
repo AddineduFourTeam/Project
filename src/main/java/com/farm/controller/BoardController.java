@@ -21,7 +21,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    private Member loginUser;
+    //private Member loginUser;
 
     @GetMapping("/board")
     public String boardList(@RequestParam(value="nowPage", defaultValue="1") int page ,Model model) {
@@ -32,11 +32,13 @@ public class BoardController {
         Page<Board> result = boardService.listAll(pageable);
         List<Board> content = result.getContent();
 
+
         long totalElements = result.getTotalElements();
         int totalPages = result.getTotalPages();
         int size = result.getSize(); // 페이지당 페이지 수
         int pageNumber = result.getNumber() + 1; // 현재페이지
         int numberOfElements = result.getNumberOfElements(); // 현재페이지의 content개수
+        System.out.println(content);
 
         model.addAttribute("board", content);
         model.addAttribute("totalElements", totalElements);
