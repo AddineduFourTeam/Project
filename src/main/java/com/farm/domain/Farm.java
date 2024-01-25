@@ -26,7 +26,7 @@ public class Farm {
 
     private String wfSubject; // 제목
     private String wfAddr; // 소재지
-    private String wfThema; // 주제
+    private String wfTheme; // 주제
     private int wfYear; // 지정연도
     private String wfUrl; // 홈페이지 주소
     private String wfTel; // 연락처
@@ -36,6 +36,7 @@ public class Farm {
     private String wfImgUrl1; // 이미지 주소1
     private String wfImgUrl2; // 이미지 주소2
     private String wfImgUrl3; // 이미지 주소3
+    private Number wfRating; // 별점
 
     @CreatedDate
     @Column(name = "created_date")
