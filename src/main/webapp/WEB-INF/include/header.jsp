@@ -7,7 +7,14 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<!-- 현재 페이지명 가져오기 -->
+<c:set var="URI" value="${pageContext.request.requestURI}" />
+<c:set var="basePath" value="/WEB-INF/views/" />
+<c:set var="folderPath" value="${fn:substringAfter(URI, basePath)}" />
+<c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
 
 <!doctype html>
 <html lang="en">

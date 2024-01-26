@@ -1,8 +1,14 @@
 package com.farm.repository;
 
+import com.farm.domain.Board;
 import com.farm.domain.Farm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FarmRepository extends JpaRepository<Farm, Long> {
-   // boolean existsByFarmDate(String holidayDate); // 공휴일 중복 체크
+
+    Page<Farm> findByWfAddrContaining(String keyword, Pageable pageable);
+    Page<Farm> findByWfSubjectContaining(String keyword, Pageable pageable);
+
 }
