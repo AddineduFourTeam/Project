@@ -25,10 +25,14 @@ public class BoardController {
 
     @GetMapping("/board")
     public String boardList(@RequestParam(value="nowPage", defaultValue="1") int page ,Model model) {
-        //Sort sort = Sort.by(Sort.Order.desc("name"));
+        Sort sort = Sort.by(Sort.Order.desc("name"));
+        int pageSize = 5;
+        int pageNumber = 4;
 
         int nPage = page - 1; // 시작페이지
-        Pageable pageable = PageRequest.ofSize(10).withPage(nPage); //ofsize(페이지당 게시물) , withPage(현재페이지)
+        //Pageable pageable = PageRequest.ofSize(10).withPage(nPage); //ofsize(페이지당 게시물) , withPage(현재페이지)
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+
         Page<Board> result = boardService.listAll(pageable);
         List<Board> content = result.getContent();
 
@@ -36,7 +40,7 @@ public class BoardController {
         long totalElements = result.getTotalElements();
         int totalPages = result.getTotalPages();
         int size = result.getSize(); // 페이지당 페이지 수
-        int pageNumber = result.getNumber() + 1; // 현재페이지
+        //int pageNumber = result.getNumber() + 1; // 현재페이지
         int numberOfElements = result.getNumberOfElements(); // 현재페이지의 content개수
         System.out.println(content);
 

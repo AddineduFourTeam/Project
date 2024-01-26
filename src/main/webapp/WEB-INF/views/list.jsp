@@ -12,7 +12,7 @@
     <div class="container">
         <div class="farm-list">
             <ul>
-                <c:forEach items="${farm}" var="farm">
+                <c:forEach items="${list}" var="farm">
                 <li>
                     <a href="#">
                         <div class="view">
@@ -32,26 +32,8 @@
                 </li>
                 </c:forEach>
             </ul>
-            <div style="text-align:center">
-                <c:if test="${nowPage > 0}">
-                    <a href="list?nowPage=${nowPage - 1}">Prev...</a>
-                </c:if>
+            <%@include file="../include/paging.jsp" %>
 
-                <c:forEach var="pageNumber" begin="0" end="${totalPages - 1}" step="1">
-                    <c:choose>
-                        <c:when test="${pageNumber == nowPage}">
-                            <strong>[${pageNumber + 1}]</strong>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="list?nowPage=${pageNumber + 1}">[${pageNumber + 1}]</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-
-                <c:if test="${nowPage < totalPages - 1}">
-                    <a href="list?nowPage=${nowPage + 1}">...Next</a>
-                </c:if>
-            </div>
         </div>
         <div class="map-wrap">
             <div id="map" class="map"></div>
