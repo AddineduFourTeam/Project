@@ -19,7 +19,7 @@ public class Board {
     @Id
     @SequenceGenerator(
             name="myBoardSEQ",
-            sequenceName="Board_SEQ",
+            sequenceName="myBoardSEQ",
             allocationSize = 1
     )
     @GeneratedValue(generator="myBoardSEQ")

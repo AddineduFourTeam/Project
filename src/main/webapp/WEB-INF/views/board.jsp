@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
 <%@include file="../include/header.jsp" %>
 <div class="wrap con">
     <div class="boarder_top">
@@ -40,8 +40,8 @@
                         <td colspan="3">자료가 없습니다.</td>
                     </tr>
                 </c:if>--%>
-                <c:choose>
-                    <c:when test="${board ne null}">
+               <%-- <c:choose>
+                    <c:when test="${board}">
                         <c:forEach var="board" items="${board}">
                             <tr>
                                 <td>1</td>
@@ -55,7 +55,7 @@
                             <td colspan="3">자료가 없습니다.</td>
                         </tr>
                     </c:otherwise>
-                </c:choose>
+                </c:choose>--%>
 
             </table>
         </div>
