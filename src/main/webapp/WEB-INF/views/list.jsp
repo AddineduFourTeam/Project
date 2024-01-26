@@ -34,46 +34,38 @@
                 </li>
                 </c:forEach>
             </ul>
-            <!--
+
             <div style="text-align:center">
                 <c:if test="${nowPage > 0}">
-                    <a href="list?nowPage=${nowPage - 1}">Prev...</a>
+                    <a href="list?nowPage=${nowPage}">Prev...</a>
                 </c:if>
 
+                <c:forEach items="${pageNumbers}" var="pageNumber">
+                    <c:choose>
+                        <c:when test="${pageNumber == nowPage + 1}">
+                            <a href="list?nowPage=${pageNumber}"><strong>[${pageNumber}]</strong></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="list?nowPage=${pageNumber}">[${pageNumber}]</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <!--
                 <c:forEach var="pageNumber" begin="0" end="${totalPages - 1}" step="1">
                     <c:choose>
                         <c:when test="${pageNumber == nowPage}">
-                            <strong>[${pageNumber + 1}]</strong>
+                             <a href="list?nowPage=${pageNumber + 1}"><strong>[${pageNumber + 1}]</strong></a>
                         </c:when>
                         <c:otherwise>
                             <a href="list?nowPage=${pageNumber + 1}">[${pageNumber + 1}]</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
+                -->
 
                 <c:if test="${nowPage < totalPages - 1}">
-                    <a href="list?nowPage=${nowPage + 1}">...Next</a>
-                </c:if>
-            </div>
-            -->
-            <div style="text-align:center">
-                <c:if test="${nowPage > 0}">
-                    <a href="list?nowPage=${nowPage - 1}">Prev...</a>
-                </c:if>
-
-                <c:forEach items="${pageNumbers}" var="pageNumber">
-                    <c:choose>
-                        <c:when test="${pageNumber == nowPage}">
-                            <strong>[${pageNumber + 1}]</strong>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="list?nowPage=${pageNumber}">[${pageNumber + 1}]</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-
-                <c:if test="${nowPage < totalPages - 1}">
-                    <a href="list?nowPage=${nowPage + 1}">...Next</a>
+                    <a href="list?nowPage=${nowPage + 2}">...Next</a>
                 </c:if>
             </div>
 
