@@ -12,7 +12,7 @@
     <div class="container">
         <div class="farm-list">
             <ul>
-                <c:forEach items="${farm}" var="farm">
+                <c:forEach items="${farms}" var="farm">
                 <li>
                     <a href="#">
                         <div class="view">
@@ -35,37 +35,26 @@
                 </c:forEach>
             </ul>
 
-            <div style="text-align:center">
+            <div class="pagination">
                 <c:if test="${nowPage > 0}">
-                    <a href="list?nowPage=${nowPage}">Prev...</a>
+                    <a href="list?page=${page+1}"><strong>&lt;&lt;</strong></a>
+                    <a href="list?page=${nowPage}"><strong>&lt;</strong></a>
                 </c:if>
 
-                <c:forEach items="${pageNumbers}" var="pageNumber">
+                <c:forEach begin="${startPage}" end="${endPage}" var="i">
                     <c:choose>
                         <c:when test="${pageNumber == nowPage + 1}">
-                            <a href="list?nowPage=${pageNumber}"><strong>[${pageNumber}]</strong></a>
+                            <a href="list?page=${i}"><strong>${i}</strong></a>
                         </c:when>
                         <c:otherwise>
-                            <a href="list?nowPage=${pageNumber}">[${pageNumber}]</a>
+                            <a href="list?page=${pageNumber}">${pageNumber}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
-
-                <!--
-                <c:forEach var="pageNumber" begin="0" end="${totalPages - 1}" step="1">
-                    <c:choose>
-                        <c:when test="${pageNumber == nowPage}">
-                             <a href="list?nowPage=${pageNumber + 1}"><strong>[${pageNumber + 1}]</strong></a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="list?nowPage=${pageNumber + 1}">[${pageNumber + 1}]</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                -->
 
                 <c:if test="${nowPage < totalPages - 1}">
-                    <a href="list?nowPage=${nowPage + 2}">...Next</a>
+                    <a href="list?page=${nowPage + 2}"><strong>&gt;</strong></a>
+                    <a href="list?page=${totalPages}"><strong>&gt;&gt;</strong></a>
                 </c:if>
             </div>
 
@@ -83,7 +72,7 @@
             level: 3 // 지도의 확대 레벨
         };
 
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
 </script>
 

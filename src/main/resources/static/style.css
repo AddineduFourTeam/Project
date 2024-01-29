@@ -460,6 +460,22 @@ footer div {
     opacity: 0;
 }
 
+.farm-list .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 0;
+    border-top: 1px solid #222;
+}
+.farm-list .pagination a strong{
+    font-weight: 900;
+}
+.farm-list .pagination a:hover,
+.farm-list .pagination a:focus{
+    color: var(--pointColor);
+}
+
 /* map */
 .map-wrap{
     position: sticky;

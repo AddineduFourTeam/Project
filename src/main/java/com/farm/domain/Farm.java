@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-//@Builder
 public class Farm {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
