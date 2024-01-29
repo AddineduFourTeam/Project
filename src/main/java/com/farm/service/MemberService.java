@@ -5,21 +5,30 @@ import com.farm.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void insert(){
-        Member member;
-        for(int i = 1 ; i < 11 ; i++) {
-            member = new Member("abc"+i+"@test.com","김이박"+i );
-            memberRepository.save(member);
-        }
+    public void memInsert(Member member) {
+        memberRepository.save(member);
     }
 
+    public Member login(String id) {
+
+            Optional<Member> loginUser = memberRepository.findByMemid(id);
+
+            if(loginUser.isPresent()){
+                return loginUser.get();
+            }else{
+                return null;
+            }
+
+    }
+    
+/*
     public List<Member> selectAll() {
         List<Member> members = memberRepository.findAll();
 
@@ -37,12 +46,12 @@ public class MemberService {
             members = memberRepository.findByEmailLike(input);
         }
         //System.out.println(members);
-   /*     switch(idx) {
+   *//*     switch(idx) {
             case "name": members = memberRepository.findByName(input); break;
             //case "id": members = memberRepository.findById(Long.parseLong(input)); break;
             case "email": members = memberRepository.findByEmail(input); break;
-        }*/
+        }*//*
 
         return members;
-    }
+    }*/
 }

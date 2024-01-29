@@ -35,7 +35,6 @@
                         <td colspan="3">자료가 없습니다.</td>
                     </tr>
                 </c:if>
-
             </table>
         </div>
         <%@include file="../include/paging.jsp" %>

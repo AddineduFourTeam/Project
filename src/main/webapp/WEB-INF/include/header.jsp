@@ -15,7 +15,6 @@
 <c:set var="basePath" value="/WEB-INF/views/" />
 <c:set var="folderPath" value="${fn:substringAfter(URI, basePath)}" />
 <c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
-
 <!doctype html>
 <html lang="en">
 <head>
