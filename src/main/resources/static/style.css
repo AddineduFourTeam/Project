@@ -596,7 +596,16 @@ select option {
 .farm-list > ul > li .desc .right >.fa-star:before{
   color: var(--pointColor);
 }
-
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--mainColor);
+    width: 8px;
+}
+body::-webkit-scrollbar-track {
+    width: 10px;
+}
 .farm-list::-webkit-scrollbar,
 .farm-list::-webkit-scrollbar-thumb,
 .farm-list::-webkit-scrollbar-track{
