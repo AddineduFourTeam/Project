@@ -2,6 +2,7 @@ package com.farm.controller;
 
 import com.farm.domain.Farm;
 import com.farm.service.ListService;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,15 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class FarmController {
     @Autowired
     ListService listService;
 
     @GetMapping("/list")
-    public String list(@RequestParam(value = "page", defaultValue = "1") int page, Model model){
+    public String list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         // 페이지 관련 처리
-        int nowPage = page - 1;
+        int nowPage = page - 1; // 현재 페이지 번호를 0 기반 인덱스로 변환
         int pageSize = 10;
         int pagePerBlock = 5;
         Pageable pageable = PageRequest.of(nowPage, pageSize);
@@ -42,6 +45,5 @@ public class FarmController {
         model.addAttribute("farms", result.getContent());
         return "list";
     }
-
 }
 
