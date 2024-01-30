@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
 <div class="con list-wrap">
-     <form action="" name="search-form" class="search-form" method="get">
+     <form action="/search" name="search-form" class="search-form" method="get">
         <select name="select" id="select" class="list-select">
             <option value="location">지역명</option>
-            <option value="farm-name">농장명</option>
+            <option value="title">농장명</option>
+            <option value="theme">테마</option>
         </select>
-        <input type="search" name="search" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
-        <button onclick="getSearchList()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <div class="container">
         <div class="farm-list">
@@ -51,7 +52,7 @@
                     </c:choose>
                 </c:forEach>
 
-                <c:if test="${nowPage < totalPages - 1}">
+                <c:if test="${nowPage < totalPages}">
                     <a href="list?page=${nowPage + 2}"><strong>&gt;</strong></a>
                     <a href="list?page=${totalPages}"><strong>&gt;&gt;</strong></a>
                 </c:if>
@@ -73,19 +74,6 @@
 
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
-
-    /*검색 영역*/
-    function getSearchList(){
-        $.ajax({
-            type: 'GET',
-            url : "/search",
-            data : ("form[name=search-form]"),
-            success : function(data){
-                $('.farm-list > ul > li').empty();
-                console.log("ajax통신 성공");
-            }
-        })
-    }
 
 </script>
 

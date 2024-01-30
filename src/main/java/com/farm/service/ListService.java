@@ -28,6 +28,16 @@ public class ListService {
         return farmRepository.findAll(pageable);
     }
 
-
+    public Page<Farm> search(Pageable pageable, String keyword, String select) {
+        if(select.equals("location")){
+            return farmRepository.findByWfAddrContaining(keyword,pageable);
+        }else if(select.equals("title")){
+            return farmRepository.findByWfSubjectContaining(keyword, pageable);
+        }else if(select.equals("theme")){
+            return farmRepository.findByWfThemeContaining(keyword, pageable);
+        }else{
+            return null;
+        }
+    }
 }
 
