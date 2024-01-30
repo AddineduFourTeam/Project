@@ -26,6 +26,7 @@ public class Member {
     private String birth;
     private String phone;
     private String email;
+    private String memImg;
 
     @CreatedDate
     private LocalDateTime regdate;

@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -31,11 +29,29 @@ public class MemberController {
         return "/join";
     }
 
+    @GetMapping("/idCheck")
+    @ResponseBody
+    public boolean checkId(@RequestParam("id") String memid){
+        return memberService.idCheck(memid);
+    }
+
     @PostMapping("/memInsert")
-    public String memInsert(Member member) {
+    public String memInsert(Member member, Model model, @RequestParam("file") MultipartFile file) throws Exception {
+        /*Model model, MultipartFile file) throws Exception 추가함*/
         member.setPass(pEncoder.encode(member.getPass()));
-        memberService.memInsert(member);
+
+        if(!file.isEmpty()){
+            memberService.uploadImage(file, member.getMemIdx());
+            member.setMemImg("/uploads/"+file.getOriginalFilename());
+        }
+
+        memberService.memInsert(member, file);/*file 추가*/
         return "redirect:/";
+    }
+
+    @GetMapping("/loginForm")
+    public String loginForm(){
+        return "login";
     }
 
     @PostMapping("/login")
