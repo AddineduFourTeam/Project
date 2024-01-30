@@ -91,7 +91,7 @@
 <script>
     $(document).ready(function(){
         $(window).scroll(function(){
-            if($(this).scrollTop() > 100) {
+            if($(this).scrollTop() > 0) {
                 $("header").addClass("on");
                 $("h1 img").attr("src","/img/logo.png");
             }else {

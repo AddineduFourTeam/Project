@@ -471,6 +471,12 @@ header.on .search-form select {
 }
 .index_body .search-form select {
     color: #fff;
+    padding:0 15px;
+    border-radius:0
+}
+select option {
+    background: rgb(0, 140, 41);
+    color: #fff;
 }
 .list-select{
     border: none;
@@ -482,9 +488,10 @@ header.on .search-form select {
 .index_body .search-form .list-search::placeholder {
     color: rgba(255,255,255,0.5);
 }
-.index_body .search-form .list-search:focus , header.on .search-form .list-search,
+.index_body header.on .search-form .list-search:focus , header.on .search-form .list-search,
 .index_body header.on .search-form input::placeholder{
     color: #222;
+    background: transparent;
 }
 .list-search {
   width: 80%;
@@ -511,7 +518,7 @@ header.on .search-form select {
   width: 40px;
   height: 40px;
   border: none;
-  background-color: #fff;
+    background: transparent
 }
 
 .search-form > button >.fa-magnifying-glass:before, header.on .search-form > button >.fa-magnifying-glass:before ,
