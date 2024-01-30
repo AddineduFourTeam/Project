@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Service
 public class MemberService {
     @Autowired
@@ -24,13 +25,14 @@ public class MemberService {
     public void memInsert(Member member, MultipartFile file) throws Exception{
         /*MultipartFile file) throws Exception추가함*/
 
-        try {
-            memberRepository.save(member);
-            /*프로필사진추가*/
-            uploadImage(file, member.getMemIdx());
+        memberRepository.save(member);
+       /* try {
+
+            *//*프로필사진추가*//*
+           // uploadImage(file, member.getMemIdx());
         }catch(IOException | IllegalStateException e){
             throw new Exception("Faile to upload the file",e);
-        }
+        }*/
 
     }
 
@@ -48,7 +50,7 @@ public class MemberService {
         return memberRepository.existsByMemid(memid);
     }
 
-    public void uploadImage(MultipartFile file, Long memIdx) throws IOException {
+    public String uploadImage(MultipartFile file, Long memIdx) throws IOException {
 
         // 1. Null 또는 빈 파일 확인
         if (file.isEmpty()) {
@@ -74,8 +76,12 @@ public class MemberService {
         if (!saveDirectory.exists()) {
             saveDirectory.mkdirs();
         }
+        //Member member = new Member();
+        //member.setMemImg("/files/"+fileName);
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
+
+        return "/files/"+fileName;
 
     }
 

@@ -34,6 +34,6 @@ public class Member {
     private LocalDateTime outdate;
 
     @Column(columnDefinition="varchar2(10) DEFAULT 'N'")
-    private String isOut;
+    private String isOut ="N";
 
 }

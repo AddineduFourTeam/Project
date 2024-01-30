@@ -50,7 +50,7 @@ public class OpenApiService {
                 int wf_idx = requestParameter.getInt("cntntsNo");
                 String wf_subject = item.getString("cntntsSj");
                 String locplc = item.getString("locplc");
-                String wf_thema = item.getString("thema");
+                String wf_theme = item.getString("theme");
                 int wf_Year = item.getInt("appnYear");
                 String wf_url = item.getString("url");
                 String wf_tel = item.getString("telno");
@@ -62,7 +62,7 @@ public class OpenApiService {
                 Farm farm = Farm.builder()
                         .wfIdx(wf_idx)
                         .wfAddr(locplc)
-                        .wfThema(wf_thema)
+                        .wfTheme(wf_theme)
                         .wfSubject(wf_subject)
                         .wfYear(wf_Year)
                         .wfUrl(wf_url)
