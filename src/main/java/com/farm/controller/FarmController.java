@@ -16,7 +16,7 @@ public class FarmController {
 
     @GetMapping("/list")
     public String list(@RequestParam(value="page", defaultValue="1") int page , Model model) {
-        listService.list(page, model, Farm.class);
+        //listService.list(page, model, Farm.class);
         return "/list";
     }
 

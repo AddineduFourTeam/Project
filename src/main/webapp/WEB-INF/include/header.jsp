@@ -39,5 +39,35 @@
     <title>메인</title>
 </head>
 <body>
-<header></header>
+
+<header>
+    <ul class="tnb wrap">
+        <li><a href="/login">login</a></li>
+        <li><a href="/join">join</a></li>
+    </ul>
+    <nav>
+        <div class="wrap">
+            <h1><a href="/"><img src="/img/logo_w.png" alt="weekend farm"></a></h1>
+            <ul class="gnb">
+                <li><a href="/list">list</a></li>
+                <li><a href="/board">board</a></li>
+                <li><a href="/story">story</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+    $(document).ready(function(){
+        $(window).scroll(function(){
+            if($(this).scrollTop() > 100) {
+                $("header").addClass("on");
+                $("h1 img").attr("src","/img/logo.png");
+            }else {
+                $("header").removeClass("on");
+                $("h1 img").attr("src","/img/logo_w.png");
+            }
+        });
+    });
+</script>
 

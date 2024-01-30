@@ -31,6 +31,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     // jsp를 위한 의존성 주입
     implementation 'jakarta.servlet:jakarta.servlet-api'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
@@ -45,8 +46,6 @@ dependencies {
 
     // 비밀번호 암호화
     implementation 'org.springframework.security:spring-security-crypto:6.2.1'
-
-
 }
 
 tasks.named('test') {

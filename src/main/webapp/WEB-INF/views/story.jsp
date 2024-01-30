@@ -8,26 +8,31 @@
                 <tr>
                     <th>NO.</th>
                     <th>제목</th>
+                    <th>작성자</th>
                     <th>등록일</th>
+                    <th>이미지</th>
                 </tr>
                 <c:if test="${not empty list}">
-                    <!-- board 데이터가 있을 때 수행할 작업 -->
-                    <c:forEach var="board" items="${list}" varStatus="status">
+                    <!-- list 데이터가 있을 때 수행할 작업 -->
+                    <c:forEach var="list" items="${list}" varStatus="status">
                         <tr>
                             <td>${status.count}</td>
-                            <td><a href="/boardDetail?bno=${board.boardIdx}">${board.boardSubject}</a></td>
-                            <td><fmt:formatDate value="${board.boardDate}" pattern="yyyy-MM-dd" /></td>
+                            <td><a href="/storyDetail?sno=${list.storyIdx}">${list.storySubject}</a></td>
+                            <td>${list.storyMemName}</td>
+                            <td><fmt:formatDate value="${list.storyDate}" pattern="yyyy-MM-dd" /></td>
+                            <td><img src="/image/${list.storyIdx}" alt=""></td>
                         </tr>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty list}">
-                    <!-- board 데이터가 없을 때 수행할 작업 -->
+                    <!-- list 데이터가 없을 때 수행할 작업 -->
                     <tr>
-                        <td colspan="3">자료가 없습니다.</td>
+                        <td colspan="5">자료가 없습니다.</td>
                     </tr>
                 </c:if>
             </table>
         </div>
+        <a href="" class="storybtn">스토리 올리기</a>
         <%@include file="../include/paging.jsp" %>
     </div>
 </div>

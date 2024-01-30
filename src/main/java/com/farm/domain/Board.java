@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Board {
     @Id
     @SequenceGenerator(
@@ -30,6 +31,8 @@ public class Board {
     @Column(insertable=false, columnDefinition="NUMBER DEFAULT 0")
     private Long boardCount;
     private Long boardWfIdx;
+    @CreatedDate
     private Date boardDate;
+    @LastModifiedDate
     private Date boardUpdateDate;
 }

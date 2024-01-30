@@ -2,6 +2,7 @@ package com.farm.controller;
 
 import com.farm.domain.Member;
 import com.farm.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -39,12 +40,13 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(Member member, Model model){
+    public String login(Member member, Model model, HttpSession session){
         System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());
       // System.out.println("id: " +loginUser.getMemid());
         if(loginUser != null && pEncoder.matches(member.getPass(),loginUser.getPass())){
                 model.addAttribute("loginUser",loginUser);
+                session.setAttribute("loginUser", loginUser);
         }
 
         return "redirect:/";

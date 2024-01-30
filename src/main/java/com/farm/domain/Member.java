@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,8 +19,10 @@ import java.time.LocalDateTime;
 @Entity(name="MEMBER")
 @EntityListeners(AuditingEntityListener.class)
 public class Member {
+
     @Id
-    @GeneratedValue(generator="myBoardSEQ")
+    @GeneratedValue(generator = "myBoardSEQ")
+    @Column(name = "MEM_IDX")
     private Long memIdx;
     private String memid;
     private String pass;
@@ -34,5 +38,8 @@ public class Member {
 
     @Column(columnDefinition="varchar2(10) DEFAULT 'N'")
     private String isOut;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Story> stories = new ArrayList<>();
 
 }

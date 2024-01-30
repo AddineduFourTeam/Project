@@ -196,8 +196,6 @@ b{font-weight:600;}
 
 }
 .wrap:after {content:"";display:block;clear:both}
-header {
-}
 body {
     display: flex;
     flex-direction: column;
@@ -207,18 +205,106 @@ body {
 .con {
     flex: 1;
 }
+img {
+    max-width: 100%;
+}
+
+/********* main **********/
+
+.mainImg {
+    height: 100vh;
+    width: 100%;
+}
+.mainImg img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+header {
+    display: block;
+    background:#fff;
+    backdrop-filter: blur(15px); /* 필요에 따라 흐림 정도 조절 */
+    background-color: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+h1 {
+    text-align: center;
+}
+h1 a {
+    text-align: center;
+    display:inline-block;
+    width: 80px
+}
+nav {
+    text-align: center;
+    position: relative;
+    border-top:1px solid rgba(255,255,255,0.5);
+    padding: 20px 0 ;
+}
+.gnb {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex: 1;
+}
+.gnb a , .fnb a {
+    color: #fff;
+    display: block;
+    text-transform: uppercase;
+}
+.gnb a {
+    font-size: 18px
+}
+.tnb {
+    display: flex;
+    justify-content: right;
+    padding: 10px 30px 15px;
+}
+.tnb a {
+    color: #fff;
+    margin-left: 30px;
+}
+nav li + li {
+    margin-left: 30px;
+}
+header nav > div {
+    display: flex;
+    justify-content: space-between;
+}
+header a {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+header.on {
+    background-color:rgba(255,255,255,0.9);
+}
+header.on nav {
+    border-top: 1px solid rgba(0,0,0,0.3);
+}
+header.on a{
+    color: #222;
+    text-shadow: none;
+}
+
+/******** footer *******/
 footer {
     background:#333;
     text-align: center;
     color: #FFF;
 }
 footer .wrap {
-    padding: 20px 25px;
+    padding: 20px 25px 50px;
 }
 footer div {
     margin-top: 20px;
 }
-
+footer h2 a {
+    width: 100px;
+    display: inline-block;
+    padding: 15px 0 30px;
+}
 /*board*/
 
 .boarder_top {
@@ -247,7 +333,7 @@ footer div {
     border: 0;
     font-size: 16px;
     letter-spacing: -0.03em;
-    width: calc(100% - 105px);
+    width: calc(100% - 115px);
 }
 
 .boarder_top .search button {

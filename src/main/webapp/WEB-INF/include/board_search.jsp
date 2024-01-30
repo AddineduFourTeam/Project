@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:if test="${fn:contains(folderName, 'board')}">
+    <c:set var="action" value="search" />
+</c:if>
+<c:if test="${fn:contains(folderName, 'story')}">
+    <c:set var="action" value="storySearch"/>
+</c:if>
 <div class="boarder_top">
     <h2>
         <c:if test="${fn:contains(folderName, 'board')}">
@@ -16,10 +22,11 @@
         </c:if>
     </h2>
     <div class="search">
-        <form action="search">
+        <form action="${action}">
             <select name="type" id="type">
                 <option value="title">제목</option>
                 <option value="content">내용</option>
+                <option value="user">작성자</option>
             </select>
             <input type="text" name="keyword" id="keyword" value="${param.keyword}">
             <button type="submit">검색</button>

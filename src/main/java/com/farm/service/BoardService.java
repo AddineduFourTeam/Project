@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,5 @@ public class BoardService {
     public Optional<Board> detail(Long bno) {
         return boardRepository.findById(bno);
     }
+
 }
