@@ -14,7 +14,18 @@
     <div class="con01">
 
     </div>
-</div>
 
+<c:choose>
+    <c:when test="${loginUser != null}">
+        <b>${loginUser.memid}</b>님 환영
+        <a href="logout">LOGOUT</a>
+        <img src="${loginUser.memImg}">
+    </c:when>
+    <c:otherwise>
+        <a href="memInsertForm">회원가입</a>
+        <a href="loginForm">로그인</a>
+    </c:otherwise>
+</c:choose>
+</div>
 <%@include file="../include/footer.jsp" %>
 
