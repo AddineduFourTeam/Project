@@ -124,6 +124,9 @@ body {
     width: 100%;
     overflow-x: hidden;
 }
+body:not(.index_body) {
+    padding-top: 160px;
+}
 body,a{
     font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
     font-size:16px;
@@ -170,7 +173,6 @@ input,input[type="submit"]{
 input[type="radio"],
 input[type="checkbox"]{
     appearance: auto;
-    -webkit-appearance: auto;
 }
 input:focus,
 textarea:focus,
@@ -184,6 +186,7 @@ b{font-weight:600;}
     --border : rgba(140, 140, 140, 0.15);
     --line : #ddd;
     --bg : #f3e9dd;
+    --color : #01b03f;
     --mainColor : #01b03f;
     --pointColor : #FF9000;
 } 
@@ -203,6 +206,9 @@ body {
     flex-direction: column;
     height: 100%;
     min-height: 100vh;
+
+}
+.list_body {
     background-color: var(--bg);
 }
 .con {
@@ -225,15 +231,17 @@ img {
 }
 header {
     display: block;
-    background:#fff;
     backdrop-filter: blur(15px); /* 필요에 따라 흐림 정도 조절 */
     background-color: rgba(255, 255, 255, 0.1);
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
 }
 h1 {
     text-align: center;
+    flex: 1;
 }
 h1 a {
     text-align: center;
@@ -244,7 +252,7 @@ nav {
     text-align: center;
     position: relative;
     border-top:1px solid rgba(255,255,255,0.5);
-    padding: 20px 0 ;
+    padding: 15px 0 ;
 }
 .gnb {
     display: flex;
@@ -258,16 +266,20 @@ nav {
     text-transform: uppercase;
 }
 .gnb a {
-    font-size: 18px
+    font-size: 16px;
 }
 .tnb {
     display: flex;
     justify-content: right;
     padding: 10px 30px 15px;
 }
-.tnb a {
+.tnb li {
     color: #fff;
     margin-left: 30px;
+    font-weight: 300;
+}
+.tnb li a {
+    color: #fff;
 }
 nav li + li {
     margin-left: 30px;
@@ -275,22 +287,22 @@ nav li + li {
 header nav > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-header a {
+header a , .tnb li {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-header.on {
+header.on , body.list_body header {
     background-color:rgba(255,255,255,0.9);
 }
-header.on nav {
-    border-top: 1px solid rgba(0,0,0,0.3);
+header.on nav , body:not(.index_body) header nav{
+    border-top: 1px solid rgb(145, 115, 77,0.1);
 }
-header.on a{
+header.on a , body:not(.index_body) header a , header.on .tnb li{
     color: #222;
     text-shadow: none;
 }
-
 /******** footer *******/
 footer {
     background:#333;
@@ -298,21 +310,27 @@ footer {
     color: #FFF;
 }
 footer .wrap {
-    padding: 20px 25px 50px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 footer div {
     margin-top: 20px;
 }
 footer h2 a {
-    width: 100px;
+    width: 50px;
     display: inline-block;
-    padding: 15px 0 30px;
+    margin: 0 20px;
+}
+footer p {
+    font-size: 14px;
 }
 /*board*/
 
 .boarder_top {
     display: flex;
-    justify-content: space-between;ㅋ
+    justify-content: space-between;
     padding: 80px 0 30px;
 }
 .boarder_top .search {
@@ -336,7 +354,7 @@ footer h2 a {
     border: 0;
     font-size: 16px;
     letter-spacing: -0.03em;
-    width: calc(100% - 115px);
+    width: calc(100% - 120px);
 }
 
 .boarder_top .search button {
@@ -368,6 +386,9 @@ footer h2 a {
 }*/
 .board_con table tr td a:hover {
     color: var(--color);
+}
+.paging {
+    margin:50px 0;
 }
 .paging ul {
     text-align: center;
@@ -419,26 +440,52 @@ footer h2 a {
 /** list **/
 
 /* search-bar */
-.search-form {
+.search-form , header.on .search-form {
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 20px;
-  margin: 50px auto;
-  width: 70%;
+  padding:10px 20px;
+  width:calc(100% - 750px);
+    margin: 0 100px;
   border-radius: 50px;
-  background-color: #fff;
-  box-shadow: 2px 6px 20px 0px rgba(0, 0, 0, .2);
   transition: all .5s;
+    align-items: center;
+    height: 55px;
+    border:0
+}
+body .search-form , header.on .search-form{
+    border:1px solid rgb(0, 140, 41);
 }
 .search-form:focus-within{
     background-color: #fff;
+}
+header.on .search-form select {
+    color: #222;
+}
+.index_body .search-form {
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.8)
+}
+.index_body .search-form > button {
+    background: transparent;
+}
+.index_body .search-form select {
+    color: #fff;
 }
 .list-select{
     border: none;
     background: transparent;
 }
-
+.index_body .search-form .list-search  {
+    color: #fff;
+}
+.index_body .search-form .list-search::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+.index_body .search-form .list-search:focus , header.on .search-form .list-search,
+.index_body header.on .search-form input::placeholder{
+    color: #222;
+}
 .list-search {
   width: 80%;
   padding: 10px 20px;
@@ -454,13 +501,12 @@ footer h2 a {
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  background: url(/img/xmark.svg);
   display: inline-block;
   color: #000;
   cursor: pointer;
 }
 
-.search-form > button {
+.search-form > button, header.on .search-form button {
   border-radius: 20px;
   width: 40px;
   height: 40px;
@@ -468,16 +514,20 @@ footer h2 a {
   background-color: #fff;
 }
 
-.search-form > button >.fa-magnifying-glass:before,
-.search-form > button > .fa-search:before {
+.search-form > button >.fa-magnifying-glass:before, header.on .search-form > button >.fa-magnifying-glass:before ,
+.search-form > button > .fa-search:before , header.on .search-form > button > .fa-search:before {
   color: var(--mainColor);
   font-size: 16px;
+}
+.index_body .search-form > button >.fa-magnifying-glass:before,
+.index_body .search-form > button > .fa-search:before{
+    color: #fff;
 }
 
 .container{
     display: flex;
     margin: 0 auto;
-    padding: 0 24px;
+    padding:15px 24px;
     width: 100%;
     max-width: 1920px;
 }

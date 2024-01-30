@@ -38,23 +38,54 @@
     <link rel="stylesheet" href="/style.css">
     <title>메인</title>
 </head>
-<body>
-
+<body class="<c:if test="${folderName eq 'index'}">index_body</c:if> <c:if test="${folderName eq 'list'}">list_body</c:if>">
 <header>
-    <ul class="tnb wrap">
-        <li><a href="/login">login</a></li>
-        <li><a href="/join">join</a></li>
-    </ul>
+    <c:choose>
+        <c:when test="${loginUser != null}">
+            <ul class="tnb wrap">
+                <li><img src="${loginUser.memImg}"></li>
+                <li><b>${loginUser.memid}</b>님 환영</li>
+                <li><a href="logout">LOGOUT</a></li>
+            </ul>
+        </c:when>
+        <c:otherwise>
+            <ul class="tnb wrap">
+                <li><a href="/login">login</a></li>
+                <li><a href="/join">join</a></li>
+            </ul>
+        </c:otherwise>
+    </c:choose>
     <nav>
         <div class="wrap">
-            <h1><a href="/"><img src="/img/logo_w.png" alt="weekend farm"></a></h1>
+            <h1>
+                <a href="/">
+                    <c:choose>
+                        <c:when test="folderName ne 'index'">
+                            <img src="/img/logo_w.png" alt="weekend farm">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/img/logo.png" alt="weekend farm">
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+            </h1>
+            <form action="/search" name="search-form" class="search-form" method="get">
+                <select name="select" id="select" class="list-select">
+                    <option value="location">지역명</option>
+                    <option value="title">농장명</option>
+                    <option value="theme">테마</option>
+                </select>
+                <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
             <ul class="gnb">
-                <li><a href="/list">list</a></li>
-                <li><a href="/board">board</a></li>
-                <li><a href="/story">story</a></li>
+                <li><a href="/list">주말농장</a></li>
+                <li><a href="/board">공지사항</a></li>
+                <li><a href="/story">농장 스토리</a></li>
             </ul>
         </div>
     </nav>
+
 </header>
 
 <script>
@@ -65,7 +96,7 @@
                 $("h1 img").attr("src","/img/logo.png");
             }else {
                 $("header").removeClass("on");
-                $("h1 img").attr("src","/img/logo_w.png");
+                $(".index_body h1 img").attr("src","/img/logo_w.png");
             }
         });
     });

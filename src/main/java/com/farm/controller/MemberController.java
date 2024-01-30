@@ -26,7 +26,7 @@ public class MemberController {
         return "index";
     }
 
-    @GetMapping("/memInsertForm")
+    @GetMapping("/join")
     public String memInsertForm(){
         return "/join";
     }
@@ -51,12 +51,12 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/loginForm")
+    @GetMapping("/login")
     public String loginForm(){
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginForm")
     public String login(Member member, Model model, HttpSession session){
         System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());

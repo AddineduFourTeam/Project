@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:if test="${fn:contains(folderName, 'board')}">
-    <c:set var="action" value="search" />
+    <c:set var="action" value="boardSearch" />
 </c:if>
 <c:if test="${fn:contains(folderName, 'story')}">
     <c:set var="action" value="storySearch"/>

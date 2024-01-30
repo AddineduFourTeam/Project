@@ -17,6 +17,7 @@ import java.util.List;
 
 import java.net.ContentHandler;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -109,6 +110,10 @@ public class BoardService {
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
+    }
+
+    public Optional<Board> detail(Long bno) {
+        return boardRepository.findById(bno);
     }
 
 }

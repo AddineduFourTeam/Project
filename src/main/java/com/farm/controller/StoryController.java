@@ -58,7 +58,7 @@ public class StoryController {
 
     @GetMapping("/storySearch")
     public String storySearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
-        boardService.SearchList(page ,type , keyword , model, Story.class);
+        boardService.searchList(page ,type , keyword , model, Story.class);
         return "story";
     }
 

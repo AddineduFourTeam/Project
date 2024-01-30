@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
-
+<div class="con">
 <form action="memInsert" method="post" id="joinForm" enctype="multipart/form-data">
     <ul style="list-style-type: none">
       <li>
@@ -13,7 +13,7 @@
       </li>
       <li>
         <label for="pass">PWD</label>
-        <input type="password" name="pass" required>
+        <input type="password" name="pass" id="pass" required>
       </li>
       <li>
         <label for="name">NAME</label>
@@ -22,15 +22,15 @@
       </li>
       <li>
         <label for="birth">birth</label>
-        <input name="birth">
+        <input name="birth" id="birth">
       </li>
       <li>
         <label for="phone">phone</label>
-        <input name="phone">
+        <input name="phone" id="phone">
       </li>
       <li>
         <label for="email">email</label>
-        <input type="email" name="email">
+        <input type="email" name="email" id="email">
       </li>
       <li>
         <input type="submit" value="회원가입">
@@ -38,7 +38,7 @@
       </li>
     </ul>
 </form>
-
+</div>
 <script>
     $(()=>{
         const $idInput = $("#memid");

@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
 <div class="con list-wrap">
-     <form action="/search" name="search-form" class="search-form" method="get">
-        <select name="select" id="select" class="list-select">
-            <option value="location">지역명</option>
-            <option value="title">농장명</option>
-            <option value="theme">테마</option>
-        </select>
-        <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
     <div class="container">
         <div class="farm-list">
             <ul>

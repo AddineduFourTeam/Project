@@ -3,14 +3,14 @@
 
 <%@include file="../include/header.jsp" %>
 
-<div>
+<div class="con">
     <c:choose>
         <c:when test="${loginUser != null}">
             <b>${loginUser.memid}</b>님 환영
             <a href="logout">LOGOUT</a>
         </c:when>
         <c:otherwise>
-            <form action="login" method="post">
+            <form action="loginForm" method="post">
                 <ul>
                     <li>
                         <label for="id">ID</label>

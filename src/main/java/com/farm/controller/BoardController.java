@@ -22,20 +22,20 @@ public class BoardController {
     //private Member loginUser;
 
     @GetMapping("/board")
-    public String list(@RequestParam(value="page", defaultValue="1") int page , Model model) {
+    public String boardlist(@RequestParam(value="page", defaultValue="1") int page , Model model) {
         boardService.listAll(page, model, Board.class);
         return "board";
     }
 
-    @GetMapping("/search")
-    public String search(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
+    @GetMapping("/boardSearch")
+    public String boardSearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
         boardService.searchList(page ,type , keyword , model, Board.class);
         return "board";
     }
 
     @GetMapping("/boardDetail")
-    public String detail(@RequestParam(value="bno") Long bno, Model model) {
-        //model.addAttribute("board", boardService.detail(bno).get());
+    public String boardDetail(@RequestParam(value="bno") Long bno, Model model) {
+        model.addAttribute("board", boardService.detail(bno).get());
         return "boardDetail";
     }
 
