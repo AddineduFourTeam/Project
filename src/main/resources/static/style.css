@@ -181,9 +181,11 @@ label{ cursor:pointer}
 b{font-weight:600;}
 
 :root {
-    --color : #FF9000;
     --border : rgba(140, 140, 140, 0.15);
     --line : #ddd;
+    --bg : #f3e9dd;
+    --mainColor : #01b03f;
+    --pointColor : #FF9000;
 } 
 
 /*main_common*/
@@ -201,6 +203,7 @@ body {
     flex-direction: column;
     height: 100%;
     min-height: 100vh;
+    background-color: var(--bg);
 }
 .con {
     flex: 1;
@@ -309,7 +312,7 @@ footer h2 a {
 
 .boarder_top {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;ㅋ
     padding: 80px 0 30px;
 }
 .boarder_top .search {
@@ -424,7 +427,7 @@ footer h2 a {
   margin: 50px auto;
   width: 70%;
   border-radius: 50px;
-  background-color: #adc852;
+  background-color: #fff;
   box-shadow: 2px 6px 20px 0px rgba(0, 0, 0, .2);
   transition: all .5s;
 }
@@ -467,7 +470,7 @@ footer h2 a {
 
 .search-form > button >.fa-magnifying-glass:before,
 .search-form > button > .fa-search:before {
-  color: darkgreen;
+  color: var(--mainColor);
   font-size: 16px;
 }
 
@@ -491,7 +494,7 @@ footer h2 a {
 }
 .farm-list > ul > li {
     width: calc(50% - 15px);
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     margin-left: 20px;
 }
 .farm-list > ul > li:nth-child(odd){
@@ -502,12 +505,23 @@ footer h2 a {
 }
 .farm-list > ul > li > a > .view{
     overflow: hidden;
-    border-radius: 10px;
     margin-bottom : 5px;
-}
-.farm-list > ul > li > a > .view > img{
     width: 100%;
+    border-radius: 10px;
+    position:relative;
+    padding-bottom:70%;
 }
+.view-img {
+   width:100%;
+   height:100%;
+   position:absolute;
+}
+.farm-list > ul > li > a > .view  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .farm-list > ul > li .desc{
     display: flex;
     justify-content: space-between;
@@ -520,12 +534,32 @@ footer h2 a {
 .farm-list > ul > li .desc .left .theme{
     font-size: 14px;
     font-weight: 700;
-    color: darkgreen;
+    color: var(--mainColor);
 }
+.farm-list > ul > li .desc .right >.fa-star:before{
+  color: var(--pointColor);
+}
+
 .farm-list::-webkit-scrollbar,
 .farm-list::-webkit-scrollbar-thumb,
 .farm-list::-webkit-scrollbar-track{
     opacity: 0;
+}
+
+.farm-list .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 0;
+    border-top: 1px solid #222;
+}
+.farm-list .pagination a strong{
+    font-weight: 900;
+}
+.farm-list .pagination a:hover,
+.farm-list .pagination a:focus{
+    color: var(--pointColor);
 }
 
 /* map */

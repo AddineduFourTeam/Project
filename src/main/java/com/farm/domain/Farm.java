@@ -19,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-//@Builder
 public class Farm {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +37,7 @@ public class Farm {
     private String wfImgUrl1; // 이미지 주소1
     private String wfImgUrl2; // 이미지 주소2
     private String wfImgUrl3; // 이미지 주소3
+    private Number wfRating; // 별점
 
     @CreatedDate
     @Column(name = "created_date")

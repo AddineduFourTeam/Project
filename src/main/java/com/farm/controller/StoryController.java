@@ -2,6 +2,7 @@ package com.farm.controller;
 
 import com.farm.domain.Member;
 import com.farm.domain.Story;
+import com.farm.service.BoardService;
 import com.farm.service.ListService;
 import com.farm.service.StoryService;
 import jakarta.persistence.EntityManager;
@@ -31,12 +32,15 @@ public class StoryController {
     @Autowired
     ListService listService;
 
+    @Autowired
+    BoardService boardService;
+
     private Member loginUser;
 
 
     @GetMapping("/story")
     public String storyList(@RequestParam(value="page", defaultValue="1") int page , Model model) {
-        listService.list(page, model, Story.class);
+        boardService.listAll(page, model, Story.class);
         return "story";
     }
     @GetMapping("/image/{id}")
@@ -54,7 +58,7 @@ public class StoryController {
 
     @GetMapping("/storySearch")
     public String storySearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
-        listService.Search(page ,type , keyword , model, Story.class);
+        boardService.SearchList(page ,type , keyword , model, Story.class);
         return "story";
     }
 
