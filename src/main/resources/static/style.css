@@ -819,7 +819,6 @@ body::-webkit-scrollbar-track {
     text-align:center;
 }
 .join-form .join-input-box{
-
     width:100%;
     height:65px;
     margin:15px 0;
@@ -861,13 +860,63 @@ body::-webkit-scrollbar-track {
     border:2px solid #000;
     width:300px;
     height: 45px;
-
+}
+.file-top{
+    margin-top:15px;
 }
 ::-webkit-file-upload-button{
     color:#fff;
     background: var(--mainColor);
     border:none;
     border-radius: 40px;
-    padding:12px 20px;
     cursor: pointer;
+    height:100%;
+    width:33%;
 }
+
+.email-input-box{
+    width:100%;
+    height:65px;
+    margin:15px 0 0;
+}
+.email-input-box input{
+    width:70%;
+    height:35%;
+    background: transparent;
+    outline: none;
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+    padding:20px;
+}
+
+.email-select-box{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    height:45px;
+
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+}
+.email-select-box input{
+    width:70%;
+    height:100%;
+    background: transparent;
+    outline: none;
+    border:none;
+    border-radius:40px;
+    padding:20px;
+}
+
+.email-select-box select{
+    width:40%;
+    /*height:42px;*/
+    height:100%;
+    border:none;
+    border-radius:40px;
+    text-align:center;
+    color:#fff;
+    font-weight: bold;
+    background: var(--mainColor);
+}
+
