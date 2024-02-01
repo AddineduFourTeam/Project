@@ -6,7 +6,7 @@
             <ul>
                 <c:forEach items="${farms}" var="farm">
                 <li>
-                    <a href="#">
+                    <a href="/listDetail?id=${farm.wfIdx}">
                         <div class="view">
                             <div class="view-img">
                                 <img src="${farm.wfImgUrl1}">
@@ -27,26 +27,34 @@
                 </c:forEach>
             </ul>
             <div class="pagination">
-                <c:if test="${nowPage > 0}">
-                    <a href="list?page=1"><strong>&lt;&lt;</strong></a>
-                    <a href="list?page=${nowPage}"><strong>&lt;</strong></a>
-                </c:if>
+                <!-- 이전페이지 -->
+                <c:choose>
+                    <c:when test="${pageNumber > 1}">
+                        <a href="list?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                        <a href="list?page=${nowPage}"><i class="fa-solid fa-angle-left"></i></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="javascript:void(0)"><i class="fa-solid fa-angles-left"></i></a>
+                        <a href="javascript:void(0)"><i class="fa-solid fa-angle-left"></i></a>
+                    </c:otherwise>
+                </c:choose>
 
+                <!-- pagination -->
                 <c:forEach begin="${startPage}" end="${endPage}" var="i">
-                    <c:choose>
-                        <c:when test="${pageNumber == nowPage + 1 }">
-                            <a href="list?page=${i}"><strong>${i}</strong></a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="list?page=${i}">${i}</a>
-                        </c:otherwise>
-                    </c:choose>
+                    <a class="<c:if test='${param.page eq i}'>on</c:if>" href="list?page=${i}"><strong>${i}</strong></a>
                 </c:forEach>
 
-                <c:if test="${nowPage < totalPages}">
-                    <a href="list?page=${nowPage + 2}"><strong>&gt;</strong></a>
-                    <a href="list?page=${totalPages}"><strong>&gt;&gt;</strong></a>
-                </c:if>
+                <!-- 다음페이지 -->
+                <c:choose>
+                    <c:when test="${pageNumber < totalPages}">
+                        <a href="list?page=${nowPage + 2}"><i class="fa-solid fa-angle-right"></i></a>
+                        <a href="list?page=${totalPages}"><i class="fa-solid fa-angles-right"></i></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="javascript:void(0)"><i class="fa-solid fa-angle-right"></i></a>
+                        <a href="javascript:void(0)"><i class="fa-solid fa-angles-right"></i></a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <div class="map-wrap">

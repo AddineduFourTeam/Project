@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2024-01-17
-  Time: 오후 5:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -69,13 +62,14 @@
                     </c:choose>
                 </a>
             </h1>
+            <c:set var="select" value="${param.select}"/>
             <form action="/search" name="search-form" class="search-form" method="get">
                 <select name="select" id="select" class="list-select">
-                    <option value="location">지역명</option>
-                    <option value="title">농장명</option>
-                    <option value="theme">테마</option>
+                    <option value="location" <c:if test="${select eq 'location'}">selected</c:if>>지역명</option>
+                    <option value="title" <c:if test="${select eq 'title'}">selected</c:if>>농장명</option>
+                    <option value="theme" <c:if test="${select eq 'theme'}">selected</c:if>>테마</option>
                 </select>
-                <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
+                <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on" value="<c:out value='${param.keyword}'/>">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <ul class="gnb">

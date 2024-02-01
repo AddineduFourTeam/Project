@@ -121,7 +121,11 @@ a{
     text-decoration:none;
 }
 body {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    height: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
 }
 body:not(.index_body) {
@@ -135,6 +139,16 @@ body,a{
     font-style: normal;
     /*line-height: 1.6;*/
     color:#222;
+}
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--mainColor);
+    width: 8px;
+}
+body::-webkit-scrollbar-track {
+    width: 10px;
 }
 
 img{
@@ -201,13 +215,7 @@ b{font-weight:600;}
 
 }
 .wrap:after {content:"";display:block;clear:both}
-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 100vh;
 
-}
 .list_body {
     background-color: var(--bg);
 }
@@ -437,21 +445,19 @@ footer p {
     color: #fff;
 }
 
-/** list **/
-
-/* search-bar */
+/******** search *******/
 .search-form , header.on .search-form {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
+  margin: 0 100px;
   padding:10px 20px;
   width:calc(100% - 750px);
-    margin: 0 100px;
+  height: 55px;
   border-radius: 50px;
+  border:0
   transition: all .5s;
-    align-items: center;
-    height: 55px;
-    border:0
 }
 body .search-form , header.on .search-form{
     border:1px solid rgb(0, 140, 41);
@@ -531,6 +537,7 @@ select option {
     color: #fff;
 }
 
+/******** list *******/
 .container{
     display: flex;
     margin: 0 auto;
@@ -596,22 +603,12 @@ select option {
 .farm-list > ul > li .desc .right >.fa-star:before{
   color: var(--pointColor);
 }
-body::-webkit-scrollbar {
-    width: 10px;
-}
-body::-webkit-scrollbar-thumb {
-    background: var(--mainColor);
-    width: 8px;
-}
-body::-webkit-scrollbar-track {
-    width: 10px;
-}
 .farm-list::-webkit-scrollbar,
 .farm-list::-webkit-scrollbar-thumb,
 .farm-list::-webkit-scrollbar-track{
     opacity: 0;
 }
-
+/******** pagination *******/
 .farm-list .pagination{
     display: flex;
     justify-content: center;
@@ -619,6 +616,9 @@ body::-webkit-scrollbar-track {
     gap: 10px;
     padding: 40px 0;
     border-top: 1px solid #222;
+}
+.farm-list .pagination a.on{
+    color: var(--pointColor);
 }
 .farm-list .pagination a strong{
     font-weight: 900;
