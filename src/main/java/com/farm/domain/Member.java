@@ -27,7 +27,7 @@ public class Member {
 
     @NotBlank(message = "아이디는 필수 입력값 입니다")
     private String memid;
- 
+
     @NonNull
     private String pass;
     @NonNull

@@ -3,7 +3,7 @@
 
 <%@include file="../include/header.jsp" %>
 
-<div class="login-wrap">
+<div class="con login-wrap">
     <div class="login-form">
         <c:choose>
             <c:when test="${loginUser != null}">

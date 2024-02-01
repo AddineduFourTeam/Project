@@ -126,7 +126,7 @@ body {
     overflow-x: hidden;
 }
 body:not(.index_body) {
-    padding-top: 160px;
+    padding-top: 150px;
 }
 body,a{
     font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
@@ -744,7 +744,6 @@ body::-webkit-scrollbar-track {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 .login-form li{list-style-type: none;}
 .login-form{
