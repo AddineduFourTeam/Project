@@ -2,38 +2,46 @@
 <%@include file="../include/header.jsp" %>
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
-    <div class="board_con">
-        <div class="board_tb">
-            <table>
-                <tr>
-                    <th>NO.</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>등록일</th>
-                    <th>이미지</th>
-                </tr>
-                <c:if test="${not empty list}">
-                    <!-- list 데이터가 있을 때 수행할 작업 -->
-                    <c:forEach var="list" items="${list}" varStatus="status">
-                        <tr>
-                            <td>${status.count}</td>
-                            <td><a href="/storyDetail?sno=${list.storyIdx}">${list.storySubject}</a></td>
-                            <td>${list.storyMemName}</td>
-                            <td><fmt:formatDate value="${list.storyDate}" pattern="yyyy-MM-dd" /></td>
-                            <td><img src="/image/${list.storyIdx}" alt=""></td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty list}">
-                    <!-- list 데이터가 없을 때 수행할 작업 -->
-                    <tr>
-                        <td colspan="5">자료가 없습니다.</td>
-                    </tr>
-                </c:if>
-            </table>
-        </div>
-        <a href="" class="storybtn">스토리 올리기</a>
-        <%@include file="../include/paging.jsp" %>
+    <div class="story_list">
+        <c:if test="${not empty list}">
+            <c:forEach var="list" items="${list}" varStatus="status">
+                <div class="story_items">
+                    <div class="story_content">
+                        <div class="story_tt">
+                            <a href="/storyDetail?sno=${list.storyIdx}">
+                                <img src="${list.storyMemImg}" alt="">
+                            </a>
+                            <b>${list.storyMemId}</b>
+                        </div>
+                        <div class="story_img">
+                            <img src="/image/${list.storyIdx}/1" alt="Image">
+                        </div>
+                        <div class="story_txt">
+                            <div class="story_subject"><a
+                                    href="/storyDetail?sno=${list.storyIdx}">${list.storySubject}</a></div>
+                            <div class="story_content ellipsis">${list.storyContent}</div>
+                            <div class="story_tag">
+                                    ${list.storyTag}
+                            </div>
+                            <div class="story_date">
+                                <fmt:formatDate value="${list.storyDate}" pattern="yyyy-MM-dd"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty list}">
+            <!-- list 데이터가 없을 때 수행할 작업 -->
+            <div class="notable">
+                자료가 없습니다.
+            </div>
+        </c:if>
     </div>
+    <div class="storybtn">
+        <a href="/storyWrite" class=" btn">스토리 올리기</a>
+        <span class="btnimg"><img src="/img/sprout.png" alt="새싹"></span>
+    </div>
+    <%@include file="../include/paging.jsp" %>
 </div>
 <%@include file="../include/footer.jsp" %>

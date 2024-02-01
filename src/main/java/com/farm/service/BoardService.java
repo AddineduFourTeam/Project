@@ -5,6 +5,7 @@ import com.farm.domain.Farm;
 import com.farm.domain.Story;
 import com.farm.repository.BoardRepository;
 import com.farm.repository.FarmRepository;
+import com.farm.repository.MemberRepository;
 import com.farm.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class BoardService {
     BoardRepository boardRepository;
     @Autowired
     StoryRepository storyRepository;
+    @Autowired
+    MemberRepository memberRepository;
     //전체 값 리스트 출력
     public void listAll(int page , Model model , Class<?> objClass) {
         int nPage = page - 1; // 시작페이지
@@ -84,8 +87,8 @@ public class BoardService {
                 result = storyRepository.findByStoryContentContaining(search, pageable);
             }
             if(type.equals("user")) {
-                System.out.println("user");
-                result = storyRepository.findByMemberNameContaining(search, pageable);
+                //System.out.println("user");
+                result = storyRepository.findByStoryMemNameContaining(search, pageable);
             }
         }
 

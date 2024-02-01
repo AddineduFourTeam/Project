@@ -40,7 +40,8 @@ public class Member {
     @Column(columnDefinition="varchar2(10) DEFAULT 'N'")
     private String isOut ="N";
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Story> stories = new ArrayList<>();
+
+   /* @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Story> stories = new ArrayList<>();*/
 
 }

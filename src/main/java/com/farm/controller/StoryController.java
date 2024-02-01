@@ -18,11 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.List;
 
 @Controller
 public class StoryController {
@@ -43,17 +45,36 @@ public class StoryController {
         boardService.listAll(page, model, Story.class);
         return "story";
     }
-    @GetMapping("/image/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+    @GetMapping("/image/{id}/{num}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id , @PathVariable int num) {
         // 데이터베이스에서 이미지 BLOB 데이터를 찾는 로직
-        byte[] imageData = storyService.getImg(id); // BLOB 데이터를 byte[]로 변환
-
+        byte[] imageData = storyService.getImg(id, num); // BLOB 데이터를 byte[]로 변환
+        //System.out.println("안녕");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG); // 적절한 Content-Type 설정
-
+        //System.out.println(new ResponseEntity<>(imageData, headers, HttpStatus.OK));
         return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
     }
 
+
+    /*@GetMapping("/images/{id}")
+    public ResponseEntity<List<byte[]>> getImages(@PathVariable Long id, Model model) {
+        List<byte[]> imgList = storyService.getImg(id);
+
+        if (imgList == null || imgList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+
+        List<ResponseEntity<byte[]>> imgs = (List<ResponseEntity<byte[]>>) new ResponseEntity<>(imgList, headers, HttpStatus.OK);
+
+        model.addAttribute("imgList", imgs);
+        model.addAttribute("storyIdx", id);
+
+        return new ResponseEntity<>(imgList, headers, HttpStatus.OK);
+    }*/
 
 
     @GetMapping("/storySearch")
@@ -69,18 +90,20 @@ public class StoryController {
     }
 
     @GetMapping("/storyWrite")
-    public String storywrite() {
+    public String storywrite(Model model) {
         //model.addAttribute("board", storyService.storydetail(sno).get());
         return "storyWrite";
     }
     @PostMapping("/storyForm")
-    public String storyForm(Story story , HttpSession session , @RequestParam("file") MultipartFile file) {
-        //story.setMember((String)session.getAttribute("id"));
+    public String storyForm(Story story , HttpSession session , @RequestParam(value="file1" , required = false) MultipartFile file1 , @RequestParam(value="file2" , required = false) MultipartFile file2 , @RequestParam(value="file3" , required = false) MultipartFile file3) {
+
         story.setStoryMemIdx(((Member)session.getAttribute("loginUser")).getMemIdx());
         story.setStoryMemName(((Member)session.getAttribute("loginUser")).getName());
-        //story.setStoryImg1(story.getStoryImg1());
+        story.setStoryMemImg(((Member)session.getAttribute("loginUser")).getMemImg());
+        story.setStoryMemId(((Member)session.getAttribute("loginUser")).getMemid());
+
         try {
-            storyService.storyForm(story,file);
+            storyService.storyForm(story,file1,file2,file3);
         }catch (Exception e) {
             e.printStackTrace();
         }
