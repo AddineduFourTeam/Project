@@ -37,8 +37,6 @@ public class StoryController {
     @Autowired
     BoardService boardService;
 
-    private Member loginUser;
-
 
     @GetMapping("/story")
     public String storyList(@RequestParam(value="page", defaultValue="1") int page , Model model) {
@@ -55,27 +53,6 @@ public class StoryController {
         //System.out.println(new ResponseEntity<>(imageData, headers, HttpStatus.OK));
         return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
     }
-
-
-    /*@GetMapping("/images/{id}")
-    public ResponseEntity<List<byte[]>> getImages(@PathVariable Long id, Model model) {
-        List<byte[]> imgList = storyService.getImg(id);
-
-        if (imgList == null || imgList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-
-        List<ResponseEntity<byte[]>> imgs = (List<ResponseEntity<byte[]>>) new ResponseEntity<>(imgList, headers, HttpStatus.OK);
-
-        model.addAttribute("imgList", imgs);
-        model.addAttribute("storyIdx", id);
-
-        return new ResponseEntity<>(imgList, headers, HttpStatus.OK);
-    }*/
-
 
     @GetMapping("/storySearch")
     public String storySearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
@@ -96,7 +73,7 @@ public class StoryController {
     }
     @PostMapping("/storyForm")
     public String storyForm(Story story , HttpSession session , @RequestParam(value="file1" , required = false) MultipartFile file1 , @RequestParam(value="file2" , required = false) MultipartFile file2 , @RequestParam(value="file3" , required = false) MultipartFile file3) {
-
+        //System.out.println("loginUser = " + loginUser);
         story.setStoryMemIdx(((Member)session.getAttribute("loginUser")).getMemIdx());
         story.setStoryMemName(((Member)session.getAttribute("loginUser")).getName());
         story.setStoryMemImg(((Member)session.getAttribute("loginUser")).getMemImg());
@@ -107,7 +84,7 @@ public class StoryController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         return "redirect:/story";
     }
 }

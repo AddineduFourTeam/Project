@@ -15,16 +15,29 @@ $(document).ready(function(){
     }else {
         $(".index_body h1 img").attr("src", "/img/logo_w.png");
     }
+    if($("div").hasClass(".story_list") == true) {
+        setTimeout(function(){
+            masonryLayout();
+            window.addEventListener("resize", masonryLayout);
+        },1000)
+    }
+
+
+
 });
 
+function masonryLayout() {
+    const masonryContainerStyle = getComputedStyle(
+        document.querySelector(".story_list")
+    );
+    const columnGap = parseInt(
+        masonryContainerStyle.getPropertyValue("column-gap")
+    );
+    const autoRows = parseInt(
+        masonryContainerStyle.getPropertyValue("grid-auto-rows")
+    );
 
-/*
-window.onload = () => {
-    document.querySelectorAll(".story_items").forEach((item) => {
-        item.style.gridRowEnd = `span ${item}`;
+    document.querySelectorAll(".story_items").forEach((elt) => {
+        elt.style.gridRowEnd = `span ${Math.ceil(elt.querySelector(".story_content").scrollHeight / 10 + 1)}`;
     });
-    const wrap = document.querySelector(".story_list");
-    wrap.style.display = "grid";
-    wrap.style.gridTemplateColumns = "repeat(3, minmax(0, 1fr))";
-    wrap.style.gridAutoRows = "1px";
-}*/
+}

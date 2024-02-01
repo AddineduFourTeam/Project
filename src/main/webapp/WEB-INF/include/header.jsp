@@ -9,6 +9,8 @@
 <c:set var="basePath" value="/WEB-INF/views/" />
 <c:set var="folderPath" value="${fn:substringAfter(URI, basePath)}" />
 <c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
+<!-- 지역명 뿌리기 -->
+<c:set var="localArray">서울,경기,인천,강원,제주,대전,충북,충남/세종,부산,울산,경남,대구,경북,광주,전남,전주/전북</c:set>
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,7 +34,6 @@
     <script src="/js/aos.min.js"></script>
     <script src="/js/wow.min.js"></script>
     <script src="/js/SmoothScroll.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/style.css">
     <title>메인</title>
@@ -42,7 +43,7 @@
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
-                <li><img src="${loginUser.memImg}"></li>
+                <li class="profile"><img src="${loginUser.memImg}"></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">LOGOUT</a></li>
             </ul>
@@ -70,17 +71,17 @@
             </h1>
             <form action="/search" name="search-form" class="search-form" method="get">
                 <select name="select" id="select" class="list-select">
-                    <option value="location">지역명</option>
-                    <option value="title">농장명</option>
-                    <option value="theme">테마</option>
+                    <option value="location" <c:if test="param.select eq 'location'">selected</c:if>>지역명</option>
+                    <option value="title" <c:if test="param.select eq 'title'">selected</c:if>>농장명</option>
+                    <option value="theme" <c:if test="param.select eq 'theme'">selected</c:if>>테마</option>
                 </select>
                 <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <ul class="gnb">
-                <li><a href="/list">주말농장</a></li>
-                <li><a href="/board">공지사항</a></li>
-                <li><a href="/story">농장 스토리</a></li>
+                <li <c:if test="${folderName eq 'list' || folderName eq 'detail'}">class="on"</c:if>><a href="/list" >주말농장</a></li>
+                <li <c:if test="${fn:contains(folderName, 'board')}">class = "on"</c:if>><a href="/board">공지사항</a></li>
+                <li <c:if test="${fn:contains(folderName, 'story')}">class = "on"</c:if>><a href="/story">농장 스토리</a></li>
             </ul>
         </div>
     </nav>
