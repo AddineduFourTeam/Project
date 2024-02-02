@@ -42,5 +42,4 @@ public class Farm {
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-
 }

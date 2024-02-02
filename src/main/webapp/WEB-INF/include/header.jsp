@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -30,6 +29,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/256c666685.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="/js/aos.min.js"></script>
@@ -44,7 +44,7 @@
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
-                <li class="profile"><img src="${loginUser.memImg}"></li>
+                <li><img src="${loginUser.memImg}"></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">LOGOUT</a></li>
             </ul>
@@ -76,7 +76,7 @@
                     <option value="title" <c:if test="param.select eq 'title'">selected</c:if>>농장명</option>
                     <option value="theme" <c:if test="param.select eq 'theme'">selected</c:if>>테마</option>
                 </select>
-                <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on">
+                <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on" value="<c:out value='${param.keyword}'/>">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <ul class="gnb">
@@ -88,5 +88,3 @@
     </nav>
 
 </header>
-
-

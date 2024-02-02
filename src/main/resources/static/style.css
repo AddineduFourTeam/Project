@@ -1,5 +1,4 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
 @font-face {
@@ -109,7 +108,7 @@
     padding:0;
     margin:0;
     box-sizing: border-box;
-    font-family: 'NanumSquareNeo', 'Open Sans' , 'Roboto' ,sans-serif ;
+    font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
     /*font-family:'AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;*/
 }
 h1,h2,h3,h4,h5,h6{
@@ -126,7 +125,7 @@ body {
     overflow-x: hidden;
 }
 body:not(.index_body) {
-    padding-top: 150px;
+    padding-top: 160px;
 }
 body,a{
     font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
@@ -164,6 +163,12 @@ table{
     max-width:1200px;
     margin:0 auto;
     padding:0 20px;
+}
+input,input[type="submit"]{
+    appearance: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
 }
 input[type="radio"],
 input[type="checkbox"]{
@@ -235,8 +240,8 @@ header {
     box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
 }
 h1 {
+    text-align: center;
     flex: 1;
-    text-align: left;
 }
 h1 a {
     text-align: center;
@@ -262,37 +267,16 @@ nav {
 }
 .gnb a {
     font-size: 16px;
-    transition: 0.5s ease;
-}
-.gnb li:hover a  , .gnb li.on a{
-    color: var(--mainColor);
 }
 .tnb {
     display: flex;
     justify-content: right;
     padding: 10px 30px 15px;
-    align-items: center;
 }
-
 .tnb li {
     color: #fff;
     margin-left: 30px;
     font-weight: 300;
-}
-.tnb li.profile {
-    width: 25px;
-    height: 25px;
-    overflow: hidden;
-    border-radius: 50%;
-    border:1px solid #ddd
-}
-.tnb li.profile + li {
-    margin-left: 15px;
-}
-.tnb li.profile img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
 }
 .tnb li a {
     color: #fff;
@@ -315,7 +299,7 @@ header.on , body.list_body header {
 header.on nav , body:not(.index_body) header nav{
     border-top: 1px solid rgb(145, 115, 77,0.1);
 }
-header.on a , body:not(.index_body) header a , header.on .tnb li , body:not(.index_body) li{
+header.on a , body:not(.index_body) header a , header.on .tnb li{
     color: #222;
     text-shadow: none;
 }
@@ -403,8 +387,6 @@ footer p {
 .board_con table tr td a:hover {
     color: var(--color);
 }
-
-
 .paging {
     margin:50px 0;
 }
@@ -870,6 +852,7 @@ select option {
     color: #fff;
 }
 
+/******** list *******/
 .container{
     display: flex;
     margin: 0 auto;
@@ -950,7 +933,7 @@ body::-webkit-scrollbar-track {
 .farm-list::-webkit-scrollbar-track{
     opacity: 0;
 }
-
+/******** pagination *******/
 .farm-list .pagination{
     display: flex;
     justify-content: center;
@@ -958,6 +941,9 @@ body::-webkit-scrollbar-track {
     gap: 10px;
     padding: 40px 0;
     border-top: 1px solid #222;
+}
+.farm-list .pagination a.on{
+    color: var(--pointColor);
 }
 .farm-list .pagination a strong{
     font-weight: 900;
