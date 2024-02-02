@@ -18,6 +18,9 @@
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+        <c:if test="${endBlockPage < 1}">
+            <li class="page-item disabled"><a class="page-link" href="/${folderName}">1</a></li>
+        </c:if>
 
         <!-- 다음 -->
         <c:choose>

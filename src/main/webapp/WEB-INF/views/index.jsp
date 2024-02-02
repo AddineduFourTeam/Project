@@ -8,14 +8,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
 <div class="mainImg">
-    <img src="/img/mainimg.jpg" alt="초원에 집에 있는 메인 이미지">
+    <img src="/img/mainimg.jpg" class="wow fadeIn" data-wow-delay="0.1s"  alt="초원에 집에 있는 메인 이미지">
 </div>
 <div class="wrap con">
     <div class="con01">
-
+        <div></div>
     </div>
-
-
 </div>
 <%@include file="../include/footer.jsp" %>
 

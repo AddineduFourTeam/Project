@@ -24,9 +24,9 @@
     <div class="search">
         <form action="${action}">
             <select name="type" id="type">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="user">작성자</option>
+                <option value="title" <c:if test="${param.type eq 'title'}">selected</c:if>>제목</option>
+                <option value="content" <c:if test="${param.type eq 'content'}">selected</c:if>>내용</option>
+                <option value="user" <c:if test="${param.type eq 'user'}">selected</c:if>>작성자</option>
             </select>
             <input type="text" name="keyword" id="keyword" value="${param.keyword}">
             <button type="submit">검색</button>

@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!-- 현재 페이지명 가져오기 -->
 <c:set var="URI" value="${pageContext.request.requestURI}" />
 <c:set var="basePath" value="/WEB-INF/views/" />
 <c:set var="folderPath" value="${fn:substringAfter(URI, basePath)}" />
 <c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
+<!-- 지역명 뿌리기 -->
+<c:set var="localArray">서울,경기,인천,강원,제주,대전,충북,충남/세종,부산,울산,경남,대구,경북,광주,전남,전주/전북</c:set>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,8 +22,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0,target-densitydpi=medium-dpi">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="shortcut icon" type="image/x-icon" href="https://t1.daumcdn.net/cfile/tistory/271CD54255E7AEE707">
-    <link href="https://t1.daumcdn.net/cfile/tistory/271CD54255E7AEE707" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="img/favicon.png" rel="icon">
     <link rel="canonical" href="">
     <meta name="author" itemprop="author" content="주말농장">
 
@@ -29,6 +32,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/256c666685.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=437827de1a7ca4ddf726ffe0bca1c156"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="/js/aos.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/SmoothScroll.js"></script>
+    <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/style.css">
     <title>메인</title>
 </head>
@@ -63,37 +71,21 @@
                     </c:choose>
                 </a>
             </h1>
-            <c:set var="select" value="${param.select}"/>
             <form action="/search" name="search-form" class="search-form" method="get">
                 <select name="select" id="select" class="list-select">
-                    <option value="location" <c:if test="${select eq 'location'}">selected</c:if>>지역명</option>
-                    <option value="title" <c:if test="${select eq 'title'}">selected</c:if>>농장명</option>
-                    <option value="theme" <c:if test="${select eq 'theme'}">selected</c:if>>테마</option>
+                    <option value="location" <c:if test="param.select eq 'location'">selected</c:if>>지역명</option>
+                    <option value="title" <c:if test="param.select eq 'title'">selected</c:if>>농장명</option>
+                    <option value="theme" <c:if test="param.select eq 'theme'">selected</c:if>>테마</option>
                 </select>
                 <input type="search" name="keyword" id="search" class="list-search" placeholder="검색해주세요" autocomplete= "on" value="<c:out value='${param.keyword}'/>">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <ul class="gnb">
-                <li><a href="/list">주말농장</a></li>
-                <li><a href="/board">공지사항</a></li>
-                <li><a href="/story">농장 스토리</a></li>
+                <li <c:if test="${folderName eq 'list' || folderName eq 'detail'}">class="on"</c:if>><a href="/list" >주말농장</a></li>
+                <li <c:if test="${fn:contains(folderName, 'board')}">class = "on"</c:if>><a href="/board">공지사항</a></li>
+                <li <c:if test="${fn:contains(folderName, 'story')}">class = "on"</c:if>><a href="/story">농장 스토리</a></li>
             </ul>
         </div>
     </nav>
 
 </header>
-
-<script>
-    $(document).ready(function(){
-        $(window).scroll(function(){
-            if($(this).scrollTop() > 0) {
-                $("header").addClass("on");
-                $("h1 img").attr("src","/img/logo.png");
-            }else {
-                $("header").removeClass("on");
-                $(".index_body h1 img").attr("src","/img/logo_w.png");
-            }
-        });
-    });
-</script>
-

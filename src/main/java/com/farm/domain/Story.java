@@ -25,6 +25,8 @@ public class Story {
     @Column(name="STORY_MEM_IDX")
     private Long storyMemIdx;
     private String storyMemName;
+    private String storyMemImg;
+    private String storyMemId;
     private Long storyWfIdx;
     private String storySubject;
     private String storyContent;
@@ -44,7 +46,7 @@ public class Story {
     @Lob
     private byte[] storyImg3;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "STORY_MEM_IDX", insertable = false, updatable = false)
-    private Member member;
+    private Member member;*/
 }
