@@ -456,7 +456,7 @@ footer p {
   width:calc(100% - 750px);
   height: 55px;
   border-radius: 50px;
-  border:0
+  border:0;
   transition: all .5s;
 }
 body .search-form , header.on .search-form{
@@ -608,6 +608,7 @@ select option {
 .farm-list::-webkit-scrollbar-track{
     opacity: 0;
 }
+
 /******** pagination *******/
 .farm-list .pagination{
     display: flex;
@@ -628,12 +629,97 @@ select option {
     color: var(--pointColor);
 }
 
+/******** list-detail *******/
+.list-detail h1{
+    margin: 20px 0;
+    text-align: left;
+}
+
+/******** gallery *******/
+.list-detail .gallery{
+    overflow: hidden;
+    border-radius: 20px;
+    margin-top: 50px;
+}
+.list-detail .gallery ul{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 230px 230px;
+    gap: 10px;
+}
+.list-detail .gallery ul li{
+    position: relative;
+    cursor: pointer;
+}
+.list-detail .gallery ul li img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.list-detail .gallery ul li::after{
+    display: block;
+    position: absolute;
+    top:0;
+    left: 0;
+    content:'';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 1;
+    opacity: 0;
+}
+.list-detail .gallery ul li:hover::after{
+    opacity: 1;
+}
+.list-detail .gallery ul li:nth-of-type(1) {
+    grid-area: img1;
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+}
+.list-detail .gallery ul li:nth-of-type(1) img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.list-detail .farm-content{
+    margin-top: 50px;
+}
+.list-detail .farmSummary h5{
+    font-size: 20px;
+    margin: 20px 0 4px 0;
+}
+.list-detail .farm-content .farmSummary .summary_txt{
+    line-height: 1.2;
+    font-size: 16px;
+}
+.list-detail .farm-content .farmSummary ul li{
+    padding-top: 4px;
+}
+.list-detail .farm-content .farmSummary ul li strong{
+    font-size: 18px;
+}
+.list-detail .farm-content .farmSummary ul li P{
+    padding-bottom: 4px;
+}
+
 /* map */
-.map-wrap{
+.list-wrap .map-wrap{
     position: sticky;
     width: 50%;
 }
-.map{
+.list-wrap .map-wrap .map{
     width: 100%;
     height: 100vh;
+}
+.list-detail .map-wrap{
+    width: 100%;
+    padding: 50px 0;
+}
+.list-detail .map-wrap h2{
+    padding: 20px 0;
+}
+.list-detail .map-wrap .map{
+    width: 100%;
+    height: 60vh;
 }

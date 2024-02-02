@@ -65,5 +65,10 @@ public class ListService {
         pagingData.put("farms", page.getContent());
         return pagingData;
     }
+
+    public Object detail(Long id) {
+        System.out.println(farmRepository.findById(id).get());
+        return farmRepository.findById(id).get();
+    }
 }
 

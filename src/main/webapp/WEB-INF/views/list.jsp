@@ -62,7 +62,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=437827de1a7ca4ddf726ffe0bca1c156"></script>
 <script>
     /* map영역 */
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
