@@ -2,13 +2,18 @@ package com.farm.service;
 
 import com.farm.domain.Member;
 import com.farm.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -85,6 +90,18 @@ public class MemberService {
 
     }
 
+    /* 회원가입시 유효성 체크 */
+    @Transactional(readOnly = true)
+    public Map<String, String> validateHandling(Errors errors) {
+        Map<String,String> validatorResult = new HashMap<>();
+
+        /* 유효성 검사에 실패한 필드 목록을 받음 */
+        for(FieldError error : errors.getFieldErrors()){
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName,error.getDefaultMessage());
+        }
+        return validatorResult;
+    }
     
 /*
     public List<Member> selectAll() {

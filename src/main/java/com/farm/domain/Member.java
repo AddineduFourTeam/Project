@@ -28,13 +28,13 @@ public class Member {
     @NotBlank(message = "아이디는 필수 입력값 입니다")
     private String memid;
 
-    @NonNull
+    //@NonNull
     private String pass;
-    @NonNull
+    //@NonNull
     private String name;
 
     private String birth;
-    @NonNull
+    //@NonNull
     private String phone;
 
     private String email;
