@@ -1026,6 +1026,12 @@ body::-webkit-scrollbar-track {
     color:#fff;
 }
 
+#loginResult{
+    color:red;
+    font-size:0.8em;
+    margin-top:10px;
+    text-align:center;
+}
 
 /*join*/
 .join-wrap{
@@ -1143,4 +1149,3 @@ body::-webkit-scrollbar-track {
     font-weight: bold;
     background: var(--mainColor);
 }
-

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.processing.Generated;
 import java.util.Map;
 
 @Controller
@@ -91,17 +92,18 @@ public class MemberController {
 
     @PostMapping("/loginForm")
     public String login(Member member, Model model, HttpSession session){
-        System.out.println("id : " + member.getMemid() );
+        //System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());
-        System.out.println("loginUser = " + loginUser);
+        //System.out.println("loginUser = " + loginUser);
         if(loginUser != null && pEncoder.matches(member.getPass(),loginUser.getPass())){
             model.addAttribute("loginUser",loginUser);
             session.setAttribute("loginUser",loginUser);
+
+            return "redirect:/";
         }else{
-
+            model.addAttribute("loginFail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+            return "login";
         }
-
-        return "redirect:/";
     }
 
     @GetMapping("/logout")
@@ -110,5 +112,15 @@ public class MemberController {
             status.setComplete();
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/forgotPass")
+    public String forgotPass(){
+        return "forgotPassForm";
+    }
+
+    @PostMapping("/forgotPassChange")
+    public String forgotPassChange(){
+        return "";
     }
 }
