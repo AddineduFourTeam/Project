@@ -19,7 +19,7 @@
                         <li>
                             <c:choose>
                                 <c:when test="${loginFail == true}">
-                                    <p id="loginResult">
+                                    <p class="fail_check">
                                         아이디 또는 비밀번호가 일치하지 않습니다
                                     </p>
                                 </c:when>

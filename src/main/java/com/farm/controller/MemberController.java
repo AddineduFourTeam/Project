@@ -15,7 +15,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.processing.Generated;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -119,8 +121,60 @@ public class MemberController {
         return "forgotPassForm";
     }
 
-    @PostMapping("/forgotPassChange")
-    public String forgotPassChange(){
-        return "";
+    /* 원본 - 없음ajax
+    @PostMapping("/forgotPassCheck")
+    public String forgotPassCheck(@ModelAttribute("infoCheck") Member infoCheck,Model model){
+
+        Optional<Member> opMember = memberService.getMemberById(infoCheck.getMemid());
+
+        if(opMember.isPresent()){
+            Member dbMember = opMember.get();
+            if(infoCheck.getMemid().equals(dbMember.getMemid()) &&
+                    infoCheck.getEmail().equals(dbMember.getEmail()) &&
+                    infoCheck.getPhone().equals(dbMember.getPhone())){
+                model.addAttribute("ChangePass",true);
+                return "forgotPassForm";
+
+            }else{
+                model.addAttribute("ChangePass",false);
+
+            }
+        }else{
+            model.addAttribute("ChangePass",false);
+
+        }
+        return "forgotPassForm";
+
+    }*/
+    @PostMapping("/forgotPassCheck")
+    @ResponseBody
+    public Map<String, Object> forgotPassCheck(@ModelAttribute("infoCheck") Member infoCheck, Model model) {
+        Map<String, Object> response = new HashMap<>();
+
+        Optional<Member> opMember = memberService.getMemberById(infoCheck.getMemid());
+
+        if (opMember.isPresent()) {
+            Member dbMember = opMember.get();
+            if (infoCheck.getMemid().equals(dbMember.getMemid()) &&
+                    infoCheck.getEmail().equals(dbMember.getEmail()) &&
+                    infoCheck.getPhone().equals(dbMember.getPhone())) {
+                response.put("ChangePass", true);
+            } else {
+                response.put("ChangePass", false);
+            }
+        } else {
+            response.put("ChangePass", false);
+        }
+
+        return response;
+    }
+
+    @PostMapping("/updatePass")
+    public String updatePass(@RequestParam("memid") String memid,
+                          @RequestParam("pass") String newPass){
+        String pass = pEncoder.encode(newPass);
+        memberService.updatePass(memid,pass);
+
+        return "redirect:/"; // 비밀번호 변경완료 페이지
     }
 }

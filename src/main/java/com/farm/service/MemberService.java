@@ -102,6 +102,19 @@ public class MemberService {
         }
         return validatorResult;
     }
+
+    public Optional<Member> getMemberById(String memid) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        return opMember;
+    }
+
+    public void updatePass(String memid, String pass) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        opMember.ifPresent(member -> {
+            member.setPass(pass);
+            memberRepository.save(member);
+        });
+    }
     
 /*
     public List<Member> selectAll() {
