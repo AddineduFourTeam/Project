@@ -33,6 +33,7 @@
     <script src="https://kit.fontawesome.com/256c666685.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=437827de1a7ca4ddf726ffe0bca1c156"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/js/aos.min.js"></script>
     <script src="/js/wow.min.js"></script>
     <script src="/js/SmoothScroll.js"></script>
@@ -87,5 +88,18 @@
             </ul>
         </div>
     </nav>
-
+<%--    <nav class="list_nav">--%>
+<%--        <div>--%>
+<%--            <ul>--%>
+<%--                <li><a href="#"></a></li>--%>
+<%--                <li><a href="#"></a></li>--%>
+<%--                <li><a href="#"></a></li>--%>
+<%--                <li><a href="#"></a></li>--%>
+<%--                <li><a href="#"></a></li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            <button>예약하기</button>--%>
+<%--        </div>--%>
+<%--    </nav>--%>
 </header>

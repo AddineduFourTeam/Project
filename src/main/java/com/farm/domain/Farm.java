@@ -30,7 +30,7 @@ public class Farm {
     private String wfTheme; // 주제
     private int wfYear; // 지정연도
     private String wfUrl; // 홈페이지 주소
-    private String wfTel; // 연락처e
+    private String wfTel; // 연락처
     private String wfCrtfcYearInfo; // 품질인증연도
     @Column(length = 10000)
     private String wfContent; // 내용
@@ -42,4 +42,11 @@ public class Farm {
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
+    @Column(name = "longitude")
+    private String longitude; // 경도
+
+    @Column(name = "latitude")
+    private String latitude; // 위도
+
 }
