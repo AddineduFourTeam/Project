@@ -16,6 +16,15 @@
                         <li>
                             <h3>LOGIN</h3>
                         </li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${loginFail == true}">
+                                    <p class="fail_check">
+                                        아이디 또는 비밀번호가 일치하지 않습니다
+                                    </p>
+                                </c:when>
+                            </c:choose>
+                        </li>
                         <li class="login-input-box">
                             <input name="memid" id="id" placeholder="ID">
                         </li>

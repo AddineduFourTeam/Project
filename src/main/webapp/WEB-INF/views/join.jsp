@@ -40,7 +40,7 @@
           <div class="email_box">
             <div class="email-input-box">
               <p>이메일</p>
-              <input type="text" name="a_email" id="a_email" class="form-control" placeholder="이메일을 입력해주세요."> <b>@</b>
+              <input type="text" name="a_email" id="a_email" class="form-control" placeholder="이메일을 입력해주세요"> <b>@</b>
             </div>
             <div class="email-select-box">
               <input type="text" name="b_email" id="b_email" class="form-control" ReadOnly="true"/>
