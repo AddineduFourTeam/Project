@@ -38,9 +38,10 @@ public class FarmController {
 //        return "listDetail";
 //    }
 
-    @GetMapping("/ListDetail")
-    public String ListDetail(@RequestParam("id") Long id) {
-        return "redirect:/listDetail?id=" + id;
+    @GetMapping("/listDetail")
+    public String listDetail(@RequestParam(value = "id") Long id, Model model){
+        model.addAttribute("listDetail", listService.detail(id));
+        return "listDetail";
     }
 
     @GetMapping("/search")

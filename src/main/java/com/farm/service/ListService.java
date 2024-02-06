@@ -25,6 +25,8 @@ import java.util.List;
 
 @Service
 public class ListService {
+
+
     @Autowired
     FarmRepository farmRepository;
 
@@ -62,6 +64,11 @@ public class ListService {
         pagingData.put("endPage", endPage);
         pagingData.put("farms", page.getContent());
         return pagingData;
+    }
+
+    public Object detail(Long id) {
+        System.out.println(farmRepository.findById(id).get());
+        return farmRepository.findById(id).get();
     }
 
     public List<Farm> localList(String local) {
