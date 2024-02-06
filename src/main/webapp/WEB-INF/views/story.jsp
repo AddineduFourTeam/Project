@@ -8,12 +8,12 @@
                 <div class="story_items">
                     <div class="story_content">
                         <div class="story_tt">
-                           <span><img src="${list.storyMemImg}" alt="${list.storyMemId} profile"></span>
+                           <span><img src="${list.storyMemImg}" alt="${list.storyMemId} profile" onerror="this.src='img/profileImg_w.png'"></span>
                             <b>${list.storyMemId}</b>
                         </div>
                         <a href="/storyDetail?sno=${list.storyIdx}">
                             <div class="story_img">
-                                <img src="/image/${list.storyIdx}/1" alt="Image">
+                                <img src="/image/${list.storyIdx}/1" alt="Image" onerror="this.src='img/logoimg.png'">
                             </div>
                         </a>
                         <div class="story_txt">

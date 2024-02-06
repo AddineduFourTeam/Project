@@ -25,8 +25,6 @@ import java.util.List;
 
 @Service
 public class ListService {
-
-
     @Autowired
     FarmRepository farmRepository;
 
@@ -64,6 +62,38 @@ public class ListService {
         pagingData.put("endPage", endPage);
         pagingData.put("farms", page.getContent());
         return pagingData;
+    }
+
+    public List<Farm> localList(String local) {
+        System.out.println("local = " + local);
+        List<Farm> result = null;
+        String[] farmlocal = {"서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전북"};
+        for(int i = 0; i < farmlocal.length; i++){
+            if(local.equals(farmlocal[i])){
+                local = local + "%";
+                result = farmRepository.findByWfAddrLike(local);
+                break;
+            }
+        }
+        if(local.equals("충북")) {
+            result = farmRepository.findByWfAddrLike("충청북도");
+        }
+        if(local.equals("경남")) {
+            result = farmRepository.findByWfAddrLike("경상남도");
+        }
+        if(local.equals("경북")) {
+            result = farmRepository.findByWfAddrLike("경상북도");
+        }
+        if(local.equals("충남/세종")) {
+            result = farmRepository.findByWfAddrContainingOrWfAddrContaining("충청남도","세종");
+        }
+        if(local.equals("전남")) {
+            result = farmRepository.findByWfAddrLike("전라남도");
+        }
+        if(local.equals("전북")) {
+            result = farmRepository.findByWfAddrLike("전라북도");
+        }
+        return result;
     }
 }
 

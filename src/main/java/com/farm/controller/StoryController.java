@@ -1,5 +1,6 @@
 package com.farm.controller;
 
+import com.farm.domain.Farm;
 import com.farm.domain.Member;
 import com.farm.domain.Story;
 import com.farm.service.BoardService;
@@ -62,7 +63,7 @@ public class StoryController {
 
     @GetMapping("/storyDetail")
     public String storydetail(@RequestParam(value="sno") Long sno, Model model) {
-        model.addAttribute("board", storyService.storydetail(sno).get());
+        model.addAttribute("story", storyService.storydetail(sno).get());
         return "storyDetail";
     }
 
@@ -87,4 +88,5 @@ public class StoryController {
         
         return "redirect:/story";
     }
+
 }

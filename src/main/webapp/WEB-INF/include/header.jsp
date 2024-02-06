@@ -11,6 +11,7 @@
 <c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
 <!-- 지역명 뿌리기 -->
 <c:set var="localArray">서울,경기,인천,강원,제주,대전,충북,충남/세종,부산,울산,경남,대구,경북,광주,전남,전주/전북</c:set>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,11 +28,14 @@
     <link rel="canonical" href="">
     <meta name="author" itemprop="author" content="주말농장">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/256c666685.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
     <script src="/js/aos.min.js"></script>
     <script src="/js/wow.min.js"></script>
     <script src="/js/SmoothScroll.js"></script>
@@ -44,7 +48,7 @@
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
-                <li><img src="${loginUser.memImg}"></li>
+                <li><span><img src="${loginUser.memImg}"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">LOGOUT</a></li>
             </ul>

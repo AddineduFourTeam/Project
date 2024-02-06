@@ -17,4 +17,7 @@ public interface FarmRepository extends JpaRepository<Farm, Long> {
 
     Page<Farm> findByWfThemeContaining(String keyword, Pageable pageable);
 
+    List<Farm> findByWfAddrLike(String local);
+
+    List<Farm> findByWfAddrContainingOrWfAddrContaining(String 충청남도, String 세종);
 }

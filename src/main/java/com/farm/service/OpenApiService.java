@@ -1,22 +1,16 @@
 package com.farm.service;
 
 import com.farm.domain.Farm;
-import com.farm.domain.OpenApiExplorer;
+import com.farm.other.OpenApiExplorer;
 import com.farm.repository.FarmRepository;
 import jakarta.transaction.Transactional;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.farm.other.CDataExtractor;
-
-import com.google.gson.Gson;
 
 //import gson.JsonObject;
 
@@ -38,7 +32,7 @@ public class OpenApiService {
     public List<Farm> getFarmService() throws IOException { // 공휴일 가져오기
         // 샘플코드를 활용해서 xml -> jsonObject로 변환
         List<Farm> farmList = new ArrayList<>();
-        for (int cntntsNo = 229873; cntntsNo <= 244558; cntntsNo++) {
+        for (int cntntsNo = 220762; cntntsNo <= 244558; cntntsNo++) {
             System.out.println(cntntsNo);
             JSONObject jsonData = openApiExplorer.getFarmExplorer(String.valueOf(cntntsNo));
             JSONObject body;

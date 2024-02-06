@@ -15,12 +15,27 @@ $(document).ready(function(){
     }else {
         $(".index_body h1 img").attr("src", "/img/logo_w.png");
     }
-    if($("div").hasClass(".story_list") == true) {
+    //masonryLayout();
+
+    // story list
+    if($("div").hasClass("story_list") === true) {
+        //console.log("ddddd");
         setTimeout(function(){
             masonryLayout();
             window.addEventListener("resize", masonryLayout);
         },1000)
     }
+
+
+    //story slick
+    $(".story_detail_img").slick({
+        draggable: true,
+            variableWidth: true,
+            slidesToShow: 1,
+            arrows: true,
+            swipeToSlide: true,
+            infinite: false
+    });
 
 
 

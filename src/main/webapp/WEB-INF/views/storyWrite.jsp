@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
-<c:if test="${empty loginUser}">
+<%--<c:if test="${empty loginUser}">
     <script>
         alert("로그인 후 작성 가능합 니다.");
         location.href="/login";
     </script>
-</c:if>
+</c:if>--%>
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
     <div class="story_con">
@@ -17,24 +17,36 @@
                 <div class="story_listtt">농장 선택</div>
                 <ul class="farm_select">
                     <c:forEach items="${localArray}" var="localArray" varStatus="idx">
-                       <li>
-                           <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="">
-                           <label for="farm_local${idx.index}">${localArray}</label>
-                       </li>
+                        <c:choose>
+                            <c:when test="${idx.index == 0}">
+                           <li>
+                               <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="${localArray}" checked>
+                               <label for="farm_local${idx.index}">${localArray}</label>
+                           </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li>
+                                    <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="${localArray}">
+                                    <label for="farm_local${idx.index}">${localArray}</label>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </ul>
             </div>
-            <div class="farm_list">
-                <ul>
+            <div class="story_img_submit">
+                <ul class="story_submit_ul">
+                    <c:forEach var="localList" items="${localList}" varStatus="status">
                     <li>
-                        <input type="radio" id="storyWfIdx01" name="storyWfIdx" value="" class="">
-                        <label for="storyWfIdx01">
+                        <input type="radio" id="storyWfIdx${status.index}" name="storyWfIdx" value="" class="">
+                        <label for="storyWfIdx${status.index}">
                             <div class="farm_list_img">
-                                <img src="http://www.nongsaro.go.kr/cms_contents/1096/229882_MF_BIMG_01.jpg" alt="" onerror="this.src=''">
+                                <img src="http://www.nongsaro.go.kr/cms_contents/1096/229882_MF_BIMG_01.jpg" alt="">
                             </div>
                             <span class="farm_list_tt">농장데스네</span>
                         </label>
                     </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="farm_img">
@@ -42,15 +54,15 @@
                     스토리 이미지
                 </div>
                 <ul>
-                    <li>
+                    <li class="farm_img1">
                         <input id="fileInput" type="file" multiple name="file1" onchange='readFile(this)' hidden/>
                         <label for="fileInput">이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small></label>
                     </li>
-                    <li>
+                    <li class="farm_img2">
                         <input id="fileInput2" type="file" multiple name="file2" onchange='readFile(this)' hidden/>
                         <label for="fileInput2">이미지 선택<small>10mb 이하</small></label>
                     </li>
-                    <li>
+                    <li class="farm_img3">
                         <input id="fileInput3" type="file" multiple name="file3" onchange='readFile(this)' hidden/>
                         <label for="fileInput3">이미지 선택<small>10mb 이하</small></label>
                     </li>
@@ -64,6 +76,53 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(document).ready(function(){
+        let farm_local = $("input[name='farm_local']:checked").val();
+        farmlocal(farm_local);
+
+        $("input[name='farm_local']").change(function(){
+            farmlocal($(this).val());
+        });
+    });
+
+    $(".farm_img li input").change(function(){
+        $(this).parents("li").next("li").show();
+    });
+
+    function farmlocal(input){
+        $.ajax({
+            url:"/storyLocal",
+            data:{'local':input},
+            type:"post",
+            success: function (data) {
+                console.log("success");
+                let content ="";
+                console.log(data);
+                if(data === null || data.length === 0) {
+                    content = "<li class='nofarmlist'>해당 지역에 농장이 없습니다.</li>"
+                }else {
+                    data.forEach(function (data, idx) {
+                        content += "<li>"+
+                            "<input type='radio' id='storyWfIdx"+idx+"' name='storyWfIdx' value='"+data.wfIdx+"' class=''>"+
+                            "<label for='storyWfIdx"+idx+"'>"+
+                            "<div class='farm_list_img'>"+
+                            "<img src='"+data.wfImgUrl1+"' alt=''>"+
+                            "</div>"+
+                            "<b class='farm_list_tt'>"+data.wfSubject+"</b>"+
+                            "<span>"+data.wfAddr+"</span>"+
+                            "</label>"+
+                            "</li>"
+                        //console.log(data.wfAddr);
+                    });
+                }
+                $(".story_submit_ul").html(content);
+            },error: function(){
+                console.log('error');
+            }
+        });
+    };
+
+
     function readFile(input) {
         readURL(input);
 

@@ -1,4 +1,4 @@
-package com.farm.domain;
+package com.farm.other;
 
 import org.json.JSONObject;
 import org.json.XML;
