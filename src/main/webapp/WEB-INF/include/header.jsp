@@ -37,21 +37,20 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=437827de1a7ca4ddf726ffe0bca1c156"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="/js/aos.min.js"></script>
-    <script src="/js/wow.min.js"></script>
-    <script src="/js/SmoothScroll.js"></script>
-    <script src="/js/script.js"></script>
-    <link rel="stylesheet" href="/style.css">
-    <title>메인</title>
+
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>주말 농장 - ${folderName}</title>
 </head>
 <body class="<c:if test="${folderName eq 'index'}">index_body</c:if> <c:if test="${folderName eq 'list'}">list_body</c:if>">
 <header>
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
-                <li><span><img src="${loginUser.memImg}"></span></li>
+                <li><span><img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">LOGOUT</a></li>
             </ul>
@@ -87,7 +86,7 @@
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <ul class="gnb">
-                <li <c:if test="${folderName eq 'list' || folderName eq 'detail'}">class="on"</c:if>><a href="/list" >주말농장</a></li>
+                <li <c:if test="${fn:contains(folderName, 'list')}">class="on"</c:if>><a href="/list" >주말농장</a></li>
                 <li <c:if test="${fn:contains(folderName, 'board')}">class = "on"</c:if>><a href="/board">공지사항</a></li>
                 <li <c:if test="${fn:contains(folderName, 'story')}">class = "on"</c:if>><a href="/story">농장 스토리</a></li>
             </ul>

@@ -16,7 +16,7 @@ public class OpenApiController {
         this.openApiService = openApiService;
     }
 
-    @GetMapping("/Farm")
+    @GetMapping("/FarmApi")
     public ResponseEntity<?> getHolidayController() throws IOException { // 공유일 가져오기
         return ResponseEntity.ok(openApiService.getFarmService());
     }
