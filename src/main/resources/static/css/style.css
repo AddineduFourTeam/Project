@@ -1334,7 +1334,7 @@ input:-webkit-autofill:active {
     color: #333;
     margin-bottom: 30px;
 }
-.login-form h4{
+h4{
     text-align:center;
 }
 .login-form .login-input-box{
