@@ -53,6 +53,8 @@
                 <li><span><img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">로그아웃</a></li>
+                <li><a href="myPage">MYPAGE</a></li>
+                <li><a href="logout">LOGOUT</a></li>
             </ul>
         </c:when>
         <c:otherwise>

@@ -3,18 +3,14 @@ package com.farm.controller;
 import com.farm.domain.Member;
 import com.farm.service.MemberService;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.processing.Generated;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -89,7 +85,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginForm(){
-        return "login";
+        return "login_2";
     }
 
     @PostMapping("/loginForm")
@@ -104,7 +100,7 @@ public class MemberController {
             return "redirect:/";
         }else{
             model.addAttribute("loginFail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
-            return "login";
+            return "login_2";
         }
     }
 
@@ -176,5 +172,17 @@ public class MemberController {
         memberService.updatePass(memid,pass);
 
         return "redirect:/"; // 비밀번호 변경완료 페이지
+    }
+
+    @GetMapping("/myPage")
+    public String myInfoForm(){
+        //model.addAttribute("memid",memid);
+        return "myPage";
+    }
+
+    @PostMapping("/updateMyInfo")
+    public String updateMyInfo(){
+
+        return "";
     }
 }
