@@ -53,6 +53,7 @@
             <ul class="tnb wrap">
                 <li><span><img src="${loginUser.memImg}"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
+                <li><a href="myPage">MYPAGE</a></li>
                 <li><a href="logout">LOGOUT</a></li>
             </ul>
         </c:when>

@@ -1,13 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/header_2.jsp" %>
 
 <div class="con login-wrap">
     <div class="login-form">
         <c:choose>
             <c:when test="${loginUser != null}">
                 <b>${loginUser.memid}</b>님 환영
+                <a href="myPageForm">MYPAGE</a>
                 <a href="logout">LOGOUT</a>
             </c:when>
             <c:otherwise>

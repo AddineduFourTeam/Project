@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/header_2.jsp" %>
 
 <div class="con login-wrap">
     <div class="login-form">
@@ -11,7 +11,7 @@
 
             <form method="post" action="forgotPassCheck" modelAttribute="infoCheck">
                 <%--${ChangePass == false}--%>
-                        <p class="fail_check" style="display: none;">입력정보와 일치하는 회원이 존재하지 않습니다</p>
+                <p class="fail_check" style="display: none;">입력정보와 일치하는 회원이 존재하지 않습니다</p>
                 <ul>
                     <li class="join-input-box m-top">
                         <p>아이디</p>
@@ -120,6 +120,8 @@
         $(".fail_check").show();
     }
     */
+
+    // forgotPassCheck폼에 있던 memid값을 updatePass폼으로 넘겨줌
     $(()=>{
         $("#updatePassBtn").click(function() {
             var memidValue = $("#memid").val();

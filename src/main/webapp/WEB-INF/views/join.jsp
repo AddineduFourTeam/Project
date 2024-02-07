@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/header_2.jsp" %>
 <div class="join-wrap">
   <div class="join-form">
     <form action="memInsert" onsubmit="validateForm()" method="post" id="joinForm" enctype="multipart/form-data">
