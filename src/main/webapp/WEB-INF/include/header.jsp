@@ -45,20 +45,20 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>주말 농장 - ${folderName}</title>
 </head>
-<body class="<c:if test="${folderName eq 'index'}">index_body</c:if> <c:if test="${folderName eq 'list'}">list_body</c:if>">
+<body class="<c:if test="${folderName eq 'index' || folderName eq 'login'}">index_body </c:if><c:if test="${folderName eq 'list'}">list_body</c:if><c:if test="${folderName eq 'login'}">auth_body</c:if>">
 <header>
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
                 <li><span><img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
-                <li><a href="logout">LOGOUT</a></li>
+                <li><a href="logout">로그아웃</a></li>
             </ul>
         </c:when>
         <c:otherwise>
             <ul class="tnb wrap">
-                <li><a href="/login">login</a></li>
-                <li><a href="/join">join</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/join">회원가입</a></li>
             </ul>
         </c:otherwise>
     </c:choose>

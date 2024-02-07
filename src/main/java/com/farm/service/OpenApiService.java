@@ -3,6 +3,7 @@ package com.farm.service;
 import com.farm.domain.Farm;
 import com.farm.repository.FarmRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 //import gson.JsonObject;
 
 @Service
+@Slf4j
 public class OpenApiService {
     @Autowired
     private final OpenApiExplorer openApiExplorer;
@@ -28,10 +30,12 @@ public class OpenApiService {
 
 
     @Transactional
+
     public List<Farm> getFarmService() throws IOException { // 공휴일 가져오기
+        log.info("api 구동시작");
         // 샘플코드를 활용해서 xml -> jsonObject로 변환
         List<Farm> farmList = new ArrayList<>();
-        for (int cntntsNo = 221049; cntntsNo <= 244558; cntntsNo++) {
+        for (int cntntsNo = 230558 ; cntntsNo <= 235558; cntntsNo++) {
             System.out.println(cntntsNo);
             JSONObject jsonData = openApiExplorer.getFarmExplorer(String.valueOf(cntntsNo));
             JSONObject body;
@@ -78,12 +82,16 @@ public class OpenApiService {
             }
 
         }
+        log.info("api 구동완료");
+
         if (!farmList.isEmpty()) {
             farmRepository.saveAll(farmList);
             return farmList;
         } else {
             return farmList;
         }
+
+
     }
 }
 
