@@ -89,17 +89,21 @@
         </div>
     </nav>
 <%--    <nav class="list_nav">--%>
-<%--        <div>--%>
-<%--            <ul>--%>
-<%--                <li><a href="#"></a></li>--%>
-<%--                <li><a href="#"></a></li>--%>
-<%--                <li><a href="#"></a></li>--%>
-<%--                <li><a href="#"></a></li>--%>
-<%--                <li><a href="#"></a></li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--        <div>--%>
-<%--            <button>예약하기</button>--%>
+<%--        <div class="wrap">--%>
+<%--            <div class="list_wrap">--%>
+<%--                <ul>--%>
+<%--                    <li><a href="#">안녕</a></li>--%>
+<%--                    <li><a href="#">나는</a></li>--%>
+<%--                    <li><a href="#">지금</a></li>--%>
+<%--                    <li><a href="#">너무</a></li>--%>
+<%--                    <li><a href="#">배불러</a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--            <div class="btn_wrap">--%>
+<%--                <button id="dtn">--%>
+<%--                    <span>예약하기</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
 <%--        </div>--%>
 <%--    </nav>--%>
 </header>

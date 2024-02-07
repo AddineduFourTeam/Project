@@ -31,7 +31,7 @@ public class AddrController {
         Map<String, Object> coordinates = new HashMap<>();
         // 파라미터로 받은 주소를 사용하여 좌표 정보 조회
         JSONObject response = kakaoApiExplorer.getAddressInfo(address);
-        //System.out.println("response = " + response);
+        System.out.println("response = " + response);
         if (response.has("documents")) {
             JSONObject document = response.getJSONArray("documents").getJSONObject(0);
             String x = document.getString("x"); // 경도
