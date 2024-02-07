@@ -8,7 +8,7 @@
             <h3>비밀번호 재설정</h3>
             <h4>(회원 정보 확인)</h4>
 
-            <form method="post" action="forgotPassCheck" modelAttribute="infoCheck">
+            <form action="forgotPassCheck" method="post" modelAttribute="infoCheck">
                 <%--${ChangePass == false}--%>
                 <p class="fail_check" style="display: none;">입력정보와 일치하는 회원이 존재하지 않습니다</p>
                 <ul>
@@ -25,16 +25,16 @@
                         <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
                     </li>
                     <li>
-                        <input type="submit" class="btn-login m-top" value="비밀번호 재설정">
+                        <input type="submit" class="btn-login m-top" value="회원 정보 확인">
                     </li>
                 </ul>
             </form>
         </div>
-        <div class="m-top" id="updatePassForm" style="display: none;">
+        <div class="m-top" id="forgotPass" style="display: none;">
             <%--${ChangePass == true}--%>
             <h3>비밀번호 재설정</h3>
                 <h4>새로 지정할 비밀번호를 입력해주세요</h4>
-            <form action="updatePass" method="post" id="updatePass">
+            <form action="forgotPass" method="post" id="forgetPass">
                 <ul>
                     <li class="join-input-box m-top">
                         <p>새로운 비밀번호 입력</p>
@@ -46,7 +46,7 @@
                         <div id="checkRePassResult" style="font-size:0.8em; display:none;"></div>
                     </li>
                     <li>
-                        <input id="updatePassBtn" class="btn-login m-top" type="submit" value="비밀번호 변경">
+                        <input id="forgotPassBtn" class="btn-login m-top" type="submit" value="비밀번호 변경">
                     </li>
                 </ul>
                 <input type="hidden" name="memid">
@@ -63,16 +63,16 @@
         $repassInput.keyup(function() {
             if ($passInput.val() !== $repassInput.val()) {
                 $("#checkRePassResult").show().css("color", "red").text("비밀번호가 일치하지 않습니다.");
-                $("#updatePassBtn :submit").attr("disabled", true).css("background","#ddd");
+                $("#forgotPassBtn :submit").attr("disabled", true).css("background","#ddd");
             } else {
                 $("#checkRePassResult").show().css("color", "#01b03f").text("비밀번호가 일치합니다.");
-                $("#updatePassBtn :submit").attr("disabled", false).css("background","#01b03f");
+                $("#forgotPassBtn :submit").attr("disabled", false).css("background","#01b03f");
             }
         });
     });
 
     // 버튼 누르면 위에 사라짐
-    $(document).ready(function () {
+    $(()=>{
         // forgotPassCheck 폼이 제출될 때
         $("form[modelAttribute='infoCheck']").submit(function (e) {
             e.preventDefault(); // 기본 폼 제출 방지
@@ -91,8 +91,8 @@
                     var ChangePass = data.ChangePass;
                     console.log("changepass" + ChangePass);
                     if (ChangePass===true) {
-                        // ChangePass가 true이면 updatePassForm을 표시
-                        $("#updatePassForm").show();
+                        // ChangePass가 true이면 forgotPassForm을 표시
+                        $("#forgotPass").show();
                         $("#forgot").hide();
                     } else {
                         // ChangePass가 false이면 fail_check 메시지를 표시
@@ -104,27 +104,22 @@
                 }
             });
         });
-
-        // updatePass 폼이 제출될 때
-        $("#updatePass").submit(function () {
-            // 필요한 경우 여기에 유효성 검사 또는 기타 로직을 추가할 수 있습니다.
-        });
     });
     /* ChangePass넘어오는지 확인용
     var ChangePass = <%--<%= request.getAttribute("ChangePass") %>;--%>
     console.log(ChangePass);
     if (ChangePass === true) {
-        $("#updatePassForm").show();
+        $("#forgotPassForm").show();
     } else {
         $(".fail_check").show();
     }
     */
 
-    // forgotPassCheck폼에 있던 memid값을 updatePass폼으로 넘겨줌
+    // forgotPassCheck폼에 있던 memid값을 forgotPassForm으로 넘겨줌
     $(()=>{
-        $("#updatePassBtn").click(function() {
+        $("#forgotPassBtn").click(function() {
             var memidValue = $("#memid").val();
-            $("#updatePassForm input[name='memid']").val(memidValue);
+            $("#forgotPass input[name='memid']").val(memidValue);
         });
     });
 </script>

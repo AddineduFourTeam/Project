@@ -49,34 +49,6 @@ public class MemberController {
         memberService.memInsert(member, file);
         return "redirect:/";
     }
-    /* 실패
-    @PostMapping("/memInsert")
-    public String memInsert(@Valid Member member, BindingResult bindingResult, Errors errors, Model model, @RequestParam("file") MultipartFile file) throws Exception {
-        if(errors.hasErrors()){
-            //회원가입 실패시 입력 데이터 값 유지
-            model.addAttribute("member",member);
-
-            // 유효성 통과 못한 필드와 메시지를 핸들링
-            Map<String, String> validatorResult = memberService.validateHandling(errors);
-            for(String key : validatorResult.keySet()){
-                model.addAttribute(key,validatorResult.get(key));
-            }
-            // 회원가입 페이지로 다시 리턴
-            return "/join";
-        }
-
-        member.setPass(pEncoder.encode(member.getPass()));
-
-        if(!file.isEmpty()){
-            String filename =  memberService.uploadImage(file, member.getMemIdx());
-            member.setMemImg(filename);
-        }
-
-        memberService.memInsert(member, file);
-
-        return "redirect:/";
-    }
-    */
 
     @GetMapping("/login")
     public String loginForm(){
@@ -88,7 +60,7 @@ public class MemberController {
         //System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());
         //System.out.println("loginUser = " + loginUser);
-        if(loginUser != null && pEncoder.matches(member.getPass(),loginUser.getPass())){
+        if(loginUser != null &&member.getIsOut().equals("N")&& pEncoder.matches(member.getPass(),loginUser.getPass())){
             model.addAttribute("loginUser",loginUser);
             session.setAttribute("loginUser",loginUser);
 
@@ -112,34 +84,9 @@ public class MemberController {
         return "forgotPassForm";
     }
 
-    /* 원본 - 없음ajax
-    @PostMapping("/forgotPassCheck")
-    public String forgotPassCheck(@ModelAttribute("infoCheck") Member infoCheck,Model model){
-
-        Optional<Member> opMember = memberService.getMemberById(infoCheck.getMemid());
-
-        if(opMember.isPresent()){
-            Member dbMember = opMember.get();
-            if(infoCheck.getMemid().equals(dbMember.getMemid()) &&
-                    infoCheck.getEmail().equals(dbMember.getEmail()) &&
-                    infoCheck.getPhone().equals(dbMember.getPhone())){
-                model.addAttribute("ChangePass",true);
-                return "forgotPassForm";
-
-            }else{
-                model.addAttribute("ChangePass",false);
-
-            }
-        }else{
-            model.addAttribute("ChangePass",false);
-
-        }
-        return "forgotPassForm";
-
-    }*/
     @PostMapping("/forgotPassCheck")
     @ResponseBody
-    public Map<String, Object> forgotPassCheck(@ModelAttribute("infoCheck") Member infoCheck, Model model) {
+    public Map<String, Object> forgotPassCheck(@ModelAttribute("infoCheck") Member infoCheck) {
         Map<String, Object> response = new HashMap<>();
 
         Optional<Member> opMember = memberService.getMemberById(infoCheck.getMemid());
@@ -160,13 +107,13 @@ public class MemberController {
         return response;
     }
 
-    @PostMapping("/updatePass")
-    public String updatePass(@RequestParam("memid") String memid,
-                          @RequestParam("pass") String newPass){
+    @PostMapping("/forgotPass")
+    public String forgotPass(@RequestParam("memid") String memid,
+                             @RequestParam("pass") String newPass){
         String pass = pEncoder.encode(newPass);
         memberService.updatePass(memid,pass);
 
-        return "redirect:/"; // 비밀번호 변경완료 페이지
+        return "completePass"; // 비밀번호 변경완료 페이지
     }
 
     @GetMapping("/myPage")
@@ -175,8 +122,87 @@ public class MemberController {
         return "myPage";
     }
 
-    @PostMapping("/updateMyInfo")
+    @GetMapping("/updateMyInfo")
     public String updateMyInfo(){
+        return "updateMyInfo";
+    }
+
+    @PostMapping("/myPagePassCheck")
+    @ResponseBody
+    public Boolean myPagePassCheck(@RequestParam("pass") String checkPass, HttpSession session){
+        Member loginUser = (Member) session.getAttribute("loginUser");
+
+        if(loginUser != null && pEncoder.matches(checkPass,loginUser.getPass())){
+            session.setAttribute("loginUser",loginUser);
+
+            return true;
+
+        }else{
+            return false;
+        }
+    }
+
+    @PostMapping("/updateMyInfoForm")
+    public String updateMyInfoForm(){
+
+        // 기존 비밀번호를 입력하고 아래에 새로 바꿀 비밀번호를 입력한 다음
+
+        return "";
+    }
+
+    @GetMapping("/updatePass")
+    public String updatePass(){
+        return "updatePassForm";
+    }
+
+    @PostMapping("/updatePass")
+    public String updatePass(@RequestParam("memid") String memid,
+                             @RequestParam("pass") String newPass,
+                             HttpSession session,
+                             SessionStatus status){
+        Member loginUser = (Member)session.getAttribute("loginUser");
+        String pass = pEncoder.encode(newPass);
+
+        if(loginUser != null){
+            memberService.updatePass(loginUser.getMemid(), pass);
+
+            if(!status.isComplete()){
+                status.setComplete();
+            }
+        }else{
+            System.out.println("비밀번호변경실패");
+        }
+
+        return "redirect:/completePass"; // 비밀번호 변경완료 페이지
+    }
+
+    @GetMapping("/completePass")
+    public String completePass(){
+        return "completePass";
+        // return "redirect:/completePass"됐을 때 받을 GetMapping
+    }
+
+    @GetMapping("/cancelAccount")
+    public String deleteAccount(){
+        return "cancelAccount";
+    }
+
+    // 아직 안됨
+    @PostMapping("/cancelAccountForm")
+    public String cancelAccountForm(@RequestParam("cancelPass") String cancelPass,
+                                    HttpSession session){
+        Member loginUser = (Member)session.getAttribute("loginUser");
+
+        //memberService.cancelAccount(loginUser.getMemid(),);
+
+        /*if(pEncoder.matches(cancelPass,loginUser.getPass())) {
+            // Member isOutCheck = memberService.findByMemid(loginUser.getIsOut());
+            if(isOutCheck.equals("N")){
+                isOutCheck.setIsOut("Y");
+                //memberService.cancelAccount();
+            }
+
+        }*/
 
         return "";
     }

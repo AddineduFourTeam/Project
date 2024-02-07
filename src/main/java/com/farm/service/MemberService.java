@@ -115,6 +115,7 @@ public class MemberService {
             memberRepository.save(member);
         });
     }
+
     
 /*
     public List<Member> selectAll() {
