@@ -21,17 +21,17 @@
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0,target-densitydpi=medium-dpi">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link href="img/favicon.png" rel="icon">
     <link rel="canonical" href="">
     <meta name="author" itemprop="author" content="주말농장">
+    <title>주말 농장 - ${folderName}</title>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/256c666685.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -43,7 +43,6 @@
 
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>주말 농장 - ${folderName}</title>
 </head>
 <body class="<c:if test="${folderName eq 'index' || folderName eq 'login'}">index_body </c:if><c:if test="${folderName eq 'list'}">list_body</c:if><c:if test="${folderName eq 'login'}">auth_body</c:if>">
 <header>
@@ -53,7 +52,7 @@
                 <li><span><img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'"></span></li>
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">로그아웃</a></li>
-                <li><a href="myPage">MYPAGE</a></li>
+                <li><a href="myPage">마이페이지</a></li>
             </ul>
         </c:when>
         <c:otherwise>
@@ -93,23 +92,24 @@
             </ul>
         </div>
     </nav>
-
-<%--    <nav class="list_nav">--%>
-<%--        <div class="wrap">--%>
-<%--            <div class="list_wrap">--%>
-<%--                <ul>--%>
-<%--                    <li><a href="#">안녕</a></li>--%>
-<%--                    <li><a href="#">나는</a></li>--%>
-<%--                    <li><a href="#">지금</a></li>--%>
-<%--                    <li><a href="#">너무</a></li>--%>
-<%--                    <li><a href="#">배불러</a></li>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--            <div class="btn_wrap">--%>
-<%--                <button id="dtn">--%>
-<%--                    <span>예약하기</span>--%>
-<%--                </button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </nav>--%>
+<c:if test="${folderName eq 'listDetail'}">
+    <nav class="list_nav">
+        <div class="wrap">
+            <div class="list_wrap">
+                <ul>
+                    <li><a href="#">안녕</a></li>
+                    <li><a href="#">나는</a></li>
+                    <li><a href="#">지금</a></li>
+                    <li><a href="#">너무</a></li>
+                    <li><a href="#">배불러</a></li>
+                </ul>
+            </div>
+            <div class="btn_wrap">
+                <button id="dtn">
+                    <span>예약하기</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</c:if>
 </header>
