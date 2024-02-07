@@ -12,16 +12,23 @@ wow.init();*/
 new WOW().init();
 
 $(document).ready(function(){
+    smoothScroll();
 
+    /* main */
 
     $(window).scroll(function(){
-        if($(this).scrollTop() > 0) {
+        if($(this).scrollTop() > 20) {
             $("header").addClass("on");
             $("h1 img").attr("src","/img/logo.png");
-
+            $(".tnb span img").on("error", function() {
+                $(this).attr("src", "/img/profileImg.png");
+            });
         }else {
             $("header").removeClass("on");
             $(".index_body h1 img").attr("src", "/img/logo_w.png");
+            $(".tnb span img").on("error", function() {
+                $(this).attr("src", "/img/profileImg_w.png");
+            });
         }
     });
     if($("header").hasClass("on") == true) {
@@ -29,7 +36,20 @@ $(document).ready(function(){
     }else {
         $(".index_body h1 img").attr("src", "/img/logo_w.png");
     }
-    //masonryLayout();
+
+    $(".main_story_slide").slick({
+        arrows:false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        centerMode: true,
+        variableWidth: true,
+        spaceBetween: 20,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+        }
+    });
 
     // story list
     if($("div").hasClass("story_list") === true) {
@@ -41,7 +61,7 @@ $(document).ready(function(){
     }
 
 
-    $("textarea").on("keydown , keyup , keypress",function(){
+    $(" textarea").on("keydown , keyup , keypress",function(){
         var reply_submit = $(this).parents(".story_reply_input").find(".reply_submit");
         resize(this);
         if($(this).val().length > 0) {

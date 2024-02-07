@@ -68,10 +68,10 @@
                 <a href="/">
                     <c:choose>
                         <c:when test="folderName ne 'index'">
-                            <img src="/img/logo_w.png" alt="weekend farm">
+                            <img src="/img/logo_w.png" alt="weekend farm" onerror="this.src='/img/logo_w.png'">
                         </c:when>
                         <c:otherwise>
-                            <img src="/img/logo.png" alt="weekend farm">
+                            <img src="/img/logo.png" alt="weekend farm" onerror="this.src='/img/logo.png'">
                         </c:otherwise>
                     </c:choose>
                 </a>

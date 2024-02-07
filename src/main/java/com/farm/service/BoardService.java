@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 
-import java.net.ContentHandler;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +48,7 @@ public class BoardService {
         listPage(model , result);
 
     }
+
 
     // 검색한 값 리스트 출력
     public void searchList(int page, String type, String search, Model model, Class<?> objClass) {
@@ -95,6 +94,7 @@ public class BoardService {
 
         listPage(model , result);
     }
+
 
     //model에 result값 담기
     private void listPage(Model model , Page<?> result) {

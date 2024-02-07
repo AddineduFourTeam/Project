@@ -24,11 +24,6 @@ public class MemberController {
     @Autowired
     PasswordEncoder pEncoder;
 
-    @RequestMapping("/")
-    public String root() throws Exception {
-        return "index";
-    }
-
     @GetMapping("/join")
     public String memInsertForm(){
         return "/join";

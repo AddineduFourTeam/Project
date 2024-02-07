@@ -3,9 +3,12 @@ package com.farm.service;
 import com.farm.domain.Story;
 import com.farm.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +40,10 @@ public class StoryService {
             return null;
         }
 
+    }
+    public void listAll(Model model) {
+        List<Story> content = storyRepository.findStory();
+        model.addAttribute("list", content);
     }
 
    /* public List<byte[]> getImg(Long id) {

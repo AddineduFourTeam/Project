@@ -35,10 +35,11 @@ public class OpenApiService {
         log.info("api 구동시작");
         // 샘플코드를 활용해서 xml -> jsonObject로 변환
         List<Farm> farmList = new ArrayList<>();
-        for (int cntntsNo = 233558 ; cntntsNo <= 235558; cntntsNo++) {
+        for (int cntntsNo = 209309 ; cntntsNo <= 217054; cntntsNo++) {
             System.out.println(cntntsNo);
-            JSONObject jsonData = openApiExplorer.getFarmExplorer(String.valueOf(cntntsNo));
+            JSONObject jsonData = openApiExplorer .getFarmExplorer(String.valueOf(cntntsNo));
             JSONObject body;
+
 
             //System.out.println("jsonData = " + jsonData);
             try {
@@ -46,18 +47,18 @@ public class OpenApiService {
                 body = jsonData.getJSONObject("response").getJSONObject("body");
                 JSONObject requestParameter = header.getJSONObject("requestParameter");
                 JSONObject item = body.getJSONObject("item");
-                int wf_idx = requestParameter.getInt("cntntsNo");
-                String wf_subject = item.getString("cntntsSj");
-                String locplc = item.getString("locplc");
-                String wf_theme = item.getString("thema");
-                int wf_Year = item.getInt("appnYear");
-                String wf_url = item.getString("url");
-                String wf_tel = item.getString("telno");
-                String wf_crtfcYearInfo = item.getString("crtfcYearInfo");
-                String wf_content = item.getString("cn");
-                String wf_imgUrl1 = item.getString("imgUrl1");
-                String wf_imgUrl2 = item.getString("imgUrl2");
-                String wf_imgUrl3 = item.getString("imgUrl3");
+                int wf_idx = requestParameter.optInt("cntntsNo",0);
+                String wf_subject = item.optString("cntntsSj", null);
+                String locplc = item.optString("locplc", null);
+                String wf_theme = item.optString("thema", null);
+                int wf_Year = item.optInt("appnYear", 0); // '0'은 기본값입니다. 필요에 따라 변경하세요.
+                String wf_url = item.optString("url", null);
+                String wf_tel = item.optString("telno", null);
+                String wf_crtfcYearInfo = item.optString("crtfcYearInfo", null);
+                String wf_content = item.optString("cn", null);
+                String wf_imgUrl1 = item.optString("imgUrl1", null);
+                String wf_imgUrl2 = item.optString("imgUrl2", null);
+                String wf_imgUrl3 = item.optString("imgUrl3", null);
                 Farm farm = Farm.builder()
                         .wfIdx(wf_idx)
                         .wfAddr(locplc)

@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
+@import url('https://webfontworld.github.io/gyeonggi/GyeonggiBatang.css');
 @font-face {
     font-family: 'NanumSquareNeo';
     font-weight: 300;
@@ -136,7 +137,6 @@ body,a{
     /*line-height: 1.6;*/
     color:#222;
 }
-
 img{
     border:0;
     vertical-align:top;
@@ -217,23 +217,7 @@ img {
 
 /********* main **********/
 
-.mainImg {
-    height: 100vh;
-    width: 100%;
-    position:relative;
-}
-.mainImg img {
-    width: 100%;
-    height: 100%;
-    object-fit:cover;
-}
-.mainBannerTxt {
-    position: absolute;
-    left: 50%;
-    font-size:40px;
-    top: 50%;
-    color: #fff;
-}
+
 header {
     display: block;
     backdrop-filter: blur(15px); /* 필요에 따라 흐림 정도 조절 */
@@ -359,7 +343,240 @@ footer p {
 }
 
 
-/*board*/
+/****** main *******/
+
+.mainImg {
+    height: 100vh;
+    width: 100%;
+    position:relative;
+}
+.mainImg img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+.mainBannerTxt {
+    position: absolute;
+    left: 50%;
+    font-size:40px;
+    top: 45%;
+    color: #fff;
+    font-weight:300;
+    font-family: 'GyeonggiBatang';
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.mainBannerTxt > * , .mainBannerTxt  b {
+    font-family: 'GyeonggiBatang';
+}
+.mainBannerTxt div {
+    margin-bottom: 25px;
+}
+.mainBannerTxt span {
+    font-size:32px ;
+    font-weight:300;
+    display: block;
+    margin-bottom: 25px;
+}
+.maincon01 {
+    padding: 100px 0;
+}
+.section {
+    transition: all 0.3s ease-in-out;
+}
+/*.maincon01.active {
+    background: #fcffa8;
+}*/
+.contt {
+    padding-bottom: 60px;
+    text-align: center;
+}
+.contt h4 {
+    font-size:28px
+}
+.contt p {
+    margin-top: 10px;
+    font-size:18px
+}
+.main_localList ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.main_localList li {
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    position:relative;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+.main_localList li:hover {
+    width: 250px;
+    height: 250px;
+}
+.main_localList li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.main_localList li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main_localList li a div {
+    text-transform: uppercase;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    height: 30px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.main_localList li a div span {
+    display: block;
+    text-align: center;
+    transition: all 0.3s;
+    -webkit-trasition: all 0.3s;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+.main_localList li:hover a div span:first-child {
+    margin-top:-32px;
+}
+
+/*.main_localList ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.main_localList .main_slideitem {
+    border-radius: 20px;
+    overflow: hidden;
+}
+.main_localList ul li {
+    width: calc(33.333% - 10px);
+    margin-bottom: 20px;
+}
+.main_localList ul li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main_localList ul li:nth-child(1), .main_localList ul li:nth-child(2) , .main_localList ul li:nth-last-child(-n+2){
+    width: calc(50% - 10px);
+}*/
+
+.maincon02 {
+    padding: 100px 0;
+}
+.ms_slide_items {
+    margin-right: 30px;
+    border-radius: 30px;
+    overflow: hidden;
+    border:1px solid var(--border);
+    position: relative;
+}
+.maincon02 .slick-track {
+    display: flex;
+    align-items: center;
+}
+.ms_slide_items img {
+    height: 420px;
+    transition: all 0.5s ease;
+}
+.ms_slide_items.slick-active img{
+    height: 450px;
+
+}
+.mainstory_txt {
+    padding: 20px;
+    position: absolute;
+    background:linear-gradient(transparent,rgba(0,0,0,0.8));
+    /*background: #fff;*/
+    bottom: 0;
+}
+.mainstory_txt b {
+    font-size: 18px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    color: #fff;
+}
+.mainstory_txt p{
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    height: 2.4em;
+    word-break:keep-all;
+    color: #fff;
+}
+.ms_slide_items:hover .mainstory_txt{
+    background:#fff
+}
+.ms_slide_items:hover .mainstory_txt p , .ms_slide_items:hover .mainstory_txt b {
+    color: #222;
+}
+.maincon03 {
+    background: url(/img/mainimg2.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center 130px;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+}
+.maincon03:after {
+    content:"";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.maincon03 .contt {
+    position:relative;
+    z-index: 1;
+    padding-bottom: 0;
+}
+.maincon03 .contt h4 {
+    margin-bottom: 50px;
+}
+.maincon03 .contt div {
+    font-weight: 300;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size:18px
+}
+.maincon03 .contt div + div {
+    margin-top: 20px;
+}
+.maincon03 .contt div p {
+    font-weight: 300;
+    font-size:18px
+}
+
+
+/******* board *******/
 
 .boarder_top {
     display: flex;
@@ -948,6 +1165,12 @@ footer p {
 .story_detail_img .story_detail_img_list {
     padding-right: 10px;
     height: 500px;
+    float:left
+}
+.story_detail_img:after {
+    content:"";
+    display: block;
+    clear: both;
 }
 .story_detail_img .story_detail_img_list img {
     max-height:  100%;

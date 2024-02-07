@@ -48,7 +48,6 @@ public class StoryController {
     public ResponseEntity<byte[]> getImage(@PathVariable Long id , @PathVariable int num) {
         // 데이터베이스에서 이미지 BLOB 데이터를 찾는 로직
         byte[] imageData = storyService.getImg(id, num); // BLOB 데이터를 byte[]로 변환
-        //System.out.println("안녕");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG); // 적절한 Content-Type 설정
         //System.out.println(new ResponseEntity<>(imageData, headers, HttpStatus.OK));

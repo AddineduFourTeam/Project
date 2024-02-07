@@ -133,9 +133,9 @@
             console.log("slideItemWidth : " + slideItemWidth + "/ storySlideWidth : " + storySlideWidth);
             if (storySlideWidth > slideItemWidth) {
                 //$(".story_detail_slide").find("button").hide();
-                story_slick();
             } else {
                 //$(".story_detail_slide").find("button").show();
+                story_slick();
             }
         });
     });
