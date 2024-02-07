@@ -54,7 +54,6 @@
                 <li><b>${loginUser.memid}</b>님 환영</li>
                 <li><a href="logout">로그아웃</a></li>
                 <li><a href="myPage">MYPAGE</a></li>
-                <li><a href="logout">LOGOUT</a></li>
             </ul>
         </c:when>
         <c:otherwise>
@@ -95,4 +94,22 @@
         </div>
     </nav>
 
+<%--    <nav class="list_nav">--%>
+<%--        <div class="wrap">--%>
+<%--            <div class="list_wrap">--%>
+<%--                <ul>--%>
+<%--                    <li><a href="#">안녕</a></li>--%>
+<%--                    <li><a href="#">나는</a></li>--%>
+<%--                    <li><a href="#">지금</a></li>--%>
+<%--                    <li><a href="#">너무</a></li>--%>
+<%--                    <li><a href="#">배불러</a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--            <div class="btn_wrap">--%>
+<%--                <button id="dtn">--%>
+<%--                    <span>예약하기</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </nav>--%>
 </header>
