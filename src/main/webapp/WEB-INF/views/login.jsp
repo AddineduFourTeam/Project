@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../include/header_2.jsp" %>
+<%@include file="../include/header.jsp" %>
 
 <div class="con login-wrap">
     <div class="login-form">
@@ -15,7 +15,7 @@
                 <form action="loginForm" method="post">
                     <ul>
                         <li>
-                            <h3>LOGIN</h3>
+                            <h3>로그인</h3>
                         </li>
                         <li>
                             <c:choose>
@@ -36,7 +36,7 @@
                             <a href="forgotPass">비밀번호 찾기</a>
                         </li>
                         <li>
-                            <input class="btn-login" type="submit" value="LOGIN">
+                            <input class="btn-login" type="submit" value="로그인">
                         </li>
                     </ul>
                 </form>

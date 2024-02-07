@@ -24,7 +24,6 @@ public class Farm {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     //@Column(name = "wf_idx")
     private int wfIdx; // 컨텐츠 번호
-
     private String wfSubject; // 제목
     private String wfAddr; // 소재지
     private String wfTheme; // 주제

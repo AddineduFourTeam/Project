@@ -7,6 +7,7 @@ import com.farm.repository.BoardRepository;
 import com.farm.repository.FarmRepository;
 import com.farm.repository.StoryRepository;
 import jakarta.persistence.Id;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import java.net.ContentHandler;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ListService {
 
 
@@ -72,7 +74,8 @@ public class ListService {
     }
 
     public List<Farm> localList(String local) {
-        System.out.println("local = " + local);
+        log.warn("localList");
+        //System.out.println("local = " + local);
         List<Farm> result = null;
         String[] farmlocal = {"서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전북"};
         for(int i = 0; i < farmlocal.length; i++){

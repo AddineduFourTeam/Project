@@ -85,7 +85,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginForm(){
-        return "login_2";
+        return "login";
     }
 
     @PostMapping("/loginForm")
@@ -100,7 +100,7 @@ public class MemberController {
             return "redirect:/";
         }else{
             model.addAttribute("loginFail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
-            return "login_2";
+            return "login";
         }
     }
 

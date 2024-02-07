@@ -1,5 +1,19 @@
+
+// animate 효과
+/*wow = new WOW(
+    {
+        boxClass:     'wow',      // 기본값
+        animateClass: 'animated',  // 기본값
+        offset:       0,          // 기본값
+        mobile:       true,       // 기본값
+        live:         true        // 기본값
+    });
+wow.init();*/
 new WOW().init();
+
 $(document).ready(function(){
+
+
     $(window).scroll(function(){
         if($(this).scrollTop() > 0) {
             $("header").addClass("on");
@@ -27,15 +41,22 @@ $(document).ready(function(){
     }
 
 
-    //story slick
-    $(".story_detail_img").slick({
-        draggable: true,
-            variableWidth: true,
-            slidesToShow: 1,
-            arrows: true,
-            swipeToSlide: true,
-            infinite: false
+    $("textarea").on("keydown , keyup , keypress",function(){
+        var reply_submit = $(this).parents(".story_reply_input").find(".reply_submit");
+        resize(this);
+        if($(this).val().length > 0) {
+            $(reply_submit).addClass("on");
+            $(reply_submit).prop("disabled",false);
+        }else {
+            $(reply_submit).removeClass("on");
+            $(reply_submit).prop("disabled",true);
+        }
     });
+
+    function resize(obj) {
+        obj.style.height = '1px';
+        obj.style.height = (14 + obj.scrollHeight) + 'px';
+    }
 
 
 
