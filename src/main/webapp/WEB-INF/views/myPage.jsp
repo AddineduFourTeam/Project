@@ -9,10 +9,6 @@
                 <h3><p>${loginUser.memid}님 회원정보</p></h3>
             </li>
             <li class="join-input-box">
-                <p>비밀번호</p>
-                <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
-            </li>
-            <li class="join-input-box">
                 <p>이름</p>
                 <input name="name" id="name"  value="${loginUser.name}" readonly>
                 <div id="checkNameResult" style="font-size:0.8em; display:none;"></div>
@@ -48,6 +44,9 @@
                 <a href="updatePass">
                     <input class="btn-join" type="button" value="비밀번호변경">
                 </a>
+            </li>
+            <li>
+                <input id="myContent" class="btn-join" type="button" value="내가 쓴 글 보기">
             </li>
         </ul>
     </div>

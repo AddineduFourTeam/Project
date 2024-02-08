@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -122,12 +123,37 @@ public class MemberService {
         opMember.ifPresent(
                 member->{
                     member.setIsOut("Y");
+                    member.setOutdate(LocalDateTime.now());
+                    member.setMemImg(null);
                     memberRepository.save(member);
                 }
         );
     }
 
+    public void updateMyInfo(Member iMyInfo, String memid) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        opMember.ifPresent(
+                member->{
+                    member.setName(iMyInfo.getName());
+                    member.setBirth(iMyInfo.getBirth());
+                    member.setPhone(iMyInfo.getPhone());
+                    //member.setEmail(iMyInfo.getEmail());
+                    //member.setMemImg(iMyInfo.getMemImg());
+
+                    memberRepository.save(member);
+                }
+        );
+    }
+
+    public Member getLoginUser(String memid) {
+        return memberRepository.findByMemid(memid).orElse(null);
+    }
+
+
+
+
     
+
 /*
     public List<Member> selectAll() {
         List<Member> members = memberRepository.findAll();

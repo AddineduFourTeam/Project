@@ -44,35 +44,5 @@
         });
     });
 
-    $(()=>{
-        $("form[id='myPagePassCheck']").submit(function(e){
-            e.preventDefault();
-
-            var formData = $(this).find('input[name="pass"]').val();
-
-            var email = $("#loginEmail").val();
-            var atIndex = email.indexOf("@");
-            var a_email = email.substring(0,atIndex);
-            var b_email = email.substring(atIndex+1);
-
-            $.ajax({
-                type:"POST",
-                url:"/myPagePassCheck",
-                data : {pass:formData},
-                success:function(response){
-                    if(response==true){
-                        $("#updateMyInfo-wrap").show();
-                        $("#myPagePassCheck").hide();
-
-                        $("#a_email").val(a_email);
-                        $("#b_email").val(b_email);
-
-                    }else{
-                        console.log("myPagePassCheck - error");
-                    }
-                }
-            })
-        })
-    });
 </script>
 <%@include file="../include/footer.jsp" %>
