@@ -6,6 +6,12 @@
     <div class="join-form">
         <form action="myPagePassCheck" method="post" id="myPagePassCheck">
             <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
+            <div id="cancelFail" style="display: none;">
+                <p class="fail_check">
+                    <b>비밀번호가 일치하지 않습니다</b>
+                </p>
+            </div>
+
             <ul>
                 <li class="join-input-box m-top">
                     <p>비밀번호 입력</p>
@@ -111,7 +117,7 @@
                         $("#b_email").val(b_email);
 
                     }else{
-                        console.log("myPagePassCheck - error");
+                        $("#cancelFail").show();
                     }
                 }
             })

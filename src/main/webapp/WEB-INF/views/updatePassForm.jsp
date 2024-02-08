@@ -30,6 +30,21 @@
 </div>
 <script>
     $(()=>{
+        const $passInput = $("#pass");
+        const $repassInput = $("#repass");
+
+        $repassInput.keyup(function() {
+            if ($passInput.val() !== $repassInput.val()) {
+                $("#checkRePassResult").show().css("color", "red").text("비밀번호가 일치하지 않습니다.");
+                $("#updatePassBtn :submit").attr("disabled", true).css("background","#ddd");
+            } else {
+                $("#checkRePassResult").show().css("color", "#01b03f").text("비밀번호가 일치합니다.");
+                $("#updatePassBtn :submit").attr("disabled", false).css("background","#01b03f");
+            }
+        });
+    });
+
+    $(()=>{
         $("form[id='myPagePassCheck']").submit(function(e){
             e.preventDefault();
 
@@ -58,21 +73,6 @@
                 }
             })
         })
-    });
-
-    $(()=>{
-        const $passInput = $("#pass");
-        const $repassInput = $("#repass");
-
-        $repassInput.keyup(function() {
-            if ($passInput.val() !== $repassInput.val()) {
-                $("#checkRePassResult").show().css("color", "red").text("비밀번호가 일치하지 않습니다.");
-                $("#forgotPassBtn :submit").attr("disabled", true).css("background","#ddd");
-            } else {
-                $("#checkRePassResult").show().css("color", "#01b03f").text("비밀번호가 일치합니다.");
-                $("#forgotPassBtn :submit").attr("disabled", false).css("background","#01b03f");
-            }
-        });
     });
 </script>
 <%@include file="../include/footer.jsp" %>

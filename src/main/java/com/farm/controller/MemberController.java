@@ -60,13 +60,28 @@ public class MemberController {
         //System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());
         //System.out.println("loginUser = " + loginUser);
-        if(loginUser != null &&member.getIsOut().equals("N")&& pEncoder.matches(member.getPass(),loginUser.getPass())){
-            model.addAttribute("loginUser",loginUser);
-            session.setAttribute("loginUser",loginUser);
 
-            return "redirect:/";
+        if(loginUser != null){
+            // 탈퇴한 사용자 체크
+            if(loginUser.getIsOut().equals("Y")){
+                model.addAttribute("isOutUser",true);
+                return "login";
+
+            // 탈퇴하지 않은 사용자 비밀번호 일치 확인    
+            }else if(pEncoder.matches(member.getPass(),loginUser.getPass())){
+                model.addAttribute("loginUser",loginUser);
+                session.setAttribute("loginUser",loginUser);
+                return "redirect:/";
+                
+            // 탈퇴하지 않은 사용자 비밀번호 일치하지 않는 경우    
+            }else{
+                model.addAttribute("loginFail", true);
+                return "login";
+
+            }
         }else{
-            model.addAttribute("loginFail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+            // 사용자 정보가 없는 경우
+            model.addAttribute("loginFail", true);
             return "login";
         }
     }
@@ -188,22 +203,49 @@ public class MemberController {
     }
 
     // 아직 안됨
-    @PostMapping("/cancelAccountForm")
+    /*@PostMapping("/cancelAccountForm")
     public String cancelAccountForm(@RequestParam("cancelPass") String cancelPass,
                                     HttpSession session){
         Member loginUser = (Member)session.getAttribute("loginUser");
 
         //memberService.cancelAccount(loginUser.getMemid(),);
 
-        /*if(pEncoder.matches(cancelPass,loginUser.getPass())) {
+        if(pEncoder.matches(cancelPass,loginUser.getPass())) {
             // Member isOutCheck = memberService.findByMemid(loginUser.getIsOut());
             if(isOutCheck.equals("N")){
                 isOutCheck.setIsOut("Y");
                 //memberService.cancelAccount();
             }
 
-        }*/
+        }
 
         return "";
+    }*/
+    @PostMapping("/cancelAccountForm")
+    public String cancelAccountForm(HttpSession session,
+                                    @RequestParam("cancelPass") String cancelPass,
+                                    SessionStatus status,
+                                    Model model){
+        Member loginUser = (Member)session.getAttribute("loginUser");
+
+        if(!status.isComplete() && pEncoder.matches(cancelPass,loginUser.getPass())){
+            memberService.cancelAccount(loginUser.getMemid());
+            /*if(!status.isComplete()){
+                memberService.cancelAccount(loginUser.getMemid());
+                status.setComplete();
+                return "redirect:/getOut";
+            }*/
+            return "redirect:/getOut";
+        }else if(!pEncoder.matches(cancelPass,loginUser.getPass())){
+            model.addAttribute("isOutUser",false);
+            return "cancelAccount";
+        }
+        return "cancelAccount";
     }
+
+    @GetMapping("/getOut")
+    public String getOut(){
+        return "getOut";
+    }
+
 }
