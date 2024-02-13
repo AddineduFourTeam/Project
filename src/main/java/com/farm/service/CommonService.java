@@ -118,10 +118,10 @@ public class CommonService {
     }
 
 
-    public void reply(Long id, Class<?> objClass) {
+/*    public void reply(Long id, Class<?> objClass) {
         if(objClass.equals(Story.class)) {
             storyRepository.save(objClass);
         }
-    }
+    }*/
 }
 

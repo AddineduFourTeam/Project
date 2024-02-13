@@ -41,18 +41,19 @@ public class ListService {
     }
 
     public Page<Farm> search(Pageable pageable, String keyword, String select) {
-        if(select.equals("location")){
-            return farmRepository.findByWfAddrContaining(keyword,pageable);
-        }else if(select.equals("title")){
+        if (select.equals("location")) {
+            return farmRepository.findByWfAddrContaining(keyword, pageable);
+        } else if (select.equals("title")) {
             return farmRepository.findByWfSubjectContaining(keyword, pageable);
-        }else if(select.equals("theme")){
+        } else if (select.equals("theme")) {
             return farmRepository.findByWfThemeContaining(keyword, pageable);
-        }else{
+        } else {
             return null;
         }
     }
-    public Map<String, Object> getPagingData(Page<Farm> page, int currentPage, int pagePerBlock){
-        Map<String, Object> pagingData =  new HashMap<>();
+
+    public Map<String, Object> getPagingData(Page<Farm> page, int currentPage, int pagePerBlock) {
+        Map<String, Object> pagingData = new HashMap<>();
 
         // 페이지네이션 관련 변수 계산
         int totalPages = page.getTotalPages(); // 전체 페이지 수
@@ -81,37 +82,38 @@ public class ListService {
         log.warn("localList");
         //System.out.println("local = " + local);
         List<Farm> result = null;
-        String[] farmlocal = {"서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전북"};
-        for(int i = 0; i < farmlocal.length; i++){
-            if(local.equals(farmlocal[i])){
+        String[] farmlocal = {"서울", "경기", "인천", "강원", "제주", "대전", "충북", "충남/세종", "부산", "울산", "경남", "대구", "경북", "광주", "전남", "전북"};
+        for (int i = 0; i < farmlocal.length; i++) {
+            if (local.equals(farmlocal[i])) {
                 local = local + "%";
                 result = farmRepository.findByWfAddrLike(local);
                 break;
             }
         }
-        if(local.equals("충북")) {
+        if (local.equals("충북")) {
             result = farmRepository.findByWfAddrLike("충청북도");
         }
-        if(local.equals("경남")) {
+        if (local.equals("경남")) {
             result = farmRepository.findByWfAddrLike("경상남도");
         }
-        if(local.equals("경북")) {
+        if (local.equals("경북")) {
             result = farmRepository.findByWfAddrLike("경상북도");
         }
-        if(local.equals("충남/세종")) {
-            result = farmRepository.findByWfAddrContainingOrWfAddrContaining("충청남도","세종");
+        if (local.equals("충남/세종")) {
+            result = farmRepository.findByWfAddrContainingOrWfAddrContaining("충청남도", "세종");
         }
-        if(local.equals("전남")) {
+        if (local.equals("전남")) {
             result = farmRepository.findByWfAddrLike("전라남도");
         }
-        if(local.equals("전북")) {
+        if (local.equals("전북")) {
             result = farmRepository.findByWfAddrLike("전라북도");
         }
         return result;
     }
+
+
     public void save(Reservation reservation) {
         reservationRepository.save(reservation);
+
     }
-
 }
-

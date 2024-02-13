@@ -55,9 +55,9 @@ public class FarmController {
         model.addAttribute("farm", listService.detail(id));
         return "reservation";
     }
-    @RequestMapping("/reservationSave")
+    @PostMapping("/reservationSave")
     public String reservationSave(Reservation reservation){
         listService.save(reservation);
-        return "redirect:/";
+        return "list";
     }
 }

@@ -157,36 +157,62 @@
             $(".rs_total_price").text(parseInt((year_leng * count / 3 * price) + (option_leng * option_price)));
         });
 
-        $("#rv_btn").click(function (e){
-            // let rvOption1 = $("#op1").is(":checked") === true ? "Y" : "N";
-            // let rvOption2 = $("#op2").is(":checked") === true ? "Y" : "N";
-            // let rvOption3 = $("#op3").is(":checked") === true ? "Y" : "N";
-            // let rvOption4 = $("#op4").is(":checked") === true ? "Y" : "N";
-            // console.log(rvOption1 ,rvOption2 ,rvOption3 ,rvOption4 );
-           $.ajax({
-               type:'POST',
-               url:"/reservationSave",
-               data:{
-                   "rvMemIdx": ${loginUser.memIdx},
-                   "rvFarmIdx": ${param.id},"rvUseDate" :  $(".rs_year").text(),
-                   "status" : "Y",
-                   "rvPrice": $(".rs_total_price").text(),
-                   "rvFeet" : $(".rs_feet").text(),
-                   // "rvOptionSeeding" : rvOption1,
-                   // "rvOptionPlow": rvOption2,
-                   // "rvOptionWatering" : rvOption3,
-                   // "rvOptionCompost" : rvOption4,
-               },
-               success:function(){
-                 console.log("성공")
-               },
-               error:function(){
-                   console.log("실패")
-               }
-           })
-        });
+    });
+
+    $("#rv_btn").click(function(e){
+        //e.preventDefault();
+        function getOptionValue(selector) {
+            return $(selector).is(":checked") ? "Y" : "N";
+        }
+        let rvOptions = [];
+        for (let i = 1; i <= 4; i++) {
+            rvOptions.push(getOptionValue(`#op${i}`));
+        }
+        //console.log(validate());
+        if(validate()) {
+            $.ajax({
+                type: 'POST',
+                url: "/reservationSave",
+                data: {
+                    "rvMemIdx" : ${loginUser.memIdx},
+                    "rvFarmIdx" : ${param.id},
+                    "rvUseDate" : $(".rs_year").text(),
+                    "status" : "Y",
+                    "rvPrice" :  $(".rs_total_price").text(),
+                    "rvFeet" : $(".rs_feet").text(),
+                    "rvOptionSeeding": rvOptions[0],
+                    "rvOptionPlow": rvOptions[1],
+                    "rvOptionWatering": rvOptions[2],
+                    "rvOptionCompost": rvOptions[3]
+                },
+                success: function (){
+                    console.log("성공");
+                    window.location.href = "/list";
+                },
+                error: function(){
+                    console.log("실패");
+                }
+            })
+        }
 
     });
+
+    function validate(){
+        let year = $(".rs_year").text();
+        let feet = $(".rs_feet").text();
+
+        if(year < 1){
+            alert("기한을 선택해주세요");
+            $("input[name='year']").focus();
+            return false;
+        }else if(feet < 1){
+            alert("평 수를 선택해주세요");
+            $("input[name='feet']").focus();
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
     // 날짜 생성

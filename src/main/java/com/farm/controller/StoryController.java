@@ -87,10 +87,10 @@ public class StoryController {
         return "redirect:/story";
     }
 
-    @PostMapping("/reply")
-    public String reply(@RequestParam("id") Long id) {
-        commonService.reply(id, StoryReply.class);
-        return "storyDetail";
-    }
+//    @PostMapping("/reply")
+//    public String reply(@RequestParam("id") Long id) {
+//        commonService.reply(id, StoryReply.class);
+//        return "storyDetail";
+//    }
 
 }
