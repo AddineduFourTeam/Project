@@ -105,5 +105,9 @@ public class ListService {
         }
         return result;
     }
+
+//    public Object reservation(Long id) {
+//        return farmRepository.findById(id).get();
+//    }
 }
 

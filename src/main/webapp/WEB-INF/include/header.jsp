@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="<c:if test="${folderName eq 'index' || folderName eq 'login'}">index_body </c:if><c:if test="${folderName eq 'list'}">list_body</c:if><c:if test="${folderName eq 'login'}">auth_body</c:if>">
-<header>
+<header class="<c:if test="${folderName eq 'listDetail'}">listDetail_header</c:if>">
     <c:choose>
         <c:when test="${loginUser != null}">
             <ul class="tnb wrap">
@@ -92,24 +92,6 @@
             </ul>
         </div>
     </nav>
-<c:if test="${folderName eq 'listDetail'}">
-    <nav class="list_nav">
-        <div class="wrap">
-            <div class="list_wrap">
-                <ul>
-                    <li><a href="#">안녕</a></li>
-                    <li><a href="#">나는</a></li>
-                    <li><a href="#">지금</a></li>
-                    <li><a href="#">너무</a></li>
-                    <li><a href="#">배불러</a></li>
-                </ul>
-            </div>
-            <div class="btn_wrap">
-                <button id="dtn">
-                    <span>예약하기</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-</c:if>
 </header>
+
+

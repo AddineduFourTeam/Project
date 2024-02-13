@@ -23,12 +23,15 @@ $(document).ready(function(){
             $(".tnb span img").on("error", function() {
                 $(this).attr("src", "/img/profileImg.png");
             });
+            $(".list_nav").addClass("nav_up");
+
         }else {
             $("header").removeClass("on");
             $(".index_body h1 img").attr("src", "/img/logo_w.png");
             $(".tnb span img").on("error", function() {
                 $(this).attr("src", "/img/profileImg_w.png");
             });
+            $(".list_nav").removeClass("nav_up");
         }
     });
     if($("header").hasClass("on") == true) {

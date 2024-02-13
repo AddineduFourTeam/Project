@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../include/header.jsp" %>
+<c:set var="farm" value="${listDetail}"/>
+    <nav class="list_nav">
+        <div class="wrap">
+            <div class="list_wrap">
+                <ul>
+                    <li><a href="#">안녕</a></li>
+                    <li><a href="#">나는</a></li>
+                    <li><a href="#">지금</a></li>
+                    <li><a href="#">너무</a></li>
+                    <li><a href="#">배불러</a></li>
+                </ul>
+            </div>
+            <div class="btn_wrap">
+                <a href="/reservation?id=${listDetail.wfIdx}" id="dtn">
+                    <span>예약하기</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 <div class="wrap con list-detail">
     <%--
         이미지 /
@@ -11,7 +30,7 @@
         이용정보
         위치 /
     --%>
-    <c:set var="farm" value="${listDetail}"/>
+
     <div class="gallery">
         <ul>
             <li><img src="${listDetail.wfImgUrl1}" alt="이미지1"></li>
@@ -31,29 +50,29 @@
     </div>
 
     <%-- 모달창 --%>
- <div class="background">
-        <div class="window">
-            <div class="popup">
-                <h2>${listDetail.wfSubject}</h2>
-                <button class="close"><i class="fa-solid fa-xmark"></i></button>
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+     <div class="background">
+            <div class="window">
+                <div class="popup">
+                    <h2>${listDetail.wfSubject}</h2>
+                    <button class="close"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        </div>
                     </div>
+                    <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                    <div class="swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
                 </div>
-                <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-                <div class="swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 <script>
 
     /* empty strong tag */
