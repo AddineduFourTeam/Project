@@ -11,7 +11,6 @@
                     <b>비밀번호가 일치하지 않습니다</b>
                 </p>
             </div>
-
             <ul>
                 <li class="join-input-box m-top">
                     <p>비밀번호 입력</p>
@@ -28,11 +27,6 @@
                 <ul style="list-style-type: none">
                     <li>
                         <h3><p>${loginUser.memid}님 회원정보 변경</p></h3>
-                        <h4>반드시 기존 비밀번호를 입력해주세요</h4>
-                    </li>
-                    <li class="join-input-box">
-                        <p>기존 비밀번호 입력</p>
-                        <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
                     </li>
                     <li class="join-input-box">
                         <p>이름</p>
@@ -57,7 +51,7 @@
                                 <input type="text" name="a_email" id="a_email" class="form-control"> <b>@</b>
                             </div>
                             <div class="email-select-box">
-                                <input type="text" name="b_email" id="b_email" class="form-control" ReadOnly="true"/>
+                                <input type="text" name="b_email" id="b_email" class="form-control"/>
                                 <select name="emailCheck" id="emailCheck" onchange="SetEmailTail(emailCheck.options[this.selectedIndex].value)" class="form-control">
                                     <option value="">메일 선택</option>
                                     <option value="etc" selected>직접입력</option>
@@ -68,6 +62,7 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" name="email" id="email">
                     </li>
                     <li class="file-top">
                         <p>프로필이미지</p>
@@ -88,6 +83,13 @@
     </div>
 </div>
 <script>
+    $(()=>{
+        var update = <%= request.getAttribute("updateInfo") %>;
+        if(update == false){
+            alert("회원정보가 성공적으로 변경되었습니다");
+        }
+    });
+
     $(()=>{
         $("form[id='myPagePassCheck']").submit(function(e){
             e.preventDefault();
@@ -118,6 +120,23 @@
             })
         })
     });
+
+
+    $(function() {
+        $("#file").on('change', function(){
+            readURL(this);
+        });
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#View').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     /////////////////////이메일
     function SetEmailTail(emailValue) {
         var email = document.all("a_email")    // 사용자 입력

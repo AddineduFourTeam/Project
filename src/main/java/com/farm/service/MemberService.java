@@ -2,19 +2,14 @@ package com.farm.service;
 
 import com.farm.domain.Member;
 import com.farm.repository.MemberRepository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -130,7 +125,7 @@ public class MemberService {
         );
     }
 
-    public void updateMyInfo(Member iMyInfo, String memid) {
+    /*public Member updateMyInfo(Member iMyInfo, String memid) {
         Optional<Member> opMember = memberRepository.findByMemid(memid);
         opMember.ifPresent(
                 member->{
@@ -143,6 +138,23 @@ public class MemberService {
                     memberRepository.save(member);
                 }
         );
+        return iMyInfo;
+    }*/
+
+    public Member updateMyInfo(Member iMyInfo, String memid) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        Member updatedMember = null;
+        if(opMember.isPresent()){
+            Member member = opMember.get();
+            member.setName(iMyInfo.getName());
+            member.setBirth(iMyInfo.getBirth());
+            member.setPhone(iMyInfo.getPhone());
+            member.setEmail(iMyInfo.getEmail());
+            //member.setMemImg(iMyInfo.getMemImg());
+
+            updatedMember = memberRepository.save(member);
+        }
+        return updatedMember;
     }
 
     public Member getLoginUser(String memid) {
