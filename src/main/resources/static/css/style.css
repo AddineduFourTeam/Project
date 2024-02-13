@@ -1745,6 +1745,55 @@ h4{
     font-weight: bold;
     background: var(--mainColor);
 }
+
+/* MyPage */
+.my-full-wrap{
+    margin-top:15px;
+    width:100%;
+    /*margin:0 auto;*/
+    align-items: center;
+}
+.tap-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+.my-tap{
+    width:20%;
+    padding:10px;
+}
+
+.my-wrap{
+    width:75%;
+}
+.my-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.my-info li{
+    /*flex:1;*/
+    padding:0 10px;
+}
+
+.my-img{
+    width:400px;
+}
+
+.my-input-box input{
+    width:70%;
+    height:35px;
+    background: transparent;
+    outline: none;
+    border:1px solid rgba(0,0,0,0.7);
+    border-radius: 40px;
+    padding:25px 20px;
+    color: #333;
+    margin-bottom: 10px;
+    font-size:16px
+}
+
+
 .background {
     position: fixed;
     top: 0;
