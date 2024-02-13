@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -91,17 +92,18 @@ public class MemberService {
     }
 
     /* 회원가입시 유효성 체크 */
+    /* 안됨
     @Transactional(readOnly = true)
     public Map<String, String> validateHandling(Errors errors) {
         Map<String,String> validatorResult = new HashMap<>();
 
-        /* 유효성 검사에 실패한 필드 목록을 받음 */
+        *//* 유효성 검사에 실패한 필드 목록을 받음 *//*
         for(FieldError error : errors.getFieldErrors()){
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName,error.getDefaultMessage());
         }
         return validatorResult;
-    }
+    }*/
 
     public Optional<Member> getMemberById(String memid) {
         Optional<Member> opMember = memberRepository.findByMemid(memid);
@@ -116,7 +118,42 @@ public class MemberService {
         });
     }
 
+    public void cancelAccount(String memid) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        opMember.ifPresent(
+                member->{
+                    member.setIsOut("Y");
+                    member.setOutdate(LocalDateTime.now());
+                    member.setMemImg(null);
+                    memberRepository.save(member);
+                }
+        );
+    }
+
+    public void updateMyInfo(Member iMyInfo, String memid) {
+        Optional<Member> opMember = memberRepository.findByMemid(memid);
+        opMember.ifPresent(
+                member->{
+                    member.setName(iMyInfo.getName());
+                    member.setBirth(iMyInfo.getBirth());
+                    member.setPhone(iMyInfo.getPhone());
+                    //member.setEmail(iMyInfo.getEmail());
+                    //member.setMemImg(iMyInfo.getMemImg());
+
+                    memberRepository.save(member);
+                }
+        );
+    }
+
+    public Member getLoginUser(String memid) {
+        return memberRepository.findByMemid(memid).orElse(null);
+    }
+
+
+
+
     
+
 /*
     public List<Member> selectAll() {
         List<Member> members = memberRepository.findAll();

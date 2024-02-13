@@ -6,6 +6,12 @@
     <div class="join-form">
         <form action="myPagePassCheck" method="post" id="myPagePassCheck">
             <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
+            <div id="cancelFail" style="display: none;">
+                <p class="fail_check">
+                    <b>비밀번호가 일치하지 않습니다</b>
+                </p>
+            </div>
+
             <ul>
                 <li class="join-input-box m-top">
                     <p>비밀번호 입력</p>
@@ -18,7 +24,7 @@
             <input type="hidden" name="memid">
         </form>
         <div id="updateMyInfo-wrap" style="display:none;">
-            <form action="updateMyInfo" method="post" id="updateMyInfo" enctype="multipart/form-data">
+            <form action="updateMyInfoForm" method="post" id="updateMyInfo" modelAttribute="inputMyInfo" enctype="multipart/form-data">
                 <ul style="list-style-type: none">
                     <li>
                         <h3><p>${loginUser.memid}님 회원정보 변경</p></h3>
@@ -27,11 +33,6 @@
                     <li class="join-input-box">
                         <p>기존 비밀번호 입력</p>
                         <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
-                    </li>
-                    <li class="join-input-box">
-                        <p>새로운 비밀번호</p>
-                        <input type="password" name="newPass" id="newPass" placeholder="비밀번호를 다시 입력해주세요">
-                        <div id="checkRePassResult" style="font-size:0.8em; display:none;"></div>
                     </li>
                     <li class="join-input-box">
                         <p>이름</p>
@@ -111,11 +112,34 @@
                         $("#b_email").val(b_email);
 
                     }else{
-                        console.log("myPagePassCheck - error");
+                        $("#cancelFail").show();
                     }
                 }
             })
         })
     });
+    /////////////////////이메일
+    function SetEmailTail(emailValue) {
+        var email = document.all("a_email")    // 사용자 입력
+        var emailTail = document.all("b_email") // Select box
+
+        if ( emailValue == "notSelected" )
+            return;
+        else if ( emailValue == "etc" ) {
+            emailTail.readOnly = false;
+            emailTail.value = "";
+            emailTail.focus();
+        } else {
+            emailTail.readOnly = true;
+            emailTail.value = emailValue;
+        }
+    }
+    function validateForm() { //form에 온서브밋이 있을경우 없으면 버튼 아이디 클릭해서 이용하시길 - onsubmit="return validateForm()"
+        var mail1 = $('#a_email').val();
+        var mail2 = $('#b_email').val();
+        var real_mail = mail1 +'@' + mail2;
+        $("#email").val(real_mail);
+        return false;
+    }
 </script>
 <%@include file="../include/footer.jsp" %>

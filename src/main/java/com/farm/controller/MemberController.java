@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class MemberController {
     @Autowired
     PasswordEncoder pEncoder;
 
+
     @GetMapping("/join")
     public String memInsertForm(){
         return "/join";
@@ -37,7 +39,9 @@ public class MemberController {
     }
 
     @PostMapping("/memInsert")
-    public String memInsert(Member member, Model model, @RequestParam("file") MultipartFile file) throws Exception {
+    public String memInsert(Member member, Model model,
+                            @RequestParam("file") MultipartFile file,
+                            RedirectAttributes redirectAttributes) throws Exception {
 
         member.setPass(pEncoder.encode(member.getPass()));
 
@@ -47,7 +51,10 @@ public class MemberController {
         }
 
         memberService.memInsert(member, file);
-        return "redirect:/";
+
+        redirectAttributes.addFlashAttribute("insertComplete", true);
+
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -60,13 +67,28 @@ public class MemberController {
         //System.out.println("id : " + member.getMemid() );
         Member loginUser = memberService.login(member.getMemid());
         //System.out.println("loginUser = " + loginUser);
-        if(loginUser != null &&member.getIsOut().equals("N")&& pEncoder.matches(member.getPass(),loginUser.getPass())){
-            model.addAttribute("loginUser",loginUser);
-            session.setAttribute("loginUser",loginUser);
 
-            return "redirect:/";
+        if(loginUser != null){
+            // 탈퇴한 사용자 체크
+            if(loginUser.getIsOut().equals("Y")){
+                model.addAttribute("isOutUser",true);
+                return "login";
+
+            // 탈퇴하지 않은 사용자 비밀번호 일치 확인    
+            }else if(pEncoder.matches(member.getPass(),loginUser.getPass())){
+                model.addAttribute("loginUser",loginUser);
+                session.setAttribute("loginUser",loginUser);
+                return "redirect:/";
+                
+            // 탈퇴하지 않은 사용자 비밀번호 일치하지 않는 경우    
+            }else{
+                model.addAttribute("loginFail", true);
+                return "login";
+
+            }
         }else{
-            model.addAttribute("loginFail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+            // 사용자 정보가 없는 경우
+            model.addAttribute("loginFail", true);
             return "login";
         }
     }
@@ -142,12 +164,30 @@ public class MemberController {
         }
     }
 
+    /*
+     * 세션정보 업데이트 안됨
+     * 정보변경할 때 비밀번호 확인 js추가 해야함
+     */
     @PostMapping("/updateMyInfoForm")
-    public String updateMyInfoForm(){
+    public String updateMyInfoForm(@ModelAttribute("inputMyInfo") Member iMyInfo,
+                                   @RequestParam("pass") String pass,
+                                   HttpSession session){
 
-        // 기존 비밀번호를 입력하고 아래에 새로 바꿀 비밀번호를 입력한 다음
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        // 기존 비밀번호가 일치할 경우 정보 저장
+        if(pEncoder.matches(pass,loginUser.getPass())){
+            
+            System.out.println("Before update: " + loginUser);
+            memberService.updateMyInfo(iMyInfo,loginUser.getMemid());
 
-        return "";
+            Member loginUser2 = memberService.getLoginUser(loginUser.getMemid());
+            System.out.println("After update: " + loginUser2);
+            session.setAttribute("loginUser",loginUser2);
+
+            return "redirect:/";
+        }
+
+        return "updateMyInfo";
     }
 
     @GetMapping("/updatePass")
@@ -187,23 +227,35 @@ public class MemberController {
         return "cancelAccount";
     }
 
-    // 아직 안됨
     @PostMapping("/cancelAccountForm")
-    public String cancelAccountForm(@RequestParam("cancelPass") String cancelPass,
-                                    HttpSession session){
+    public String cancelAccountForm(HttpSession session,
+                                    @RequestParam("cancelPass") String cancelPass,
+                                    SessionStatus status,
+                                    Model model){
         Member loginUser = (Member)session.getAttribute("loginUser");
 
-        //memberService.cancelAccount(loginUser.getMemid(),);
 
-        /*if(pEncoder.matches(cancelPass,loginUser.getPass())) {
-            // Member isOutCheck = memberService.findByMemid(loginUser.getIsOut());
-            if(isOutCheck.equals("N")){
-                isOutCheck.setIsOut("Y");
-                //memberService.cancelAccount();
-            }
+        if(!status.isComplete() && pEncoder.matches(cancelPass,loginUser.getPass())){
+            memberService.cancelAccount(loginUser.getMemid());
+            status.setComplete();
 
-        }*/
+            return "redirect:/getOut";
 
-        return "";
+        }else if(!pEncoder.matches(cancelPass,loginUser.getPass())){
+            model.addAttribute("isOutUser",false);
+            return "cancelAccount";
+
+        }
+        return "cancelAccount";
     }
+
+    @GetMapping("/getOut")
+    public String getOut(){
+        return "getOut";
+        // getOut 리다이렉트용
+    }
+
+    // 작성한 글 찾기
+    // memid값과 story_mem_id값이 일치하는 경우 story_subject 가져오기
+
 }
