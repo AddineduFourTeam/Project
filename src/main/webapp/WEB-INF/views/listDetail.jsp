@@ -95,9 +95,9 @@
         const modal = document.querySelector(".background");
         const closeButton = document.querySelector(".close");
 
-        /!* reservation *!/
-        const btn = document.querySelector(".btn_wrap > button ");
-        btn.addEventListener('click', () => showModal(modal));
+        /* reservation */
+        // const btn = document.querySelector(".btn_wrap > button ");
+        // btn.addEventListener('click', () => showModal(modal));
 
         galleryItems.forEach((li, index) => {
             li.addEventListener('click', () => {

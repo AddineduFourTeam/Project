@@ -6,7 +6,7 @@
 <c:set var="year"><fmt:formatDate value="${today}" pattern="yyyy" /></c:set>
 <div class="con wrap reservation_wrap">
     <div class="reservation">
-        <form action="/" method="post">
+        <form action="/userprofile" method="post">
             <div class="wrap">
                 <h2>사용할 기간을 선택해 주세요</h2>
                 <div class="date_wrap">
@@ -111,6 +111,7 @@
                 </form>
             </div>
         </form>
+    </div>
 </div>
 
 <%@include file="../include/footer.jsp" %>
