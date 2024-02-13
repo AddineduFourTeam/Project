@@ -1004,7 +1004,6 @@ footer p {
     transition: all .5s;
     align-items: center;
     height: 55px;
-    border:0
 }
 body .search-form , header.on .search-form{
     border:1px solid rgb(0, 140, 41);
@@ -1094,7 +1093,7 @@ select option {
 }
 .farm-list{
     width: 50%;
-    height: 100vh;
+    height: calc(100vh - 160px);
     overflow-y: scroll;
 }
 .farm-list > ul{
@@ -1285,7 +1284,7 @@ body::-webkit-scrollbar-track {
 
 /* login */
 .auth_body {
-    background:url("/img/bg03.jpg") no-repeat center / cover;
+    background:url("../img/bg03.jpg") no-repeat center / cover;
     position:relative;
     padding-top: 150px;
 }
@@ -1623,6 +1622,23 @@ input:-webkit-autofill:active {
 }
 
 /* list_nav */
+.listDetail_header{
+    box-shadow: none;
+}
+.list_nav{
+    display: block;
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 150px;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0 10px 10px -10px rgb(145, 115, 77,0.3);
+    transition: all .4s;
+}
+.nav_up{
+    transform: translateY(-250px);
+}
 .list_nav > .wrap{
     display: flex;
     justify-content: space-between;
@@ -1642,14 +1658,221 @@ input:-webkit-autofill:active {
     display: none;
     clear: both;
 }
-.list_nav > .wrap > .btn_wrap > button{
+.list_nav > .wrap > .btn_wrap > a{
     padding: 16px 20px;
     border: none;
     background-color: var(--mainColor);
     border-radius: 10px;
 }
-.list_nav > .wrap > .btn_wrap > button > span{
+.list_nav > .wrap > .btn_wrap > a > span{
     font-size: 1rem;
     font-weight: bold;
     color: #fff;
 }
+
+/* reservation */
+.reservation{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px 0;
+}
+.reservation h2{
+    padding-bottom: 20px;
+    font-size: 2rem;
+    text-align: center;
+}
+.field_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 65%;
+    margin: 0 auto;
+}
+
+/* date */
+.reservation .date_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.reservation .date_wrap .date{
+    padding: 10px 30px;
+    cursor: pointer;
+    position: relative;
+    width: 33.3%;
+    text-align: center;
+}
+.reservation .date_wrap .date label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.reservation .date_wrap .date label input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .date_wrap .date label span:before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #b5bfd9;
+    top: 0.7rem;
+    left: 2.2rem;
+    border-radius: 4px;
+    opacity: 1;
+    transition: all .3s;
+}
+.reservation .date_wrap .date input:checked + span:before{
+    opacity: 1;
+    background-image: url(../img/check.svg);
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+}
+
+.reservation .date_wrap .date input:checked + span{
+    color: var(--mainColor);
+}
+
+/* field */
+.field_wrap .field{
+    width: 200px;
+    cursor: pointer;
+}
+.field_wrap .field input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .feet_wrap{
+    padding-top: 15px;
+}
+.reservation .feet_wrap .feet{
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* option */
+.reservation .option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.reservation .option .checkbox_wrap label .checkbox-input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit{
+    border-color: var(--mainColor);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: var(--mainColor);
+    border-color: var(--mainColor);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit i,
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit span {
+    color: var(--mainColor);
+}
+
+.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit {
+    border-color: var(--mainColor);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(1,176,63,0.2);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit:before {
+    transform: scale(1);
+    opacity: 1;
+}
+.reservation .option .checkbox_wrap label .tit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 7rem;
+    min-height: 7rem;
+    border-radius: 0.5rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    box-shadow:  0 5px 10px rgba(0,0,0,0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+
+}
+.reservation .option .checkbox_wrap label .tit:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.25s ease;
+    background-image: url(../img/check.svg);
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.reservation .option .checkbox_wrap label .tit:hover {
+    border-color: var(--mainColor);
+}
+.reservation .option .checkbox_wrap label .tit:hover:before{
+    transform: scale(1);
+    opacity: 1;
+}
+.reservation .option .checkbox_wrap label .tit i {
+    transition: 0.375s ease;
+    font-size: 2rem;
+    color: #494949;
+}
+.reservation .option .checkbox_wrap label .tit span{
+    display: block;
+    font-size: 1rem;
+    color: #707070;
+    transition: 0.375s ease;
+    text-align: center;
+}
+.reservation .info_wrap h3{
+    text-align: center;
+    color: #b5bfd9;
+}
+
+
+
+
+
+

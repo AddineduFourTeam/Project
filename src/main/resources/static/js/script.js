@@ -18,16 +18,18 @@ $(document).ready(function(){
         if($(this).scrollTop() > 0) {
             $("header").addClass("on");
             $("h1 img").attr("src","/img/logo.png");
+            $(".list_nav").addClass("nav_up");
 
         }else {
             $("header").removeClass("on");
             $(".index_body h1 img").attr("src", "/img/logo_w.png");
+            $(".list_nav").removeClass("nav_up");
         }
     });
     if($("header").hasClass("on") == true) {
         $("h1 img").attr("src","/img/logo.png");
     }else {
-        $(".index_body h1 img").attr("src", "/img/logo_w.png");
+        $(".index_body h1   img").attr("src", "/img/logo_w.png");
     }
     //masonryLayout();
 

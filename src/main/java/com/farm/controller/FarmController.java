@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class FarmController {
     ListService listService;
 
     private Pageable createPageable(int page){
-        return PageRequest.of(page -1, PAGE_SIZE);
+        return PageRequest.of(page -1, PAGE_SIZE, Sort.by("wfIdx").descending());
     }
 
     @GetMapping("/list")
@@ -31,12 +32,6 @@ public class FarmController {
         model.addAllAttributes(listService.getPagingData(result, page,PAGE_PER_BLOCK));
         return "list";
     }
-
-//    @GetMapping("/listDetail")
-//    public String listDetail(@RequestParam(value = "id") Long id, Model model){
-//        model.addAllAttributes("listDetail", ListService.detail.get(id));
-//        return "listDetail";
-//    }
 
     @GetMapping("/listDetail")
     public String listDetail(@RequestParam(value = "id") Long id, Model model){
@@ -51,5 +46,10 @@ public class FarmController {
         Page<Farm> result = listService.search(pageable, keyword, select);
         model.addAllAttributes(listService.getPagingData(result, page,PAGE_PER_BLOCK));
         return "list";
+    }
+    @GetMapping("/reservation")
+    public String reservation(@RequestParam(value = "id") Long id, Model model){
+        model.addAttribute("farm", listService.detail(id));
+        return "reservation";
     }
 }

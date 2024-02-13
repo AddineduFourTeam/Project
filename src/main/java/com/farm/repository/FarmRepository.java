@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface FarmRepository extends JpaRepository<Farm, Long> {
 
+    //Page<Farm> findAllOrderByWfIdxDesc(Pageable pageable);
     Page<Farm> findByWfAddrContaining(String keyword, Pageable pageable);
 
     Page<Farm> findByWfSubjectContaining(String keyword, Pageable pageable);

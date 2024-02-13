@@ -36,7 +36,12 @@ public class Farm {
     private String wfImgUrl1; // 이미지 주소1
     private String wfImgUrl2; // 이미지 주소2
     private String wfImgUrl3; // 이미지 주소3
-    private Number wfRating; // 별점
+    @Column(columnDefinition = "NUMBER(10,0) DEFAULT 0")
+    private Integer wfRating; // 별점
+    @Column(columnDefinition = "NUMBER(10,0) DEFAULT 0 NOT NULL")
+    private Integer wfPrice; // 가격
+    @Column(columnDefinition = "NUMBER(10,0) DEFAULT 0")
+    private Integer wfOptionPrice; // 옵션 가격
 
     @CreatedDate
     @Column(name = "created_date")
@@ -47,5 +52,6 @@ public class Farm {
 
     @Column(name = "latitude")
     private String latitude; // 위도
+
 
 }
