@@ -1,6 +1,7 @@
 package com.farm.controller;
 
 import com.farm.domain.Farm;
+import com.farm.domain.Reservation;
 import com.farm.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -51,5 +54,10 @@ public class FarmController {
     public String reservation(@RequestParam(value = "id") Long id, Model model){
         model.addAttribute("farm", listService.detail(id));
         return "reservation";
+    }
+    @RequestMapping("/reservationSave")
+    public String reservationSave(Reservation reservation){
+        listService.save(reservation);
+        return "redirect:/";
     }
 }

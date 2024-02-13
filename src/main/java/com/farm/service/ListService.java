@@ -2,9 +2,11 @@ package com.farm.service;
 
 import com.farm.domain.Board;
 import com.farm.domain.Farm;
+import com.farm.domain.Reservation;
 import com.farm.domain.Story;
 import com.farm.repository.BoardRepository;
 import com.farm.repository.FarmRepository;
+import com.farm.repository.ReservationRepository;
 import com.farm.repository.StoryRepository;
 import jakarta.persistence.Id;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,8 @@ public class ListService {
 
     @Autowired
     FarmRepository farmRepository;
+    @Autowired
+    ReservationRepository reservationRepository;
 
     public Page<Farm> findAll(Pageable pageable) {
         return farmRepository.findAll(pageable);
@@ -105,9 +109,9 @@ public class ListService {
         }
         return result;
     }
+    public void save(Reservation reservation) {
+        reservationRepository.save(reservation);
+    }
 
-//    public Object reservation(Long id) {
-//        return farmRepository.findById(id).get();
-//    }
 }
 
