@@ -53,9 +53,9 @@
                     <h4>댓글 <span>100</span>개</h4>
                 </div>
                 <div class="story_reply_input">
-                    <textarea name="" row="1" placeholder="댓글을 작성해주세요." id="message"></textarea>
+                    <textarea name="" row="1" placeholder="댓글을 작성해주세요." id="message_textbox"></textarea>
                     <div class="btnFlex flex">
-                        <button class="emoji_btn" value=""><i class="fa-regular fa-face-smile"></i></button>
+                        <button class="emoji_btn" data-target-textbox="message_textbox"><i class="fa-regular fa-face-smile"></i></button>
                         <button type="button" class="reply_submit" disabled="disabled">등록</button>
                     </div>
                 </div>
@@ -80,9 +80,9 @@
                                             <span class="sr_date">24.02.05</span>
                                         </div>
                                         <div class="story_reply_input">
-                                            <textarea name="" row="1" placeholder="댓글을 작성해주세요." id="message"></textarea>
+                                            <textarea name="" row="1" placeholder="댓글을 작성해주세요." id="message_textbox1"></textarea>
                                             <div class="btnFlex flex">
-                                                <button class="emoji_btn" value=""><i class="fa-regular fa-face-smile"></i></button>
+                                                <button class="emoji_btn" data-target-textbox="message_textbox1"><i class="fa-regular fa-face-smile"></i></button>
                                                 <button type="button" class="reply_submit" disabled="disabled">등록</button>
                                             </div>
                                         </div>
@@ -154,36 +154,41 @@
         });
     }
 
-    const button = document.querySelector(".emoji_btn");
-    const picker = new EmojiButton({
-        //position: 'bottom-start',
-        i18n: {
-            search: 'Search emojis...',
-            categories: {
-                recents: 'Recent Emojis',
-                smileys: 'Smileys & Emotion',
-                people: 'People & Body',
-                animals: 'Animals & Nature',
-                food: 'Food & Drink',
-                activities: 'Activities',
-                travel: 'Travel & Places',
-                objects: 'Objects',
-                symbols: 'Symbols',
-                flags: 'Flags'
-            },
-            notFound: 'No emojis found'
-        }
+    // 각 버튼에 대한 정보를 배열로 저장
+    const emojiButtons = document.querySelectorAll(".emoji_btn");
 
-    });
+    emojiButtons.forEach(button => {
+        const picker = new EmojiButton({
+            i18n: {
+                search: 'Search emojis...',
+                categories: {
+                    recents: 'Recent Emojis',
+                    smileys: 'Smileys & Emotion',
+                    people: 'People & Body',
+                    animals: 'Animals & Nature',
+                    food: 'Food & Drink',
+                    activities: 'Activities',
+                    travel: 'Travel & Places',
+                    objects: 'Objects',
+                    symbols: 'Symbols',
+                    flags: 'Flags'
+                },
+                notFound: 'No emojis found'
+            }
+        });
 
-    button.addEventListener('click', (target) => {
-        let btn_val = target.value ;
-        picker.togglePicker(button);
-    });
+        button.addEventListener('click', () => {
+            picker.togglePicker(button);
+        });
 
-    picker.on('emoji', emoji => {
-        const text_box = document.querySelector('#message');
-        text_box.value += emoji;
+        picker.on('emoji', emoji => {
+            const associatedTextBoxId = button.dataset.targetTextbox;
+            //console.log(associatedTextBoxId);
+            const text_box = document.querySelector("#"+associatedTextBoxId);
+
+            text_box.value += emoji;
+
+        });
     });
 </script>
 <%@include file="../include/footer.jsp" %>

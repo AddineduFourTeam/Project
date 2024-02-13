@@ -4,6 +4,7 @@ import com.farm.domain.Board;
 import com.farm.domain.Story;
 import com.farm.repository.BoardRepository;
 import com.farm.service.BoardService;
+import com.farm.service.CommonService;
 import com.farm.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,19 +18,17 @@ public class BoardController {
     BoardService boardService;
 
     @Autowired
-    ListService listService;
-
-    //private Member loginUser;
+    CommonService commonService;
 
     @GetMapping("/board")
     public String boardlist(@RequestParam(value="page", defaultValue="1") int page , Model model) {
-        boardService.listAll(page, model, Board.class);
+        commonService.listAll(page, model, Board.class);
         return "board";
     }
 
     @GetMapping("/boardSearch")
     public String boardSearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
-        boardService.searchList(page ,type , keyword , model, Board.class);
+        commonService.searchList(page ,type , keyword , model, Board.class);
         return "board";
     }
 

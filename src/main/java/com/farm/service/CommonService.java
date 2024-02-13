@@ -3,6 +3,7 @@ package com.farm.service;
 import com.farm.domain.Board;
 import com.farm.domain.Farm;
 import com.farm.domain.Story;
+import com.farm.domain.StoryReply;
 import com.farm.repository.BoardRepository;
 import com.farm.repository.FarmRepository;
 import com.farm.repository.MemberRepository;
@@ -15,11 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
-public class BoardService {
+public class CommonService {
 
     @Autowired
     FarmRepository farmRepository;
@@ -30,6 +30,8 @@ public class BoardService {
     @Autowired
     MemberRepository memberRepository;
     //전체 값 리스트 출력
+    
+    //list 뿌리기
     public void listAll(int page , Model model , Class<?> objClass) {
         int nPage = page - 1; // 시작페이지
         Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
@@ -115,9 +117,11 @@ public class BoardService {
         model.addAttribute("endBlockPage", endBlockPage);
     }
 
-    public Optional<Board> detail(Long bno) {
-        return boardRepository.findById(bno);
-    }
 
+    public void reply(Long id, Class<?> objClass) {
+        if(objClass.equals(Story.class)) {
+            storyRepository.save(objClass);
+        }
+    }
 }
 

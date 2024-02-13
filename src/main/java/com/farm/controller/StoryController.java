@@ -3,7 +3,9 @@ package com.farm.controller;
 import com.farm.domain.Farm;
 import com.farm.domain.Member;
 import com.farm.domain.Story;
+import com.farm.domain.StoryReply;
 import com.farm.service.BoardService;
+import com.farm.service.CommonService;
 import com.farm.service.ListService;
 import com.farm.service.StoryService;
 import jakarta.persistence.EntityManager;
@@ -33,15 +35,12 @@ public class StoryController {
     StoryService storyService;
 
     @Autowired
-    ListService listService;
-
-    @Autowired
-    BoardService boardService;
+    CommonService commonService;
 
 
     @GetMapping("/story")
     public String storyList(@RequestParam(value="page", defaultValue="1") int page , Model model) {
-        boardService.listAll(page, model, Story.class);
+        commonService.listAll(page, model, Story.class);
         return "story";
     }
     @GetMapping("/image/{id}/{num}")
@@ -56,12 +55,12 @@ public class StoryController {
 
     @GetMapping("/storySearch")
     public String storySearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
-        boardService.searchList(page ,type , keyword , model, Story.class);
+        commonService.searchList(page ,type , keyword , model, Story.class);
         return "story";
     }
 
     @GetMapping("/storyDetail")
-    public String storydetail(@RequestParam(value="sno") Long sno, Model model) {
+    public String storydetail(@RequestParam(value="id") Long sno, Model model) {
         model.addAttribute("story", storyService.storydetail(sno).get());
         return "storyDetail";
     }
@@ -86,6 +85,12 @@ public class StoryController {
         }
         
         return "redirect:/story";
+    }
+
+    @PostMapping("/reply")
+    public String reply(@RequestParam("id") Long id) {
+        commonService.reply(id, StoryReply.class);
+        return "storyDetail";
     }
 
 }

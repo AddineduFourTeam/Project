@@ -11,14 +11,14 @@
                            <span><img src="${list.storyMemImg}" alt="${list.storyMemId} profile" onerror="this.src='img/profileImg_w.png'"></span>
                             <b>${list.storyMemId}</b>
                         </div>
-                        <a href="/storyDetail?sno=${list.storyIdx}">
+                        <a href="/storyDetail?id=${list.storyIdx}">
                             <div class="story_img">
                                 <img src="/image/${list.storyIdx}/1" alt="Image" onerror="this.src='img/logoimg.png'">
                             </div>
                         </a>
                         <div class="story_txt">
                             <div class="story_subject"><a
-                                    href="/storyDetail?sno=${list.storyIdx}">${list.storySubject}</a></div>
+                                    href="/storyDetail?id=${list.storyIdx}">${list.storySubject}</a></div>
                             <div class="story_content_ele ellipsis">${list.storyContent}</div>
                             <div class="story_tag">
                                     ${list.storyTag}

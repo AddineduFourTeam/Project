@@ -484,7 +484,7 @@ footer p {
 
 }
 .main_story_slide , .main_story_slide .slick-list{
-    height:  450px;
+    height:  470px;
 }
 .ms_slide_items {
     margin-right: 30px;
@@ -502,7 +502,7 @@ footer p {
     transition: all 0.5s ease;
 }
 .ms_slide_items.slick-active img{
-    height: 450px;
+    height: 470px;
 
 }
 .mainstory_txt {
