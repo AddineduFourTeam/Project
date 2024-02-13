@@ -128,9 +128,9 @@
         $(window).on('load', function(){
             $(".story_detail_img_list").each(function () {
                 slideItemWidth += $(this).innerWidth();
-                console.log("slideItemWidth : " + slideItemWidth)
+                //console.log("slideItemWidth : " + slideItemWidth)
             });
-            console.log("slideItemWidth : " + slideItemWidth + "/ storySlideWidth : " + storySlideWidth);
+            //console.log("slideItemWidth : " + slideItemWidth + "/ storySlideWidth : " + storySlideWidth);
             if (storySlideWidth > slideItemWidth) {
                 //$(".story_detail_slide").find("button").hide();
             } else {

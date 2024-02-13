@@ -397,24 +397,31 @@ footer p {
     margin-top: 10px;
     font-size:18px
 }
+.main_localList {
+    max-width: 880px;
+    height: 400px;
+    margin:0 auto
+}
 .main_localList ul {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .main_localList li {
     width:200px;
     height: 200px;
     border-radius: 50%;
     overflow: hidden;
-    position:relative;
     transition: all 0.3s ease;
     margin: 0 10px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
 }
 .main_localList li:hover {
-    width: 250px;
-    height: 250px;
+    transform:scale(1.2);
 }
 .main_localList li a {
     display: block;
@@ -474,6 +481,10 @@ footer p {
 
 .maincon02 {
     padding: 100px 0;
+
+}
+.main_story_slide , .main_story_slide .slick-list{
+    height:  450px;
 }
 .ms_slide_items {
     margin-right: 30px;

@@ -73,9 +73,10 @@
                             <span>gyeongsang</span>
                             <span>경상</span>
                         </div>
-                    </a></li>
-                </div>
-            </ul>
+                    </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="maincon02 section">
@@ -116,11 +117,28 @@
 <script>
     $(function(){
         $(window).scroll(function(){
-            $(".section").each(function(){
+            if($(window).scrollTop() >= $(".maincon01").offset().top - 300) {
+                let count = 0;
+                let width = 250;
+                $(".main_localList li").each(function () {
+
+                    if ($(this).index() === 4) {
+                        $(this).css({"top": width, "left": "15%"});
+                    } else if ($(this).index() === 5) {
+                        $(this).css({"top": width, "left": "calc(15% + " + width + "px)"});
+                    } else if ($(this).index() === 6) {
+                        $(this).css({"top": width, "left": "calc(15% + " + 2 * width + "px)"});
+                    } else {
+                        $(this).css("left", count);
+                        count += width;
+                    }
+                });
+            }
+            /*$(".section").each(function(){
                 if($(window).scrollTop() >= $(this).offset().top - 300) {
                     $(this).addClass("active").siblings().removeClass("active");
                 }
-            });
+            });*/
         });
     });
 </script>

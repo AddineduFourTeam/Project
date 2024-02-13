@@ -35,7 +35,7 @@ public class OpenApiService {
         log.info("api 구동시작");
         // 샘플코드를 활용해서 xml -> jsonObject로 변환
         List<Farm> farmList = new ArrayList<>();
-        for (int cntntsNo = 209309 ; cntntsNo <= 217054; cntntsNo++) {
+        for (int cntntsNo = 220000 ; cntntsNo <= 220771; cntntsNo++) {
             System.out.println(cntntsNo);
             JSONObject jsonData = openApiExplorer .getFarmExplorer(String.valueOf(cntntsNo));
             JSONObject body;
