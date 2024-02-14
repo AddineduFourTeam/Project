@@ -23,7 +23,7 @@
             <input type="hidden" name="memid">
         </form>
         <div id="updateMyInfo-wrap" style="display:none;">
-            <form action="updateMyInfoForm" method="post" id="updateMyInfo" modelAttribute="inputMyInfo" enctype="multipart/form-data">
+            <form action="updateMyInfoForm" onsubmit="validateForm()" method="post" id="updateMyInfo" modelAttribute="inputMyInfo" enctype="multipart/form-data">
                 <ul style="list-style-type: none">
                     <li>
                         <h3><p>${loginUser.memid}님 회원정보 변경</p></h3>
@@ -66,6 +66,9 @@
                     </li>
                     <li class="file-top">
                         <p>프로필이미지</p>
+                        <img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'">
+                        <input type="hidden" name="existingImage" value="${loginUser.memImg}">
+                        <p>변경할 이미지</p>
                         <input type="file" name="file" id="file" class="btn-file">
                         <span class="modi_img" >
                         <img src="" alt="" id="View">
@@ -73,9 +76,6 @@
                     </li>
                     <li>
                         <input class="btn-join" type="submit" value="회원정보변경">
-                    </li>
-                    <li>
-                        <a href="cancelAccount">회원탈퇴</a>
                     </li>
                 </ul>
             </form>

@@ -150,7 +150,7 @@ public class MemberService {
             member.setBirth(iMyInfo.getBirth());
             member.setPhone(iMyInfo.getPhone());
             member.setEmail(iMyInfo.getEmail());
-            //member.setMemImg(iMyInfo.getMemImg());
+            member.setMemImg(iMyInfo.getMemImg());
 
             updatedMember = memberRepository.save(member);
         }
@@ -161,10 +161,6 @@ public class MemberService {
         return memberRepository.findByMemid(memid).orElse(null);
     }
 
-
-
-
-    
 
 /*
     public List<Member> selectAll() {

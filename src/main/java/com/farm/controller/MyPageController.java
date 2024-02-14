@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -56,7 +57,22 @@ public class MyPageController {
     @PostMapping("/updateMyInfoForm")
     public String updateMyInfoForm(@ModelAttribute("inputMyInfo") Member iMyInfo,
                                    HttpSession session, Model model,
-                                   RedirectAttributes redirectAttributes){
+                                   @RequestParam("file") MultipartFile file,
+                                   @RequestParam("existingImage") String existingImage){
+
+        Long memIdx = iMyInfo.getMemIdx();
+
+        if(!file.isEmpty() && file != null){
+            try{
+                String filename =  memberService.uploadImage(file, memIdx);
+                iMyInfo.setMemImg(filename);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+        }else{
+            iMyInfo.setMemImg(existingImage);
+        }
 
         Member loginUser = (Member) session.getAttribute("loginUser");
         Member updatedMember = memberService.updateMyInfo(iMyInfo,loginUser.getMemid());
