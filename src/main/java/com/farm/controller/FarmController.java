@@ -13,12 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FarmController {
-    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_SIZE = 12;
     private static final int PAGE_PER_BLOCK = 5;
 
     @Autowired
@@ -29,10 +28,11 @@ public class FarmController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    public String list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,@RequestParam(value = "local", defaultValue = "전체") String local) {
         // 페이지 관련 처리
         Pageable pageable = createPageable(page);
-        Page<Farm> result = listService.findAll(pageable);
+        Page<Farm> result = listService.localList(local,model,pageable);
+        //Page<Farm> result = listService.findAll(pageable);
         model.addAllAttributes(listService.getPagingData(result, page,PAGE_PER_BLOCK));
         return "list";
     }
@@ -63,8 +63,9 @@ public class FarmController {
     }
 
     @PostMapping("/storyLocal")
-    public ResponseEntity<?> storyLocal(@RequestParam(value="local") String local, Model model,@RequestParam(value = "page", defaultValue = "1") int page,@RequestParam(value="use") String use) {
+    public ResponseEntity<?> storyLocal(@RequestParam(value="local") String local, Model model) {
+        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("wfIdx").descending());
         //List<Farm> localList = listService.localList(local);
-        return ResponseEntity.ok(listService.localList(local,model,page,use));
+        return ResponseEntity.ok(listService.localList(local,model,pageable).getContent());
     }
 }
