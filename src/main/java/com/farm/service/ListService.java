@@ -42,18 +42,19 @@ public class ListService {
     }
 
     public Page<Farm> search(Pageable pageable, String keyword, String select) {
-        if(select.equals("location")){
-            return farmRepository.findByWfAddrContaining(keyword,pageable);
-        }else if(select.equals("title")){
+        if (select.equals("location")) {
+            return farmRepository.findByWfAddrContaining(keyword, pageable);
+        } else if (select.equals("title")) {
             return farmRepository.findByWfSubjectContaining(keyword, pageable);
-        }else if(select.equals("theme")){
+        } else if (select.equals("theme")) {
             return farmRepository.findByWfThemeContaining(keyword, pageable);
-        }else{
+        } else {
             return null;
         }
     }
-    public Map<String, Object> getPagingData(Page<Farm> page, int currentPage, int pagePerBlock){
-        Map<String, Object> pagingData =  new HashMap<>();
+
+    public Map<String, Object> getPagingData(Page<Farm> page, int currentPage, int pagePerBlock) {
+        Map<String, Object> pagingData = new HashMap<>();
 
         // 페이지네이션 관련 변수 계산
         int totalPages = page.getTotalPages(); // 전체 페이지 수
@@ -118,13 +119,15 @@ public class ListService {
         }
         if(local.equals("전북")) {
             result = farmRepository.findByWfAddrLikeKeywords("전라북도","전북",pageable);
+
         }
         model.addAttribute("farmList",farmlocal);
         return result.getContent();
     }
+
+
     public void save(Reservation reservation) {
         reservationRepository.save(reservation);
+
     }
-
 }
-

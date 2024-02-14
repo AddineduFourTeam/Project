@@ -1,8 +1,6 @@
 package com.farm.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Reservation {
     @Id
+    @SequenceGenerator(
+            name="myBoardSEQ",
+            sequenceName="myBoardSEQ",
+            allocationSize = 1
+    )
+    @GeneratedValue(generator="myBoardSEQ" , strategy = GenerationType.AUTO)
     private Long rvIdx; // 컨텐츠 번호
     private Long rvMemIdx; // 사용자 고유 식별자
     private Long rvFarmIdx; // 농장 고유 식별자
@@ -31,4 +35,6 @@ public class Reservation {
     @CreatedDate
     private String rvDate; // 예약 날짜
 
+//public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+//
 }
