@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,5 +60,11 @@ public class FarmController {
     public String reservationSave(Reservation reservation){
         listService.save(reservation);
         return "redirect:/";
+    }
+
+    @PostMapping("/storyLocal")
+    public ResponseEntity<?> storyLocal(@RequestParam(value="local") String local, Model model,@RequestParam(value = "page", defaultValue = "1") int page,@RequestParam(value="use") String use) {
+        //List<Farm> localList = listService.localList(local);
+        return ResponseEntity.ok(listService.localList(local,model,page,use));
     }
 }

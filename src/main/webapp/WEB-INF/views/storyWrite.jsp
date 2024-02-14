@@ -92,7 +92,7 @@
     function farmlocal(input){
         $.ajax({
             url:"/storyLocal",
-            data:{'local':input},
+            data:{'local':input,"use":"storyWrite"},
             type:"post",
             success: function (data) {
                 console.log("success");

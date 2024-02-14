@@ -10,7 +10,7 @@
 <c:set var="folderPath" value="${fn:substringAfter(URI, basePath)}" />
 <c:set var="folderName" value="${fn:substringBefore(folderPath, '.jsp')}" />
 <!-- 지역명 뿌리기 -->
-<c:set var="localArray">서울,경기,인천,강원,제주,대전,충북,충남/세종,부산,울산,경남,대구,경북,광주,전남,전주/전북</c:set>
+<c:set var="localArray">전체,서울,경기,인천,강원,제주,대전,충북,충남/세종,부산,울산,경남,대구,경북,광주,전남,전주/전북</c:set>
 <!doctype html>
 <html lang="en">
 <head>

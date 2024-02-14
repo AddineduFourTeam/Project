@@ -64,7 +64,7 @@ $(document).ready(function(){
     }
 
 
-    $(" textarea").on("keydown , keyup , keypress",function(){
+    $(".story_reply textarea").on("keydown , keyup , keypress",function(){
         var reply_submit = $(this).parents(".story_reply_input").find(".reply_submit");
         resize(this);
         if($(this).val().length > 0) {
