@@ -1333,15 +1333,20 @@ select option {
 }
 
 /****** list *******/
+.list-wrap .container{
+    padding: 20px 0;
+}
 .farm-list{
     width: 100%;
     overflow: hidden;
+    padding-top: 20px;
 }
 .farm-list > ul{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
+    padding-bottom: 40px;
 }
 .farm-list > ul > li {
     width: calc(33% - 10px);
@@ -1405,11 +1410,37 @@ body::-webkit-scrollbar-track {
 .filter {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px 0;
+    padding: 20px 50px;
     width: 100%;
     height: 100%;
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     overflow: hidden;
+}
+.filter::before{
+    content: '';
+    display: block;
+    width: 100px;
+    height: 80px;
+    background: linear-gradient(to right, #f3e9dd 60%,transparent);
+    position: absolute;
+    left: -1%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.filter::after{
+    content: '';
+    display: block;
+    width: 100px;
+    height: 80px;
+    background: linear-gradient(to left, #f3e9dd 60%,transparent);
+    position: absolute;
+    right: -1%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 2;
 }
 .filter ul{
     position: relative;
@@ -1420,7 +1451,6 @@ body::-webkit-scrollbar-track {
 .filter ul li{
     text-align: center;
     font-size: 18px;
-    /*background: #fff;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1429,11 +1459,13 @@ body::-webkit-scrollbar-track {
     padding: 15px 25px;
     text-align: center;
     display: inline-block;
-    border: 1px solid var(--border);
+    /*border: 1px solid var(--border);*/
     cursor: pointer;
     font-size: 16px;
-    border-radius: 20px;
     font-weight: bold;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
 }
 .filter ul li input{
     clip: rect(0 0 0 0);
@@ -1447,7 +1479,8 @@ body::-webkit-scrollbar-track {
 .filter ul li input:checked + label {
     position: absolute;
     color: #fff;
-    z-index: 13;
+    z-index: 2;
+    background-color: transparent;
 }
 .selector{
     background-color: var(--mainColor);
@@ -1458,13 +1491,39 @@ body::-webkit-scrollbar-track {
     width: 4.75rem;
     height: 2.6rem;
     z-index: 1;
-    /*box-shadow: 0px 0px 12px -2px rgba(255,71,86,0.9);*/
-    box-shadow: 0px 0px 12px -2px  rgba(1,176,63,0.9);
+    box-shadow: 0 0 12px -2px rgba(1,176,63,0.9);
     transition: all 0.2s ease-in-out;
     padding: 25px;
 }
-.selector-item--active {
-    color: white;
+
+.filter-button-prev{
+    top: 40%;
+    left: 1%;
+    cursor: pointer;
+}
+.filter-button-next{
+    top: 40%;
+    right: 1%;
+    cursor: pointer;
+}
+.filter-button-prev,
+.filter-button-next {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 35px;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    z-index: 15;
+}
+.filter-button-next.swiper-button-disabled,
+.filter-button-prev.swiper-button-disabled {
+    opacity: .35;
+    cursor: auto;
+    pointer-events: none;
 }
 
 /* pagination */
@@ -1718,28 +1777,27 @@ body::-webkit-scrollbar-track {
 }
 
 /* map */
-/*.list-wrap{*/
-/*    height: 100vh;*/
-/*}*/
-/*.list-wrap .map-wrap{*/
-/*    position: sticky;*/
-/*    width: 50%;*/
-/*}*/
-/*.list-wrap .map-wrap .map{*/
-/*    width: 100%;*/
-/*    height: 100vh;*/
-/*}*/
-/*.list-detail .map-wrap{*/
-/*    width: 100%;*/
-/*    padding: 50px 0;*/
-/*}*/
-/*.list-detail .map-wrap h2{*/
-/*    padding: 20px 0;*/
-/*}*/
-/*.list-detail .map-wrap .map{*/
-/*    width: 100%;*/
-/*    height: 60vh;*/
-/*}*/
+.list-wrap{
+    height: 100vh;
+}
+.list-wrap .map-wrap{
+    width: 50%;
+}
+.list-wrap .map-wrap .map{
+    width: 100%;
+    height: 100vh;
+}
+.list-detail .map-wrap{
+    width: 100%;
+    padding: 50px 0;
+}
+.list-detail .map-wrap h2{
+    padding: 20px 0;
+}
+.list-detail .map-wrap .map{
+    width: 100%;
+    height: 60vh;
+}
 
 /* login */
 .auth_body {
@@ -2076,8 +2134,6 @@ h4{
     text-align: center;
 }
 .background .window .popup .close{
-}
-.close{
     position: absolute;
     top: 30px;
     right: 30px;
@@ -2087,13 +2143,8 @@ h4{
     font-size: 2rem;
     border: none;
     background-color: transparent;
-
 }
-
-.m-top{
-    margin-top:15px;
-}
-.swiper {
+.modal_swiper {
     width: 80%;
     height: 100%;
     display: flex;
@@ -2102,12 +2153,12 @@ h4{
     left: 50%;
     transform: translateX(-50%);
 }
-.swiper-wrapper{
+.modal_swiper .swiper-wrapper{
     display: flex;
     align-items: center;
 }
 
-.swiper-slide {
+.modal_swiper .swiper-wrapper .swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
@@ -2116,12 +2167,12 @@ h4{
     align-items: center;
     height: 90%;
 }
-.swiper-slide img {
+.modal_swiper .swiper-wrapper .swiper-slide img {
     display: block;
     height: 100%;
     object-fit: cover;
 }
-.swiper-button-prev{
+.modal-button-prev{
     position: absolute;
     top: 45%;
     left: 24px;

@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../include/header.jsp" %>
 <c:set var="farm" value="${listDetail}"/>
-    <nav class="list_nav">
-        <div class="wrap">
-            <div class="list_wrap">
-                <ul>
-                    <li><a href="#">안녕</a></li>
-                    <li><a href="#">나는</a></li>
-                    <li><a href="#">지금</a></li>
-                    <li><a href="#">너무</a></li>
-                    <li><a href="#">배불러</a></li>
-                </ul>
-            </div>
-            <div class="btn_wrap">
-                <a href="/reservation?id=${listDetail.wfIdx}" id="btn">
-                    <span>예약하기</span>
-                </a>
-            </div>
+<nav class="list_nav">
+    <div class="wrap">
+        <div class="list_wrap">
+            <ul>
+                <li><a href="#">안녕</a></li>
+                <li><a href="#">나는</a></li>
+                <li><a href="#">지금</a></li>
+                <li><a href="#">너무</a></li>
+                <li><a href="#">배불러</a></li>
+            </ul>
         </div>
-    </nav>
+        <div class="btn_wrap">
+            <a href="/reservation?id=${listDetail.wfIdx}" id="dtn">
+                <span>예약하기</span>
+            </a>
+        </div>
+    </div>
+</nav>
 <div class="wrap con list-detail">
     <%--
         이미지 /
@@ -50,29 +50,28 @@
     </div>
 
     <%-- 모달창 --%>
-     <div class="background">
-            <div class="window">
-                <div class="popup">
-                    <h2>${listDetail.wfSubject}</h2>
-                    <button class="close"><i class="fa-solid fa-xmark"></i></button>
-                    <div class="swiper modal_swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                            <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-                        </div>
+    <div class="background">
+        <div class="window">
+            <div class="popup">
+                <h2>${listDetail.wfSubject}</h2>
+                <button class="close"><i class="fa-solid fa-xmark"></i></button>
+                <div class="modal_swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
                     </div>
-                    <div class="modal-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-                    <div class="modal-button-next"><i class="fa-solid fa-angle-right"></i></div>
                 </div>
+                <div class="modal-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                <div class="modal-button-next"><i class="fa-solid fa-angle-right"></i></div>
             </div>
         </div>
-
     </div>
+</div>
 <script>
 
     /* empty strong tag */
@@ -90,7 +89,7 @@
     });
 
     /* modal */
-   document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const galleryItems = document.querySelectorAll(".gallery > ul >  li");
         const modal = document.querySelector(".background");
         const closeButton = document.querySelector(".close");
@@ -114,7 +113,7 @@
     const closeModal = (modal) => {
         document.querySelector(".popup").className = "popup animate__animated animate__zoomOut animate__faster"
         setTimeout(function (){
-             modal.className = "background";
+            modal.className = "background";
         },200)
     }
 
@@ -167,6 +166,7 @@
                 marker.setMap(map);
             },
             error: function (xhr, status, error) {
+                console.log("error");
                 alert("위치를 불러오는데 실패했습니다: " + error); // 사용자 친화적인 에러 처리
             }
         });
