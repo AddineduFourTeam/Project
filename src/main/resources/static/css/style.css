@@ -8,9 +8,9 @@
     font-style: normal;
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot');
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.ttf') format("truetype");
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff2') format('woff2'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff') format('woff'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.ttf') format("truetype");
     font-display: swap;
 }
 @font-face {
@@ -19,9 +19,9 @@
     font-style: normal;
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot');
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.ttf') format("truetype");
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff2') format('woff2'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff') format('woff'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.ttf') format("truetype");
     font-display: swap;
 }
 @font-face {
@@ -30,9 +30,9 @@
     font-style: normal;
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot');
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.ttf') format("truetype");
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff2') format('woff2'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff') format('woff'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.ttf') format("truetype");
     font-display: swap;
 }
 @font-face {
@@ -41,9 +41,9 @@
     font-style: normal;
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot');
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.ttf') format("truetype");
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff2') format('woff2'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff') format('woff'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.ttf') format("truetype");
     font-display: swap;
 }
 @font-face {
@@ -52,9 +52,9 @@
     font-style: normal;
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot');
     src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.ttf') format("truetype");
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff2') format('woff2'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff') format('woff'),
+    url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.ttf') format("truetype");
     font-display: swap;
 }
 @font-face {
@@ -186,7 +186,7 @@ b{font-weight:600;}
     --color : #01b03f;
     --mainColor : #01b03f;
     --pointColor : #FF9000;
-} 
+}
 
 /*main_common*/
 
@@ -414,7 +414,7 @@ footer p {
     height: 200px;
     border-radius: 50%;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     margin: 0 10px;
     position: absolute;
     top: 40%;
@@ -768,6 +768,9 @@ footer p {
 }
 .story_content:hover .story_tt {
     display: flex;
+}
+.story_img img {
+    width: 100%;
 }
 .storybtn {
     position: relative;
@@ -1211,7 +1214,7 @@ footer p {
     right: 10px;
     left: auto;
 }
-    /*emoji*/
+/*emoji*/
 
 .emoji-picker {
     width: 400px;
@@ -1226,14 +1229,14 @@ footer p {
 
 /****** search-bar *******/
 .search-form , header.on .search-form {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  padding:10px 20px;
-  width:calc(100% - 750px);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding:10px 20px;
+    width:calc(100% - 750px);
     margin: 0 100px;
-  border-radius: 50px;
-  border:0;
+    border-radius: 50px;
+    border:0;
     transition: all .5s;
     align-items: center;
     height: 55px;
@@ -1279,37 +1282,37 @@ select option {
     background: transparent;
 }
 .list-search {
-  width: 80%;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  background-color: transparent;
+    width: 80%;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 
 .list-search::-webkit-search-cancel-button {
-  position: relative;
-  right: 0;
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  display: inline-block;
-  color: #000;
-  cursor: pointer;
+    position: relative;
+    right: 0;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
 }
 
 .search-form > button, header.on .search-form button {
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  border: none;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
     background: transparent
 }
 
 .search-form > button >.fa-magnifying-glass:before, header.on .search-form > button >.fa-magnifying-glass:before ,
 .search-form > button > .fa-search:before , header.on .search-form > button > .fa-search:before {
-  color: var(--mainColor);
-  font-size: 16px;
+    color: var(--mainColor);
+    font-size: 16px;
 }
 .index_body .search-form > button >.fa-magnifying-glass:before,
 .index_body .search-form > button > .fa-search:before{
@@ -1343,9 +1346,9 @@ select option {
     padding-bottom:70%;
 }
 .view-img {
-   width:100%;
-   height:100%;
-   position:absolute;
+    width:100%;
+    height:100%;
+    position:absolute;
 }
 .farm-list > ul > li > a > .view  img{
     width: 100%;
@@ -1368,7 +1371,7 @@ select option {
     color: var(--mainColor);
 }
 .farm-list > ul > li .desc .right >.fa-star:before{
-  color: var(--pointColor);
+    color: var(--pointColor);
 }
 body::-webkit-scrollbar {
     width: 10px;
@@ -1953,6 +1956,213 @@ h4{
     color:#fff;
     font-weight: bold;
     background: var(--mainColor);
+}
+
+/* MyPage */
+.my-full-wrap{
+    margin-top:15px;
+    width:100%;
+    /*margin:0 auto;*/
+    align-items: center;
+}
+.tap-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+.my-tap{
+    width:20%;
+    padding:10px;
+}
+
+.my-wrap{
+    width:75%;
+}
+.my-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.my-info li{
+    /*flex:1;*/
+    padding:0 10px;
+}
+
+.my-img{
+    width:400px;
+}
+
+.my-input-box input{
+    width:70%;
+    height:35px;
+    background: transparent;
+    outline: none;
+    border:1px solid rgba(0,0,0,0.7);
+    border-radius: 40px;
+    padding:25px 20px;
+    color: #333;
+    margin-bottom: 10px;
+    font-size:16px
+}
+
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    opacity: 0;
+}
+.show {
+    opacity: 1;
+    z-index: 1000;
+    /*transition: all .5s;*/
+}
+.background .window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background .window .popup {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+    padding: 50px 24px 50px 24px;
+}
+.background .window .popup h2{
+    text-align: center;
+}
+.background .window .popup .close{
+}
+.close{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+
+}
+
+.m-top{
+    margin-top:15px;
+}
+.swiper {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.swiper-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+.swiper-slide img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-button-prev{
+    position: absolute;
+    top: 45%;
+    left: 24px;
+    cursor: pointer;
+}
+.swiper-button-next{
+    position: absolute;
+    top: 45%;
+    right: 30px;
+    cursor: pointer;
+}
+.swiper-button-prev,
+.swiper-button-next {
+    width: 60px;
+    height: 60px;
+    line-height: 65px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 50%;
+}
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: .35;
+    cursor: auto;
+    pointer-events: none;
+}
+
+/* list_nav */
+.listDetail_header{
+    box-shadow: none;
+}
+.list_nav{
+    display: block;
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 150px;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0 10px 10px -10px rgb(145, 115, 77,0.3);
+    transition: all .4s;
+}
+.nav_up{
+    transform: translateY(-250px);
+}
+.list_nav > .wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    padding: 0 24px;
+}
+.list_nav > .wrap > .list_wrap > ul{
+    display: flex;
+}
+.list_nav > .wrap > .list_wrap > ul > li > a{
+    font-size: 1rem;
+    font-weight: bold;
+}
+.list_nav > .wrap:after {
+    content: "";
+    display: none;
+    clear: both;
+}
+.list_nav > .wrap > .btn_wrap > a{
+    padding: 16px 20px;
+    border: none;
+    background-color: var(--mainColor);
+    border-radius: 10px;
+}
+.list_nav > .wrap > .btn_wrap > a > span{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
 }
 
 /* reservation */

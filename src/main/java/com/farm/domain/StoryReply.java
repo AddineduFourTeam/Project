@@ -20,6 +20,7 @@ public class StoryReply {
     @GeneratedValue(generator="myBoardSEQ")
     private Long srIdx;
     private Long srMemIdx;
+    private Long srStoryIdx;
     private Long srReplyIdx;
     private String srContent;
     @CreatedDate
@@ -29,5 +30,5 @@ public class StoryReply {
     @Column(name = "SR_UPDATE_DATE")
     private LocalDateTime srUpdateDate;
     private int srDepth;
-    private int srCount;
+    private int srLike;
 }

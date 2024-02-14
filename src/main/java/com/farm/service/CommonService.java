@@ -4,10 +4,7 @@ import com.farm.domain.Board;
 import com.farm.domain.Farm;
 import com.farm.domain.Story;
 import com.farm.domain.StoryReply;
-import com.farm.repository.BoardRepository;
-import com.farm.repository.FarmRepository;
-import com.farm.repository.MemberRepository;
-import com.farm.repository.StoryRepository;
+import com.farm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,8 +26,10 @@ public class CommonService {
     StoryRepository storyRepository;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    StoryReplyRepository storyReplyRepository;
     //전체 값 리스트 출력
-    
+
     //list 뿌리기
     public void listAll(int page , Model model , Class<?> objClass) {
         int nPage = page - 1; // 시작페이지
@@ -47,7 +46,7 @@ public class CommonService {
             result = storyRepository.findAll(pageable);
         }
 
-        listPage(model , result);
+        listPage(model , result,objClass);
 
     }
 
@@ -94,12 +93,12 @@ public class CommonService {
         }
 
 
-        listPage(model , result);
+        listPage(model , result, objClass);
     }
 
 
     //model에 result값 담기
-    private void listPage(Model model , Page<?> result) {
+    private void listPage(Model model , Page<?> result, Class<?> objClass) {
         List<?> content = result.getContent();
 
         int totalPages = result.getTotalPages(); // 전제 페이지 수
@@ -110,18 +109,39 @@ public class CommonService {
         int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.
         endBlockPage = totalPages<endBlockPage? totalPages:endBlockPage;
 
-        model.addAttribute("list", content);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("pageNumber", pageNumber);
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        if(objClass.equals(StoryReply.class)) {
+            model.addAttribute("Replylist", content);
+            model.addAttribute("ReplyTotalPages", totalPages);
+            model.addAttribute("ReplyPageNumber", pageNumber);
+            model.addAttribute("ReplyStartBlockPage", startBlockPage);
+            model.addAttribute("ReplyEndBlockPage", endBlockPage);
+        }else {
+            model.addAttribute("list", content);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("pageNumber", pageNumber);
+            model.addAttribute("startBlockPage", startBlockPage);
+            model.addAttribute("endBlockPage", endBlockPage);
+        }
+
     }
 
-
-/*    public void reply(Long id, Class<?> objClass) {
-        if(objClass.equals(Story.class)) {
-            storyRepository.save(objClass);
+    //댓글,후기 저장
+    public void replySave(Object object) {
+        if(object.getClass().equals(StoryReply.class)) {
+            storyReplyRepository.save((StoryReply)object);
         }
-    }*/
+    }
+
+    //댓글,후기 리스트
+    public void replyDetail(Long id,int page , Model model,Class<?> objClass) {
+        int nPage = page - 1; // 시작페이지
+        Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
+        Page<?> result = null;
+        if(objClass.equals(StoryReply.class)) {
+            result = storyReplyRepository.findBySrReplyIdx(id,pageable);
+        }
+
+        listPage(model , result, objClass);
+    }
 }
 

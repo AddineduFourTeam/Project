@@ -60,8 +60,9 @@ public class StoryController {
     }
 
     @GetMapping("/storyDetail")
-    public String storydetail(@RequestParam(value="id") Long sno, Model model) {
-        model.addAttribute("story", storyService.storydetail(sno).get());
+    public String storydetail(@RequestParam(value="id") Long id,@RequestParam(value="page", defaultValue="1") int page , Model model) {
+        model.addAttribute("story", storyService.storydetail(id).get());
+        commonService.replyDetail(id,page,model,StoryReply.class);
         return "storyDetail";
     }
 
@@ -83,14 +84,15 @@ public class StoryController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return "redirect:/story";
     }
 
-//    @PostMapping("/reply")
-//    public String reply(@RequestParam("id") Long id) {
-//        commonService.reply(id, StoryReply.class);
-//        return "storyDetail";
-//    }
+    @PostMapping("/storyReplySave")
+    public String storyReplySave(StoryReply storyReply,@RequestParam("id") Long id) {
+        storyReply.setSrStoryIdx(id);
+        commonService.replySave(storyReply);
+        return "storyDetail";
+    }
 
 }

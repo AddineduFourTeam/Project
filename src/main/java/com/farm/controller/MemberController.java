@@ -45,8 +45,9 @@ public class MemberController {
 
         member.setPass(pEncoder.encode(member.getPass()));
 
+        Long memIdx = member.getMemIdx();
         if(!file.isEmpty()){
-          String filename =  memberService.uploadImage(file, member.getMemIdx());
+          String filename =  memberService.uploadImage(file, memIdx);
           member.setMemImg(filename);
         }
 

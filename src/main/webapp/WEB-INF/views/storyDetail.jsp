@@ -56,7 +56,7 @@
                     <textarea name="" row="1" placeholder="댓글을 작성해주세요." id="message_textbox"></textarea>
                     <div class="btnFlex flex">
                         <button class="emoji_btn" data-target-textbox="message_textbox"><i class="fa-regular fa-face-smile"></i></button>
-                        <button type="button" class="reply_submit" disabled="disabled">등록</button>
+                        <button type="button" class="reply_submit" id="reply_submit" disabled="disabled">등록</button>
                     </div>
                 </div>
                 <div class="story_reply_list">
@@ -137,6 +137,25 @@
                 //$(".story_detail_slide").find("button").show();
                 story_slick();
             }
+        });
+
+        $("#reply_submit").click(function(){
+            let text = $("#message_textbox").val();
+            text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+            $.ajax(function(){
+                url:"/storyReplySave",
+                    data:{id:${param.id},srMemIdx:${loginUser.memIdx},},
+                type:"post",
+                    success:function(result){
+                    console.log("success");
+                    let content = "";
+                    $(".story_reply_list ul").prepend(content);
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
         });
     });
 

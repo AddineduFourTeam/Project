@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,37 +79,50 @@ public class ListService {
         return farmRepository.findById(id).get();
     }
 
-    public List<Farm> localList(String local) {
-        log.warn("localList");
+    public List<Farm> localList(String local,Model model,int page,String use) {
+        //log.warn("localList");
+        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("wfIdx").descending());
+        if(use.equals("list")) {
+            int nPage = page - 1; // 시작페이지
+            pageable = PageRequest.ofSize(10).withPage(nPage);
+        }
+
         //System.out.println("local = " + local);
-        List<Farm> result = null;
-        String[] farmlocal = {"서울", "경기", "인천", "강원", "제주", "대전", "충북", "충남/세종", "부산", "울산", "경남", "대구", "경북", "광주", "전남", "전북"};
-        for (int i = 0; i < farmlocal.length; i++) {
-            if (local.equals(farmlocal[i])) {
-                local = local + "%";
-                result = farmRepository.findByWfAddrLike(local);
-                break;
+        Page<Farm> result = null;
+        String[] farmlocal = {"전체","서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전북"};
+        for(int i = 0; i < farmlocal.length; i++){
+            if(local.equals(farmlocal[i])){
+                if(i == 0) {
+                    result = farmRepository.findAll(pageable);
+                    break;
+                }else {
+                    result = farmRepository.findByWfAddrLike(local + "%",pageable);
+                    break;
+                }
             }
         }
-        if (local.equals("충북")) {
-            result = farmRepository.findByWfAddrLike("충청북도");
+        //System.out.println(local);
+        if(local.equals("충북")) {
+            result = farmRepository.findByWfAddrLikeKeywords("충청북도","충북",pageable);
         }
-        if (local.equals("경남")) {
-            result = farmRepository.findByWfAddrLike("경상남도");
+        if(local.equals("경남")) {
+            result = farmRepository.findByWfAddrLikeKeywords("경상남도","경남",pageable);
         }
-        if (local.equals("경북")) {
-            result = farmRepository.findByWfAddrLike("경상북도");
+        if(local.equals("경북")) {
+            result = farmRepository.findByWfAddrLikeKeywords("경상북도","경북",pageable);
         }
-        if (local.equals("충남/세종")) {
-            result = farmRepository.findByWfAddrContainingOrWfAddrContaining("충청남도", "세종");
+        if(local.equals("충남/세종")) {
+            result = farmRepository.findByWfAddrLikeKeywords("충청남도","세종","충남",pageable);
         }
-        if (local.equals("전남")) {
-            result = farmRepository.findByWfAddrLike("전라남도");
+        if(local.equals("전남")) {
+            result = farmRepository.findByWfAddrLikeKeywords("전라남도","전남",pageable);
         }
-        if (local.equals("전북")) {
-            result = farmRepository.findByWfAddrLike("전라북도");
+        if(local.equals("전북")) {
+            result = farmRepository.findByWfAddrLikeKeywords("전라북도","전북",pageable);
+
         }
-        return result;
+        model.addAttribute("farmList",farmlocal);
+        return result.getContent();
     }
 
 
