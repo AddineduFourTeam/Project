@@ -1,5 +1,6 @@
 package com.farm.service;
 
+import com.farm.domain.Member;
 import com.farm.domain.Story;
 import com.farm.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class StoryService {
     @Autowired
     StoryRepository storyRepository;
+
+    @Autowired
+    MemberService memberService;
 
     public Optional<Story> storydetail(Long sno) {
         return storyRepository.findById(sno);
@@ -45,6 +49,15 @@ public class StoryService {
         List<Story> content = storyRepository.findStory();
         model.addAttribute("list", content);
     }
+
+    /* 마이페이지 story 가져오기 */
+    public String getStoryMemId(String memid) {
+        Member member = memberService.findByMemid(memid);
+        return member.getMemid();
+    }
+
+
+
 
    /* public List<byte[]> getImg(Long id) {
         List<byte[]> imgList = storyRepository.findById(id).stream()

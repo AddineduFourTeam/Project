@@ -2,9 +2,13 @@ package com.farm.service;
 
 import com.farm.domain.Member;
 import com.farm.repository.MemberRepository;
+import com.farm.repository.ReservationRepository;
+import com.farm.repository.ReviewRepository;
+import com.farm.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -18,6 +22,15 @@ import java.util.UUID;
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    StoryRepository storyRepository;
+
+    @Autowired
+    ReservationRepository reservationRepository;
+
+    @Autowired
+    ReviewRepository reviewRepository;
 
     /*프로필추가설정*/
     @Value("${upload.directory}")
@@ -159,6 +172,20 @@ public class MemberService {
 
     public Member getLoginUser(String memid) {
         return memberRepository.findByMemid(memid).orElse(null);
+    }
+
+    public Member findByMemid(String memid) {
+        return memberRepository.findByMemid(memid).orElse(null);
+    }
+
+    public void getMypgList(Model model, Long memIdx) {
+        model.addAttribute("stories",storyRepository.findTop5ByStoryMemIdxOrderByStoryDateDesc(memIdx));
+        model.addAttribute("reservations",reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
+        //리뷰는 아직 만들어진게 없음
+        model.addAttribute("reviews",reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
+        System.out.println("reservs = " + reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
+        System.out.println("reviews = " + reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
+
     }
 
 

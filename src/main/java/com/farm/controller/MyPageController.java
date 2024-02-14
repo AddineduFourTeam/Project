@@ -1,7 +1,10 @@
 package com.farm.controller;
 
+
 import com.farm.domain.Member;
+import com.farm.domain.Story;
 import com.farm.service.MemberService;
+import com.farm.service.StoryService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,19 +13,53 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
+import java.util.List;
 
 @Controller
-@SessionAttributes({"loginUser"})
+//@SessionAttributes({"loginUser"})
 public class MyPageController {
     @Autowired
     MemberService memberService;
 
     @Autowired
+    StoryService storyService;
+
+    @Autowired
     PasswordEncoder pEncoder;
 
     @GetMapping("/myPage")
-    public String myInfoForm(){
+    public String myInfoForm(HttpSession session, Model model){
+        Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
+
+        /*List<Board> recentBoards = boardService.getRecentBoards();
+        model.addAttribute("boards",recentBoards);*/
+
+        /*List<Reservation> recentResvs = reservationService.getRecentReservs();
+        model.addAttribute("resvs",recentResvs);*/
+
+        /*
+        이건 나중에 if문 추가할것
+        if(memid != null) {
+
+            List<Story> recentStories = storyService.getRecentStories(memid);
+            model.addAttribute("stories", recentStories);
+
+            return "myPage";
+        }else{
+            return "myPage";
+//            return "redirect:/login";
+        }*/
+
+        //String storyMemId = storyService.getStoryMemId(memid);
+        //List<Story> recentStories = storyService.getRecentStories(storyMemId,memid);
+        try {
+            memberService.getMypgList(model,idx);
+        }catch (Exception e) {
+            System.out.println("idx값이 없습니다.");
+        }
+
         return "myPage";
     }
 
@@ -149,4 +186,5 @@ public class MyPageController {
 
     // 작성한 글 찾기
     // memid값과 story_mem_id값이 일치하는 경우 story_subject 가져오기
+
 }
