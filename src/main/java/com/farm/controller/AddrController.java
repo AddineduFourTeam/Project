@@ -43,7 +43,6 @@ public class AddrController {
             farm.setLatitude(y);
         }
 
-
         //System.out.println("x"+coordinates.get("x"));
             return ResponseEntity.ok(coordinates);
     }

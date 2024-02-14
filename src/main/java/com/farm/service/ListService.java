@@ -89,7 +89,7 @@ public class ListService {
 
         //System.out.println("local = " + local);
         Page<Farm> result = null;
-        String[] farmlocal = {"전체","서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전북"};
+        String[] farmlocal = {"전체","서울","경기","인천","강원","제주","대전","충북","충남/세종","부산","울산","경남","대구","경북","광주","전남","전주/전북"};
         for(int i = 0; i < farmlocal.length; i++){
             if(local.equals(farmlocal[i])){
                 if(i == 0) {
@@ -117,9 +117,8 @@ public class ListService {
         if(local.equals("전남")) {
             result = farmRepository.findByWfAddrLikeKeywords("전라남도","전남",pageable);
         }
-        if(local.equals("전북")) {
-            result = farmRepository.findByWfAddrLikeKeywords("전라북도","전북",pageable);
-
+        if(local.equals("전주/전북")) {
+            result = farmRepository.findByWfAddrLikeKeywords("전라북도","전북","전주",pageable);
         }
         model.addAttribute("farmList",farmlocal);
         return result.getContent();

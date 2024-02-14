@@ -135,7 +135,7 @@ public class CommonService {
     //댓글,후기 리스트
     public void replyDetail(Long id,int page , Model model,Class<?> objClass) {
         int nPage = page - 1; // 시작페이지
-        Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
+        Pageable pageable = PageRequest.ofSize(20).withPage(nPage);
         Page<?> result = null;
         if(objClass.equals(StoryReply.class)) {
             result = storyReplyRepository.findBySrReplyIdx(id,pageable);

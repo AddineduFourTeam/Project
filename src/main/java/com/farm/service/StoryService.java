@@ -16,6 +16,10 @@ public class StoryService {
     @Autowired
     StoryRepository storyRepository;
 
+    @Autowired
+    CommonService commonService;
+
+    //story detail 불러오기
     public Optional<Story> storydetail(Long sno) {
         return storyRepository.findById(sno);
     }

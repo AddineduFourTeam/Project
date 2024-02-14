@@ -398,7 +398,7 @@ footer p {
     font-size:18px
 }
 .main_localList {
-    max-width: 880px;
+    max-width: 950px;
     height: 400px;
     margin:0 auto
 }
@@ -415,7 +415,7 @@ footer p {
     border-radius: 50%;
     overflow: hidden;
     transition: all 0.5s ease;
-    margin: 0 10px;
+    /*margin: 0 10px;*/
     position: absolute;
     top: 40%;
     left: 40%;
@@ -511,6 +511,7 @@ footer p {
     background:linear-gradient(transparent,rgba(0,0,0,0.8));
     /*background: #fff;*/
     bottom: 0;
+    width: 100%;
 }
 .mainstory_txt b {
     font-size: 18px;
@@ -1048,6 +1049,18 @@ footer p {
     flex-wrap: wrap;
     border:1px solid var(--border);
     padding: 15px;
+    max-height:600px;
+    overflow-y:auto
+}
+.story_submit_ul::-webkit-scrollbar {
+    width: 10px;
+}
+.story_submit_ul::-webkit-scrollbar-thumb {
+    background: var(--mainColor);
+    width: 8px;
+}
+.story_submit_ul::-webkit-scrollbar-track {
+    width: 10px;
 }
 .story_submit_ul li {
     width:20%

@@ -17,20 +17,10 @@
                 <div class="story_listtt">농장 선택</div>
                 <ul class="farm_select">
                     <c:forEach items="${localArray}" var="localArray" varStatus="idx">
-                        <c:choose>
-                            <c:when test="${idx.index == 0}">
-                           <li>
-                               <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="${localArray}" checked>
-                               <label for="farm_local${idx.index}">${localArray}</label>
-                           </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li>
-                                    <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="${localArray}">
-                                    <label for="farm_local${idx.index}">${localArray}</label>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
+                        <li>
+                            <input type="radio" class="" id="farm_local${idx.index}" name="farm_local" value="${localArray}" <c:if test="${idx.index == 0}">checked</c:if>>
+                            <label for="farm_local${idx.index}">${localArray}</label>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>

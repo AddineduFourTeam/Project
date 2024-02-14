@@ -10,6 +10,7 @@ import com.farm.service.ListService;
 import com.farm.service.StoryService;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.List;
-
+@Slf4j
 @Controller
 public class StoryController {
     @Autowired
@@ -43,15 +44,7 @@ public class StoryController {
         commonService.listAll(page, model, Story.class);
         return "story";
     }
-    @GetMapping("/image/{id}/{num}")
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id , @PathVariable int num) {
-        // 데이터베이스에서 이미지 BLOB 데이터를 찾는 로직
-        byte[] imageData = storyService.getImg(id, num); // BLOB 데이터를 byte[]로 변환
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG); // 적절한 Content-Type 설정
-        //System.out.println(new ResponseEntity<>(imageData, headers, HttpStatus.OK));
-        return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
-    }
+
 
     @GetMapping("/storySearch")
     public String storySearch(@RequestParam(value="page", defaultValue="1") int page , @RequestParam(value="type") String type , @RequestParam(value="keyword") String keyword , Model model) {
@@ -68,7 +61,6 @@ public class StoryController {
 
     @GetMapping("/storyWrite")
     public String storywrite(Model model) {
-        //model.addAttribute("board", storyService.storydetail(sno).get());
         return "storyWrite";
     }
     @PostMapping("/storyForm")

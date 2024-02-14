@@ -20,4 +20,6 @@ public interface StoryRepository extends JpaRepository<Story, Long> {
     Page<Story> findByStoryContentContaining(String keyword, Pageable pageable);
 
     Page<Story> findByStoryMemNameContaining(String keyword, Pageable pageable);
+
+    Page<Story> findBySrStoryIdx(Long sno, Pageable pageable);
 }

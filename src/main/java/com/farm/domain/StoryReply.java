@@ -30,5 +30,5 @@ public class StoryReply {
     @Column(name = "SR_UPDATE_DATE")
     private LocalDateTime srUpdateDate;
     private int srDepth;
-    private int srLike;
+    private int srLike = 0;
 }
