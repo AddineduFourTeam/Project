@@ -80,11 +80,9 @@ public class StoryController {
         return "redirect:/story";
     }
 
-    @PostMapping("/storyReplySave")
+    /*@PostMapping("/storyReplySave")
     public String storyReplySave(StoryReply storyReply,@RequestParam("id") Long id) {
         storyReply.setSrStoryIdx(id);
         commonService.replySave(storyReply);
-        return "storyDetail";
-    }
-
+    }*/
 }

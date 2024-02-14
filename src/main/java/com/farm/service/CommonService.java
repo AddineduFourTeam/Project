@@ -124,7 +124,6 @@ public class CommonService {
         }
 
     }
-
     //댓글,후기 저장
     public void replySave(Object object) {
         if(object.getClass().equals(StoryReply.class)) {

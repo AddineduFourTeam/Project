@@ -35,6 +35,4 @@ public class Reservation {
     @CreatedDate
     private String rvDate; // 예약 날짜
 
-//public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-//
 }
