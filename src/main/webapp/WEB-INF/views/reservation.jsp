@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@include file="../include/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%--<%@include file="../include/header.jsp" %>--%>
 <!-- 현재날짜 -->
 <c:set var="today" value="<%=new java.util.Date()%>"/>
 <!-- 현재년도 -->
 <c:set var="year"><fmt:formatDate value="${today}" pattern="yyyy"/></c:set>
-
 <%--<c:if test="${empty loginUser}">
     <script>
         alert("로그인 후 작성 가능합 니다.");
@@ -15,7 +17,7 @@
 <div class="con wrap reservation_wrap">
     <div class="reservation">
         <div>
-            <h2>사용할 기간을 선택해 주세요</h2>
+            <h3>이용 기간</h3>
             <div class="date_wrap">
                 <c:forEach begin="${year}" end="${year+5}" var="year">
                     <div class="date">
@@ -29,7 +31,7 @@
         </div>
 
         <div>
-            <h2>사용할 밭의 평수를 선택해 주세요</h2>
+            <h3>평 수</h3>
             <div class="field_wrap">
                 <c:forEach begin="1" end="9" varStatus="index">
                     <div class="field">
@@ -41,12 +43,12 @@
                 </c:forEach>
             </div>
             <div class="feet_wrap">
-                <p class="feet"><span></span>평(밭 하나당 3평)</p>
+                <p class="feet"><span></span>평<b>(밭 하나당 3평)</b></p>
             </div>
         </div>
 
         <div>
-            <h2>추가 옵션을 선택해주세요</h2>
+            <h3>추가 옵션</h3>
             <div class="option">
                 <div class="checkbox_wrap">
                     <label for="op1">
@@ -88,131 +90,131 @@
         </div>
 
         <div>
-            <h2>예약정보</h2>
+            <h3>예약정보</h3>
             <div class="info_wrap">
                 <ul>
                     <li>
-                        <h3>농장이름</h3>
-                        <p>${farm.wfSubject}</p>
+                        <h4>농장이름</h4>
+                        <p>${listDetail.wfSubject}</p>
                     </li>
                     <li>
-                        <h3>분양 기간</h3>
+                        <h4>분양 기간</h4>
                         <p class="rs_year"></p>
                     </li>
                     <li>
-                        <h3>분양할 평수</h3>
+                        <h4>분양할 평수</h4>
                         <p class="rs_feet"></p>
                     </li>
                     <li>
-                        <h3>추가 옵션</h3>
+                        <h4>추가 옵션</h4>
                         <p class="rs_option"></p>
                     </li>
                     <li>
-                        <h3>금액</h3>
+                        <h4>금액</h4>
                         <p class="rs_total_price"></p>
                     </li>
                 </ul>
             </div>
         </div>
+        <button type="button" class="booking_btn">등록</button>
     </div>
-    <button type="button" id="rv_btn">등록</button>
 </div>
 
-<%@include file="../include/footer.jsp" %>
+<%--<%@include file="../include/footer.jsp" %>--%>
 <script>
-    $(document).ready(function () {
-        let price = "${farm.wfPrice}";
-        let option_price = "${farm.wfOptionPrice}";
-        //console.log(option_price);
-        let isChecked = $("input[name='feet']");
-        let src;
-        isChecked.change(function () {
-            if ($(this).is(':checked')) {
-                src = "../img/field_on.png";
-            } else {
-                src = "../img/field.png";
-            }
-            $(this).siblings("label").find("img").attr('src', src);
-        });
+    <%--$(document).ready(function () {--%>
+    <%--    let price = "${farm.wfPrice}";--%>
+    <%--    let option_price = "${farm.wfOptionPrice}";--%>
+    <%--    //console.log(option_price);--%>
+    <%--    let isChecked = $("input[name='feet']");--%>
+    <%--    let src;--%>
+    <%--    isChecked.change(function () {--%>
+    <%--        if ($(this).is(':checked')) {--%>
+    <%--            src = "../img/field_on.png";--%>
+    <%--        } else {--%>
+    <%--            src = "../img/field.png";--%>
+    <%--        }--%>
+    <%--        $(this).siblings("label").find("img").attr('src', src);--%>
+    <%--    });--%>
 
-        let year_leng = 0;
-        let option_leng = 0;
+    <%--    let year_leng = 0;--%>
+    <%--    let option_leng = 0;--%>
 
-        $("input[type='checkbox']").change(function () {
-            let name = $(this).attr("name");
+    <%--    $("input[type='checkbox']").change(function () {--%>
+    <%--        let name = $(this).attr("name");--%>
 
-            let count = $("input[name='feet']:checked").length * 3;
-            if (name === "option") {
-                let content = $("input[name='option']:checked");
-                option_leng = $("input[name='option']:checked").length;
-                let value = content.siblings().children('.txt').text();
-                $(".rs_option").text(value);
-            } else {
-                year_leng = $("input[name='year']:checked").length;
-                $(".rs_year").text(year_leng);
-                $(".rs_feet").text(count);
-                $('.feet > span').html(count);
-            }
-            console.log((year_leng * count / 3 * price) + "/" + (option_leng * option_price));
-            $(".rs_total_price").text(parseInt((year_leng * count / 3 * price) + (option_leng * option_price)));
-        });
+    <%--        let count = $("input[name='feet']:checked").length * 3;--%>
+    <%--        if (name === "option") {--%>
+    <%--            let content = $("input[name='option']:checked");--%>
+    <%--            option_leng = $("input[name='option']:checked").length;--%>
+    <%--            let value = content.siblings().children('.txt').text();--%>
+    <%--            $(".rs_option").text(value);--%>
+    <%--        } else {--%>
+    <%--            year_leng = $("input[name='year']:checked").length;--%>
+    <%--            $(".rs_year").text(year_leng);--%>
+    <%--            $(".rs_feet").text(count);--%>
+    <%--            $('.feet > span').html(count);--%>
+    <%--        }--%>
+    <%--        console.log((year_leng * count / 3 * price) + "/" + (option_leng * option_price));--%>
+    <%--        $(".rs_total_price").text(parseInt((year_leng * count / 3 * price) + (option_leng * option_price)));--%>
+    <%--    });--%>
 
-    });
+    <%--});--%>
 
-    $("#rv_btn").click(function(e){
-        //e.preventDefault();
-        function getOptionValue(selector) {
-            return $(selector).is(":checked") ? "Y" : "N";
-        }
-        let rvOptions = [];
-        for (let i = 1; i <= 4; i++) {
-            rvOptions.push(getOptionValue(`#op${i}`));
-        }
-        //console.log(validate());
-        if(validate()) {
-            $.ajax({
-                type: 'POST',
-                url: "/reservationSave",
-                data: {
-                    "rvMemIdx" : ${loginUser.memIdx},
-                    "rvFarmIdx" : ${param.id},
-                    "rvUseDate" : $(".rs_year").text(),
-                    "status" : "Y",
-                    "rvPrice" :  $(".rs_total_price").text(),
-                    "rvFeet" : $(".rs_feet").text(),
-                    "rvOptionSeeding": rvOptions[0],
-                    "rvOptionPlow": rvOptions[1],
-                    "rvOptionWatering": rvOptions[2],
-                    "rvOptionCompost": rvOptions[3]
-                },
-                success: function (){
-                    console.log("성공");
-                    window.location.href = "/list";
-                },
-                error: function(){
-                    console.log("실패");
-                }
-            })
-        }
+    <%--$("#rv_btn").click(function(e){--%>
+    <%--    //e.preventDefault();--%>
+    <%--    function getOptionValue(selector) {--%>
+    <%--        return $(selector).is(":checked") ? "Y" : "N";--%>
+    <%--    }--%>
+    <%--    let rvOptions = [];--%>
+    <%--    for (let i = 1; i <= 4; i++) {--%>
+    <%--        rvOptions.push(getOptionValue(`#op${i}`));--%>
+    <%--    }--%>
+    <%--    //console.log(validate());--%>
+    <%--    if(validate()) {--%>
+    <%--        $.ajax({--%>
+    <%--            type: 'POST',--%>
+    <%--            url: "/reservationSave",--%>
+    <%--            data: {--%>
+    <%--                "rvMemIdx" : ${loginUser.memIdx},--%>
+    <%--                "rvFarmIdx" : ${param.id},--%>
+    <%--                "rvUseDate" : $(".rs_year").text(),--%>
+    <%--                "status" : "Y",--%>
+    <%--                "rvPrice" :  $(".rs_total_price").text(),--%>
+    <%--                "rvFeet" : $(".rs_feet").text(),--%>
+    <%--                "rvOptionSeeding": rvOptions[0],--%>
+    <%--                "rvOptionPlow": rvOptions[1],--%>
+    <%--                "rvOptionWatering": rvOptions[2],--%>
+    <%--                "rvOptionCompost": rvOptions[3]--%>
+    <%--            },--%>
+    <%--            success: function (){--%>
+    <%--                console.log("성공");--%>
+    <%--                window.location.href = "/list";--%>
+    <%--            },--%>
+    <%--            error: function(){--%>
+    <%--                console.log("실패");--%>
+    <%--            }--%>
+    <%--        })--%>
+    <%--    }--%>
 
-    });
+    <%--});--%>
 
-    function validate(){
-        let year = $(".rs_year").text();
-        let feet = $(".rs_feet").text();
+    <%--function validate(){--%>
+    <%--    let year = $(".rs_year").text();--%>
+    <%--    let feet = $(".rs_feet").text();--%>
 
-        if(year < 1){
-            alert("기한을 선택해주세요");
-            $("input[name='year']").focus();
-            return false;
-        }else if(feet < 1){
-            alert("평 수를 선택해주세요");
-            $("input[name='feet']").focus();
-            return false;
-        }else{
-            return true;
-        }
-    }
+    <%--    if(year < 1){--%>
+    <%--        alert("기한을 선택해주세요");--%>
+    <%--        $("input[name='year']").focus();--%>
+    <%--        return false;--%>
+    <%--    }else if(feet < 1){--%>
+    <%--        alert("평 수를 선택해주세요");--%>
+    <%--        $("input[name='feet']").focus();--%>
+    <%--        return false;--%>
+    <%--    }else{--%>
+    <%--        return true;--%>
+    <%--    }--%>
+    <%--}--%>
 
 
     // 날짜 생성
