@@ -7,10 +7,10 @@
         location.href="/login";
     </script>
 </c:if>
-<div class="con wrap m-top">
-    <h3><p>${loginUser.memid}님 회원정보</p></h3>
-    <input type="hidden" name="memid" value="${loginUser.memid}">
+<div class="con wrap">
     <div class="my-full-wrap">
+        <h3><p>${loginUser.memid}님 회원정보</p></h3>
+        <input type="hidden" name="memid" value="${loginUser.memid}">
         <div class="my-tap-wrap">
             <div class="my-tap">
                 <ul>
@@ -31,12 +31,12 @@
                     </li>
                     <li>
                         <a href="#">
-                            <input class="btn-join" type="button" value="예약내역이여기요?">
+                            <input class="btn-join" type="button" value="예약내역">
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <input class="btn-join" type="button" value="리뷰도어쩌구?">
+                            <input class="btn-join" type="button" value="리뷰내역">
                         </a>
                     </li>
                 </ul>
@@ -59,29 +59,32 @@
                         <input type="text" name="email" id="email" class="form-control" value="${loginUser.email}" readonly>
                     </li>
                 </ul>
-                <div class="my-resv-wrap m-top">
-                    예약내역
+                <div class="my-resv-wrap">
+                    <h4>예약내역</h4>
                     <table>
                         <thead>
                         <tr>
                             <th>예약상태</th>
                             <th>No</th>
-                            <th>농장</th>
+                            <th>예약한 농장</th>
                             <th>예약기간</th>
                             <th>예약날짜</th>
+                            <th>예약상세</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:choose>
                             <c:when test="${reservations ne null}">
                                 <c:forEach var="resv" items="${reservations}" varStatus="i">
+
                                     <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                                     <tr>
                                         <td>${resv.status}</td>
                                         <td>${i.count}</td>
-                                        <td>${resv.rvFarmIdx}</td>
-                                        <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">${resv.rvUseDate}</a></td>
-                                        <td><fmt:formatDate pattern="yyyy-MM-dd'T'HH:mm" value="${parsedDateTime}" /></td>
+                                        <td>(${resv.rvFarmIdx})${wfSubject.get(i.index)}</td>
+                                        <td>${resv.rvUseDate}년</td>
+                                        <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                        <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
@@ -133,6 +136,7 @@
                                 <th>No</th>
                                 <th>제목</th>
                                 <th>날짜</th>
+                                <th>스토리이미지</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -144,6 +148,7 @@
                                     <td>${i.count}</td>
                                     <td><a href="storyDetail?id=${story.storyIdx}" class="ellipsis">${story.storySubject}</a></td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                    <td><img src="${story.storyMemImg}"></td>
                                 </tr>
                             </c:forEach>
                             </c:when>

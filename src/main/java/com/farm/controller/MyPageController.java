@@ -2,7 +2,6 @@ package com.farm.controller;
 
 
 import com.farm.domain.Member;
-import com.farm.domain.Story;
 import com.farm.service.MemberService;
 import com.farm.service.StoryService;
 import jakarta.servlet.http.HttpSession;
@@ -15,10 +14,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
-//@SessionAttributes({"loginUser"})
+@SessionAttributes({"loginUser"})
 public class MyPageController {
     @Autowired
     MemberService memberService;
@@ -31,6 +29,7 @@ public class MyPageController {
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
+        System.out.println("로그인유저:"+session.getAttribute("loginUser"));
         Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
 
         /*List<Board> recentBoards = boardService.getRecentBoards();
@@ -58,6 +57,7 @@ public class MyPageController {
             memberService.getMypgList(model,idx);
         }catch (Exception e) {
             System.out.println("idx값이 없습니다.");
+
         }
 
         return "myPage";
@@ -77,19 +77,11 @@ public class MyPageController {
 
         if(loginUser != null && pEncoder.matches(checkPass,loginUser.getPass())){
             session.setAttribute("loginUser",loginUser);
-
             return true;
-
         }else{
             return false;
         }
     }
-
-    /*
-     * 세션정보 업데이트 안됨 -> 모델로 해결
-     * 정보변경할 때 비밀번호 확인 js추가 해야함
-     * 회원정보 수정 이름 외에 다른것도 다 되게 바꿔야함
-     */
 
     @PostMapping("/updateMyInfoForm")
     public String updateMyInfoForm(@ModelAttribute("inputMyInfo") Member iMyInfo,
@@ -167,24 +159,23 @@ public class MyPageController {
         if(!status.isComplete() && pEncoder.matches(cancelPass,loginUser.getPass())){
             memberService.cancelAccount(loginUser.getMemid());
             status.setComplete();
+            session.invalidate();
 
-            return "redirect:/getOut";
+            return "redirect:/cancelComplete";
 
         }else if(!pEncoder.matches(cancelPass,loginUser.getPass())){
             model.addAttribute("isOutUser",false);
             return "cancelAccount";
 
+        }else{
+            model.addAttribute("isOutFail",false);
+            return "cancelAccount";
         }
-        return "cancelAccount";
     }
 
-    @GetMapping("/getOut")
-    public String getOut(){
-        return "getOut";
-        // getOut 리다이렉트용
+    @GetMapping("/cancelComplete")
+    public String cancelComplete(){
+        return "cancelComplete";
+        // cancelComplete 리다이렉트용
     }
-
-    // 작성한 글 찾기
-    // memid값과 story_mem_id값이 일치하는 경우 story_subject 가져오기
-
 }

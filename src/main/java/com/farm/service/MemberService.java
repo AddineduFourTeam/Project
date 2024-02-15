@@ -1,10 +1,7 @@
 package com.farm.service;
 
 import com.farm.domain.Member;
-import com.farm.repository.MemberRepository;
-import com.farm.repository.ReservationRepository;
-import com.farm.repository.ReviewRepository;
-import com.farm.repository.StoryRepository;
+import com.farm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,6 +29,9 @@ public class MemberService {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    FarmRepository farmRepository;
 
     /*프로필추가설정*/
     @Value("${upload.directory}")
@@ -181,10 +182,16 @@ public class MemberService {
     public void getMypgList(Model model, Long memIdx) {
         model.addAttribute("stories",storyRepository.findTop5ByStoryMemIdxOrderByStoryDateDesc(memIdx));
         model.addAttribute("reservations",reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
-        //리뷰는 아직 만들어진게 없음
         model.addAttribute("reviews",reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
-        System.out.println("reservs = " + reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
-        System.out.println("reviews = " + reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
+
+        /*List<String> wfSubjects = reservationRepository.findFarmWfSubjectByRvMemIdx(memIdx);
+        model.addAttribute("wfSubjects",wfSubjects);*/
+        /*model.addAttribute("farmSubject",reservationRepository.findFarmSubjectsByRvMemIdx(memIdx));*/
+
+        /*model.addAttribute("wfSubject",reservationRepository.findWfSubjectByMemIdx(memIdx));
+        System.out.println("wfSubject = " + reservationRepository.findWfSubjectByMemIdx(memIdx));*/
+        model.addAttribute("wfSubject",reservationRepository.findWfSubjectByMemIdx(memIdx));
+        System.out.println("wfSubject = " + reservationRepository.findWfSubjectByMemIdx(memIdx));
 
     }
 
