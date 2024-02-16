@@ -1,34 +1,21 @@
 package com.farm.controller;
 
-import com.farm.domain.Farm;
 import com.farm.domain.Member;
 import com.farm.domain.Story;
 import com.farm.domain.StoryReply;
-import com.farm.service.BoardService;
+import com.farm.dto.MemInfoDto;
 import com.farm.service.CommonService;
-import com.farm.service.ListService;
 import com.farm.service.StoryService;
-import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.util.List;
+
+
 @Slf4j
 @Controller
 public class StoryController {
@@ -56,7 +43,18 @@ public class StoryController {
     public String storydetail(@RequestParam(value="id") Long id,@RequestParam(value="page", defaultValue="1") int page , Model model) {
         model.addAttribute("story", storyService.storydetail(id).get());
         commonService.replyDetail(id,page,model,StoryReply.class);
+        //commonService.reReplyDetail(id,srDepth,rIdx,page,model,StoryReply.class);
         return "storyDetail";
+    }
+    @PostMapping("/storyReplyList")
+    public List<StoryReply> storyReplyList(@RequestParam("id") Long id, @RequestParam("srIdx") Long srIdx, Model model) {
+        return commonService.storyReplyList(id,srIdx,model);
+    }
+
+    @GetMapping("/storyDelete")
+    public String storyDelete(@RequestParam(value="id") Long id) {
+        storyService.storyDelete(id);
+        return "redirect:/story";
     }
 
     @GetMapping("/storyWrite")
@@ -80,9 +78,37 @@ public class StoryController {
         return "redirect:/story";
     }
 
-    /*@PostMapping("/storyReplySave")
-    public String storyReplySave(StoryReply storyReply,@RequestParam("id") Long id) {
+    @PostMapping("/storyReplySave")
+    @ResponseBody
+    public MemInfoDto storyReplySave(StoryReply storyReply,@RequestParam("id") Long id) {
+        System.out.println("storyReply = " + storyReply);
         storyReply.setSrStoryIdx(id);
-        commonService.replySave(storyReply);
-    }*/
+        MemInfoDto sr = (MemInfoDto)commonService.replySave(storyReply);
+        System.out.println("sr = " + sr);
+        //System.out.println("storyReply = " + storyReply);
+        return sr;
+    }
+
+    @PostMapping("/likeUp")
+    @ResponseBody
+    public int likeUp(@RequestParam("id") Long id) {
+        return commonService.likeUp(id);
+    }
+    @PostMapping("/likeDown")
+    @ResponseBody
+    public int likeDown(@RequestParam("id") Long id) {
+        return commonService.likeDown(id);
+    }
+
+    @PostMapping("/replyUpdate")
+    @ResponseBody
+    public String replyUpdate(@RequestParam("id") Long id, @RequestParam("txt") String txt) {
+        return commonService.replyUpdate(id,txt);
+    }
+    @PostMapping("/replyDelete")
+    @ResponseBody
+    public String replyDelete(@RequestParam("id") Long id) {
+        commonService.replyDelete(id);
+        return "storyDetail";
+    }
 }

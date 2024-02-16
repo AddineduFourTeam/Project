@@ -62,6 +62,10 @@ public class StoryService {
         return member.getMemid();
     }
 
+    public void storyDelete(Long id) {
+        storyRepository.deleteById(id);
+    }
+
 
 
 
