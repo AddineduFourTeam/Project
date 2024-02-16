@@ -2377,7 +2377,11 @@ input:-webkit-autofill:active {
     background: var(--mainColor);
 }
 
-/* MyPage */
+/************************************** MyPage ***********************************/
+
+/* mypg tab*/
+
+
 .my-full-wrap{
     margin-top:15px;
     width:100%;
@@ -2390,11 +2394,52 @@ input:-webkit-autofill:active {
 }
 .my-tap{
     width:25%;
-    padding:10px;
+    padding:10px 50px 0 0;
+    position: relative;
 }
-
+.my-tap ul {
+    position:sticky;
+    top: 180px;
+    left: 0;
+}
+.my-tap ul li {
+    border-bottom:1px solid var(--border);
+}
+.my-tap ul li a {
+    display: block;
+    padding:  20px 20px 20px 0;
+    font-size:16px;
+    position: relative;
+}
+.my-tap ul li.on a , .my-tap ul li:hover a {
+    color:var(--mainColor);
+    font-weight:bold;
+    position: relative;
+}
+.my-tap ul li a:after {
+    content:"\e93e";
+    font-family: xeicon;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 55%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    opacity:0;
+    transition: 0.3s ease-in-out;
+}
+.my-tap ul li:hover a:after {
+    opacity: 1;
+    right:0;
+    color: var(--mainColor);
+}
 .my-wrap{
     width:75%;
+}
+.my-wrap > div {
+    margin-top: 150px;
+    min-height: auto;
 }
 .my-info-wrap{
     list-style-type: none;
@@ -2405,18 +2450,42 @@ input:-webkit-autofill:active {
 
 .my-info-wrap li{
     padding:0 10px;
+    margin-top: 0 !important;
 }
 
 .my-img{
-    width:50%;
+    width:40%;
 }
 
-.my-info{
-    margin-top:20px;
-    width:45%;
+.my-info-wrap li.my-info{
+    width:60%;
+    border:1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+.my-info > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.my-info > div + div {
+    margin-top: 30px;
+}
+.my-info > div b {
+    display: block;
+    margin-bottom: 5px;
+}
+.my-info a{
+    border:1px solid var(--border);
+    border-radius: 5px;
+    padding:5px 20px;
+    display: inline-block;
 }
 
-.my-info input{
+/*.my-info input{
     width:100%;
     height:35px;
     background: transparent;
@@ -2427,15 +2496,31 @@ input:-webkit-autofill:active {
     color: #333;
     margin-bottom: 10px;
     font-size:16px
+}*/
+.mypg_tt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
-
+.mypg_tt h3 {
+    text-align: left;
+    font-size:18px;
+}
+.mypg_tt a {
+    color: #999;
+    font-size:12px;
+    vertical-align: middle;;
+}
+.mypg_tt a i {
+    vertical-align: middle;
+}
 .my-resv-wrap{
     text-align: center;
     margin-top:15px;
     width:100%;
-
 }
-
+/*
 .my-resv-wrap h4{
     margin:10px;
 }
@@ -2446,14 +2531,13 @@ input:-webkit-autofill:active {
 }
 .my-resv-wrap table td{
     padding-top:5px;
-}
+}*/
 
 
 .my-review-wrap{
     text-align: center;
     margin-top:15px;
     width:100%;
-    background: red;
 }
 
 .my-story-wrap{
@@ -2461,6 +2545,8 @@ input:-webkit-autofill:active {
     margin-top:15px;
     width:100%;
 }
+
+
 .story_wrap {
     display: flex;
     margin-bottom: 100px;
@@ -2470,11 +2556,11 @@ input:-webkit-autofill:active {
     width: 33.333%;
     padding: 5px;
 }
-.my-story-wrap a div {
+.my-story-wrap .story_items a div.story_img {
     width: 100%;
     height: 100%;
 }
-.my-story-wrap a img {
+.my-story-wrap .story_items a img {
     width: 100%;
     height: 100%;
     object-fit: cover;

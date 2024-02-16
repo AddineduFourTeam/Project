@@ -178,23 +178,23 @@
                 data: {"id":${param.id}, "srMemIdx":${user_idx}, "srDepth": 1, "srContent": text},
                 type: "post",
                 success: function (data) {
-                    //console.log("success"+data);
+                    console.log(data);
                     let content = `<li>
                         <div class="sr_depth1">
                         <div class="sr_depth_flex">
-                        <div class="sr_img"><img src="" alt="" onerror="this.src='img/profileImg.png'"></div>
+                        <div class="sr_img"><img src="${"${data.memImg}"}" alt="" onerror="this.src='img/profileImg.png'"></div>
                         <div class="sr_reply_right">
-                        <div class="sr_name"><a href="/story?name=1"></a></div>
+                        <div class="sr_name">@${"${data.name}"}</div>
                         <div class="sr_txt">
-                        ${"${data.srContent}"}
+                        ${"${data.storyReply.srContent}"}
                         </div>
                         <div class="sr_btm">
                         <div class="sr_txt_btn">
                         <a href="javascript:void(0);"><i class="fa-regular fa-thumbs-up"></i><span></span></a>
-                        <a href="javascript:void(0)" onclick="reply_update(${"${data.srIdx}"})">수정</a>
-                        <a href="javascript:void(0)" onclick="reply_delete(${"${data.srIdx}"});">삭제</a>
+                        <a href="javascript:void(0)" onclick="reply_update(${"${data.storyReply.srIdx}"})">수정</a>
+                        <a href="javascript:void(0)" onclick="reply_delete(${"${data.storyReply.srIdx}"});">삭제</a>
                         </div>
-                        <span class="sr_date">${"${data.srDate}"}</span>
+                        <span class="sr_date">${"${data.storyReply.srDate}"}</span>
                         </div>
                         </div>
                         </div>

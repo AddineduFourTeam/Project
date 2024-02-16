@@ -21,6 +21,8 @@ public class CommonService {
     @Autowired
     BoardRepository boardRepository;
     @Autowired
+    ReservationRepository reservationRepository;
+    @Autowired
     StoryRepository storyRepository;
     @Autowired
     MemberRepository memberRepository;
@@ -30,8 +32,7 @@ public class CommonService {
 
     //list 뿌리기
     public void listAll(int page , Model model , Class<?> objClass) {
-        int nPage = page - 1; // 시작페이지
-        Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
+        Pageable pageable = getPageable(page,objClass);
         Page<?> result = null;
 
         if(objClass.equals(Farm.class)) {
@@ -52,10 +53,12 @@ public class CommonService {
     // 검색한 값 리스트 출력
     public void searchList(int page, String type, String search, Model model, Class<?> objClass) {
         //Sort sort = Sort.by(Sort.Order.desc("name"));
-
-        int nPage = page - 1; // 시작페이지
-        Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
+        Pageable pageable = getPageable(page,objClass);
         Page<?> result = null;
+
+        /*int nPage = page - 1; // 시작페이지
+        Pageable pageable = PageRequest.ofSize(10).withPage(nPage);
+        Page<?> result = null;*/
 
 
         //농장 리스트 검색
@@ -92,6 +95,23 @@ public class CommonService {
 
 
         listPage(model , result, objClass);
+    }
+
+    private Pageable getPageable(int page,Class<?> objClass) {
+        int nPage = page - 1; // 시작페이지
+        Sort sort = null;
+        if(objClass.equals(StoryReply.class)) {
+            sort = Sort.by(
+                    Sort.Order.desc("srLike"),
+                    Sort.Order.desc("srDate"),
+                    Sort.Order.desc("srIdx")
+            );
+        }else if(objClass.equals(Story.class)) {
+            sort = Sort.by( Sort.Order.desc("storyDate"));
+        }else if(objClass.equals(Board.class)) {
+            sort = Sort.by( Sort.Order.desc("boardDate"));
+        }
+        return PageRequest.ofSize(10).withPage(nPage).withSort(sort);
     }
 
 
@@ -150,18 +170,7 @@ public class CommonService {
 
     //댓글,후기 리스트
     public void replyDetail(Long id,int page , Model model,Class<?> objClass) {
-        int nPage = page - 1; // 시작페이지
-        Sort sort = null;
-        if(objClass.equals(StoryReply.class)) {
-            sort = Sort.by(
-                    Sort.Order.desc("srLike"),
-                    Sort.Order.desc("srDate"),
-                    Sort.Order.desc("srIdx")
-            );
-        }else {
-            sort = Sort.by(Sort.Order.desc("srLike"));
-        }
-        Pageable pageable = PageRequest.ofSize(10).withPage(nPage).withSort(sort);
+        Pageable pageable = getPageable(page,objClass);
         Page<?> result = null;
         if(objClass.equals(StoryReply.class)) {
            result = storyReplyRepository.findBySrStoryIdx(id, pageable);
@@ -223,6 +232,19 @@ public class CommonService {
 
     public void replyDelete(Long id) {
         storyReplyRepository.deleteById(id);
+    }
+
+    public void myList(Long idx,int page, Class<?> objClass, Model model) {
+        Pageable pageable = getPageable(page,objClass);
+        Page<?> result = null;
+
+        if(objClass.equals(Story.class)) {
+            result = storyRepository.findByStoryMemIdx(idx,pageable);
+            //model.addAttribute("myStory", myStory);
+        }else if(objClass.equals(Reservation.class)) {
+            result = reservationRepository.findByRvMemIdxOrderByRvDateDesc(idx,pageable);
+        }
+        listPage(model , result, objClass);
     }
 }
 

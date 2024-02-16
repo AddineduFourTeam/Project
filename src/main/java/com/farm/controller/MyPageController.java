@@ -2,6 +2,8 @@ package com.farm.controller;
 
 
 import com.farm.domain.Member;
+import com.farm.domain.Story;
+import com.farm.service.CommonService;
 import com.farm.service.MemberService;
 import com.farm.service.StoryService;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.CommonDataSource;
 import java.io.IOException;
 
 @Controller
@@ -23,6 +26,9 @@ public class MyPageController {
 
     @Autowired
     StoryService storyService;
+
+    @Autowired
+    CommonService commonService;
 
     @Autowired
     PasswordEncoder pEncoder;
@@ -178,4 +184,12 @@ public class MyPageController {
         return "cancelComplete";
         // cancelComplete 리다이렉트용
     }
+
+    @GetMapping("/mypgStory")
+    public String mypgStory(HttpSession session, Model model, @RequestParam(value="page" , defaultValue = "1") int page){
+        Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
+        commonService.myList(idx,page, Story.class,model);
+        return "mypgStory";
+    }
+
 }
