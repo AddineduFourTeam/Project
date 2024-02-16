@@ -1856,9 +1856,7 @@ input:-webkit-autofill:active {
     color: #333;
     margin-bottom: 30px;
 }
-h4{
-    text-align:center;
-}
+
 .login-form .login-input-box{
     width:100%;
     height:50px;
@@ -1928,6 +1926,7 @@ h4{
 .join-form li{list-style-type: none;}
 .join-form{
     width:300px;
+    margin-top:15px;
 }
 .join-form h3{
     font-size:25px;
@@ -2088,18 +2087,97 @@ h4{
 }
 
 .my-resv-wrap{
+    text-align: center;
+    margin-top:15px;
     width:100%;
     background: skyblue;
 }
 
 .my-review-wrap{
+    text-align: center;
+    margin-top:15px;
     width:100%;
     background: red;
 }
 
 .my-story-wrap{
+    text-align: center;
+    margin-top:15px;
     width:100%;
     background: #01b03f;
+}
+
+/* cancel */
+.cancel-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index: 1;
+}
+
+.cancel-form{
+    margin:30px 0;
+    max-width:400px;
+    width: 100%;
+    padding:50px 30px;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancelAccountForm{
+    margin-top:25px;
+    text-align: center;
+}
+
+.cancelPass{
+    background: transparent;
+    padding-left:15px;
+    width:90%;
+    height:45px;
+    border:2px solid rgba(0,0,0,.7);
+    border-radius:40px;
+}
+
+.cancel-btn-wrap{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top:20px;
+}
+
+.cancel-btn-wrap a{
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:0.9em;
+}
+
+.btn-cancel{
+    background: transparent;
+    font-weight:bold;
+    width:40%;
+    height:45px;
+    border:2px solid rgba(0,0,0,.7);
+    border-radius:40px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover{
+    background: var(--mainColor);
+    color:#fff;
+}
+
+.cancelComplete{
+    margin:50px 0;
+    text-align: center;
 }
 
 
