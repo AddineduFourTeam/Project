@@ -3,8 +3,6 @@
 <%@include file="../include/header.jsp" %>
 <div class="con wrap">
     <%@include file="../include/mypg_menu.jsp" %>
-
-    <div class="my-wrap">
         <div class="update-pass-wrap">
             <div class="update-pass-form">
                 <div class="update-pass-h">
@@ -33,7 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </div>
 </div>
 </div>

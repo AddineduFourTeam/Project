@@ -3,27 +3,27 @@
 <%@include file="../include/header.jsp" %>
 <div class="con wrap">
 <%@include file="../include/mypg_menu.jsp" %>
-
-<div class="my-wrap">
-    <div class="join-form">
-        <form action="myPagePassCheck" method="post" id="myPagePassCheck">
-            <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
-            <div id="cancelFail" style="display: none;">
-                <p class="fail_check">
-                    <b>비밀번호가 일치하지 않습니다</b>
-                </p>
-            </div>
-            <ul>
-                <li class="join-input-box m-top">
-                    <p>비밀번호 입력</p>
-                    <input type="password" name="pass" placeholder="비밀번호를 입력해주세요">
-                </li>
-                <li>
-                    <input id="myPagePassCheckBtn" class="btn-login m-top" type="submit" value="회원정보 변경하기">
-                </li>
-            </ul>
-            <input type="hidden" name="memid">
-        </form>
+    <div class="uinfo-wrap">
+        <div class="uinfo-form ">
+            <form action="myPagePassCheck" method="post" id="myPagePassCheck">
+                <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
+                <div id="cancelFail" style="display: none;">
+                    <p class="fail_check">
+                        <b>비밀번호가 일치하지 않습니다</b>
+                    </p>
+                </div>
+                <ul>
+                    <li class="uinfo-input-box">
+                        <p>비밀번호 입력</p>
+                        <input type="password" name="pass" placeholder="비밀번호를 입력해주세요">
+                    </li>
+                    <li>
+                        <input id="myPagePassCheckBtn" class="btn-login" type="submit" value="회원정보 변경하기">
+                    </li>
+                </ul>
+                <input type="hidden" name="memid">
+            </form>
+        </div>
         <div id="updateMyInfo-wrap" style="display:none;">
             <form action="updateMyInfoForm" onsubmit="validateForm()" method="post" id="updateMyInfo" modelAttribute="inputMyInfo" enctype="multipart/form-data">
                 <ul style="list-style-type: none">
@@ -83,7 +83,6 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 </div>
 </div>
