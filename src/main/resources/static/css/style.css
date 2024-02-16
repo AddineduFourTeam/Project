@@ -2084,8 +2084,21 @@ input:-webkit-autofill:active {
     text-align: center;
     margin-top:15px;
     width:100%;
-    background: skyblue;
+
 }
+
+.my-resv-wrap h4{
+    margin:10px;
+}
+
+.my-resv-wrap table th{
+    border-bottom:1.5px solid #000;
+    padding-bottom: 5px;
+}
+.my-resv-wrap table td{
+    padding-top:5px;
+}
+
 
 .my-review-wrap{
     text-align: center;
@@ -2098,8 +2111,30 @@ input:-webkit-autofill:active {
     text-align: center;
     margin-top:15px;
     width:100%;
-    background: #01b03f;
 }
+.story_wrap {
+    display: flex;
+    margin-bottom: 100px;
+}
+.my-story-wrap .story_items{
+    display: block;
+    width: 33.333%;
+    padding: 5px;
+}
+.my-story-wrap a div {
+    width: 100%;
+    height: 100%;
+}
+.my-story-wrap a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.my-story_subject{
+    margin-top: 10px;
+}
+
 
 /* cancel */
 .cancel-wrap {

@@ -180,7 +180,7 @@ public class MemberService {
     }
 
     public void getMypgList(Model model, Long memIdx) {
-        model.addAttribute("stories",storyRepository.findTop5ByStoryMemIdxOrderByStoryDateDesc(memIdx));
+        model.addAttribute("stories",storyRepository.findTop3ByStoryMemIdxOrderByStoryDateDesc(memIdx));
         model.addAttribute("reservations",reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
         model.addAttribute("reviews",reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
 
