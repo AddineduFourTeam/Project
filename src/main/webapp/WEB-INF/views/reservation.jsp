@@ -119,8 +119,6 @@
         <button type="button" class="booking_btn">등록</button>
     </div>
 </div>
-
-<%--<%@include file="../include/footer.jsp" %>--%>
 <script>
     <%--$(document).ready(function () {--%>
     <%--    let price = "${farm.wfPrice}";--%>

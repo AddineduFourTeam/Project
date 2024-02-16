@@ -2492,8 +2492,10 @@ input:-webkit-autofill:active {
     background: #01b03f;
 }
 
-/* reservation_info */
+/* mypage_reservation */
 .info_wrap{
+    padding: 80px 0 0;
+    margin: 0 auto;
     width: 886.5px;
 }
 .rv_info{
@@ -2507,10 +2509,16 @@ input:-webkit-autofill:active {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 24px;
     background-color: #01b03f;
 }
 .rv_info .info_list .data{
     display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.rv_info .info_list .data p{
+    font-size: 1.5rem;
 }
 .rv_info .info_con{
     background-color: #FF9000;
