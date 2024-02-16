@@ -1174,6 +1174,7 @@ footer p {
     margin-right: 10px;
     font-size:12px;
     color: #999;
+    cursor:pointer
 }
 .sr_date {
     font-size:13px
@@ -1227,6 +1228,11 @@ footer p {
     right: 10px;
     left: auto;
 }
+.like {
+    font-size:16px;
+}
+
+
 /*emoji*/
 
 .emoji-picker {
@@ -2249,6 +2255,7 @@ input:-webkit-autofill:active {
     color: #333;
     margin-bottom: 30px;
 }
+
 .login-form .login-input-box{
     width:100%;
     height:50px;
@@ -2318,6 +2325,7 @@ input:-webkit-autofill:active {
 .join-form li{list-style-type: none;}
 .join-form{
     width:300px;
+    margin-top:15px;
 }
 .join-form h3{
     font-size:25px;
@@ -2425,7 +2433,11 @@ input:-webkit-autofill:active {
     background: var(--mainColor);
 }
 
-/* MyPage */
+/************************************** MyPage ***********************************/
+
+/* mypg tab*/
+
+
 .my-full-wrap{
     margin-top:15px;
     width:100%;
@@ -2434,15 +2446,56 @@ input:-webkit-autofill:active {
 }
 .my-tap-wrap{
     display: flex;
-    justify-content: space-between;
+
 }
 .my-tap{
     width:25%;
-    padding:10px;
+    padding:10px 50px 0 0;
+    position: relative;
 }
-
+.my-tap ul {
+    position:sticky;
+    top: 180px;
+    left: 0;
+}
+.my-tap ul li {
+    border-bottom:1px solid var(--border);
+}
+.my-tap ul li a {
+    display: block;
+    padding:  20px 20px 20px 0;
+    font-size:16px;
+    position: relative;
+}
+.my-tap ul li.on a , .my-tap ul li:hover a {
+    color:var(--mainColor);
+    font-weight:bold;
+    position: relative;
+}
+.my-tap ul li a:after {
+    content:"\e93e";
+    font-family: xeicon;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 55%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    opacity:0;
+    transition: 0.3s ease-in-out;
+}
+.my-tap ul li:hover a:after {
+    opacity: 1;
+    right:0;
+    color: var(--mainColor);
+}
 .my-wrap{
     width:75%;
+}
+.my-wrap > div {
+    margin-top: 150px;
+    min-height: auto;
 }
 .my-info-wrap{
     list-style-type: none;
@@ -2453,18 +2506,42 @@ input:-webkit-autofill:active {
 
 .my-info-wrap li{
     padding:0 10px;
+    margin-top: 0 !important;
 }
 
 .my-img{
-    width:50%;
+    width:40%;
 }
 
-.my-info{
-    margin-top:20px;
-    width:45%;
+.my-info-wrap li.my-info{
+    width:60%;
+    border:1px solid var(--border);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+.my-info > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.my-info > div + div {
+    margin-top: 20px;
+}
+.my-info > div b {
+    display: block;
+    margin-bottom: 5px;
+}
+.my-info a{
+    border:1px solid var(--border);
+    border-radius: 5px;
+    padding:5px 20px;
+    display: inline-block;
 }
 
-.my-info input{
+/*.my-info input{
     width:100%;
     height:35px;
     background: transparent;
@@ -2475,21 +2552,191 @@ input:-webkit-autofill:active {
     color: #333;
     margin-bottom: 10px;
     font-size:16px
+}*/
+.mypg_tt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
+.mypg_tt h3 {
+    text-align: left;
+    font-size:18px;
+}
+.mypg_tt a {
+    color: #999;
+    font-size:12px;
+    vertical-align: middle;;
+}
+.mypg_tt a i {
+    vertical-align: middle;
+}
+
+.update-pass-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index: 1;
+}
+.update-pass-form{
+    max-width:400px;
+    width: 100%;
+}
+.update-pass-form li{list-style-type: none;}
+
+.update-pass-h{
+    margin-bottom: 30px;
+}
+
+.upass-input-box{
+    margin:15px 0;
+}
+
+.upass-input-box div{
+    font-size:15px;
+}
+.upass-input-box input{
+    width:100%;
+    background: transparent;
+    /*border:none;*/
+    outline: none;
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+    padding:15px;
+}
+
 
 .my-resv-wrap{
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
-    background: skyblue;
+}
+/*
+.my-resv-wrap h4{
+    margin:10px;
 }
 
+.my-resv-wrap table th{
+    border-bottom:1.5px solid #000;
+    padding-bottom: 5px;
+}
+.my-resv-wrap table td{
+    padding-top:5px;
+}*/
+
+
 .my-review-wrap{
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
-    background: red;
 }
 
 .my-story-wrap{
+    text-align: center;
+    margin-top:20px;
     width:100%;
-    background: #01b03f;
+}
+
+
+.story_wrap {
+    display: flex;
+    margin-bottom: 100px;
+}
+.my-story-wrap .story_items{
+    display: block;
+    width: 33.333%;
+    padding: 5px;
+}
+.my-story-wrap .story_items a div.story_img {
+    width: 100%;
+    height: 100%;
+}
+.my-story-wrap .story_items a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.my-story_subject{
+    margin-top: 10px;
+}
+
+
+/* cancel */
+.cancel-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index: 1;
+    width:75%;
+}
+
+.cancel-form{
+    margin:30px 0;
+    max-width:400px;
+    width: 100%;
+    padding:50px 30px;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancelAccountForm{
+    margin-top:25px;
+    text-align: center;
+}
+
+.cancelPass{
+    background: transparent;
+    padding-left:15px;
+    width:90%;
+    height:45px;
+    border:2px solid rgba(0,0,0,.7);
+    border-radius:40px;
+}
+
+.cancel-btn-wrap{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top:20px;
+}
+
+.cancel-btn-wrap a{
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:0.9em;
+}
+
+.btn-cancel{
+    background: transparent;
+    font-weight:bold;
+    width:40%;
+    height:45px;
+    border:2px solid rgba(0,0,0,.7);
+    border-radius:40px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover{
+    background: var(--mainColor);
+    color:#fff;
+}
+
+.cancelComplete{
+    margin:50px 0;
+    text-align: center;
 }
 
 /* mypageReservation */

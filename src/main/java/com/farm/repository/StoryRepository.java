@@ -24,5 +24,7 @@ public interface StoryRepository extends JpaRepository<Story, Long> {
     //Page<Story> findBySrStoryIdx(Long sno, Pageable pageable);
 
     //@Query("select s from Story s where s.storyMemIdx = :memIdx order by s.storyDate desc limit 5")
-    List<Story> findTop5ByStoryMemIdxOrderByStoryDateDesc(Long memIdx);
+    List<Story> findTop3ByStoryMemIdxOrderByStoryDateDesc(Long memIdx);
+
+    Page<Story> findByStoryMemIdx(Long idx, Pageable pageable);
 }

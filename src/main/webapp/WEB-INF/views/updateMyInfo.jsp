@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="../include/header.jsp" %>
+<div class="con wrap">
+<%@include file="../include/mypg_menu.jsp" %>
 
-<div class="join-wrap">
+<div class="my-wrap">
     <div class="join-form">
         <form action="myPagePassCheck" method="post" id="myPagePassCheck">
             <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
@@ -82,6 +84,10 @@
         </div>
     </div>
 </div>
+</div>
+</div>
+</div>
+
 <script>
     $(()=>{
         var update = <%= request.getAttribute("updateInfo") %>;

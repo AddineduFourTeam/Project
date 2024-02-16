@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
-<%--<c:if test="${empty loginUser}">
+<c:if test="${empty loginUser}">
     <script>
         alert("로그인 후 작성 가능합 니다.");
         location.href="/login";
     </script>
-</c:if>--%>
+</c:if>
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
     <div class="story_con">
@@ -87,7 +87,7 @@
             success: function (data) {
                 console.log("success");
                 let content ="";
-                console.log(data);
+                //console.log(data);
                 if(data === null || data.length === 0) {
                     content = "<li class='nofarmlist'>해당 지역에 농장이 없습니다.</li>"
                 }else {
