@@ -1461,7 +1461,7 @@ body::-webkit-scrollbar-track {
     justify-content: center;
     align-items: center;
 }
-.filter ul li label{
+.filter ul li a{
     padding: 15px 25px;
     text-align: center;
     display: inline-block;
@@ -1473,20 +1473,20 @@ body::-webkit-scrollbar-track {
     background-color: rgba(255,255,255,0.5);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
 }
-.filter ul li input{
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-.filter ul li input:checked + label {
+/*.filter ul li input{*/
+/*    clip: rect(0 0 0 0);*/
+/*    clip-path: inset(100%);*/
+/*    height: 1px;*/
+/*    overflow: hidden;*/
+/*    position: absolute;*/
+/*    white-space: nowrap;*/
+/*    width: 1px;*/
+/*}*/
+.filter ul li a.on {
     position: absolute;
     color: #fff;
-    z-index: 2;
     background-color: transparent;
+    z-index: 2;
 }
 .selector{
     background-color: var(--mainColor);
@@ -1651,30 +1651,38 @@ body::-webkit-scrollbar-track {
     align-items: center;
 }
 .background .window .popup {
-    position: relative;
+    position: fixed;
     background-color: #fff;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-    width: 80%;
+    width: 70%;
     height: 80%;
     border-radius: 20px;
-    padding: 50px 24px 50px 24px;
+    padding: 20px 24px 30px 24px;
+    overflow: auto;
+}
+.background .window .popup::-webkit-scrollbar {
+    display: none;
 }
 .background .window .popup h2{
     text-align: center;
 }
 .background .window .popup .close{
-    position: absolute;
-    top: 30px;
+    position: sticky;
+    top: 0;
     right: 30px;
-    width: 20px;
+    width: 100%;
     height: 20px;
     cursor: pointer;
     font-size: 2rem;
     border: none;
     background-color: transparent;
+    text-align: right;
 }
 .background .window .popup .close:hover{
     color: var(--mainColor);
+}
+.modal-content-gallery{
+    height: 93%;
 }
 .modal_swiper {
     width: 80%;
@@ -1710,6 +1718,7 @@ body::-webkit-scrollbar-track {
     left: 24px;
     cursor: pointer;
 }
+
 .modal-button-next{
     position: absolute;
     top: 45%;
@@ -1732,6 +1741,29 @@ body::-webkit-scrollbar-track {
     cursor: auto;
     pointer-events: none;
 }
+.swiper-button-next{
+    position: absolute;
+    top: 45%;
+    right: 30px;
+    cursor: pointer;
+}
+.swiper-button-prev,
+.swiper-button-next {
+    width: 60px;
+    height: 60px;
+    line-height: 65px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 50%;
+}
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: .35;
+    cursor: auto;
+    pointer-events: none;
+}
+
 
 /* list_nav */
 .listDetail_header{
@@ -1740,16 +1772,17 @@ body::-webkit-scrollbar-track {
 .list_nav{
     display: block;
     backdrop-filter: blur(15px);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
-    top: 150px;
+    top: -100px;
     width: 100%;
-    z-index: 1;
+    z-index: 99;
     box-shadow: 0 10px 10px -10px rgb(145, 115, 77,0.3);
     transition: all .4s;
+    /*padding: 0;*/
 }
 .nav_up{
-    transform: translateY(-250px);
+    transform: translateY(249px);
 }
 .list_nav > .wrap{
     display: flex;
@@ -1761,6 +1794,12 @@ body::-webkit-scrollbar-track {
 .list_nav > .wrap > .list_wrap > ul{
     display: flex;
 }
+.list_nav > .wrap > .list_wrap > ul > li{
+    padding: 10px 20px;
+}
+.list_nav > .wrap > .list_wrap > ul > li:hover{
+    border-bottom: 2px solid var(--mainColor);
+}
 .list_nav > .wrap > .list_wrap > ul > li > a{
     font-size: 1rem;
     font-weight: bold;
@@ -1770,32 +1809,295 @@ body::-webkit-scrollbar-track {
     display: none;
     clear: both;
 }
-.list_nav > .wrap > .btn_wrap > a{
+/*.list_nav > .wrap > .btn_wrap{*/
+/*    padding-bottom: 15px;*/
+/*}*/
+.list_nav > .wrap > .btn_wrap > .rv_btn{
     padding: 16px 20px;
     border: none;
     background-color: var(--mainColor);
     border-radius: 10px;
 }
-.list_nav > .wrap > .btn_wrap > a > span{
+.list_nav > .wrap > .btn_wrap > .rv_btn > span{
     font-size: 1rem;
     font-weight: bold;
     color: #fff;
 }
 
+/* reservation */
+.reservation_wrap{
+    width: 75%;
+}
+.reservation{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px 0;
+}
+/*.reservation > div{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    flex-wrap: wrap;*/
+/*    align-content: center;*/
+/*}*/
+.reservation h3{
+    padding-bottom: 20px;
+    font-size: 1.5rem;
+    /*margin-left: 100px;*/
+}
+
+/* date */
+.reservation .date_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.reservation .date_wrap .date{
+    /*padding: 10px 30px;*/
+    cursor: pointer;
+    position: relative;
+    width: 30%;
+    text-align: center;
+    /*border: 1px solid #b5bfd9;*/
+    /*border-radius: 4px;*/
+
+}
+.reservation .date_wrap .date label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.reservation .date_wrap .date label input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .date_wrap .date label span{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px 30px;
+    min-height: 53px;
+    border: 2px solid #b5bfd9;
+    /* box-shadow: 0 5px 10px rgba(0,0,0,0.1); */
+    transition: all .2s ease;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #b5bfd9;
+}
+.reservation .date_wrap .date label input:checked + span{
+    background-color: var(--bg);
+}
+/*.reservation .date_wrap .date label span:before{*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    display: block;*/
+/*    width: 1.25rem;*/
+/*    height: 1.25rem;*/
+/*    border: 2px solid #b5bfd9;*/
+/*    top: 0.7rem;*/
+/*    left: 2.2rem;*/
+/*    border-radius: 4px;*/
+/*    opacity: 1;*/
+/*    transition: all .3s;*/
+/*}*/
+/*.reservation .date_wrap .date input:checked + span:before{*/
+/*    opacity: 1;*/
+/*    background-image: url(../img/check.svg);*/
+/*    background-size: 12px;*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: 50% 50%;*/
+/*    background-color: var(--mainColor);*/
+/*    border: 2px solid var(--mainColor);*/
+/*}*/
+
+.reservation .date_wrap .date input:checked + span{
+    color: var(--mainColor);
+}
+.reservation .booking_btn{
+    width: 70%;
+    margin: 0 auto;
+    padding: 16px 20px;
+    border: none;
+    background-color: var(--mainColor);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+/* field */
+.field_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 750px;
+    margin: 0 auto;
+}
+.field_wrap .field{
+    width: 200px;
+    cursor: pointer;
+}
+.field_wrap .field input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .feet_wrap{
+    padding-top: 15px;
+}
+.reservation .feet_wrap .feet{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+.reservation .feet_wrap .feet b{
+    font-size: 1rem;
+}
+
+/* option */
+.reservation .option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.reservation .option .checkbox_wrap label .checkbox-input{
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit{
+    border-color: var(--mainColor);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: var(--mainColor);
+    border-color: var(--mainColor);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit i,
+.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit span {
+    color: var(--mainColor);
+}
+
+.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit {
+    border-color: var(--mainColor);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(1,176,63,0.2);
+}
+.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit:before {
+    transform: scale(1);
+    opacity: 1;
+}
+.reservation .option .checkbox_wrap label .tit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 7rem;
+    min-height: 7rem;
+    border-radius: 0.5rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    box-shadow:  0 5px 10px rgba(0,0,0,0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+
+}
+.reservation .option .checkbox_wrap label .tit:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.25s ease;
+    background-image: url(../img/check.svg);
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.reservation .option .checkbox_wrap label .tit:hover {
+    border-color: var(--mainColor);
+}
+.reservation .option .checkbox_wrap label .tit:hover:before{
+    transform: scale(1);
+    opacity: 1;
+}
+.reservation .option .checkbox_wrap label .tit i {
+    transition: 0.375s ease;
+    font-size: 2rem;
+    color: #494949;
+}
+.reservation .option .checkbox_wrap label .tit span{
+    display: block;
+    font-size: 1rem;
+    color: #707070;
+    transition: 0.375s ease;
+    text-align: center;
+}
+/* info */
+.reservation .info_wrap{
+    width: 70%;
+    margin: 0 auto;
+}
+.reservation .info_wrap h4{
+    color: #b5bfd9;
+}
+.reservation .info_wrap ul li{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+}
+.reservation .info_wrap ul li:last-of-type{
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 2px solid #b5bfd9;
+}
+.reservation .info_wrap ul li p{
+    font-weight: bold;
+}
+.reservation .info_wrap ul li .rs_total_price{
+    font-weight: bold;
+    color: var(--pointColor);
+}
+
 /* map */
-.list-wrap{
-    height: 100vh;
-}
-.list-wrap .map-wrap{
-    width: 50%;
-}
-.list-wrap .map-wrap .map{
-    width: 100%;
-    height: 100vh;
-}
 .list-detail .map-wrap{
     width: 100%;
     padding: 50px 0;
+    position: relative;
 }
 .list-detail .map-wrap h2{
     padding: 20px 0;
@@ -1803,6 +2105,47 @@ body::-webkit-scrollbar-track {
 .list-detail .map-wrap .map{
     width: 100%;
     height: 60vh;
+    border-radius: 20px;
+}
+.list-detail .map-wrap .addr{
+    padding-top: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #b5bfd9;
+}
+/* control */
+.zoomcontrol {
+    position:absolute;
+    top:135px;
+    right:20px;
+    width:36px;
+    height:80px;
+    overflow:hidden;
+    z-index:1;
+    background-color:#fff;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    border-radius:5px;
+}
+.zoomcontrol span {
+    display:block;
+    width:36px;
+    height:40px;
+    text-align:center;
+    cursor:pointer;
+}
+.zoomcontrol span:hover {
+    background-color: var(--bg);
+}
+.zoomcontrol span i {
+    width:15px;
+    padding:12px 0;
+    border:none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--mainColor);
+}
+.zoomcontrol span:first-child{
+    border-bottom:1px solid #bfbfbf;
 }
 
 /* login */
@@ -2182,358 +2525,6 @@ input:-webkit-autofill:active {
 
 
 
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-    opacity: 0;
-}
-.show {
-    opacity: 1;
-    z-index: 1000;
-    /*transition: all .5s;*/
-}
-.background .window {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.background .window .popup {
-    position: relative;
-    background-color: #fff;
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-    width: 80%;
-    height: 80%;
-    border-radius: 20px;
-    padding: 50px 24px 50px 24px;
-}
-.background .window .popup h2{
-    text-align: center;
-}
-.background .window .popup .close{
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    font-size: 2rem;
-    border: none;
-    background-color: transparent;
-}
-.modal_swiper {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.modal_swiper .swiper-wrapper{
-    display: flex;
-    align-items: center;
-}
-
-.modal_swiper .swiper-wrapper .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
-}
-.modal_swiper .swiper-wrapper .swiper-slide img {
-    display: block;
-    height: 100%;
-    object-fit: cover;
-}
-.modal-button-prev{
-    position: absolute;
-    top: 45%;
-    left: 24px;
-    cursor: pointer;
-}
-.swiper-button-next{
-    position: absolute;
-    top: 45%;
-    right: 30px;
-    cursor: pointer;
-}
-.swiper-button-prev,
-.swiper-button-next {
-    width: 60px;
-    height: 60px;
-    line-height: 65px;
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-    font-size: 2rem;
-    text-align: center;
-    border-radius: 50%;
-}
-.swiper-button-next.swiper-button-disabled,
-.swiper-button-prev.swiper-button-disabled {
-    opacity: .35;
-    cursor: auto;
-    pointer-events: none;
-}
-
-/* list_nav */
-.listDetail_header{
-    box-shadow: none;
-}
-.list_nav{
-    display: block;
-    backdrop-filter: blur(15px);
-    background-color: rgba(255, 255, 255, 0.1);
-    position: fixed;
-    top: 150px;
-    width: 100%;
-    z-index: 1;
-    box-shadow: 0 10px 10px -10px rgb(145, 115, 77,0.3);
-    transition: all .4s;
-}
-.nav_up{
-    transform: translateY(-250px);
-}
-.list_nav > .wrap{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    padding: 0 24px;
-}
-.list_nav > .wrap > .list_wrap > ul{
-    display: flex;
-}
-.list_nav > .wrap > .list_wrap > ul > li > a{
-    font-size: 1rem;
-    font-weight: bold;
-}
-.list_nav > .wrap:after {
-    content: "";
-    display: none;
-    clear: both;
-}
-.list_nav > .wrap > .btn_wrap > a{
-    padding: 16px 20px;
-    border: none;
-    background-color: var(--mainColor);
-    border-radius: 10px;
-}
-.list_nav > .wrap > .btn_wrap > a > span{
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-}
-
-/* reservation */
-.reservation{
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding: 50px 0;
-}
-.reservation h2{
-    padding-bottom: 20px;
-    font-size: 2rem;
-    text-align: center;
-}
-.field_wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 65%;
-    margin: 0 auto;
-}
-
-/* date */
-.reservation .date_wrap{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-.reservation .date_wrap .date{
-    padding: 10px 30px;
-    cursor: pointer;
-    position: relative;
-    width: 33.3%;
-    text-align: center;
-}
-.reservation .date_wrap .date label{
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-.reservation .date_wrap .date label input{
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-.reservation .date_wrap .date label span:before{
-    content: "";
-    position: absolute;
-    display: block;
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 2px solid #b5bfd9;
-    top: 0.7rem;
-    left: 2.2rem;
-    border-radius: 4px;
-    opacity: 1;
-    transition: all .3s;
-}
-.reservation .date_wrap .date input:checked + span:before{
-    opacity: 1;
-    background-image: url(../img/check.svg);
-    background-size: 12px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-color: var(--mainColor);
-    border: 2px solid var(--mainColor);
-}
-
-.reservation .date_wrap .date input:checked + span{
-    color: var(--mainColor);
-}
-
-/* field */
-.field_wrap .field{
-    width: 200px;
-    cursor: pointer;
-}
-.field_wrap .field input{
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-.reservation .feet_wrap{
-    padding-top: 15px;
-}
-.reservation .feet_wrap .feet{
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* option */
-.reservation .option{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.reservation .option .checkbox_wrap label .checkbox-input{
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit{
-    border-color: var(--mainColor);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    background-color: var(--bg);
-}
-.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit:before {
-    transform: scale(1);
-    opacity: 1;
-    background-color: var(--mainColor);
-    border-color: var(--mainColor);
-}
-.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit i,
-.reservation .option .checkbox_wrap label .checkbox-input:checked + .tit span {
-    color: var(--mainColor);
-}
-
-.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit {
-    border-color: var(--mainColor);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(1,176,63,0.2);
-}
-.reservation .option .checkbox_wrap label .checkbox-input:focus + .tit:before {
-    transform: scale(1);
-    opacity: 1;
-}
-.reservation .option .checkbox_wrap label .tit{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 7rem;
-    min-height: 7rem;
-    border-radius: 0.5rem;
-    border: 2px solid #b5bfd9;
-    background-color: #fff;
-    box-shadow:  0 5px 10px rgba(0,0,0,0.1);
-    transition: 0.15s ease;
-    cursor: pointer;
-    position: relative;
-
-}
-.reservation .option .checkbox_wrap label .tit:before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 2px solid #b5bfd9;
-    background-color: #fff;
-    border-radius: 50%;
-    top: 0.25rem;
-    left: 0.25rem;
-    opacity: 0;
-    transform: scale(0);
-    transition: 0.25s ease;
-    background-image: url(../img/check.svg);
-    background-size: 12px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-}
-.reservation .option .checkbox_wrap label .tit:hover {
-    border-color: var(--mainColor);
-}
-.reservation .option .checkbox_wrap label .tit:hover:before{
-    transform: scale(1);
-    opacity: 1;
-}
-.reservation .option .checkbox_wrap label .tit i {
-    transition: 0.375s ease;
-    font-size: 2rem;
-    color: #494949;
-}
-.reservation .option .checkbox_wrap label .tit span{
-    display: block;
-    font-size: 1rem;
-    color: #707070;
-    transition: 0.375s ease;
-    text-align: center;
-}
-.reservation .info_wrap h3{
-    text-align: center;
-    color: #b5bfd9;
-}
 
 
 
