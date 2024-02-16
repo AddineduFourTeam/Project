@@ -8,40 +8,7 @@
     </script>
 </c:if>
 <div class="con wrap">
-    <div class="my-full-wrap">
-        <h3><p>${loginUser.memid}님 회원정보</p></h3>
-        <input type="hidden" name="memid" value="${loginUser.memid}">
-        <div class="my-tap-wrap">
-            <div class="my-tap">
-                <ul>
-                    <li>
-                        <a href="updateMyInfo">
-                            <input class="btn-join" type="button" value="회원정보변경">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="updatePass">
-                            <input class="btn-join" type="button" value="비밀번호변경">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cancelAccount">
-                            <input class="btn-join" type="button" value="회원탈퇴">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <input class="btn-join" type="button" value="예약내역">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <input class="btn-join" type="button" value="리뷰내역">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
+    <%@include file="../include/mypg_menu.jsp" %>
             <div class="my-wrap">
                 <ul class="my-info-wrap">
                     <li class="file-top my-img">
