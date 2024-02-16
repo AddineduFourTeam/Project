@@ -8,16 +8,20 @@
                     <p class="farm_name">주말농장</p>
                     <p class="date">24. 2. 16 오후 2:30</p>
                 </div>
-                <div class="arrow">
-                    <span class="arrow-top">열림</span>
-                    <span class="arrow-bottom">닫힘</span>
+                <div class="arrow_wrap">
+                    <span class="arrow-top">
+                        <i class="xi-caret-up-min"></i>
+                    </span>
                 </div>
             </div>
             <div class="info_con">
-                <div class="badge">
-                    <span>확정</span>
-                </div>
                 <ul>
+                    <li>
+                        <p class="tit">예약 여부</p>
+                        <div class="badge">
+                            <span>확정</span>
+                        </div>
+                    </li>
                     <li>
                         <p class="tit">이용 기간</p>
                         <p class="txt">3년 (2024 ~ 2026)</p>
@@ -29,18 +33,23 @@
                     <li>
                         <p class="tit">옵션</p>
                         <div class="txt">
-                            <span class="option"><i></i></span>
-                            <span class="option"><i></i></span>
-                            <span class="option"><i></i></span>
-                            <span class="option"><i></i></span>
+                            <span class="option"><i class="fa-solid fa-seedling"></i></span>
+                            <span class="option"><i class="fa-solid fa-tractor"></i></span>
+                            <span class="option"><i class="fa-solid fa-droplet"></i></span>
+                            <span class="option"><i class="fa-solid fa-sack-xmark"></i></span>
                         </div>
                     </li>
                     <li>
                         <p class="tit">총 금액</p>
-                        <p class="txt">300,000원</p>
+                        <p class="txt price">300,000원</p>
                     </li>
                 </ul>
+                <div class="btn_wrap">
+                    <a href="../listDetail" class="update">수정</a>
+                    <a href="#" class="del">삭제</a>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -49,6 +58,6 @@
     $(".info_list").click(function() {
         $(this).next(".info_con").stop().slideToggle(300);
         $(this).toggleClass('on').siblings().removeClass('on');
-        $(this).next(".info_con").siblings(".info_con").slideUp(300);
+        $(this).next(".info_con").siblings(".info_con").slideDown(300);
     });
 </script>
