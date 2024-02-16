@@ -2,11 +2,8 @@ package com.farm.controller;
 
 
 import com.farm.domain.Member;
-<<<<<<< HEAD
 import com.farm.domain.Story;
 import com.farm.service.CommonService;
-=======
->>>>>>> origin/esj
 import com.farm.service.MemberService;
 import com.farm.service.StoryService;
 import jakarta.servlet.http.HttpSession;
