@@ -27,7 +27,7 @@
                     </li>
                 </ul>
                 <div class="my-resv-wrap">
-                    <h4>예약내역</h4>
+                    <h4>최근 예약내역</h4>
                     <table>
                         <thead>
                         <tr>
@@ -65,7 +65,7 @@
                     </table>
                 </div>
                 <div class="my-review-wrap">
-                    리뷰
+                    최근 리뷰
                     <table>
                         <thead>
                         <tr>
@@ -96,37 +96,32 @@
                     </table>
                 </div>
                 <div class="my-story-wrap">
-                    스토리
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>제목</th>
-                                <th>날짜</th>
-                                <th>스토리이미지</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <h3>스토리</h3>
+                    <div class="story_wrap">
                         <c:choose>
                             <c:when test="${stories ne null}">
                             <c:forEach var="story" items="${stories}" varStatus="i">
                                 <fmt:parseDate value="${story.storyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-                                <tr>
-                                    <td>${i.count}</td>
-                                    <td><a href="storyDetail?id=${story.storyIdx}" class="ellipsis">${story.storySubject}</a></td>
-                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
-                                    <td><img src="${story.storyMemImg}"></td>
-                                </tr>
+                                <div class="story_items">
+                                    <a href="/storyDetail?id=${story.storyIdx}">
+                                        <div class="story_img">
+                                            <img src="/image/${story.storyIdx}/1" alt="Image" onerror="this.src='img/logoimg.png'">
+                                        </div>
+
+                                        <div class="my-story_subject">
+                                            ${story.storySubject}
+                                        </div>
+                                    </a>
+
+                                </div>
+
                             </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <tr>
-                                    <td colspan="3">자료가 없습니다.</td>
-                                </tr>
+                                    <div class="empty">자료가 없습니다.</div>
                             </c:otherwise>
                         </c:choose>
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
 
