@@ -48,10 +48,10 @@
                                     <tr>
                                         <td>${resv.status}</td>
                                         <td>${i.count}</td>
-                                        <td>(${resv.rvFarmIdx})${wfSubject.get(i.index)}</td>
+                                        <td><a href="listDetail?id=${resv.rvFarmIdx}">(${resv.rvFarmIdx})${wfSubject.get(i.index)}</a></td>
                                         <td>${resv.rvUseDate}년</td>
                                         <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
-                                        <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
+                                        <td><a href="mypagereservation?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
                                     </tr>
                                 </c:forEach>
                             </c:when>

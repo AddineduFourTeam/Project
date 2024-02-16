@@ -19,6 +19,11 @@
 <div class="my-tap">
     <ul>
         <li>
+            <a href="myPage">
+                <input class="btn-join" type="button" value="홈">
+            </a>
+        </li>
+        <li>
             <a href="updateMyInfo">
                 <input class="btn-join" type="button" value="회원정보변경">
             </a>

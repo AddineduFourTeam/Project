@@ -2386,7 +2386,7 @@ input:-webkit-autofill:active {
 }
 .my-tap-wrap{
     display: flex;
-    justify-content: space-between;
+
 }
 .my-tap{
     width:25%;
@@ -2395,6 +2395,10 @@ input:-webkit-autofill:active {
 
 .my-wrap{
     width:75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .my-info-wrap{
     list-style-type: none;
@@ -2429,11 +2433,46 @@ input:-webkit-autofill:active {
     font-size:16px
 }
 
+.update-pass-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index: 1;
+}
+.update-pass-form{
+    max-width:400px;
+    width: 100%;
+}
+.update-pass-form li{list-style-type: none;}
+
+.update-pass-h{
+    margin-bottom: 30px;
+}
+
+.upass-input-box{
+    margin:15px 0;
+}
+
+.upass-input-box div{
+    font-size:15px;
+}
+.upass-input-box input{
+    width:100%;
+    background: transparent;
+    /*border:none;*/
+    outline: none;
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+    padding:15px;
+}
+
+
 .my-resv-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
-
 }
 
 .my-resv-wrap h4{
@@ -2451,14 +2490,15 @@ input:-webkit-autofill:active {
 
 .my-review-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
     background: red;
 }
 
 .my-story-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
     width:100%;
 }
 .story_wrap {
@@ -2492,6 +2532,7 @@ input:-webkit-autofill:active {
     align-items: center;
     position:relative;
     z-index: 1;
+    width:75%;
 }
 
 .cancel-form{

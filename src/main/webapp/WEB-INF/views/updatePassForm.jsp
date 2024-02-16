@@ -1,32 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="../include/header.jsp" %>
+<div class="con wrap">
+    <%@include file="../include/mypg_menu.jsp" %>
 
-<div class="con login-wrap">
-    <div class="login-form">
-            <h3>비밀번호 변경</h3>
-            <h4>변경할 비밀번호를 입력해주세요</h4>
-        <div class="m-top">
-            <%--${ChangePass == true}--%>
-            <form action="updatePass" method="post" id="updatePassForm">
-                <ul>
-                    <li class="join-input-box m-top">
-                        <p>새로운 비밀번호 입력</p>
-                        <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
-                    </li>
-                    <li class="join-input-box m-top">
-                        <p>비밀번호 확인</p>
-                        <input type="password" name="repass" id="repass" placeholder="비밀번호를 한 번 더 입력해주세요">
-                        <div id="checkRePassResult" style="font-size:0.8em; display:none;"></div>
-                    </li>
-                    <li>
-                        <input id="updatePassBtn" class="btn-login m-top" type="submit" value="비밀번호 변경">
-                    </li>
-                </ul>
-                <input type="hidden" name="memid">
-            </form>
+    <div class="my-wrap">
+        <div class="update-pass-wrap">
+            <div class="update-pass-form">
+                <div class="update-pass-h">
+                    <h3>비밀번호 변경</h3>
+                    <h4>변경할 비밀번호를 입력해주세요</h4>
+                </div>
+                <div>
+                    <%--${ChangePass == true}--%>
+                    <form action="updatePass" method="post" id="updatePassForm">
+                        <ul>
+                            <li class="upass-input-box">
+                                <p>새로운 비밀번호 입력</p>
+                                <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
+                            </li>
+                            <li class="upass-input-box">
+                                <p>비밀번호 확인</p>
+                                <input type="password" name="repass" id="repass" placeholder="비밀번호를 한 번 더 입력해주세요">
+                                <div id="checkRePassResult" style="font-size:0.8em; display:none;"></div>
+                            </li>
+                            <li>
+                                <input id="updatePassBtn" class="btn-login m-top" type="submit" value="비밀번호 변경">
+                            </li>
+                        </ul>
+                        <input type="hidden" name="memid">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <script>
     $(()=>{
