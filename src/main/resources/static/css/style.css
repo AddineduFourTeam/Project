@@ -2390,7 +2390,7 @@ input:-webkit-autofill:active {
 }
 .my-tap-wrap{
     display: flex;
-    justify-content: space-between;
+
 }
 .my-tap{
     width:25%;
@@ -2460,7 +2460,7 @@ input:-webkit-autofill:active {
 .my-info-wrap li.my-info{
     width:60%;
     border:1px solid var(--border);
-    padding: 20px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2472,7 +2472,7 @@ input:-webkit-autofill:active {
     align-items: center;
 }
 .my-info > div + div {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .my-info > div b {
     display: block;
@@ -2515,9 +2515,46 @@ input:-webkit-autofill:active {
 .mypg_tt a i {
     vertical-align: middle;
 }
+
+.update-pass-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index: 1;
+}
+.update-pass-form{
+    max-width:400px;
+    width: 100%;
+}
+.update-pass-form li{list-style-type: none;}
+
+.update-pass-h{
+    margin-bottom: 30px;
+}
+
+.upass-input-box{
+    margin:15px 0;
+}
+
+.upass-input-box div{
+    font-size:15px;
+}
+.upass-input-box input{
+    width:100%;
+    background: transparent;
+    /*border:none;*/
+    outline: none;
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+    padding:15px;
+}
+
+
 .my-resv-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
 }
 /*
@@ -2536,13 +2573,14 @@ input:-webkit-autofill:active {
 
 .my-review-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
+    margin-bottom: 50px;
     width:100%;
 }
 
 .my-story-wrap{
     text-align: center;
-    margin-top:15px;
+    margin-top:20px;
     width:100%;
 }
 
@@ -2578,6 +2616,7 @@ input:-webkit-autofill:active {
     align-items: center;
     position:relative;
     z-index: 1;
+    width:75%;
 }
 
 .cancel-form{
