@@ -36,14 +36,13 @@
 
     <div class="gallery">
         <ul>
-            <li><img src="${farm.wfImgUrl1}" alt="이미지1"></li>
-            <li><img src="/img/placeholder.png" alt="placeholder image"></li>
-            <li><img src="/img/placeholder.png" alt="placeholder image"></li>
-            <li><img src="/img/placeholder.png" alt="placeholder image"></li>
-            <li><img src="/img/placeholder.png" alt="placeholder image"></li>
+            <li><img src="${farm.wfImgUrl1}" alt="이미지1" onerror="this.src='/img/placeholder.png'"></li>
+            <c:forEach begin="0" end="3">
+            <li><img src="" alt="placeholder image" onerror="this.src='/img/placeholder.png'"></li>
+            </c:forEach>
         </ul>
     </div>
-    <h1>${listDetail.wfSubject}</h1>
+    <h2>${listDetail.wfSubject}</h2>
     <h3>${listDetail.wfTheme}</h3>
     <div class="farm-content">${listDetail.wfContent}</div>
     <div class="map-wrap">
@@ -53,33 +52,18 @@
             <span onclick="zoomIn()"><i class="fa-solid fa-plus"></i></span>
             <span onclick="zoomOut()"><i class="fa-solid fa-minus"></i></span>
         </div>
-        <div class="addr">${listDetail.wfAddr}</div>
+        <div class="addr_con">
+            <p class="addr">${listDetail.wfAddr}</p>
+            <button class="copy" type="button">
+                <i class="fa-solid fa-copy"></i>
+                <span>주소 복사</span>
+            </button>
+        </div>
+        <div class="toast_message">복사가 완료되었어요!</div>
     </div>
-
-    <%-- 모달창 --%>
-<%--    <div class="background">--%>
-<%--        <div class="window">--%>
-<%--            <div class="popup">--%>
-<%--                <h2>${listDetail.wfSubject}</h2>--%>
-<%--                <button class="close"><i class="fa-solid fa-xmark"></i></button>--%>
-<%--                <div class="modal_swiper">--%>
-<%--                    <div class="swiper-wrapper">--%>
-<%--                        <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="modal-button-prev"><i class="fa-solid fa-angle-left"></i></div>--%>
-<%--                <div class="modal-button-next"><i class="fa-solid fa-angle-right"></i></div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-        <%@include file="../include/modal.jsp" %>
 </div>
+<%-- 모달창 --%>
+<%@include file="../include/modal.jsp" %>
 <script>
 
     /* empty strong tag */
@@ -95,43 +79,6 @@
             }
         });
     });
-
-    /* modal */
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const galleryItems = document.querySelectorAll(".gallery > ul >  li");
-    //     const modal = document.querySelector(".background");
-    //     const closeButton = document.querySelector(".close");
-    //
-    //     /* reservation */
-    //     const btn = document.querySelector(".btn_wrap > button ");
-    //     btn.addEventListener('click', () => showModal(modal));
-    //
-    //     galleryItems.forEach((li, index) => {
-    //         li.addEventListener('click', () => {
-    //             swiper.slideTo(index, 0, false)
-    //             showModal(modal);
-    //         });
-    //     });
-    //     closeButton.addEventListener('click', () => closeModal(modal));
-    // });
-    // const showModal = (modal) => {
-    //     modal.className = "background show";
-    //     document.querySelector(".popup").className = "popup animate__animated animate__zoomIn animate__faster";
-    // }
-    // const closeModal = (modal) => {
-    //     document.querySelector(".popup").className = "popup animate__animated animate__zoomOut animate__faster"
-    //     setTimeout(function (){
-    //         modal.className = "background";
-    //     },200)
-    // }
-
-    /* 갤러리 */
-    // var swiper = new Swiper(".modal_swiper", {
-    //     navigation: {
-    //         nextEl: ".modal-button-next",
-    //         prevEl: ".modal-button-prev",
-    //     },
-    // });
 
     /* map영역 */
     // 지도 생성 및 초기화
@@ -184,10 +131,20 @@
                     image: markerImage
                 });
                 marker.setMap(map);
+
+                var iwContent = '<div style="padding:5px;">${listDetail.wfSubject} <br><a href="https://map.kakao.com/link/map/${listDetail.wfSubject},'+response.y+','+response.x+'" target="_blank">지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    position : iwPosition,
+                    content : iwContent
+                });
+
+                infowindow.open(map, marker);
             },
             error: function (xhr, status, error) {
                 console.log("error");
-                alert("위치를 불러오는데 실패했습니다: " + error); // 사용자 친화적인 에러 처리
+                alert("위치를 불러오는데 실패했습니다: " + error);
             }
         });
     }
@@ -197,6 +154,32 @@
         updateMarkerByAddress(map); // 주소 기반으로 마커 업데이트
     });
 
+    /* copy & toast*/
+    const text = document.querySelector(".addr");
+    let tostBtn = document.querySelector('.copy');
+
+    // 토스트 메세지
+    let tostMessage = document.querySelector('.toast_message');
+
+    tostBtn.addEventListener('click', () => {
+        window.navigator.clipboard.writeText(text.textContent).then(() => {
+            // alert("복사가 완료되었습니다.");
+            tostOn();
+        })
+    });
+
+    function tostOn(){
+        tostMessage.classList.add('active');
+        setTimeout(function(){
+            tostMessage.classList.remove('active');
+        },2000);
+    }
+
+    //3. 토스트 버튼에 이벤트 연결
+    tostBtn.addEventListener('click',function(){
+        console.log('해치웠나???');
+        tostOn()
+    });
 
 </script>
 <%@include file="../include/footer.jsp" %>

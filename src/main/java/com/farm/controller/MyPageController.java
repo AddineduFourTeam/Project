@@ -184,7 +184,9 @@ public class MyPageController {
         // getOut 리다이렉트용
     }
 
-    // 작성한 글 찾기
-    // memid값과 story_mem_id값이 일치하는 경우 story_subject 가져오기
+    @GetMapping("/mypage_reservation")
+    public String mypage_reservation(){
+        return "mypage_reservation";
+    }
 
 }

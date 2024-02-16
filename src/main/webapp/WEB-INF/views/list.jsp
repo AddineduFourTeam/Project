@@ -10,8 +10,8 @@
             <ul class="swiper-wrapper">
                 <c:forEach items="${localArray}" var="localArray" varStatus="idx">
                     <li class="swiper-slide">
-<%--                        <a href="javascript:void(0);">${localArray}</a>--%>
-                        <a href="/list?local=${localArray}">${localArray}</a>
+                        <a href="javascript:void(0);">${localArray}</a>
+                       <%-- <a href="/list?local=${localArray}">${localArray}</a>--%>
                     </li>
                 </c:forEach>
             </ul>
