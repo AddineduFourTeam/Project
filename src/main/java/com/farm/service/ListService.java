@@ -119,6 +119,14 @@ public class ListService {
 
     public void save(Reservation reservation) {
         reservationRepository.save(reservation);
-
     }
+
+    public List<Reservation> mypageReservation(Long id) {
+        return reservationRepository.findAllByRvMemIdxOrderByRvDateDesc(id);
+    }
+
+    public List<String> reservationFarm (Long id) {
+        return reservationRepository.findWfSubjectByMemIdx(id);
+    }
+
 }

@@ -122,7 +122,7 @@
             <div class="my-story-wrap">
                 <div class="mypg_tt">
                     <h3>스토리</h3>
-                    <a href="/mypgStory">더보기 <i class="xi-angle-right-min"></i></a>
+                    <a href="/mypgStory">더보기<i class="xi-angle-right-min"></i></a>
                 </div>
                 <div class="story_wrap">
                     <c:choose>
@@ -134,14 +134,11 @@
                                     <div class="story_img">
                                         <img src="/image/${story.storyIdx}/1" alt="Image" onerror="this.src='img/logoimg.png'">
                                     </div>
-
                                     <div class="my-story_subject">
                                         ${story.storySubject}
                                     </div>
                                 </a>
-
                             </div>
-
                         </c:forEach>
                         </c:when>
                         <c:otherwise>

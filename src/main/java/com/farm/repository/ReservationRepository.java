@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.net.ContentHandler;
 import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
@@ -25,5 +26,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "where rv.rvMemIdx = :memIdx order by rv.rvDate desc")
     List<String> findWfSubjectByMemIdx(Long memIdx);
     Page<Reservation> findByRvMemIdxOrderByRvDateDesc(Long idx, Pageable pageable);
+
+//    List<Reservation> findAllByrvMemIdx(Long id);
+    List<Reservation> findAllByRvMemIdxOrderByRvDateDesc(Long id);
+
 }
 

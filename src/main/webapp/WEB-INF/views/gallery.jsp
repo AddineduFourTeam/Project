@@ -3,13 +3,10 @@
 <h2>${listDetail.wfSubject}</h2>
 <div class="modal_swiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
-        <div class="swiper-slide"><img src="/img/placeholder.png" alt="placeholder image"></div>
+        <div class="swiper-slide"><img src="${listDetail.wfImgUrl1}" alt="이미지1" onerror="this.src='/img/placeholder.png'"></div>
+        <c:forEach begin="0" end="6">
+            <div class="swiper-slide"><img src="" alt="placeholder image" onerror="this.src='/img/placeholder.png'"></div>
+        </c:forEach>
     </div>
 </div>
 <div class="modal-button-prev"><i class="fa-solid fa-angle-left"></i></div>
