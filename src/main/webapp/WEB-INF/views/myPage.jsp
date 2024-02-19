@@ -45,7 +45,6 @@
                     <th>예약한 농장</th>
                     <th>예약기간</th>
                     <th>예약날짜</th>
-                    <th>상세보기</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,10 +55,9 @@
                             <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                             <tr>
                                 <td>${i.count}</td>
-                                <td>${wfSubjectList[i.index]}</td>
+                                <td><a href="listDetail?id=${resv.rvFarmIdx}">${wfSubjectlist[i.index]}</td>
                                 <td>${resv.rvUseDate}년</td>
                                 <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
-                                <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
                             </tr>
                         </c:forEach>
                     </c:when>
