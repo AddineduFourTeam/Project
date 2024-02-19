@@ -4,6 +4,7 @@
 <nav class="list_nav">
     <div class="wrap">
         <div class="list_wrap">
+            <div class="line"></div>
             <ul>
                 <li><a href="#">소개</a></li>
                 <li><a href="#">나는</a></li>
@@ -28,7 +29,7 @@
         농장이름 /
         테마 /
         리뷰
-        서비스
+        서비스/
         농장소개 /
         이용정보
         위치 /
@@ -44,6 +45,33 @@
     </div>
     <h2>${listDetail.wfSubject}</h2>
     <h4>${listDetail.wfTheme}</h4>
+    <div class="preview">
+        <div class="point">
+           <i class="fa-solid fa-star"></i>
+            <span>${listDetail.wfRating}</span>
+            <a href="#">리뷰보기</a>
+        </div>
+        <div class="preview_wrap">
+            <div class="preview_swiper">
+                <ul class="swiper-wrapper">
+                    <c:forEach begin="0" end="10">
+                        <li class="swiper-slide">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <div class="slide_wrap">
+                                <p>안녕하세요 지금은 배고픈 시간입니다 :)</p>
+                                <div class="user_info">
+                                    <p class="nickname">이시영바보</p>
+                                    <span class="date">리뷰를 단 날짜가 들어가는 자리입니당</span>
+                                </div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <div class="preview-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+            <div class="preview-button-next"><i class="fa-solid fa-angle-right"></i></div>
+        </div>
+    </div>
     <div class="farm-content">
         <h2>농장 소개</h2>
         ${listDetail.wfContent}
@@ -97,6 +125,10 @@
             </div>
         </div>
     </div>
+    <div class="farmer-info">
+        <h2>농장주정보</h2>
+        <p><i class="fa-solid fa-phone"></i>${farm.wfTel}</p>
+    </div>
     <div class="map-wrap">
         <h2>농장 위치</h2>
         <div id="map" class="map"></div>
@@ -130,11 +162,172 @@
 <%--            </tr>--%>
 <%--        </c:otherwise>--%>
 <%--    </c:choose>--%>
-
+    <div class="review">
+        <h2>농장 후기</h2>
+        <c:forEach begin="0" end="5">
+            <div class="review_wrap">
+                <div class="user_info">
+                    <span class="user_img"><img src="img/profileImg.png"/></span>
+                    <p class="nickname">이시영바보</p>
+                    <span class="date">리뷰를 단 날짜</span>
+                </div>
+                <div class="review_flex">
+                    <div class="review_swiper_wrap">
+                        <div class="point">
+                            <i class="fa-solid fa-star"></i>
+                            <span>${listDetail.wfRating}</span>
+                        </div>
+                        <div class="review_swiper">
+                            <ul class="swiper-wrapper">
+                                <c:forEach begin="0" end="10">
+                                    <li class="swiper-slide">
+                                        <div class="slide_wrap">
+                                            <img src="${farm.wfImgUrl1}" alt="이미지1" onerror="this.src='/img/placeholder.png'">
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                            <div class="review-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                            <div class="review-button-next"><i class="fa-solid fa-angle-right"></i></div>
+                        </div>
+                    <div class="review_txt">
+                        <p>솔직히 말할게 많이 기다려 왔어
+                            너도 그랬을 거라 믿어
+                            오늘이 오길
+                            매일같이 달력을 보면서
+                            솔직히 나에게도
+                            지금 이 순간은
+                            꿈만 같아 너와 함께라
+                            오늘을 위해
+                            꽤 많은 걸 준비해 봤어
+                            All about you and I
+                            다른 건 다 제쳐 두고
+                            Now come with me
+                            Take my hand
+                            아름다운 청춘의 한 장
+                            함께 써내려 가자
+                            너와의 추억들로
+                            가득 채울래
+                            (Come on!)
+                            아무 걱정도 하지는 마
+                            나에게 다 맡겨 봐
+                            지금 이 순간이
+                            다시 넘겨볼 수 있는
+                            한 페이지가 될 수 있게
+                            솔직히 말할게 많이 기다려 왔어
+                            너도 그랬을 거라 믿어
+                            오늘이 오길
+                            매일같이 달력을 보면서
+                            솔직히 나에게도
+                            지금 이 순간은
+                            꿈만 같아 너와 함께라
+                            오늘을 위해
+                            꽤 많은 걸 준비해 봤어
+                            All about you and I
+                            다른 건 다 제쳐 두고
+                            Now come with me
+                            Take my hand
+                            아름다운 청춘의 한 장
+                            함께 써내려 가자
+                            너와의 추억들로
+                            가득 채울래
+                            (Come on!)
+                            아무 걱정도 하지는 마
+                            나에게 다 맡겨 봐
+                            지금 이 순간이
+                            다시 넘겨볼 수 있는
+                            한 페이지가 될 수 있게
+                            솔직히 말할게 많이 기다려 왔어
+                            너도 그랬을 거라 믿어
+                            오늘이 오길
+                            매일같이 달력을 보면서
+                            솔직히 나에게도
+                            지금 이 순간은
+                            꿈만 같아 너와 함께라
+                            오늘을 위해
+                            꽤 많은 걸 준비해 봤어
+                            All about you and I
+                            다른 건 다 제쳐 두고
+                            Now come with me
+                            Take my hand
+                            아름다운 청춘의 한 장
+                            함께 써내려 가자
+                            너와의 추억들로
+                            가득 채울래
+                            (Come on!)
+                            아무 걱정도 하지는 마
+                            나에게 다 맡겨 봐
+                            지금 이 순간이
+                            다시 넘겨볼 수 있는
+                            한 페이지가 될 수 있게
+                            솔직히 말할게 많이 기다려 왔어
+                            너도 그랬을 거라 믿어
+                            오늘이 오길
+                            매일같이 달력을 보면서
+                            솔직히 나에게도
+                            지금 이 순간은
+                            꿈만 같아 너와 함께라
+                            오늘을 위해
+                            꽤 많은 걸 준비해 봤어
+                            All about you and I
+                            다른 건 다 제쳐 두고
+                            Now come with me
+                            Take my hand
+                            아름다운 청춘의 한 장
+                            함께 써내려 가자
+                            너와의 추억들로
+                            가득 채울래
+                            (Come on!)
+                            아무 걱정도 하지는 마
+                            나에게 다 맡겨 봐
+                            지금 이 순간이
+                            다시 넘겨볼 수 있는
+                            한 페이지가 될 수 있게
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
 </div>
 <%-- 모달창 --%>
 <%@include file="../include/modal.jsp" %>
 <script>
+
+    /* nav */
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let tabs = document.querySelectorAll(".list_wrap ul li");
+        let underLine = document.querySelector(".line");
+
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener("click", filter);
+        }
+
+        function filter(event) {
+            underLine.style.left = event.currentTarget.offsetLeft + "px";
+            underLine.style.width = event.currentTarget.offsetWidth + "px";
+            underLine.style.top = event.currentTarget.offsetTop + event.currentTarget.offsetHight + "px";
+        }
+    });
+
+    /* swiper*/
+    var swipe1 = new Swiper(".preview_swiper", {
+        slidesPerView : 3,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: ".preview-button-next",
+            prevEl: ".preview-button-prev",
+        },
+    });
+    var swiper2 = new Swiper(".review_swiper", {
+        slidesPerView : 3,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: ".review-button-next",
+            prevEl: ".review-button-prev",
+        },
+    });
 
     /* empty strong tag */
     document.addEventListener('DOMContentLoaded', (event) => {
