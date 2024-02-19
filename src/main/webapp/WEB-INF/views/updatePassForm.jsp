@@ -3,11 +3,9 @@
 <%@include file="../include/header.jsp" %>
 <div class="con wrap">
     <%@include file="../include/mypg_menu.jsp" %>
-
-    <div class="my-wrap">
-        <div class="update-pass-wrap">
-            <div class="update-pass-form">
-                <div class="update-pass-h">
+        <div class="upass-wrap">
+            <div class="upass-form">
+                <div class="upass-h">
                     <h3>비밀번호 변경</h3>
                     <h4>변경할 비밀번호를 입력해주세요</h4>
                 </div>
@@ -33,7 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </div>
 </div>
 </div>

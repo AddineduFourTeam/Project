@@ -45,7 +45,10 @@
                         <th>예약한 농장</th>
                         <th>예약기간</th>
                         <th>예약날짜</th>
+<<<<<<< HEAD
                         <th>예약상세</th>
+=======
+>>>>>>> origin/sr
                         <th>예약상태</th>
                     </tr>
                     </thead>
@@ -57,10 +60,16 @@
                                 <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                                 <tr>
                                     <td>${i.count}</td>
+<<<<<<< HEAD
                                     <td>${wfSubjectList[i.index]}</td>
                                     <td>${resv.rvUseDate}년</td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
                                     <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
+=======
+                                    <td><a href="listDetail?id=${resv.rvFarmIdx}">${wfSubjectlist[i.index]}</a></td>
+                                    <td>${resv.rvUseDate}년</td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+>>>>>>> origin/sr
                                     <td>${resv.status}</td>
                                 </tr>
                             </c:forEach>
@@ -83,6 +92,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>방문한 농장</th>
                         <th>제목</th>
                         <th>리뷰작성일자</th>
                     </tr>
@@ -94,7 +104,8 @@
                                 <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                                 <tr>
                                     <td>${i.count}</td>
-                                    <td><a href="mypageReservation?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>
+                                    <td><a href="listDetail?id=${review.reviewWfIdx}">${wfSubjectlist[i.index]}</a></td>
+                                    <td><a href="mypageReview?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
                                 </tr>
                             </c:forEach>

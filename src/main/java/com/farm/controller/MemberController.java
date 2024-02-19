@@ -138,4 +138,5 @@ public class MemberController {
 
         return "completePass"; // 비밀번호 변경완료 페이지
     }
+
 }
