@@ -13,7 +13,10 @@
             - 회원정보 변경
         </c:if>
         <c:if test="${fn:contains(folderName, 'mypgStory')}">
-            - 내 스토리
+        - 내 스토리
+        </c:if>
+        <c:if test="${fn:contains(folderName, 'mypageReservation')}">
+            - 농장 예약 내역
         </c:if>
     </h2>
 </div>

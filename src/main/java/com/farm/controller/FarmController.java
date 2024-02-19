@@ -1,8 +1,11 @@
 package com.farm.controller;
 
 import com.farm.domain.Farm;
+import com.farm.domain.Member;
 import com.farm.domain.Reservation;
 import com.farm.service.ListService;
+import com.farm.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +25,8 @@ public class FarmController {
 
     @Autowired
     ListService listService;
+    @Autowired
+    MemberService memberService;
 
     private Pageable createPageable(int page){
         return PageRequest.of(page -1, PAGE_SIZE, Sort.by("wfIdx").descending());

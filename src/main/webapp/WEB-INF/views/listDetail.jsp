@@ -43,8 +43,60 @@
         </ul>
     </div>
     <h2>${listDetail.wfSubject}</h2>
-    <h3>${listDetail.wfTheme}</h3>
-    <div class="farm-content">${listDetail.wfContent}</div>
+    <h4>${listDetail.wfTheme}</h4>
+    <div class="farm-content">
+        <h2>농장 소개</h2>
+        ${listDetail.wfContent}
+    </div>
+    <div class="service">
+        <h2>서비스</h2>
+        <div class="service_wrap">
+            <div>
+                <i class="fa-solid fa-wifi"></i>
+                <span>와이파이</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-square-parking"></i>
+                <span>무료주차</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-trowel"></i>
+                <span>도구대여</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-faucet-drip"></i>
+                <span>개수대 완비</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-truck-monster"></i>
+                <span>농기구대여</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-couch"></i>
+                <span>휴게공간</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-tent"></i>
+                <span>비닐하우스</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-shower"></i>
+                <span>샤워실 완비</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-restroom"></i>
+                <span>화장실</span>
+            </div>
+            <div>
+                <i class="fa-regular fa-credit-card"></i>
+                <span>카드결제</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-ban-smoking"></i>
+                <span>금연</span>
+            </div>
+        </div>
+    </div>
     <div class="map-wrap">
         <h2>농장 위치</h2>
         <div id="map" class="map"></div>
@@ -61,6 +113,24 @@
         </div>
         <div class="toast_message">복사가 완료되었어요!</div>
     </div>
+<%--    <c:choose>--%>
+<%--        <c:when test="${not empty reviews}">--%>
+<%--            <c:forEach var="review" items="${reviews}" varStatus="i">--%>
+<%--                <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />--%>
+<%--                <tr>--%>
+<%--                    <td>${i.count}</td>--%>
+<%--                    <td><a href="mypageReservation?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>--%>
+<%--                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>--%>
+<%--                </tr>--%>
+<%--            </c:forEach>--%>
+<%--        </c:when>--%>
+<%--        <c:otherwise>--%>
+<%--            <tr>--%>
+<%--                <td colspan="3">자료가 없습니다.</td>--%>
+<%--            </tr>--%>
+<%--        </c:otherwise>--%>
+<%--    </c:choose>--%>
+
 </div>
 <%-- 모달창 --%>
 <%@include file="../include/modal.jsp" %>
@@ -132,15 +202,20 @@
                 });
                 marker.setMap(map);
 
-                var iwContent = '<div style="padding:5px;">${listDetail.wfSubject} <br><a href="https://map.kakao.com/link/map/${listDetail.wfSubject},'+response.y+','+response.x+'" target="_blank">지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+                var infoContent = '<div class="customoverlay">' +
+                    '  <a href="https://map.kakao.com/link/map/${listDetail.wfSubject},'+response.y+','+response.x+'" target="_blank">' +
+                    '    <span class="title">${listDetail.wfSubject}</span>' +
+                    '  </a>' +
+                    '</div>';
 
-                var infowindow = new kakao.maps.InfoWindow({
-                    position : iwPosition,
-                    content : iwContent
+                var customOverlay = new kakao.maps.CustomOverlay({
+                    position: newPosition,
+                    content: infoContent,
+                    yAnchor: 1
                 });
 
-                infowindow.open(map, marker);
+                customOverlay.setMap(map);
+
             },
             error: function (xhr, status, error) {
                 console.log("error");

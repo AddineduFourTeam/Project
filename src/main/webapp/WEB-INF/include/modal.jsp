@@ -69,6 +69,15 @@
             $(this).siblings("label").find("img").attr('src', src);
         });
 
+        $("input[name='option']").change(function() {
+            let optionName = $(this).val();
+            if ($(this).is(":checked")) {
+                rvOptions[optionName] = "Y";
+            } else {
+                rvOptions[optionName] = "N";
+            }
+        });
+
         let year_leng = 0;
         let option_leng = 0;
 
@@ -94,15 +103,18 @@
     });
 
     $(".booking_btn").click(function(e){
-        //e.preventDefault();
+        e.preventDefault();
         function getOptionValue(selector) {
             return $(selector).is(":checked") ? "Y" : "N";
         }
-        let rvOptions = [];
-        for (let i = 1; i <= 4; i++) {
-            rvOptions.push(getOptionValue(`#op${i}`));
-        }
-        //console.log(validate());
+
+        let rvOptionsData = {
+            "rvOptionSeeding": getOptionValue("#op1"),
+            "rvOptionPlow": getOptionValue("#op2"),
+            "rvOptionWatering": getOptionValue("#op3"),
+            "rvOptionCompost": getOptionValue("#op4")
+        };
+
         if(validate()) {
             $.ajax({
                 type: 'POST',
@@ -114,10 +126,7 @@
                     "status" : "Y",
                     "rvPrice" :  $(".rs_total_price").text(),
                     "rvFeet" : $(".rs_feet").text(),
-                    "rvOptionSeeding": rvOptions[0],
-                    "rvOptionPlow": rvOptions[1],
-                    "rvOptionWatering": rvOptions[2],
-                    "rvOptionCompost": rvOptions[3]
+                    ...rvOptionsData
                 },
                 success: function (){
                     console.log("성공");

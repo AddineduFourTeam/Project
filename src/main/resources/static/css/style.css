@@ -1325,9 +1325,8 @@ select option {
     width: 40px;
     height: 40px;
     border: none;
-    background: transparent
+    background: transparent;
 }
-
 .search-form > button >.fa-magnifying-glass:before, header.on .search-form > button >.fa-magnifying-glass:before ,
 .search-form > button > .fa-search:before , header.on .search-form > button > .fa-search:before {
     color: var(--mainColor);
@@ -1355,7 +1354,7 @@ select option {
     padding-bottom: 40px;
 }
 .farm-list > ul > li {
-    width: calc(33% - 10px);
+    width: calc(33% - 12px);
     padding-bottom: 24px;
 }
 .farm-list > ul > li > a{
@@ -1553,8 +1552,11 @@ body::-webkit-scrollbar-track {
 }
 
 /******** list-detail *******/
+.list-detail{
+    padding: 50px 0;
+}
 .list-detail h2{
-    margin: 20px 0;
+    margin: 20px 0 5px 0;
     text-align: left;
 }
 
@@ -1562,7 +1564,7 @@ body::-webkit-scrollbar-track {
 .list-detail .gallery{
     overflow: hidden;
     border-radius: 20px;
-    margin-top: 80px;
+    margin-top: 30px;
 }
 .list-detail .gallery ul{
     display: grid;
@@ -1626,6 +1628,25 @@ body::-webkit-scrollbar-track {
     padding-bottom: 4px;
 }
 
+/* service */
+.list-detail .service{
+    margin-top: 50px;
+}
+.list-detail .service .service_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+.list-detail .service .service_wrap > div{
+    display: flex;
+    align-items: center;
+    width: 33%;
+    margin-bottom: 20px;
+}
+.list-detail .service .service_wrap > div i{
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
 /* modal */
 .background {
     position: fixed;
@@ -2096,11 +2117,10 @@ body::-webkit-scrollbar-track {
 /* map */
 .list-detail .map-wrap{
     width: 100%;
-    padding: 50px 0;
     position: relative;
 }
 .list-detail .map-wrap h2{
-    padding: 20px 0;
+
 }
 .list-detail .map-wrap .map{
     width: 100%;
@@ -2130,7 +2150,7 @@ body::-webkit-scrollbar-track {
 /* control */
 .zoomcontrol {
     position:absolute;
-    top:180px;
+    top:50px;
     right:20px;
     width:36px;
     height:80px;
@@ -2181,20 +2201,44 @@ body::-webkit-scrollbar-track {
     opacity: 1;
 }
 
-/*.wrapper {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}*/
-/*.wrapper * {padding: 0;margin: 0;}*/
-/*.wrapper .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}*/
-/*.wrapper .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}*/
-/*.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}*/
-/*.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}*/
-/*.info .close:hover {cursor: pointer;}*/
-/*.info .body {position: relative;overflow: hidden;}*/
-/*.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}*/
-/*.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}*/
-/*.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}*/
-/*.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}*/
-/*.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}*/
-/*.info .link {color: #5085BB;}*/
+.customoverlay {
+    position:relative;
+    bottom:62px;
+    border-radius:6px;
+    background-color: #fff;
+    box-shadow:0px 1px 2px #888;
+}
+.customoverlay a {
+    display:block;
+    text-decoration:none;
+    color:#000;
+    text-align:center;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:bold;
+    overflow:hidden;
+    background: var(--mainColor) url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+.customoverlay .title {
+    display:block;
+    text-align:center;
+    background:#fff;
+    margin-right:35px;
+    padding:10px 15px;
+    font-size:14px;
+    font-weight:bold;
+}
+.customoverlay:after {
+    content:'';
+    position:absolute;
+    margin-left:-12px;
+    left:50%;
+    bottom:-12px;
+    width:22px;
+    height:12px;
+    background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+
+
 
 
 
@@ -2494,7 +2538,7 @@ input:-webkit-autofill:active {
     width:75%;
 }
 .my-wrap > div {
-    margin-top: 150px;
+    padding-bottom: 80px;
     min-height: auto;
 }
 .my-info-wrap{
@@ -2741,10 +2785,8 @@ input:-webkit-autofill:active {
 
 /* mypageReservation */
 .info_wrap{
-    padding: 80px 0;
     margin: 0 auto;
-    width: 886.5px;
-
+    width: 90%;
 }
 .rv_info{
     width: 100%;
@@ -2860,7 +2902,7 @@ input:-webkit-autofill:active {
 }
 .info_wrap .btn_wrap a{
     width: 100%;
-    padding: 20px 30px;
+    padding: 15px 30px;
     text-align: center;
     background-color: #b5bfd9;
     border-radius: 10px;

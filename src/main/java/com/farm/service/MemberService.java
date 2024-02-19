@@ -195,6 +195,10 @@ public class MemberService {
 
     }
 
+//    public Object getMypgList(Long idx) {
+//        return null;
+//    }
+
 
 /*
     public List<Member> selectAll() {

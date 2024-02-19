@@ -1,9 +1,13 @@
 package com.farm.controller;
 
 
+import com.farm.domain.Farm;
 import com.farm.domain.Member;
+import com.farm.domain.Reservation;
 import com.farm.domain.Story;
+import com.farm.repository.ReservationRepository;
 import com.farm.service.CommonService;
+import com.farm.service.ListService;
 import com.farm.service.MemberService;
 import com.farm.service.StoryService;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.CommonDataSource;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -32,6 +38,11 @@ public class MyPageController {
 
     @Autowired
     PasswordEncoder pEncoder;
+    @Autowired
+    ListService listService;
+
+    @Autowired
+    ReservationRepository reservationRepository;
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
@@ -194,9 +205,30 @@ public class MyPageController {
     }
 
     @GetMapping("/mypageReservation")
-    public String mypage_reservation(){
+    public String mypageReservation( HttpSession session, Model model) {
+        Long id = ((Member)session.getAttribute("loginUser")).getMemIdx();
+        model.addAttribute("reservations", listService.mypageReservation(id));
+        model.addAttribute("wfSubjects",listService.reservationFarm(id));
+        try {
+            memberService.getMypgList(model,id);
+        }catch (Exception e) {
+            System.out.println("idx값이 없습니다.");
+
+        }
+//        model.addAttribute("reviews",reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
+
+//        model.addAttribute("wfSubjects",reservationRepository.findWfSubjectByMemIdx(id));
+//        System.out.println("listService = " + listService.mypageReservation(id));
+//        model.addAttribute("farm", listService.getWfSubject(rvFarmIdx));
+//        List<String> farm = new ArrayList();
+//        for(Reservation reservation : listService.mypageReservation(id)){
+//            farm.add(listService.farm(reservation.getRvFarmIdx()).getWfSubject());
+//        }
+//        model.addAttribute("farm", farm);
         return "mypageReservation";
-
     }
-
+//    @GetMapping("/mypageReservation")
+//    public String mypageReservation() {
+//        return "mypageReservation";
+//    }
 }
