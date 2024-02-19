@@ -2784,9 +2784,11 @@ input:-webkit-autofill:active {
     display: block;
 }
 
+/* mypg story*/
 
-
-
+.my-wrap > div.story_list {
+    margin-top: 0;
+}
 
 
 

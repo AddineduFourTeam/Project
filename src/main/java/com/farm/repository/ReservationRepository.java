@@ -23,7 +23,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("select fm.wfSubject from Farm fm " +
             "join Reservation rv on rv.rvFarmIdx = fm.wfIdx " +
             "where rv.rvMemIdx = :memIdx order by rv.rvDate desc")
-    List<Reservation> findWfSubjectByMemIdx(Long memIdx);
+    List<String> findWfSubjectByMemIdx(Long memIdx);
     Page<Reservation> findByRvMemIdxOrderByRvDateDesc(Long idx, Pageable pageable);
 }
 

@@ -9,12 +9,19 @@
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
     <div class="story_con">
-        <form action="storyForm" method="post" enctype="multipart/form-data">
-            <div class="storyW_tt"><label for="title" class="story_listtt">스토리 제목</label><input type="text" id="title" name="storySubject" value="" required></div>
-            <div class="story_txt"><label for="content" class="story_listtt">스토리 내용</label><textarea id="content" name="storyContent" required></textarea></div>
+        <form action="<c:out value="${not empty param.sno ? 'storyUpdate' : 'storyForm'}"/>" method="post" enctype="multipart/form-data">
+            <div class="storyW_tt">
+                <label for="title" class="story_listtt">스토리 제목</label>
+                <input type="text" id="title" name="storySubject" value="${story.storySubject}" required>
+            </div>
+            <div class="story_txt">
+                <label for="content" class="story_listtt">스토리 내용</label>
+                <textarea id="content" name="storyContent" required><c:out value="${fn:replace(story.storyContent, '<br>', '&lt;br&gt;')}" escapeXml="false" /></textarea>
+            </div>
             <div class="story_farm">
                 <input type="hidden" id="farm_select" name="farm_select">
                 <div class="story_listtt">농장 선택</div>
+                <c:if test="${param.sno eq null}">
                 <ul class="farm_select">
                     <c:forEach items="${localArray}" var="localArray" varStatus="idx">
                         <li>
@@ -23,20 +30,21 @@
                         </li>
                     </c:forEach>
                 </ul>
+                </c:if>
             </div>
             <div class="story_img_submit">
                 <ul class="story_submit_ul">
-                    <c:forEach var="localList" items="${localList}" varStatus="status">
-                    <li>
-                        <input type="radio" id="storyWfIdx${status.index}" name="storyWfIdx" value="" class="">
-                        <label for="storyWfIdx${status.index}">
-                            <div class="farm_list_img">
-                                <img src="http://www.nongsaro.go.kr/cms_contents/1096/229882_MF_BIMG_01.jpg" alt="">
-                            </div>
-                            <span class="farm_list_tt">농장데스네</span>
-                        </label>
-                    </li>
-                    </c:forEach>
+                    <c:if test="${not empty param.sno}">
+                        <li>
+                            <input type="radio" id="storyWfIdx${status.index}" name="storyWfIdx" value="" class="" >
+                            <label for="storyWfIdx${status.index}">
+                                <div class="farm_list_img">
+                                    <img src="http://www.nongsaro.go.kr/cms_contents/1096/229882_MF_BIMG_01.jpg" alt="">
+                                </div>
+                                <span class="farm_list_tt">농장데스네</span>
+                            </label>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <div class="farm_img">
@@ -46,20 +54,47 @@
                 <ul>
                     <li class="farm_img1">
                         <input id="fileInput" type="file" multiple name="file1" onchange='readFile(this)' hidden/>
-                        <label for="fileInput">이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small></label>
+                        <label for="fileInput">
+                        <c:choose>
+                            <c:when test="${story.storyImg1 ne null}">
+                                <img src="/image/${story.storyIdx}/1" alt="">
+                            </c:when>
+                            <c:otherwise>
+                                이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
+                            </c:otherwise>
+                        </c:choose>
+                        </label>
                     </li>
-                    <li class="farm_img2">
+                    <li class="farm_img2" <c:if test="${story.storyImg2 ne null}">style="display:block"</c:if>>
                         <input id="fileInput2" type="file" multiple name="file2" onchange='readFile(this)' hidden/>
-                        <label for="fileInput2">이미지 선택<small>10mb 이하</small></label>
+                        <label for="fileInput2">
+                            <c:choose>
+                                <c:when test="${story.storyImg2 ne null}">
+                                    <img src="/image/${story.storyIdx}/2" alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
+                                </c:otherwise>
+                            </c:choose>
+                        </label>
                     </li>
-                    <li class="farm_img3">
+                    <li class="farm_img3" <c:if test="${story.storyImg3 ne null}">style="display:block"</c:if>>
                         <input id="fileInput3" type="file" multiple name="file3" onchange='readFile(this)' hidden/>
-                        <label for="fileInput3">이미지 선택<small>10mb 이하</small></label>
+                        <label for="fileInput3">
+                            <c:choose>
+                                <c:when test="${story.storyImg3 ne null}">
+                                    <img src="/image/${story.storyIdx}/3" alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
+                                </c:otherwise>
+                            </c:choose>
+                        </label>
                     </li>
                 </ul>
             </div>
             <div class="story_submit">
-                <button>등록</button>
+                <button><c:out value="${not empty param.sno ? '수정' : '등록'}"/></button>
                 <span class="btnimg"><img src="/img/sprout.png" alt="새싹"></span>
             </div>
         </form>
@@ -73,12 +108,15 @@
         $("input[name='farm_local']").change(function(){
             farmlocal($(this).val());
         });
+       /* $(".story_submit button").click(function(){
+            $(this)
+        });*/
     });
 
     $(".farm_img li input").change(function(){
         $(this).parents("li").next("li").show();
     });
-
+    <c:if test="${param.sno eq null}">
     function farmlocal(input){
         $.ajax({
             url:"/storyLocal",
@@ -92,8 +130,10 @@
                     content = "<li class='nofarmlist'>해당 지역에 농장이 없습니다.</li>"
                 }else {
                     data.forEach(function (data, idx) {
+                        var checked = (data.wfIdx == ${story.storyWfIdx}) ? 'checked' : ''; // JSTL 변수를 JavaScript 변수로 사용
+
                         content += "<li>"+
-                            "<input type='radio' id='storyWfIdx"+idx+"' name='storyWfIdx' value='"+data.wfIdx+"' class=''>"+
+                            "<input type='radio' id='storyWfIdx"+idx+"' "+ checked +" name='storyWfIdx' value='"+data.wfIdx+"' class=''>"+
                             "<label for='storyWfIdx"+idx+"'>"+
                             "<div class='farm_list_img'>"+
                             "<img src='"+data.wfImgUrl1+"' alt=''>"+
@@ -101,7 +141,7 @@
                             "<b class='farm_list_tt'>"+data.wfSubject+"</b>"+
                             "<span>"+data.wfAddr+"</span>"+
                             "</label>"+
-                            "</li>"
+                            "</li>";
                         //console.log(data.wfAddr);
                     });
                 }
@@ -111,6 +151,7 @@
             }
         });
     };
+    </c:if>
 
 
     function readFile(input) {

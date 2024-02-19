@@ -41,7 +41,7 @@ public class StoryController {
 
     @GetMapping("/storyDetail")
     public String storydetail(@RequestParam(value="id") Long id,@RequestParam(value="page", defaultValue="1") int page , Model model) {
-        model.addAttribute("story", storyService.storydetail(id).get());
+        model.addAttribute("story", storyService.storydetail(id));
         commonService.replyDetail(id,page,model,StoryReply.class);
         //commonService.reReplyDetail(id,srDepth,rIdx,page,model,StoryReply.class);
         return "storyDetail";
@@ -58,7 +58,8 @@ public class StoryController {
     }
 
     @GetMapping("/storyWrite")
-    public String storywrite(Model model) {
+    public String storywrite(Model model,@RequestParam(value="sno", defaultValue="1") Long sno) {
+        model.addAttribute("story", storyService.storyWrite(sno));
         return "storyWrite";
     }
     @PostMapping("/storyForm")
@@ -107,8 +108,14 @@ public class StoryController {
     }
     @PostMapping("/replyDelete")
     @ResponseBody
-    public String replyDelete(@RequestParam("id") Long id) {
-        commonService.replyDelete(id);
+    public String replyDelete(@RequestParam("id") Long id,HttpSession session) {
+        commonService.replyDelete(id,StoryReply.class,session);
+        return "storyDetail";
+    }
+    @PostMapping("/storyDelete")
+    @ResponseBody
+    public String storyDelete(@RequestParam("id") Long id,HttpSession session) {
+        commonService.replyDelete(id,Story.class,session);
         return "storyDetail";
     }
 }

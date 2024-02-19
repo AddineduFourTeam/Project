@@ -11,9 +11,14 @@
                                onerror="this.src='img/profileImg.png'"></span>${story.storyMemId}
                 </div>
                 <div class="board_view_date">
-                    <fmt:parseDate value="${story.storyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime"
-                                   type="both"/>
-                    <fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/>
+                    <span>
+                       조회수 : <span class="count">${story.storyCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    </span>
+                    <span>
+                        <fmt:parseDate value="${story.storyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime"
+                                       type="both"/>
+                        <fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/>
+                    </span>
                 </div>
             </div>
             <div class="board_view_con">
@@ -48,8 +53,10 @@
                 </div>
             </div>
             <div class="board_btn">
-                <%--<a href="/storyWrite?sno=${param.sno}">수정</a>
-                <a href="javascript:void(0)" class="delete">삭제</a>--%>
+                <c:if test="${loginUser.memIdx eq story.storyMemIdx}">
+                <a href="/storyWrite?sno=${param.id}">수정</a>
+                <a href="javascript:myStoryDelete(${param.id})" class="delete">삭제</a>
+                </c:if>
                 <a href="/story">목록</a>
             </div>
             <div class="story_reply">
@@ -254,6 +261,7 @@
 
             }
         });
+
             /*let arr = $(".story_reply_list > ul > li");
 
             // 각 요소에 대한 AJAX 요청
@@ -275,8 +283,6 @@
                     }
                 });
             });*/
-
-
 
 
     });
@@ -449,6 +455,23 @@
                 }
             });
         }
+    }
+
+    function myStoryDelete(id){
+        if(comfirm("게시물을 삭제 하시겠습까?")) {
+            $.ajax({
+                url: "/storyDelete",
+                data: {"id": id},
+                type: "post",
+                success: function (data) {
+                    alert("삭제가 완료 되었습니다.");
+                    history.back();
+                }, error: function (xhr, status, error) {
+                    console.log(xhr, status, error);
+                }
+            });
+        }
+
     }
 
 

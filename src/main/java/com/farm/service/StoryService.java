@@ -26,8 +26,12 @@ public class StoryService {
     //story detail 불러오기
 
 
-    public Optional<Story> storydetail(Long sno) {
-        return storyRepository.findById(sno);
+    public Story storydetail(Long sno) {
+        Story story = storyRepository.findById(sno).orElseGet(null);
+        //Story.setStoryCount((int)(story.get().getStoryCount() + 1));
+        story.setStoryCount(story.getStoryCount() + 1);
+        storyRepository.save(story);
+        return story;
     }
 
     public void storyForm(Story story, MultipartFile file1 , MultipartFile file2 , MultipartFile file3) throws Exception {
@@ -64,6 +68,10 @@ public class StoryService {
 
     public void storyDelete(Long id) {
         storyRepository.deleteById(id);
+    }
+
+    public Object storyWrite(Long sno) {
+        return storyRepository.findById(sno).orElseGet(null);
     }
 
 

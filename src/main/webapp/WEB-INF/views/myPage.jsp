@@ -41,12 +41,12 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>예약상태</th>
                         <th>No</th>
                         <th>예약한 농장</th>
                         <th>예약기간</th>
                         <th>예약날짜</th>
                         <th>예약상세</th>
+                        <th>예약상태</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,12 +56,12 @@
 
                                 <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                                 <tr>
-                                    <td>${resv.status}</td>
                                     <td>${i.count}</td>
-                                    <td>(${resv.rvFarmIdx})${wfSubject.get(i.index)}</td>
+                                    <td>${wfSubjectList[i.index]}</td>
                                     <td>${resv.rvUseDate}년</td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
                                     <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
+                                    <td>${resv.status}</td>
                                 </tr>
                             </c:forEach>
                         </c:when>

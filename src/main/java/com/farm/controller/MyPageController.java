@@ -2,6 +2,7 @@ package com.farm.controller;
 
 
 import com.farm.domain.Member;
+import com.farm.domain.Review;
 import com.farm.domain.Story;
 import com.farm.service.CommonService;
 import com.farm.service.MemberService;
@@ -59,12 +60,13 @@ public class MyPageController {
 
         //String storyMemId = storyService.getStoryMemId(memid);
         //List<Story> recentStories = storyService.getRecentStories(storyMemId,memid);
-        try {
+        /*try {
             memberService.getMypgList(model,idx);
         }catch (Exception e) {
             System.out.println("idx값이 없습니다.");
 
-        }
+        }*/
+        memberService.getMypgList(model,idx);
 
         return "myPage";
     }
@@ -190,6 +192,13 @@ public class MyPageController {
     public String mypgStory(HttpSession session, Model model, @RequestParam(value="page" , defaultValue = "1") int page) {
         Long idx = ((Member) session.getAttribute("loginUser")).getMemIdx();
         commonService.myList(idx, page, Story.class, model);
+        return "mypgStory";
+    }
+
+    @GetMapping("/mypgReview")
+    public String mypgReview(HttpSession session, Model model, @RequestParam(value="page" , defaultValue = "1") int page) {
+        Long idx = ((Member) session.getAttribute("loginUser")).getMemIdx();
+        commonService.myList(idx, page, Review.class, model);
         return "mypgStory";
     }
 

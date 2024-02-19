@@ -3,16 +3,16 @@ package com.farm.service;
 import com.farm.domain.*;
 import com.farm.dto.MemInfoDto;
 import com.farm.repository.*;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+@Slf4j
 @Service
 public class CommonService {
 
@@ -28,7 +28,9 @@ public class CommonService {
     MemberRepository memberRepository;
     @Autowired
     StoryReplyRepository storyReplyRepository;
-    //전체 값 리스트 출력
+    @Autowired
+    ReviewRepository reviewRepository;
+
 
     //list 뿌리기
     public void listAll(int page , Model model , Class<?> objClass) {
@@ -230,8 +232,30 @@ public class CommonService {
         //return srList;
     }
 
-    public void replyDelete(Long id) {
-        storyReplyRepository.deleteById(id);
+    public void replyDelete(Long id, Class<?> objClass , HttpSession session) {
+        Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
+        if(objClass.equals(StoryReply.class)) {
+            if(Objects.equals(idx, storyReplyRepository.findById(id).get().getSrMemIdx())) {
+                storyReplyRepository.deleteById(id);
+            }else {
+                log.error("계정 오류");
+            }
+        }
+        if(objClass.equals(Reservation.class)) {
+            if(Objects.equals(idx, reservationRepository.findById(id).get().getRvMemIdx())) {
+                reservationRepository.deleteById(id);
+            }else {
+                log.error("계정 오류");
+            }
+        }
+        if(objClass.equals(Story.class)) {
+            if(Objects.equals(idx, storyRepository.findById(id).get().getStoryMemIdx())) {
+                storyRepository.deleteById(id);
+            }else {
+                log.error("계정 오류");
+            }
+        }
+
     }
 
     public void myList(Long idx,int page, Class<?> objClass, Model model) {
@@ -243,6 +267,8 @@ public class CommonService {
             //model.addAttribute("myStory", myStory);
         }else if(objClass.equals(Reservation.class)) {
             result = reservationRepository.findByRvMemIdxOrderByRvDateDesc(idx,pageable);
+        }else if(objClass.equals(Review.class)) {
+            result = reviewRepository.findByReviewMemIdxOrderByReviewDateDesc(idx,pageable);
         }
         listPage(model , result, objClass);
     }
