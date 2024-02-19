@@ -1,11 +1,15 @@
 package com.farm.service;
 
 import com.farm.domain.Member;
+import com.farm.domain.Reservation;
+import com.farm.domain.Review;
+import com.farm.domain.Story;
 import com.farm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -65,40 +69,6 @@ public class MemberService {
         return memberRepository.existsByMemid(memid);
     }
 
-    public String uploadImage(MultipartFile file, Long memIdx) throws IOException {
-
-        // 1. Null 또는 빈 파일 확인
-        if (file.isEmpty()) {
-            throw new IllegalArgumentException("파일이 비어 있습니다");
-        }
-
-        // 2. 파일 유형 확인 (이미지인지)
-        if (!file.getContentType().startsWith("image/")) {
-            throw new IllegalArgumentException("잘못된 파일 유형입니다. 이미지를 업로드하세요");
-        }
-
-        //프로필사진 추가
-        String projectPath = System.getProperty("user.dir")
-                + "\\src\\main\\resources\\static\\files";
-
-        UUID uuid = UUID.randomUUID();
-
-        // 3. 파일 이름 충돌 처리
-        String fileName = uuid+"_"+file.getOriginalFilename();
-
-        // 4. 파일을 저장할 디렉토리 생성
-        File saveDirectory = new File(projectPath);
-        if (!saveDirectory.exists()) {
-            saveDirectory.mkdirs();
-        }
-        //Member member = new Member();
-        //member.setMemImg("/files/"+fileName);
-        File saveFile = new File(projectPath, fileName);
-        file.transferTo(saveFile);
-
-        return "/files/"+fileName;
-
-    }
 
     /* 회원가입시 유효성 체크 */
     /* 안됨
@@ -192,38 +162,20 @@ public class MemberService {
         System.out.println("wfSubject = " + reservationRepository.findWfSubjectByMemIdx(memIdx));*/
 
         model.addAttribute("wfSubjectlist",reservationRepository.findWfSubjectByMemIdx(memIdx));
+        model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(memIdx));
 
     }
 
-//    public Object getMypgList(Long idx) {
-//        return null;
-//    }
-
-
-/*
-    public List<Member> selectAll() {
-        List<Member> members = memberRepository.findAll();
-
-        return members;
+    public void reviewWrite(Long id,Model model) {
+        Long wrfidx = reservationRepository.findById(id).orElseGet(null).getRvFarmIdx();
+        model.addAttribute("reviewReservation",reservationRepository.findById(id).orElseGet(null));
+        model.addAttribute("reviewFarm",farmRepository.findById(wrfidx).orElseGet(null));
+        /*model.addAttribute("review",reviewRepository.findById(id).orElseGet(null));
+        System.out.println("test3");*/
     }
 
-    public List<Member> select(String idx,String input) {
-        List<Member> members = memberRepository.findAll();
-        //System.out.println(members);
-        //System.out.println(idx + " : " + input);
-        if(idx.equals("name")) {
-            members = memberRepository.findByNameLike(input);
-        }
-        if(idx.equals("email")){
-            members = memberRepository.findByEmailLike(input);
-        }
-        //System.out.println(members);
-   *//*     switch(idx) {
-            case "name": members = memberRepository.findByName(input); break;
-            //case "id": members = memberRepository.findById(Long.parseLong(input)); break;
-            case "email": members = memberRepository.findByEmail(input); break;
-        }*//*
+    public Review reviewForm(Review review,Long rno) {
 
-        return members;
-    }*/
+        return reviewRepository.save(review);
+    }
 }

@@ -9,7 +9,8 @@
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
     <div class="story_con">
-        <form action="<c:out value="${not empty param.sno ? 'storyUpdate' : 'storyForm'}"/>" method="post" enctype="multipart/form-data">
+        <form action="<c:out value="${not empty param.sno ? 'storyUpdate' : ''}"/>" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="storyIdx" name="storyIdx" value="${param.sno}">
             <div class="storyW_tt">
                 <label for="title" class="story_listtt">스토리 제목</label>
                 <input type="text" id="title" name="storySubject" value="${story.storySubject}" required>
@@ -21,7 +22,6 @@
             <div class="story_farm">
                 <input type="hidden" id="farm_select" name="farm_select">
                 <div class="story_listtt">농장 선택</div>
-                <c:if test="${param.sno eq null}">
                 <ul class="farm_select">
                     <c:forEach items="${localArray}" var="localArray" varStatus="idx">
                         <li>
@@ -30,11 +30,10 @@
                         </li>
                     </c:forEach>
                 </ul>
-                </c:if>
             </div>
             <div class="story_img_submit">
                 <ul class="story_submit_ul">
-                    <c:if test="${not empty param.sno}">
+                    <%--<c:if test="${not empty param.sno}">
                         <li>
                             <input type="radio" id="storyWfIdx${status.index}" name="storyWfIdx" value="" class="" >
                             <label for="storyWfIdx${status.index}">
@@ -44,7 +43,7 @@
                                 <span class="farm_list_tt">농장데스네</span>
                             </label>
                         </li>
-                    </c:if>
+                    </c:if>--%>
                 </ul>
             </div>
             <div class="farm_img">
@@ -53,7 +52,7 @@
                 </div>
                 <ul>
                     <li class="farm_img1">
-                        <input id="fileInput" type="file" multiple name="file1" onchange='readFile(this)' hidden/>
+                        <input id="fileInput" type="file" multiple name="file1" value="${story.storyImg1}" onchange='readFile(this)' hidden/>
                         <label for="fileInput">
                         <c:choose>
                             <c:when test="${story.storyImg1 ne null}">
@@ -66,7 +65,7 @@
                         </label>
                     </li>
                     <li class="farm_img2" <c:if test="${story.storyImg2 ne null}">style="display:block"</c:if>>
-                        <input id="fileInput2" type="file" multiple name="file2" onchange='readFile(this)' hidden/>
+                        <input id="fileInput2" type="file" multiple name="file2" onchange='readFile(this)' value="${story.storyImg2}" hidden/>
                         <label for="fileInput2">
                             <c:choose>
                                 <c:when test="${story.storyImg2 ne null}">
@@ -79,7 +78,7 @@
                         </label>
                     </li>
                     <li class="farm_img3" <c:if test="${story.storyImg3 ne null}">style="display:block"</c:if>>
-                        <input id="fileInput3" type="file" multiple name="file3" onchange='readFile(this)' hidden/>
+                        <input id="fileInput3" type="file" multiple name="file3" value="${story.storyImg3}" onchange='readFile(this)' hidden/>
                         <label for="fileInput3">
                             <c:choose>
                                 <c:when test="${story.storyImg3 ne null}">
@@ -101,27 +100,37 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         let farm_local = $("input[name='farm_local']:checked").val();
         farmlocal(farm_local);
 
-        $("input[name='farm_local']").change(function(){
+        $("input[name='farm_local']").change(function () {
             farmlocal($(this).val());
         });
-       /* $(".story_submit button").click(function(){
-            $(this)
-        });*/
+        /* $(".story_submit button").click(function(){
+             $(this)
+         });*/
+
+        <%--<c:if test="${param.sno ne null}">
+        var checkedInput = $(".story_submit_ul input:checked");
+        console.log(checkedInput);
+
+        if (checkedInput.length > 0) {
+            var sTop = checkedInput.closest("li").offset().top;
+            $(".story_submit_ul").scrollTop(sTop);
+        }
+        </c:if>--%>
     });
 
-    $(".farm_img li input").change(function(){
+    $(".farm_img li input").change(function () {
         $(this).parents("li").next("li").show();
     });
-    <c:if test="${param.sno eq null}">
-    function farmlocal(input){
+
+    function farmlocal(input) {
         $.ajax({
-            url:"/storyLocal",
-            data:{'local':input,"use":"storyWrite"},
-            type:"post",
+            url: "/storyLocal",
+            data: {'local': input, "use": "storyWrite"},
+            type: "post",
             success: function (data) {
                 console.log("success");
                 let content ="";
@@ -151,7 +160,7 @@
             }
         });
     };
-    </c:if>
+
 
 
     function readFile(input) {

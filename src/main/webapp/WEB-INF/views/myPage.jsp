@@ -11,9 +11,9 @@
     <div class="my-wrap">
         <ul class="my-info-wrap">
             <li class="file-top my-img">
-                    <span>
-                        <img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'">
-                    </span>
+                <span>
+                    <img src="${loginUser.memImg}" onerror="this.src='img/profileImg_w.png'">
+                </span>
             </li>
             <li class="my-info">
                 <div>
@@ -51,12 +51,12 @@
                 <tbody>
                 <c:choose>
                     <c:when test="${not empty reservations}">
+                        <c:set var="nowNum" value="${fn:length(reservations)}"/>
                         <c:forEach var="resv" items="${reservations}" varStatus="i">
-
                             <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                             <tr>
-                                <td>${i.count}</td>
-                                <td>${wfSubjectList[i.index]}</td>
+                                <td>${nowNum - i.index}</td>
+                                <td>${wfSubjectlist[i.index]}</td>
                                 <td>${resv.rvUseDate}년</td>
                                 <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
                                 <td><a href="reservationDetail?id=${resv.rvIdx}" class="ellipsis">상세보기</a></td>
@@ -73,40 +73,44 @@
             </table>
         </div>
         <div class="my-review-wrap board_con">
-            <div class="mypg_tt">
-                <h3>최근 리뷰</h3>
-                <a href="/mypgReview">더보기 <i class="xi-angle-right-min"></i></a>
-            </div>
-            <table>
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>방문한 농장</th>
-                    <th>제목</th>
-                    <th>리뷰작성일자</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:choose>
-                    <c:when test="${not empty reviews}">
-                        <c:forEach var="review" items="${reviews}" varStatus="i">
-                            <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
+
+            <div class="my-review-wrap board_con">
+                <div class="mypg_tt">
+                    <h3>최근 리뷰</h3>
+                    <a href="/mypgReview">더보기 <i class="xi-angle-right-min"></i></a>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>방문한 농장</th>
+                        <th>제목</th>
+                        <th>리뷰작성일자</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:choose>
+                        <c:when test="${not empty reviews}">
+                            <c:set var="nowNum" value="${fn:length(reviews)}"/>
+                            <c:forEach var="review" items="${reviews}" varStatus="i">
+                                <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
+                                <tr>
+                                    <td>${nowNum - i.index}</td>
+                                    <td>${reviewWfSubjectlist[i.index]}</td>
+                                    <td><a href="mypgReviewDetail?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
                             <tr>
-                                <td>${i.count}</td>
-                                <td><a href="listDetail?id=${review.reviewWfIdx}">${wfSubjectlist[i.index]}</a></td>
-                                <td><a href="mypageReview?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>
-                                <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                <td colspan="4">자료가 없습니다.</td>
                             </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="3">자료가 없습니다.</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-                </tbody>
-            </table>
+                        </c:otherwise>
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="my-story-wrap">
             <div class="mypg_tt">

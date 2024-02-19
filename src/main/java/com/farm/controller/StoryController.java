@@ -78,6 +78,24 @@ public class StoryController {
 
         return "redirect:/story";
     }
+    @PostMapping("/storyUpdate")
+    public String storyUpdate(Story story , @RequestParam("storyIdx") Long sno , HttpSession session , @RequestParam(value="file1" , required = false) MultipartFile file1 , @RequestParam(value="file2" , required = false) MultipartFile file2 , @RequestParam(value="file3" , required = false) MultipartFile file3) {
+        //System.out.println("loginUser = " + loginUser);
+        story.setStoryMemIdx(((Member)session.getAttribute("loginUser")).getMemIdx());
+        story.setStoryMemName(((Member)session.getAttribute("loginUser")).getName());
+        story.setStoryMemImg(((Member)session.getAttribute("loginUser")).getMemImg());
+        story.setStoryMemId(((Member)session.getAttribute("loginUser")).getMemid());
+
+        try {
+            System.out.println("통과");
+            storyService.storyUpdate(story,sno,file1,file2,file3);
+        }catch (Exception e) {
+            System.out.println("불통");
+            e.printStackTrace();
+        }
+
+        return "redirect:/story";
+    }
 
     @PostMapping("/storyReplySave")
     @ResponseBody

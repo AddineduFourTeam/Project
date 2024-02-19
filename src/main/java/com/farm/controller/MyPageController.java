@@ -1,12 +1,11 @@
 package com.farm.controller;
 
 
-import com.farm.domain.Farm;
 import com.farm.domain.Member;
 import com.farm.domain.Review;
-import com.farm.domain.Reservation;
 import com.farm.domain.Story;
 import com.farm.repository.ReservationRepository;
+import com.farm.repository.ReviewRepository;
 import com.farm.service.CommonService;
 import com.farm.service.ListService;
 import com.farm.service.MemberService;
@@ -20,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.sql.CommonDataSource;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -44,6 +40,9 @@ public class MyPageController {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Autowired
+    ReviewRepository reveiwRepository;
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
@@ -111,7 +110,7 @@ public class MyPageController {
 
         if(!file.isEmpty() && file != null){
             try{
-                String filename =  memberService.uploadImage(file, memIdx);
+                String filename =  commonService.uploadImage(file, memIdx);
                 iMyInfo.setMemImg(filename);
             }catch(IOException e){
                 e.printStackTrace();
@@ -209,8 +208,66 @@ public class MyPageController {
     public String mypgReview(HttpSession session, Model model, @RequestParam(value="page" , defaultValue = "1") int page) {
         Long idx = ((Member) session.getAttribute("loginUser")).getMemIdx();
         commonService.myList(idx, page, Review.class, model);
-        return "mypgStory";
+        return "mypgReview";
     }
+    @GetMapping("/mypgReviewWrite")
+    public String mypgReviewWrite(Model model,@RequestParam(value="id", defaultValue="1") Long id) {
+        //System.out.println("id : "+id);
+        memberService.reviewWrite(id,model);
+        return "mypgReviewWrite";
+    }
+
+    @PostMapping("/reviewForm")
+    public String reviewForm(
+            @RequestParam("reviewRvIdx") Long rno,
+            Review review ,
+            HttpSession session ,
+            @RequestParam(value="file1",required = false) MultipartFile file1,
+            @RequestParam(value="file2",required = false) MultipartFile file2,
+            @RequestParam(value="file3",required = false) MultipartFile file3) {
+        //System.out.println("file1 = " + file1 + ", file2 = " + file2 + ", file3 = " + file3);
+        Long memIdx = ((Member)session.getAttribute("loginUser")).getMemIdx();
+
+        try{
+            if(file1 != null && !file1.isEmpty()) {
+                System.out.println("file1");
+                String filename1 =  commonService.uploadImage(file1, memIdx);
+                review.setReviewImg1(filename1);
+            }
+            if(file2 != null && !file2.isEmpty()) {
+                System.out.println("file1");
+                String filename2 =  commonService.uploadImage(file2, memIdx);
+                review.setReviewImg1(filename2);
+            }
+            if(file3 != null && !file3.isEmpty()) {
+                System.out.println("file1");
+                String filename3 =  commonService.uploadImage(file3, memIdx);
+                review.setReviewImg1(filename3);
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        review.setReviewMemIdx(memIdx);
+        review.setReviewRvIdx(rno);
+        Review savedReview = memberService.reviewForm(review,rno);
+        return "redirect:/mypgReviewDetail?id="+savedReview.getReviewIdx();
+    }
+
+    @GetMapping("/mypgReviewDetail")
+    public String mypgReviewDetail(Model model,@RequestParam(value="id",required = false) Long id) {
+        model.addAttribute("review", reveiwRepository.findById(id).get());
+        return "mypgReviewDetail";
+    }
+
+
+    @PostMapping("/reviewDelete")
+    @ResponseBody
+    public String reviewDelete(@RequestParam("id") Long id,HttpSession session) {
+        commonService.replyDelete(id,Story.class,session);
+        return "storyDetail";
+    }
+
 
     @GetMapping("/mypageReservation")
     public String mypageReservation( HttpSession session, Model model) {

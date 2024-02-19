@@ -458,7 +458,7 @@
     }
 
     function myStoryDelete(id){
-        if(comfirm("게시물을 삭제 하시겠습까?")) {
+        if(confirm("게시물을 삭제 하시겠습까?")) {
             $.ajax({
                 url: "/storyDelete",
                 data: {"id": id},
