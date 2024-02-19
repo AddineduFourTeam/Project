@@ -3198,6 +3198,16 @@ input:-webkit-autofill:active {
     border-bottom-left-radius: 20px;
     display: none;
 }
+.rv_info .info_con .write{
+    margin: 10px 0;
+}
+.rv_info .info_con .write a{
+    font-size: 1.2rem;
+    color: var(--pointColor);
+}
+.rv_info .info_con .write a span{
+    font-weight: bold;
+}
 .rv_info .info_con ul{
     width: 100%;
     padding-top: 20px;
@@ -3230,6 +3240,11 @@ input:-webkit-autofill:active {
 .rv_info .info_con ul li div.txt{
     display: flex;
     gap: 14px;
+}
+.rv_info .info_con ul li div.txt .option{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 .rv_info .info_con ul li div.txt span i{
     font-size: 2rem;

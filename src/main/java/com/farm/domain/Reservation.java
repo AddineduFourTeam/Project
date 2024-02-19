@@ -24,6 +24,7 @@ public class Reservation {
     private Long rvMemIdx; // 사용자 고유 식별자
     private Long rvFarmIdx; // 농장 고유 식별자
     private Integer rvUseDate  = 0; // 예약 기간
+    private String rvUseYearDate; // 예약 기간(년)
     private char status = 'N'; // 예약 상태(확정 y, 취소 n)
     private Integer rvPrice = 0; // 예약 가격
     private Integer rvFeet = 0; // 평 수

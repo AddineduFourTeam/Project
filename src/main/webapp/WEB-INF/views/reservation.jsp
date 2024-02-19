@@ -22,7 +22,7 @@
                 <c:forEach begin="${year}" end="${year+5}" var="year">
                     <div class="date">
                         <label for="year${year}">
-                            <input type="checkbox" name="year" id="year${year}">
+                            <input type="checkbox" name="year" id="year${year}" value="${year}">
                             <span class="txt">${year}</span>
                         </label>
                     </div>

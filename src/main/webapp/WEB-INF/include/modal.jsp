@@ -70,11 +70,11 @@
         });
 
         $("input[name='option']").change(function() {
-            let optionName = $(this).val();
+            //let optionName = $(this).val();
             if ($(this).is(":checked")) {
-                rvOptions[optionName] = "Y";
+                $(this).val("Y");
             } else {
-                rvOptions[optionName] = "N";
+                $(this).val("N");
             }
         });
 
@@ -116,6 +116,12 @@
         };
 
         if(validate()) {
+            var arr = [];
+            $("input[name='year']:checked").each(function(){
+                arr.push(parseInt($(this).val()));
+            });
+
+            console.log(arr);
             $.ajax({
                 type: 'POST',
                 url: "/reservationSave",
@@ -126,6 +132,7 @@
                     "status" : "Y",
                     "rvPrice" :  $(".rs_total_price").text(),
                     "rvFeet" : $(".rs_feet").text(),
+                    "rvUseYearDate" : arr,
                     ...rvOptionsData
                 },
                 success: function (){
