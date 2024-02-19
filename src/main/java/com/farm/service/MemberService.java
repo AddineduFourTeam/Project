@@ -192,7 +192,6 @@ public class MemberService {
         System.out.println("wfSubject = " + reservationRepository.findWfSubjectByMemIdx(memIdx));*/
         model.addAttribute("wfSubjectlist",reservationRepository.findWfSubjectByMemIdx(memIdx));
         //System.out.println("wfSubjectlist = " + reservationRepository.findWfSubjectByMemIdx(memIdx));
-
     }
 
 

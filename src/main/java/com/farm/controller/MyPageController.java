@@ -63,9 +63,7 @@ public class MyPageController {
             memberService.getMypgList(model,idx);
         }catch (Exception e) {
             System.out.println("idx값이 없습니다.");
-
         }
-
         return "myPage";
     }
 

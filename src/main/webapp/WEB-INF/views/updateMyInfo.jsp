@@ -6,7 +6,7 @@
     <div class="uinfo-wrap">
         <div class="uinfo-form ">
             <form action="myPagePassCheck" method="post" id="myPagePassCheck">
-                <h3>회원정보 변경을 위해 비밀번호를 입력해주세요</h3>
+                <h3>회원정보 변경을 위해<br/>비밀번호를 입력해주세요</h3>
                 <div id="cancelFail" style="display: none;">
                     <p class="fail_check">
                         <b>비밀번호가 일치하지 않습니다</b>

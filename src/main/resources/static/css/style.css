@@ -2581,10 +2581,19 @@ input:-webkit-autofill:active {
 
 .uinfo-form li{list-style-type: none;}
 .uinfo-form {
-    width:300px;
+    max-width:350px;
+    /*width:100%;*/
     margin-top:15px;
+
+
+    padding:50px 30px;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
 }
-.uinfo-form  h3{
+.uinfo-form h3{
     font-size:25px;
     text-align:center;
 }
@@ -2605,26 +2614,37 @@ input:-webkit-autofill:active {
     border-radius: 40px;
     padding:20px;
 }
+
+.uinfo-input-box p{
+    font-size: 13px;
+}
 .input-box input::placeholder{
     color:#000;
     font-size:11px;
 }
 
-.update-pass-wrap{
+.upass-wrap{
     width:75%;
     display: flex;
     justify-content: center;
     align-items: center;
     position:relative;
     z-index: 1;
+
 }
-.update-pass-form{
+.upass-form{
     max-width:300px;
     width: 100%;
+    padding:30px 30px;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
 }
-.update-pass-form li{list-style-type: none;}
+.upass-form li{list-style-type: none;}
 
-.update-pass-h{
+.upass-h{
     margin-bottom: 30px;
 }
 
@@ -2643,6 +2663,10 @@ input:-webkit-autofill:active {
     border:2px solid rgba(0, 0, 0, .7);
     border-radius: 40px;
     padding:15px;
+}
+
+.upass-input-box p{
+    font-size: 13px;
 }
 
 
