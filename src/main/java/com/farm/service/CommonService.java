@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -31,6 +34,41 @@ public class CommonService {
     @Autowired
     ReviewRepository reviewRepository;
 
+
+    public String uploadImage(MultipartFile file, Long memIdx) throws IOException {
+
+        // 1. Null 또는 빈 파일 확인
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("파일이 비어 있습니다");
+        }
+
+        // 2. 파일 유형 확인 (이미지인지)
+        if (!file.getContentType().startsWith("image/")) {
+            throw new IllegalArgumentException("잘못된 파일 유형입니다. 이미지를 업로드하세요");
+        }
+
+        //프로필사진 추가
+        String projectPath = System.getProperty("user.dir")
+                + "\\src\\main\\resources\\static\\files";
+
+        UUID uuid = UUID.randomUUID();
+
+        // 3. 파일 이름 충돌 처리
+        String fileName = uuid+"_"+file.getOriginalFilename();
+
+        // 4. 파일을 저장할 디렉토리 생성
+        File saveDirectory = new File(projectPath);
+        if (!saveDirectory.exists()) {
+            saveDirectory.mkdirs();
+        }
+        //Member member = new Member();
+        //member.setMemImg("/files/"+fileName);
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
+        return "/files/"+fileName;
+
+    }
 
     //list 뿌리기
     public void listAll(int page , Model model , Class<?> objClass) {
@@ -112,6 +150,8 @@ public class CommonService {
             sort = Sort.by( Sort.Order.desc("storyDate"));
         }else if(objClass.equals(Board.class)) {
             sort = Sort.by( Sort.Order.desc("boardDate"));
+        }else if(objClass.equals(Review.class)) {
+            sort = Sort.by( Sort.Order.desc("reviewDate"));
         }
         return PageRequest.ofSize(10).withPage(nPage).withSort(sort);
     }
@@ -178,27 +218,6 @@ public class CommonService {
            result = storyReplyRepository.findBySrStoryIdx(id, pageable);
 
             listPage(model , result,objClass);
-            /*Member member = memberRepository.findById(sr.getSrMemIdx()).orElseGet(() -> null);
-            MemInfoDto memInfoDto = new MemInfoDto(sr, member);
-            System.out.println("memInfoDto = " + memInfoDto); */
-
-            /*List<?> content = result.getContent();
-            int totalPages = result.getTotalPages(); // 전제 페이지 수
-            int pageNumber = result.getNumber() + 1; // 현재페이지 0부터 시작
-
-            int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5
-            int startBlockPage = ((pageNumber-1)/pageBlock)*pageBlock +1 ; //현재 페이지가 7이라면 1*5+1=6
-            int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.
-            endBlockPage = totalPages<endBlockPage? totalPages:endBlockPage;
-
-            model.addAttribute("Replylist", content);
-            model.addAttribute("ReplySize", content.size());
-            model.addAttribute("totalPages", totalPages);
-            model.addAttribute("pageNumber", pageNumber);
-            model.addAttribute("startBlockPage", startBlockPage);
-            model.addAttribute("endBlockPage", endBlockPage);*/
-
-
         }
 
     }
@@ -264,13 +283,14 @@ public class CommonService {
 
         if(objClass.equals(Story.class)) {
             result = storyRepository.findByStoryMemIdx(idx,pageable);
-            //model.addAttribute("myStory", myStory);
         }else if(objClass.equals(Reservation.class)) {
             result = reservationRepository.findByRvMemIdxOrderByRvDateDesc(idx,pageable);
         }else if(objClass.equals(Review.class)) {
             result = reviewRepository.findByReviewMemIdxOrderByReviewDateDesc(idx,pageable);
+            //model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(idx));
         }
         listPage(model , result, objClass);
     }
+
 }
 

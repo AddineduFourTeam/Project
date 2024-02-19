@@ -18,14 +18,17 @@ public class Review {
     private Long reviewIdx;
     private String reviewSubject;
     private String reviewContent;
-    private String reviewImg_1;
-    private String reviewImg_2;
+    private String reviewImg1;
+    private String reviewImg2;
+    private String reviewImg3;
+
     @Column(insertable=false, columnDefinition="NUMBER DEFAULT 0")
     private String reviewCount;
 
     @CreatedDate
     private String reviewDate;
-    private Long reviewWfIdx;
+    private Long reviewRvIdx;
+    private int reviewWfIdx;
     private Long reviewMemIdx;
 
 }

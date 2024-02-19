@@ -2546,6 +2546,7 @@ input:-webkit-autofill:active {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 130px;
 }
 
 .my-info-wrap li{
@@ -3001,6 +3002,86 @@ input:-webkit-autofill:active {
 .my-wrap > div.story_list {
     margin-top: 0;
 }
+.my-wrap > div.storybtn {
+    padding-bottom: 0;
+}
+
+
+/* mypg review */
+
+.review_txt_con {
+    border:1px solid var(--border);
+    padding: 20px 30px;
+}
+.review_farm_con {
+    display: flex;
+    align-items: center;
+}
+.review_farm_img {
+    width: 250px;
+    padding-right: 30px;
+}
+.review_farm_img .farmImg {
+    width: 100%;
+    height: 220px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.review_farm_img .farmImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.review_farm_img b {
+    display: block;
+    margin-bottom: 5px;
+}
+.review_farm_text {
+    flex: 1;
+}
+.review_farm_text ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.review_farm_text ul li{
+    margin-bottom: 35px;
+    width: calc(50% - 20px);
+    display: flex;
+    justify-content: space-between;
+}
+.review_farm_text ul li:first-child {
+    width: 100%;
+                        }
+.review_farm_text ul li span {
+    color: #999;
+    width: 75px;
+}
+.review_farm_text ul li b {
+    display: block;
+    width: calc(100% - 75px);
+    text-align: right;
+    word-break: keep-all;
+}
+.review_farm_text ul li b.color {
+    color: var(--pointColor);
+}
+.review_farm_text ul li b span:last-child {
+    display: none;
+}
+.review_farm_text ul li:nth-last-of-type(-n + 2) {
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+
 
 
 

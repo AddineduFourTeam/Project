@@ -15,6 +15,9 @@
         <c:if test="${fn:contains(folderName, 'mypgStory')}">
         - 내 스토리
         </c:if>
+        <c:if test="${fn:contains(folderName, 'mypgReview')}">
+        - 내 리뷰
+        </c:if>
         <c:if test="${fn:contains(folderName, 'mypageReservation')}">
             - 농장 예약 내역
         </c:if>
@@ -34,7 +37,7 @@
                         예약내역
                     </a>
                 </li>
-                <li class="<c:if test="${folderName eq 'mypgReview'}">on</c:if>">
+                <li class="<c:if test="${fn:contains(folderName, 'mypgReview')}">on</c:if>">
                     <a href="mypgReview">
                         리뷰내역
                     </a>
