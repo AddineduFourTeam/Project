@@ -2634,7 +2634,7 @@ input:-webkit-autofill:active {
     padding:15px;
 }
 
-.forgot-pass-form .forgot-pass{
+.forgot-pass{
     display: flex;
     justify-content: flex-end;
     font-size:12px;

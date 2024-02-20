@@ -16,13 +16,6 @@ import java.util.Optional;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findTop5ByRvMemIdxOrderByRvDateDesc(Long memIdx);
 
-    /*List<String> findFarmWfSubjectByRvMemIdx(Long memIdx);*/
-
-    /*@Query("select fm.wfSubject from Reservation res " +
-           "join Farm fm on res.rvFarmIdx = fm.wfIdx " +
-           "where res.rvMemIdx = :memIdx")
-    String findWfSubjectByMemIdx(Long memIdx);*/
-
     @Query("select fm.wfSubject from Farm fm " +
             "join Reservation rv on rv.rvFarmIdx = fm.wfIdx " +
             "where rv.rvMemIdx = :memIdx order by rv.rvDate desc")
