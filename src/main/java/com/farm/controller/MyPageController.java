@@ -44,7 +44,7 @@ public class MyPageController {
     ReservationRepository reservationRepository;
 
     @Autowired
-    ReviewRepository reveiwRepository;
+    ReviewRepository reviewRepository;
     @Autowired
     ReservationService reservationService;
 
@@ -60,7 +60,6 @@ public class MyPageController {
      */
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
-        // System.out.println("로그인유저:"+session.getAttribute("loginUser"));
         Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
 
         memberService.getMypgList(model,idx);
@@ -77,7 +76,7 @@ public class MyPageController {
     @ResponseBody
     public Boolean myPagePassCheck(@RequestParam("pass") String checkPass,
                                    HttpSession session){
-        System.out.println("checkPass:"+checkPass);
+        //System.out.println("checkPass:"+checkPass);
         Member loginUser = (Member) session.getAttribute("loginUser");
 
         if(loginUser != null && pEncoder.matches(checkPass,loginUser.getPass())){
@@ -294,7 +293,7 @@ public class MyPageController {
 
     @GetMapping("/mypgReviewDetail")
     public String mypgReviewDetail(Model model,@RequestParam(value="id",required = false) Long id) {
-        Review review = reveiwRepository.findById(id).get();
+        Review review = reviewRepository.findById(id).get();
         model.addAttribute("review",review );
         model.addAttribute("reviewFarm",farmRepository.findById(review.getReviewWfIdx()).orElseGet(null));
         model.addAttribute("reviewReservation",reservationRepository.findById(review.getReviewRvIdx()).orElseGet(null));

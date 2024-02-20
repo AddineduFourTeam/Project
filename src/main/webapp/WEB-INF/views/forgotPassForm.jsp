@@ -106,15 +106,6 @@
             });
         });
     });
-    /* ChangePass넘어오는지 확인용
-    var ChangePass = <%--<%= request.getAttribute("ChangePass") %>;--%>
-    console.log(ChangePass);
-    if (ChangePass === true) {
-        $("#forgotPassForm").show();
-    } else {
-        $(".fail_check").show();
-    }
-    */
 
     // forgotPassCheck폼에 있던 memid값을 forgotPassForm으로 넘겨줌
     $(()=>{

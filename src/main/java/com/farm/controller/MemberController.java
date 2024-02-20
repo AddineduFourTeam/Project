@@ -47,8 +47,6 @@ public class MemberController {
     @GetMapping("/idCheck")
     @ResponseBody
     public boolean checkId(@RequestParam("id") String memid){
-        //System.out.println("idCheck 메서드 호출됨, memid: " + memid);
-
         return memberService.idCheck(memid);
     }
 
@@ -72,7 +70,6 @@ public class MemberController {
         redirectAttributes.addFlashAttribute("insertComplete", true);
 
         return "redirect:/login";
-  
     }
 
     /*
@@ -108,7 +105,6 @@ public class MemberController {
             }else{
                 model.addAttribute("loginFail", true);
                 return "login";
-
             }
         }else{
             // 사용자 정보가 없는 경우

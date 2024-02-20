@@ -4,8 +4,8 @@
 <div class="con wrap">
 <%@include file="../include/mypg_menu.jsp" %>
     <div class="uinfo-wrap">
-        <div class="uinfo-form ">
-            <form action="myPagePassCheck" method="post" id="myPagePassCheck">
+        <div>
+            <form action="myPagePassCheck" method="post" id="myPagePassCheck" class="uinfo-form">
                 <h3>회원정보 변경을 위해<br/>비밀번호를 입력해주세요</h3>
                 <div id="cancelFail" style="display: none;">
                     <p class="fail_check">
@@ -24,23 +24,23 @@
                 <input type="hidden" name="memid">
             </form>
         </div>
-        <div id="updateMyInfo-wrap" style="display:none;">
+        <div id="updateMyInfo-wrap" class="uinfo-form" style="display:none;">
             <form action="updateMyInfoForm" onsubmit="validateForm()" method="post" id="updateMyInfo" modelAttribute="inputMyInfo" enctype="multipart/form-data">
                 <ul style="list-style-type: none">
                     <li>
                         <h3><p>${loginUser.memid}님 회원정보 변경</p></h3>
                     </li>
-                    <li class="join-input-box">
+                    <li class="uinfo-input-box">
                         <p>이름</p>
                         <input name="name" id="name"  value="${loginUser.name}">
                         <div id="checkNameResult" style="font-size:0.8em; display:none;"></div>
                     </li>
-                    <li class="join-input-box">
+                    <li class="uinfo-input-box">
                         <p>생년월일</p>
                         <input name="birth" id="birth"  value="${loginUser.birth}">
                         <div id="checkBirthResult" style="font-size:0.8em; display:none;"></div>
                     </li>
-                    <li class="join-input-box">
+                    <li class="uinfo-input-box">
                         <p>휴대전화번호</p>
                         <input name="phone" id="phone"  value="${loginUser.phone}">
                         <div id="checkPhoneResult" style="font-size:0.8em; display:none;"></div>
@@ -125,7 +125,6 @@
             })
         })
     });
-
 
     $(function() {
         $("#file").on('change', function(){
