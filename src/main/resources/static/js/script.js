@@ -17,24 +17,10 @@ $(document).ready(function(){
     /* main */
 
     $(window).scroll(function(){
-        if($(this).scrollTop() > 20) {
-            $("header").addClass("on");
-            $("h1 img").attr("src","/img/logo.png");
-            $(".tnb span img").on("error", function() {
-                $(this).attr("src", "/img/profileImg.png");
-            });
-            $(".list_nav").addClass("nav_up");
-
-        }else {
-            $("header").removeClass("on");
-            $(".index_body h1 img").attr("src", "/img/logo_w.png");
-            $(".tnb span img").on("error", function() {
-                $(this).attr("src", "/img/profileImg_w.png");
-            });
-            $(".list_nav").removeClass("nav_up");
-        }
+        scroll();
     });
-    if($("header").hasClass("on") == true) {
+    scroll();
+    if($("header").hasClass("on") === true) {
         $("h1 img").attr("src","/img/logo.png");
     }else {
         $(".index_body h1 img").attr("src", "/img/logo_w.png");
@@ -85,6 +71,25 @@ $(document).ready(function(){
 
 });
 
+function scroll() {
+    if($(window).scrollTop() > 20) {
+        $("header").addClass("on");
+        $("h1 img").attr("src","/img/logo.png");
+        $(".tnb span img").on("error", function() {
+            $(this).attr("src", "/img/profileImg.png");
+        });
+        $(".list_nav").addClass("nav_up");
+
+    }else {
+        $("header").removeClass("on");
+        $(".index_body h1 img").attr("src", "/img/logo_w.png");
+        $(".tnb span img").on("error", function() {
+            $(this).attr("src", "/img/profileImg_w.png");
+        });
+        $(".list_nav").removeClass("nav_up");
+    }
+}
+
 function masonryLayout() {
     const masonryContainerStyle = getComputedStyle(
         document.querySelector(".story_list")
@@ -99,4 +104,16 @@ function masonryLayout() {
     document.querySelectorAll(".story_items").forEach((elt) => {
         elt.style.gridRowEnd = `span ${Math.ceil(elt.querySelector(".story_content").scrollHeight / 10 + 1)}`;
     });
+}
+
+
+function AddComma(num)
+{
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ',');
+}
+function removeComma(str)
+{
+    n = parseInt(str.replace(/,/g,""));
+    return n;
 }

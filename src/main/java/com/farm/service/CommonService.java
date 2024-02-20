@@ -152,8 +152,15 @@ public class CommonService {
             sort = Sort.by( Sort.Order.desc("boardDate"));
         }else if(objClass.equals(Review.class)) {
             sort = Sort.by( Sort.Order.desc("reviewDate"));
+        }else if(objClass.equals(Reservation.class)) {
+            sort = Sort.by( Sort.Order.desc("rvDate"));
         }
-        return PageRequest.ofSize(10).withPage(nPage).withSort(sort);
+        if(objClass.equals(Reservation.class)){
+            return PageRequest.ofSize(1000).withPage(nPage).withSort(sort);
+        }else {
+            return PageRequest.ofSize(10).withPage(nPage).withSort(sort);
+        }
+
     }
 
 
@@ -287,7 +294,7 @@ public class CommonService {
             result = reservationRepository.findByRvMemIdxOrderByRvDateDesc(idx,pageable);
         }else if(objClass.equals(Review.class)) {
             result = reviewRepository.findByReviewMemIdxOrderByReviewDateDesc(idx,pageable);
-            //model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(idx));
+            model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(idx));
         }
         listPage(model , result, objClass);
     }

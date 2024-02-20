@@ -5,6 +5,8 @@ import com.farm.domain.Member;
 import com.farm.domain.Reservation;
 import com.farm.domain.Review;
 import com.farm.domain.Story;
+import com.farm.dto.ReservationFarmDto;
+import com.farm.repository.FarmRepository;
 import com.farm.repository.ReservationRepository;
 import com.farm.repository.ReviewRepository;
 import com.farm.service.*;
@@ -34,6 +36,7 @@ public class MyPageController {
 
     @Autowired
     PasswordEncoder pEncoder;
+
     @Autowired
     ListService listService;
 
@@ -44,6 +47,9 @@ public class MyPageController {
     ReviewRepository reveiwRepository;
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    FarmRepository farmRepository;
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
@@ -212,9 +218,10 @@ public class MyPageController {
         return "mypgReview";
     }
     @GetMapping("/mypgReviewWrite")
-    public String mypgReviewWrite(Model model,@RequestParam(value="id", defaultValue="1") Long id) {
+    public String mypgReviewWrite(Model model,@RequestParam(value="rno") Long rno,@RequestParam(value="id" , required = false, defaultValue = "0" ) Long id) {
         //System.out.println("id : "+id);
-        memberService.reviewWrite(id,model);
+        memberService.reviewWrite(rno,id,model);
+
         return "mypgReviewWrite";
     }
 
@@ -238,12 +245,12 @@ public class MyPageController {
             if(file2 != null && !file2.isEmpty()) {
                 System.out.println("file1");
                 String filename2 =  commonService.uploadImage(file2, memIdx);
-                review.setReviewImg1(filename2);
+                review.setReviewImg2(filename2);
             }
             if(file3 != null && !file3.isEmpty()) {
                 System.out.println("file1");
                 String filename3 =  commonService.uploadImage(file3, memIdx);
-                review.setReviewImg1(filename3);
+                review.setReviewImg3(filename3);
             }
 
         }catch(IOException e){
@@ -254,10 +261,49 @@ public class MyPageController {
         Review savedReview = memberService.reviewForm(review,rno);
         return "redirect:/mypgReviewDetail?id="+savedReview.getReviewIdx();
     }
+    @PostMapping("/reviewUpdate")
+    public String reviewUpdate(
+            @RequestParam("id") Long id,
+            Review review ,
+            HttpSession session ,
+            @RequestParam(value="file1",required = false) MultipartFile file1,
+            @RequestParam(value="file2",required = false) MultipartFile file2,
+            @RequestParam(value="file3",required = false) MultipartFile file3) {
+        System.out.println("file2 = " + file2.getOriginalFilename());
+        //System.out.println("file1 = " + file1 + ", file2 = " + file2 + ", file3 = " + file3);
+        Long memIdx = ((Member)session.getAttribute("loginUser")).getMemIdx();
+
+        try{
+            if(file1 != null && !file1.isEmpty()) {
+                System.out.println("file1");
+                String filename1 =  commonService.uploadImage(file1, memIdx);
+                review.setReviewImg1(filename1);
+            }
+            if(file2 != null && !file2.isEmpty()) {
+                String filename2 =  commonService.uploadImage(file2, memIdx);
+                System.out.println("file2"+filename2);
+                review.setReviewImg2(filename2);
+            }
+            if(file3 != null && !file3.isEmpty()) {
+                System.out.println("file3");
+                String filename3 =  commonService.uploadImage(file3, memIdx);
+                System.out.println("file3"+filename3);
+                review.setReviewImg3(filename3);
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        Review savedReview = memberService.reviewUpdate(review,id);
+        return "redirect:/mypgReviewDetail?id="+savedReview.getReviewIdx();
+    }
 
     @GetMapping("/mypgReviewDetail")
     public String mypgReviewDetail(Model model,@RequestParam(value="id",required = false) Long id) {
-        model.addAttribute("review", reveiwRepository.findById(id).get());
+        Review review = reveiwRepository.findById(id).get();
+        model.addAttribute("review",review );
+        model.addAttribute("reviewFarm",farmRepository.findById(review.getReviewWfIdx()).orElseGet(null));
+        model.addAttribute("reviewReservation",reservationRepository.findById(review.getReviewRvIdx()).orElseGet(null));
         return "mypgReviewDetail";
     }
 
@@ -265,18 +311,21 @@ public class MyPageController {
     @PostMapping("/reviewDelete")
     @ResponseBody
     public String reviewDelete(@RequestParam("id") Long id,HttpSession session) {
-        commonService.replyDelete(id,Story.class,session);
+        memberService.reviewDelete(id);
         return "storyDetail";
     }
 
 
     @GetMapping("/mypageReservation")
     public String mypageReservation( HttpSession session, Model model) {
+        int page = 0;
         Long id = ((Member)session.getAttribute("loginUser")).getMemIdx();
         model.addAttribute("reservations", listService.mypageReservation(id));
         model.addAttribute("wfSubjects",listService.reservationFarm(id));
+        /*model.addAttribute("hasReview",memberService.hasReview(id));*/
+
         try {
-            memberService.getMypgList(model,id);
+            commonService.myList(id,page,Reservation.class,model);
         }catch (Exception e) {
             System.out.println("idx값이 없습니다.");
 
@@ -295,7 +344,7 @@ public class MyPageController {
     }
    @ResponseBody
    @GetMapping("/getReservation")
-   public Reservation getReservation(@RequestParam("rvIdx") Long rvIdx) {
+   public ReservationFarmDto getReservation(@RequestParam("rvIdx") Long rvIdx) {
        return reservationService.detail(rvIdx);
    }
 }

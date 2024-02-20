@@ -95,7 +95,7 @@
                 <ul>
                     <li>
                         <h4>농장이름</h4>
-                        <p>${listDetail.wfSubject}</p>
+                        <p class="rv_farmName">${listDetail.wfSubject}</p>
                     </li>
                     <li>
                         <h4>분양 기간</h4>
@@ -116,6 +116,11 @@
                 </ul>
             </div>
         </div>
+        <input type="hidden" id="reYear">
+        <input type="hidden" id="reFeet">
+        <input type="hidden" id="price" value="${farm.wfPrice}">
+        <input type="hidden" id="option_price" value="${farm.wfOptionPrice}">
+
         <button type="button" class="booking_btn">등록</button>
     </div>
 </div>

@@ -20,15 +20,15 @@
         <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
             <c:choose>
                 <c:when test="${pageNumber + 1 == i}">
-                    <li class="page-item disabled"><a class="page-link" href="/${folderName}?${modifiedParam}page=${i}">${i}</a></li>
+                    <li class="page-item disabled ${param.page eq i ? 'on' : '' }"><a class="page-link" href="/${folderName}?${modifiedParam}page=${i}">${i}</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="/${folderName}?${modifiedParam}page=${i}">${i}</a></li>
+                    <li class="page-item ${param.page eq i or empty param.page ? 'on' : '' }"><a class="page-link" href="/${folderName}?${modifiedParam}page=${i}">${i}</a></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${endBlockPage < 1}">
-            <li class="page-item disabled"><a class="page-link" href="/${folderName}${fn:replace(fn:replace(param, '{', ''), '}', '')}">1</a></li>
+            <li class="page-item disabled on"><a class="page-link" href="/${folderName}${fn:replace(fn:replace(param, '{', ''), '}', '')}">1</a></li>
         </c:if>
 
         <!-- 다음 -->

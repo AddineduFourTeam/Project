@@ -662,7 +662,7 @@ footer p {
     color: var(--line);
 }
 .paging li.on a {
-    color: #000
+    color: var(--mainColor)
 }
 
 .paging li:first-child a , .paging li:last-child a {
@@ -686,7 +686,7 @@ footer p {
     border-top:1px solid var(--line);
 }
 .board_view_con {
-    padding:0 10px 200px;
+    padding:50px 10px 200px;
 }
 .board_btn {
     text-align: right;
@@ -1481,7 +1481,7 @@ body::-webkit-scrollbar-track {
 /*    white-space: nowrap;*/
 /*    width: 1px;*/
 /*}*/
-.filter ul li a.on {
+.filter ul li.on a {
     position: absolute;
     color: #fff;
     background-color: transparent;
@@ -3382,7 +3382,9 @@ input:-webkit-autofill:active {
     margin-bottom: 0;
 }
 
-
+.tac {
+    text-align: center;
+}
 
 
 

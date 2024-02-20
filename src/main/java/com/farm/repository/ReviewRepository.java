@@ -20,4 +20,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "join Review rv on rv.reviewWfIdx = fm.wfIdx " +
             "where rv.reviewMemIdx = :memIdx order by rv.reviewDate desc")
     List<String> findWfSubjectByMemIdx(Long memIdx);
+
+    Object findByReviewRvIdx(Long id);
 }

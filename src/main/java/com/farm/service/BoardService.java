@@ -24,6 +24,9 @@ public class BoardService {
     BoardRepository boardRepository;
 
     public Optional<Board> detail(Long bno) {
+        Board board = boardRepository.findById(bno).orElseGet(null);
+        board.setBoardCount(board.getBoardCount() + 1);
+        boardRepository.save(board);
         return boardRepository.findById(bno);
     }
 
