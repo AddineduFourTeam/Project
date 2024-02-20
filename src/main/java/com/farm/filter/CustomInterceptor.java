@@ -18,9 +18,9 @@ public class CustomInterceptor implements HandlerInterceptor {
 
         // 로그인 페이지 및 루트 페이지 요청인 경우는 허용
         if (requestURI.equals("/") || requestURI.startsWith("/login") || requestURI.startsWith("/join") || requestURI.startsWith("/idCheck")
-            || requestURI.startsWith("/list") || requestURI.startsWith("/board") || requestURI.startsWith("/story")
-            || requestURI.startsWith("/memInsert") || requestURI.startsWith("/forgotPass") || requestURI.startsWith("/forgotPassCheck")
-            || requestURI.startsWith("/completePass") || requestURI.startsWith("/cancelComplete") || requestURI.startsWith("/api/coordinates")) {
+                || requestURI.startsWith("/list") || requestURI.startsWith("/board") || requestURI.startsWith("/story")
+                || requestURI.startsWith("/memInsert") || requestURI.startsWith("/forgotPass") || requestURI.startsWith("/forgotPassCheck")
+                || requestURI.startsWith("/completePass") || requestURI.startsWith("/cancelComplete") || requestURI.startsWith("/api/coordinates")) {
             return true;
         }
         // 로그인한 사용자일 경우 페이지 이동 허용

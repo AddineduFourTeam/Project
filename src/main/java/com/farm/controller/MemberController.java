@@ -44,15 +44,14 @@ public class MemberController {
         return "/join";
     }
 
-    @PostMapping("/idChk")
+    @GetMapping("/idCheck")
+    @ResponseBody
     public boolean checkId(@RequestParam("id") String memid){
-        /*boolean bl = memberService.idChk(memid);*/
-        /*System.out.println("bl = " + bl);
-        return memberService.idChk(memid);*/
-        /*System.out.println("idCheck 메서드 호출됨, memid: " + memid);*/
+        //System.out.println("idCheck 메서드 호출됨, memid: " + memid);
 
         return memberService.idCheck(memid);
     }
+
 
     @PostMapping("/memInsert")
     public String memInsert(Member member,
@@ -70,10 +69,10 @@ public class MemberController {
 
         memberService.memInsert(member, file);
 
-        //redirectAttributes.addFlashAttribute("insertComplete", true);
+        redirectAttributes.addFlashAttribute("insertComplete", true);
 
-        //return "redirect:/login";
-        return "login";
+        return "redirect:/login";
+  
     }
 
     /*
