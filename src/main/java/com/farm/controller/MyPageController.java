@@ -42,39 +42,13 @@ public class MyPageController {
     ReservationRepository reservationRepository;
 
     @Autowired
-    ReviewRepository reveiwRepository;
+    ReviewRepository reviewRepository;
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
         System.out.println("로그인유저:"+session.getAttribute("loginUser"));
         Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
 
-        /*List<Board> recentBoards = boardService.getRecentBoards();
-        model.addAttribute("boards",recentBoards);*/
-
-        /*List<Reservation> recentResvs = reservationService.getRecentReservs();
-        model.addAttribute("resvs",recentResvs);*/
-
-        /*
-        이건 나중에 if문 추가할것
-        if(memid != null) {
-
-            List<Story> recentStories = storyService.getRecentStories(memid);
-            model.addAttribute("stories", recentStories);
-
-            return "myPage";
-        }else{
-            return "myPage";
-//            return "redirect:/login";
-        }*/
-
-        //String storyMemId = storyService.getStoryMemId(memid);
-        //List<Story> recentStories = storyService.getRecentStories(storyMemId,memid);
-        /*try {
-            memberService.getMypgList(model,idx);
-        }catch (Exception e) {
-            System.out.println("idx값이 없습니다.");
-        }*/
         memberService.getMypgList(model,idx);
 
         return "myPage";
@@ -256,7 +230,7 @@ public class MyPageController {
 
     @GetMapping("/mypgReviewDetail")
     public String mypgReviewDetail(Model model,@RequestParam(value="id",required = false) Long id) {
-        model.addAttribute("review", reveiwRepository.findById(id).get());
+        model.addAttribute("review", reviewRepository.findById(id).get());
         return "mypgReviewDetail";
     }
 

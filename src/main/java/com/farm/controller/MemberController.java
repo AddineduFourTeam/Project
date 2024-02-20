@@ -29,6 +29,14 @@ public class MemberController {
     @Autowired
     PasswordEncoder pEncoder;
 
+    /*
+     * 회원가입
+     * join : 회원가입 form 페이지로 이동
+     * idCheck : 회원가입시 아이디 중복 체크
+     * memInsert : 가입 정보 insert
+     *             가입시 프로필 이미지도 함께 삽입
+     *             회원가입 성공시 insertComplete:true값과 함께 login페이지로 redirect
+     */
 
     @GetMapping("/join")
     public String memInsertForm(){
@@ -43,7 +51,7 @@ public class MemberController {
     }
 
     @PostMapping("/memInsert")
-    public String memInsert(Member member, Model model,
+    public String memInsert(Member member,
                             @RequestParam("file") MultipartFile file,
                             RedirectAttributes redirectAttributes) throws Exception {
 
@@ -62,6 +70,12 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    /*
+     * 로그인 / 로그아웃
+     * login : 로그인 페이지 이동
+     * loginForm : 로그인 정보(id, pass)확인해서 탈퇴한 사용자, 비밀번호 일치 확인 후 로그인 진행
+     * logout : 사용자 로그아웃
+     */
     @GetMapping("/login")
     public String loginForm(){
         return "login";
@@ -69,9 +83,9 @@ public class MemberController {
 
     @PostMapping("/loginForm")
     public String login(Member member, Model model, HttpSession session){
-        //System.out.println("id : " + member.getMemid() );
+        //System.out.println("id : " + member.getMemid() ); // memid 값 확인
         Member loginUser = memberService.login(member.getMemid());
-        //System.out.println("loginUser = " + loginUser);
+        //System.out.println("loginUser = " + loginUser); // loginUser값 확인
 
         if(loginUser != null){
             // 탈퇴한 사용자 체크
@@ -106,6 +120,12 @@ public class MemberController {
         return "redirect:/";
     }
 
+    /*
+     * 잃어버린 비밀번호 재설정(로그인 없음)
+     * forgotPass : 비밀번호 재설정 정보 확인 페이지로 이동
+     * forgotPassCheck : 비밀번호 재설정을 위한 정보 확인 실행
+     *                   memid, email, phone 데이터 받아서 DB값과 일치하는지 확인 후, 일치하면 pass 재설정
+     */
     @GetMapping("/forgotPass")
     public String forgotPass(){
         return "forgotPassForm";
