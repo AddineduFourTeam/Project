@@ -3,24 +3,25 @@
 <%@ include file="../include/header.jsp" %>
 
 <div class="con login-wrap">
-    <div class="login-form">
+    <div class="forgot-pass-form">
         <div id="forgot">
-            <h3>비밀번호 재설정</h3>
-            <h4>(회원 정보 확인)</h4>
-
+            <div class="forgot-h">
+                <h3>비밀번호 재설정</h3>
+                <h4>(회원 정보 확인)</h4>
+            </div>
             <form action="forgotPassCheck" method="post" modelAttribute="infoCheck">
                 <%--${ChangePass == false}--%>
                 <p class="fail_check" style="display: none;">입력정보와 일치하는 회원이 존재하지 않습니다</p>
                 <ul>
-                    <li class="join-input-box m-top">
+                    <li class="forgot-input-box">
                         <p>아이디</p>
                         <input name="memid" id="memid" placeholder="아이디를 입력해주세요">
                     </li>
-                    <li class="join-input-box m-top">
+                    <li class="forgot-input-box">
                         <p>휴대전화번호</p>
                         <input name="phone" id="phone" placeholder="'-'없이 번호만 입력해주세요">
                     </li>
-                    <li class="join-input-box m-top">
+                    <li class="forgot-input-box">
                         <p>이메일</p>
                         <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
                     </li>

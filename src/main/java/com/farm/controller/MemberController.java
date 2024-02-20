@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +47,7 @@ public class MemberController {
     @GetMapping("/idCheck")
     @ResponseBody
     public boolean checkId(@RequestParam("id") String memid){
+        System.out.println("idCheck 메서드 호출됨, memid: " + memid);
 
         return memberService.idCheck(memid);
     }
@@ -58,6 +60,7 @@ public class MemberController {
         member.setPass(pEncoder.encode(member.getPass()));
 
         Long memIdx = member.getMemIdx();
+
         if(!file.isEmpty()){
           String filename =  commonService.uploadImage(file, memIdx);
           member.setMemImg(filename);

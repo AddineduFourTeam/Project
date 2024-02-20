@@ -44,9 +44,16 @@ public class MyPageController {
     @Autowired
     ReviewRepository reviewRepository;
 
+    /*
+     * 마이페이지
+     * myPage : 로그인된 사용자의 memIdx값으로 마이페이지에 리스트 출력
+     * updateMyInfo : 회원정보 변경을 위한 링크 이동
+     * myPagePassCheck : 비밀번호 확인후 일치하는 경우 회원정보 변경 페이지로 이동
+     * updateMyInfoForm : 정보변경 form에서 넘어온 값으로 회원정보 DB 변경
+     */
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
-        System.out.println("로그인유저:"+session.getAttribute("loginUser"));
+        // System.out.println("로그인유저:"+session.getAttribute("loginUser"));
         Long idx = ((Member)session.getAttribute("loginUser")).getMemIdx();
 
         memberService.getMypgList(model,idx);
@@ -82,6 +89,7 @@ public class MyPageController {
 
         Long memIdx = iMyInfo.getMemIdx();
 
+        // 프로필 이미지가 존재할 때 추가 이미지를 입력하지 않은 경우 기존 이미지 유지
         if(!file.isEmpty() && file != null){
             try{
                 String filename =  commonService.uploadImage(file, memIdx);
@@ -102,6 +110,12 @@ public class MyPageController {
         return "updateMyInfo";
     }
 
+    /*
+     * 비밀번호 변경(로그인된 상태)
+     * updatePass(GET) : 비밀번호 변경 페이지(updatePassForm)로 이동
+     * updatePass(POST) : 비밀번호 변경 값을 받아서 암호화 후 저장.
+     *                    강제 로그아웃 후 재로그인 유도
+     */
     @GetMapping("/updatePass")
     public String updatePass(){
         return "updatePassForm";
@@ -134,6 +148,11 @@ public class MyPageController {
         // return "redirect:/completePass"됐을 때 받을 GetMapping
     }
 
+    /*
+     * 회원탈퇴
+     * cancelAccount : 회원탈퇴 링크 이동
+     * cancelAccountForm : 비밀번호 일치 확인 후 회원탈퇴, 로그아웃 진행
+     */
     @GetMapping("/cancelAccount")
     public String deleteAccount(){
         return "cancelAccount";
@@ -150,7 +169,7 @@ public class MyPageController {
         if(!status.isComplete() && pEncoder.matches(cancelPass,loginUser.getPass())){
             memberService.cancelAccount(loginUser.getMemid());
             status.setComplete();
-            session.invalidate();
+           session.invalidate();
 
             return "redirect:/cancelComplete";
 
