@@ -10,8 +10,9 @@
     <%@include file="../include/mypg_menu.jsp" %>
         <div class="my-wrap">
             <div class="story_con review_con">
-            <form action="<c:out value="${not empty param.sno ? 'reviewUpdate' : 'reviewForm'}"/>" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="reviewRvIdx" name="reviewRvIdx" value="${param.id}">
+            <form action="<c:out value="${not empty param.id ? 'reviewUpdate' : 'reviewForm'}"/>" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="reviewRvIdx" name="reviewRvIdx" value="${param.rno}">
+                <input type="hidden" id="id" name="id" value="${param.id}">
                 <div class="story_farm">
                     <div class="story_listtt">예약 내역</div>
                     <div class="review_con review_txt_con">
@@ -43,10 +44,9 @@
                                             <c:if test="${reviewReservation.rvOptionSeeding.toString() eq 'Y'}">모종 제공 <span>,</span></c:if>
                                             <c:if test="${reviewReservation.rvOptionPlow.toString() eq 'Y'}">밭갈기 <span>,</span></c:if>
                                             <c:if test="${reviewReservation.rvOptionWatering.toString() eq 'Y'}">물주기 <span>,</span></c:if>
-                                            <c:if test="${reviewReservation.rvOptionCompost.toString() eq 'Y'}">퇴비뿌리기 <span>,</span></c:if>
-                                            <c:set var="options" value="[reviewReservation.rvOptionSeeding, reviewReservation.rvOptionPlow, reviewReservation.rvOptionWatering, reviewReservation.rvOptionCompost]" />
-
-                                            <c:if test="${not options.toString().contains('y' ) and not options.toString().contains('Y')}">
+                                            <c:if test="[${reviewReservation.rvOptionCompost.toString() eq 'Y'}">퇴비뿌리기 <span>,</span></c:if>
+                                            <c:set var="options" value="[${reviewReservation.rvOptionSeeding.toString()}, ${reviewReservation.rvOptionPlow.toString()}, ${reviewReservation.rvOptionWatering.toString()}, ${reviewReservation.rvOptionCompost.toString()}]" />
+                                            <c:if test="${options eq '[N, N, N, N]'}">
                                                 없음
                                             </c:if>
                                         </b>
@@ -62,7 +62,7 @@
                                             <c:when test="${reviewReservation.status.toString() eq 'Y'}">확정</c:when>
                                             <c:otherwise>미확정</c:otherwise>
                                         </c:choose>
-                                        </b>
+                                         </b>
                                     </li>
                                     <li>
                                         <span>예약일</span>
@@ -79,11 +79,11 @@
 
                 <div class="storyW_tt">
                     <label for="title" class="story_listtt">리뷰 제목</label>
-                    <input type="text" id="title" name="reviewSubject" value="${list.reviewSubject}" required>
+                    <input type="text" id="title" name="reviewSubject" value="${review.reviewSubject}" required>
                 </div>
                 <div class="story_txt">
                     <label for="content" class="story_listtt">리뷰 내용</label>
-                    <textarea id="content" name="reviewContent" required><c:out value="${fn:replace(list.reviewContent, '<br>', '&lt;br&gt;')}" escapeXml="false" /></textarea>
+                    <textarea id="content" name="reviewContent" required><c:out value="${fn:replace(review.reviewContent, '<br>', '&lt;br&gt;')}" escapeXml="false" /></textarea>
                 </div>
                 <div class="farm_img">
                     <div class="story_listtt">
@@ -91,11 +91,11 @@
                     </div>
                     <ul>
                         <li class="farm_img1">
-                            <input id="fileInput" type="file" multiple name="file1" value="${story.storyImg1}" hidden/>
+                            <input id="fileInput" type="file" multiple name="file1" value="${review.reviewImg1}" hidden/>
                             <label for="fileInput">
                                 <c:choose>
-                                    <c:when test="${list.reviewImg1 ne null}">
-                                        <img src="${list.reviewImg1}" alt="">
+                                    <c:when test="${review.reviewImg1 ne null}">
+                                        <img src="${review.reviewImg1}" alt="">
                                     </c:when>
                                     <c:otherwise>
                                         이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
@@ -103,12 +103,12 @@
                                 </c:choose>
                             </label>
                         </li>
-                        <li class="farm_img2" <c:if test="${list.reviewImg2 ne null}">style="display:block"</c:if>>
-                            <input id="fileInput2" type="file" multiple name="file2" hidden/>
+                        <li class="farm_img2" <c:if test="${review.reviewImg2 ne null}">style="display:block"</c:if>>
+                            <input id="fileInput2" type="file" value="${review.reviewImg2}" multiple name="file2" hidden/>
                             <label for="fileInput2">
                                 <c:choose>
-                                    <c:when test="${story.storyImg2 ne null}">
-                                        <img src="${story.storyImg2}" alt="">
+                                    <c:when test="${review.reviewImg2 ne null}">
+                                        <img src="${review.reviewImg2}" alt="">
                                     </c:when>
                                     <c:otherwise>
                                         이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
@@ -116,12 +116,12 @@
                                 </c:choose>
                             </label>
                         </li>
-                        <li class="farm_img3" <c:if test="${story.reviewImg3 ne null}">style="display:block"</c:if>>
-                            <input id="fileInput3" type="file" multiple name="file3" value="${story.storyImg3}" hidden/>
+                        <li class="farm_img3" <c:if test="${review.reviewImg3 ne null}">style="display:block"</c:if>>
+                            <input id="fileInput3" type="file" multiple name="file3" value="${review.reviewImg3}" hidden/>
                             <label for="fileInput3">
                                 <c:choose>
-                                    <c:when test="${story.storyImg3 ne null}">
-                                        <img src="${story.storyImg3}" alt="">
+                                    <c:when test="${review.reviewImg3 ne null}">
+                                        <img src="${review.reviewImg3}" alt="">
                                     </c:when>
                                     <c:otherwise>
                                         이미지 선택<span>(썸네일 이미지)</span><small>10mb 이하</small>
@@ -133,7 +133,7 @@
                 </div>
 
                 <div class="story_submit">
-                    <button><c:out value="${not empty param.sno ? '수정' : '등록'}"/></button>
+                    <button><c:out value="${not empty param.id ? '수정' : '등록'}"/></button>
                     <span class="btnimg"><img src="/img/sprout.png" alt="새싹"></span>
                 </div>
             </form>
@@ -156,7 +156,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                //console.log(input);
+                console.log(input);
                 $(input).next("label").html(`<img src='${"${e.target.result}"}'>`);
             }
             reader.readAsDataURL(input.files[0]);

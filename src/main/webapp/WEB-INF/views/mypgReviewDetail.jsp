@@ -12,9 +12,9 @@
                                    onerror="this.src='img/profileImg.png'"></span>${loginUser.memid}
                     </div>
                     <div class="board_view_date">
-                        <span>
+                        <%--<span>
                            조회수 : <span class="count">${review.reviewCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                        </span>
+                        </span>--%>
                         <span>
                             <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                             <fmt:formatDate pattern="yyyy.MM.dd H:mm" value="${parsedDateTime}"/>
@@ -22,22 +22,85 @@
                     </div>
                 </div>
                 <div class="board_view_con">
+                    <div class="story_farm">
+                        <div class="story_listtt">예약 내역</div>
+                        <div class="review_con review_txt_con">
+                            <div class="review_farm_con">
+                                <div class="review_farm_img">
+                                    <div class="farmImg"><img src="${reviewFarm.wfImgUrl1}" alt="" onerror="this.src='/img/placeholder.png'"></div>
+                                </div>
+                                <div class="review_farm_text">
+                                    <ul>
+                                        <li>
+                                            <span>농장명</span>
+                                            <b class="color">${reviewFarm.wfSubject}</b>
+                                        </li>
+                                        <%--<li>
+                                            <span>농장 주소</span>
+                                            <b>${reviewFarm.wfAddr}</b>
+                                        </li>--%>
+                                        <li>
+                                            <span>예약 기한</span>
+                                            <b>${reviewReservation.rvUseDate}년</b>
+                                        </li>
+                                        <li>
+                                            <span>예약 평수</span>
+                                            <b>${reviewReservation.rvFeet}평</b>
+                                        </li>
+                                        <li>
+                                            <span>예약 옵션</span>
+                                            <b>
+                                                <c:if test="${reviewReservation.rvOptionSeeding.toString() eq 'Y'}">모종 제공 <span>,</span></c:if>
+                                                <c:if test="${reviewReservation.rvOptionPlow.toString() eq 'Y'}">밭갈기 <span>,</span></c:if>
+                                                <c:if test="${reviewReservation.rvOptionWatering.toString() eq 'Y'}">물주기 <span>,</span></c:if>
+                                                <c:if test="[${reviewReservation.rvOptionCompost.toString() eq 'Y'}">퇴비뿌리기 <span>,</span></c:if>
+                                                <c:set var="options" value="[${reviewReservation.rvOptionSeeding.toString()}, ${reviewReservation.rvOptionPlow.toString()}, ${reviewReservation.rvOptionWatering.toString()}, ${reviewReservation.rvOptionCompost.toString()}]" />
+                                                <c:if test="${options eq '[N, N, N, N]'}">
+                                                    없음
+                                                </c:if>
+                                            </b>
+                                        </li>
+                                        <li>
+                                            <span>예약 금액</span>
+                                            <b><fmt:formatNumber value="${reviewReservation.rvPrice}" pattern="#,###" />원</b>
+                                        </li>
+                                        <li>
+                                            <span>예약 상태</span>
+                                            <b>
+                                                <c:choose>
+                                                    <c:when test="${reviewReservation.status.toString() eq 'Y'}">확정</c:when>
+                                                    <c:otherwise>미확정</c:otherwise>
+                                                </c:choose>
+                                            </b>
+                                        </li>
+                                        <li>
+                                            <span>예약일</span>
+                                            <b>
+                                                <fmt:parseDate value="${reviewReservation.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
+                                                <fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/>
+                                            </b>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <c:if test="${not empty review.reviewImg1}">
                         <div class="story_detail_slide">
                             <button type="button" class="prev"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>
                             </button>
-                            <div class="story_detail_img">
-                                <div class="story_detail_img_list">
+                            <div class="story_detail_img review_detail_img">
+                                <div class="story_detail_img_list review_detail_img_list">
                                     <c:if test="${not empty review.reviewImg1}">
                                         <img src="${review.reviewImg1}" alt="Image">
                                     </c:if>
                                 </div>
-                                <div class="story_detail_img_list">
+                                <div class="story_detail_img_list review_detail_img_list">
                                     <c:if test="${not empty review.reviewImg2}">
                                         <img src="${review.reviewImg2}" alt="Image">
                                     </c:if>
                                 </div>
-                                <div class="story_detail_img_list">
+                                <div class="story_detail_img_list review_detail_img_list">
                                     <c:if test="${not empty review.reviewImg3}">
                                         <img src="${review.reviewImg3}" alt="Image">
                                     </c:if>
@@ -53,8 +116,8 @@
                     </div>
                 </div>
                 <div class="board_btn">
-                    <a href="/mypgReviewWrite?id=${param.id}">수정</a>
-                    <a href="javascript:myReviewDelete(${param.id})" class="delete">삭제</a>
+                    <a href="/mypgReviewWrite?id=${review.reviewIdx}&rno=${review.reviewRvIdx}">수정</a>
+                    <a href="javascript:myReviewDelete(${review.reviewIdx})" class="delete">삭제</a>
                     <a href="/mypgReview">목록</a>
                 </div>
             </div>
@@ -73,17 +136,14 @@
         let reviewSlideWidth = $(".review_detail_img").outerWidth();
 
         //이미지가 3개가 넘어가면 슬라이드
-        $(window).on('load', function () {
-            $(".review_detail_img_list").each(function () {
-                slideItemWidth += $(this).innerWidth();
-            });
-            if (reviewSlideWidth < slideItemWidth) {
-                review_slick();
-            }
+        $(".review_detail_img_list").each(function () {
+            slideItemWidth += $(this).innerWidth();
         });
+        if (reviewSlideWidth < slideItemWidth) {
+            review_slick();
+        }
 
     });
-
 
 
     //이미지 슬릭
@@ -135,47 +195,7 @@
         picker.togglePicker(button);
     });
 
-
-
-
-    //좋아요
-    let likeTmp = 0;
-    function like(ele,id){
-        if (is_login()) {
-            if(likeTmp ===0) {
-                $.ajax({
-                    url:"/likeUp",
-                    type:"post",
-                    data:{id : id},
-                    success:function(result){
-                       console.log("success");
-                       $(ele).find("i").attr("class", "fa-solid fa-thumbs-up").css("color", "#01b03f");
-                        $(ele).find("span").text(result);
-                       likeTmp = 1;
-                    },error: function (xhr, status, error) {
-                        console.log(xhr, status, error);
-                    }
-                });
-            }else {
-                $.ajax({
-                    url:"/likeDown",
-                    type:"post",
-                    data:{id : id},
-                    success:function(result){
-                        console.log("success");
-                        $(ele).find("i").attr("class", "fa-regular fa-thumbs-up").css("color","#999");
-                        $(ele).find("span").text(result > 0 ? result : "");
-                        likeTmp = 0;
-                    },error: function (xhr, status, error) {
-                        console.log(xhr, status, error);
-                    }
-                });
-
-            }
-        }
-    };
-
-    function myreviewDelete(id){
+    function myReviewDelete(id){
         if(confirm("게시물을 삭제 하시겠습까?")) {
             $.ajax({
                 url: "/reviewDelete",
@@ -183,7 +203,7 @@
                 type: "post",
                 success: function (data) {
                     alert("삭제가 완료 되었습니다.");
-                    hireview.back();
+                    window.location.href = "/mypgReview";
                 }, error: function (xhr, status, error) {
                     console.log(xhr, status, error);
                 }

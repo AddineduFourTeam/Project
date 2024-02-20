@@ -166,16 +166,44 @@ public class MemberService {
 
     }
 
-    public void reviewWrite(Long id,Model model) {
-        Long wrfidx = reservationRepository.findById(id).orElseGet(null).getRvFarmIdx();
-        model.addAttribute("reviewReservation",reservationRepository.findById(id).orElseGet(null));
+    public void reviewWrite(Long rno,Long id,Model model) {
+        Long wrfidx = reservationRepository.findById(rno).orElseGet(null).getRvFarmIdx();
+        model.addAttribute("reviewReservation",reservationRepository.findById(rno).orElseGet(null));
         model.addAttribute("reviewFarm",farmRepository.findById(wrfidx).orElseGet(null));
-        /*model.addAttribute("review",reviewRepository.findById(id).orElseGet(null));
-        System.out.println("test3");*/
+        if(id > 0) {
+            model.addAttribute("review",reviewRepository.findById(id).orElseGet(null));
+        }
     }
 
     public Review reviewForm(Review review,Long rno) {
-
+        review.setReviewWfIdx(reservationRepository.findById(rno).orElseGet(null).getRvFarmIdx());
         return reviewRepository.save(review);
+    }
+
+    public Review reviewUpdate(Review review, Long id) {
+        Review orginalreview = reviewRepository.findById(id).orElseGet(null);
+        if(review.getReviewImg1() != null && !review.getReviewImg1().isEmpty()) {
+            orginalreview.setReviewImg1(review.getReviewImg1());
+        }
+        if(review.getReviewImg2() != null && !review.getReviewImg2().isEmpty()) {
+            orginalreview.setReviewImg2(review.getReviewImg2());
+        }
+        if(review.getReviewImg3() != null && !review.getReviewImg3().isEmpty()) {
+            orginalreview.setReviewImg3(review.getReviewImg3());
+        }
+        /*orginalreview.setReviewImg1(review.getReviewImg1());
+        orginalreview.setReviewImg2(review.getReviewImg2());
+        orginalreview.setReviewImg3(review.getReviewImg3());*/
+        orginalreview.setReviewContent(review.getReviewContent());
+        orginalreview.setReviewSubject(review.getReviewSubject());
+        return reviewRepository.save(orginalreview);
+    }
+
+    public void reviewDelete(Long id) {
+        reviewRepository.deleteById(id);
+    }
+
+    public Object hasReview(Long id) {
+        return reviewRepository.findByReviewRvIdx(id) != null;
     }
 }

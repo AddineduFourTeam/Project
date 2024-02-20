@@ -28,7 +28,7 @@ public class Review {
     @CreatedDate
     private String reviewDate;
     private Long reviewRvIdx;
-    private int reviewWfIdx;
+    private Long reviewWfIdx;
     private Long reviewMemIdx;
 
 }

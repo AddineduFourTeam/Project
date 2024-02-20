@@ -68,14 +68,21 @@
             }
             $(this).siblings("label").find("img").attr('src', src);
         });
-
+        let optionArr = [];
         $("input[name='option']").change(function() {
             //let optionName = $(this).val();
             if ($(this).is(":checked")) {
+
                 $(this).val("Y");
             } else {
                 $(this).val("N");
             }
+            optionArr = [];
+            $("input[name='option']").each(function(){
+                if ($(this).is(":checked")) {
+                    optionArr.push($(this).siblings().children('.txt').text());
+                }
+            });
         });
 
         let year_leng = 0;
@@ -89,7 +96,7 @@
                 let content = $("input[name='option']:checked");
                 option_leng = $("input[name='option']:checked").length;
                 let value = content.siblings().children('.txt').text();
-                $(".rs_option").text(value);
+                $(".rs_option").text(optionArr);
             } else {
                 year_leng = $("input[name='year']:checked").length;
                 $(".rs_year").text(year_leng);
@@ -97,7 +104,7 @@
                 $('.feet > span').html(count);
             }
             console.log((year_leng * count / 3 * price) + "/" + (option_leng * option_price));
-            $(".rs_total_price").text(parseInt((year_leng * count / 3 * price) + (option_leng * option_price)));
+            $(".rs_total_price").text(AddComma(parseInt((year_leng * count / 3 * price) + (option_leng * option_price))));
         });
 
     });
@@ -130,7 +137,7 @@
                     "rvFarmIdx" : ${param.id},
                     "rvUseDate" : $(".rs_year").text(),
                     "status" : "Y",
-                    "rvPrice" :  $(".rs_total_price").text(),
+                    "rvPrice" :  removeComma($(".rs_total_price").text()),
                     "rvFeet" : $(".rs_feet").text(),
                     "rvUseYearDate" : arr,
                     ...rvOptionsData

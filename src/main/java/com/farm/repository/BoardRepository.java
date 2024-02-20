@@ -12,4 +12,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findByBoardSubjectContaining(String keyword, Pageable pageable);
     Page<Board> findByBoardContentContaining(String keyword, Pageable pageable);
 
+    Page<?> findAllOrderByBoardDateDesc(Pageable pageable);
 }

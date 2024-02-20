@@ -6,14 +6,14 @@
         <%-- 농장 필터 --%>
         <div class="filter">
             <input type="hidden" id="farm_select" name="farm_select">
-            <div class="selector"></div>
             <ul class="swiper-wrapper">
                 <c:forEach items="${localArray}" var="localArray" varStatus="idx">
-                    <li class="swiper-slide">
+                    <li class="swiper-slide <c:if test="${param.local eq localArray}">on</c:if>">
                         <a href="javascript:void(0);">${localArray}</a>
                        <%-- <a href="/list?local=${localArray}">${localArray}</a>--%>
                     </li>
                 </c:forEach>
+                <li class="selector"></li>
             </ul>
             <div class="filter-button-prev"><i class="fa-solid fa-angle-left"></i></div>
             <div class="filter-button-next"><i class="fa-solid fa-angle-right"></i></div>
@@ -89,9 +89,9 @@
         <%--        </div>--%>
 
     </div>
-    <div id="content">
+    <%--<div id="content">
         여기는 콘텐츠가 표시될 영역입니다.
-    </div>
+    </div>--%>
 </div>
 <script>
     // /* map영역 */
@@ -113,6 +113,22 @@
             prevEl: ".filter-button-prev",
         },
     });
+    if($(".swiper-slide").hasClass("on") === true) {
+        let target = $(".swiper-slide.on");
+        muCenter(target);
+        $(".selector").css("left",(target.position().left) + 20);
+        console.log("left"+target.position().left);
+    }else {
+        $(".swiper-slide").eq(0).addClass("on");
+    }
+    /*var $snbSwiperItem = $('.filter .swiper-wrapper .swiper-slide a');
+    $snbSwiperItem.click(function(){
+        var target = $(this).parent();
+        $snbSwiperItem.parent().removeClass('on')
+        target.addClass('on');
+        muCenter(target);
+    });*/
+
     /***리로딩 되는 현상****/
     // document.addEventListener("DOMContentLoaded", function () {
     //     let tabs = document.querySelectorAll(".filter ul li a");
@@ -451,17 +467,16 @@
     //     }
     // });
 
-
     /***셋타임아웃사용***/
     document.addEventListener("DOMContentLoaded", function () {
         let tabs = document.querySelectorAll(".filter ul li a");
         let selector = document.querySelector(".selector");
 
-        if (tabs.length > 0) {
+        /*if (tabs.length > 0) {
             tabs.forEach(tab => tab.classList.remove("on"));
             tabs[0].classList.add("on");
             filter({currentTarget: tabs[0]});
-        }
+        }*/
         tabs.forEach(tab => {
             tab.addEventListener("click", filter);
         });
@@ -469,20 +484,19 @@
         function filter(event) {
 
             // 클릭 이벤트가 발생한 경우, "on" 클래스를 관리합니다.
-            tabs.forEach(tab => tab.classList.remove("on"));
+            tabs.forEach(tab => tab.closest("li").classList.remove("on"));
             let label = event.currentTarget;
-            label.classList.add("on");
+            label.closest("li").classList.add("on");
 
             // 선택 표시기의 위치와 크기를 조정합니다.
             let selectorHeight = selector.offsetHeight;
-            selector.style.left = label.offsetLeft + 50 + "px";
+            selector.style.left = label.offsetLeft + "px";
             selector.style.width = label.offsetWidth + "px";
-            selector.style.top = (label.offsetTop + label.offsetHeight - selectorHeight / 2) + "px";
+            /*selector.style.top = (label.offsetTop + label.offsetHeight - selectorHeight / 2) + "px";*/
 
             setTimeout(function(){
                 if(label.innerText !== "전체") {
                     window.location.href="/list?local="+label.innerText;
-
                 }
             },200);
             console.log(label.innerText);
@@ -493,6 +507,31 @@
 
         }
     });
+
+    function muCenter(target){
+        var snbwrap = $('.filter .swiper-wrapper');
+        var targetPos = target.position();
+        var box = $('.filter');
+        var boxHarf = box.width()/2;
+        var pos;
+        var listWidth=0;
+
+        snbwrap.find('.swiper-slide').each(function(){ listWidth += $(this).outerWidth(); })
+
+        var selectTargetPos = targetPos.left + target.outerWidth()/2;
+        if (selectTargetPos <= boxHarf) { // left
+            pos = 0;
+        }else if ((listWidth - selectTargetPos) <= boxHarf) {     //right
+            pos = listWidth-box.width();
+        }else {
+            pos = selectTargetPos - boxHarf;
+        }
+
+        setTimeout(function(){snbwrap.css({
+            "transform": "translate3d("+ (pos*-1) +"px, 0, 0)",
+            "transition-duration": "500ms"
+        })}, 200);
+    }
 
 </script>
 

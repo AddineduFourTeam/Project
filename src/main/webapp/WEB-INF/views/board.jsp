@@ -22,8 +22,9 @@
                 <c:if test="${not empty list}">
                     <!-- board 데이터가 있을 때 수행할 작업 -->
                     <c:forEach var="board" items="${list}" varStatus="status">
+                        <c:set var="nowNum" value="${fn:length(list)}"/>
                         <tr>
-                            <td>${status.count}</td>
+                            <td>${nowNum - status.index}</td>
                             <td><a href="/boardDetail?bno=${board.boardIdx}">${board.boardSubject}</a></td>
                             <td><fmt:formatDate value="${board.boardDate}" pattern="yyyy-MM-dd" /></td>
                         </tr>

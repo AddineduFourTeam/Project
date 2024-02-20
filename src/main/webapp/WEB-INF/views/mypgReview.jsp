@@ -28,8 +28,8 @@
                             <fmt:parseDate value="${list.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                             <tr>
                             <td>${nowNum - status.index}</td>
-                            <td><a href="mypgReviewDetail?id=${list.reviewIdx}">${list.reviewSubject}</a></td>
-                            <td>${reviewWfSubjectlist[status.index]}</td>
+                            <td><a href="mypgReviewDetail?id=${list.reviewIdx}"><b>${list.reviewSubject}</b></a></td>
+                            <td class="tac">${reviewWfSubjectlist[status.index]}</td>
                             <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
                         </tr>
                         </c:forEach>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="storybtn">
-                    <a href="/mypgReviewWrite?id=50" class="btn">리뷰 등록</a>
+                    <a href="/mypageReservation" class="btn">예약내역 바로가기</a>
                     <span class="btnimg"><img src="/img/sprout.png" alt="새싹"></span>
                 </div>
                 <%@include file="../include/paging.jsp" %>

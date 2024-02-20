@@ -24,10 +24,21 @@
                             </div>
                             <div class="info_con">
                                 <div class="write">
-                                    <a href="/mypgReviewWrite?id=${resv.rvIdx}" class="review_btn">
-                                        <i class="fa-solid fa-pen"></i>
-                                        <span>후기쓰기</span>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${hasReview}">
+                                            <a href="/mypgReviewDetail?id=${resv.rvIdx}" class="review_btn">
+                                                <i class="fa-solid fa-pen"></i>
+                                                <span>후기보기</span>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <a href="/mypgReviewWrite?rno=${resv.rvIdx}" class="review_btn">
+                                            <i class="fa-solid fa-pen"></i>
+                                            <span>후기쓰기</span>
+                                        </a>
+                                        </c:otherwise>
+
+                                    </c:choose>
                                 </div>
                                 <ul>
                                     <li>

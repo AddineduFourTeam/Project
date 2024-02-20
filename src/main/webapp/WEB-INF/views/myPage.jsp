@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../include/header.jsp" %>
 <c:if test="${empty loginUser}">
     <script>
         alert("로그인 후 작성 가능합 니다.");
-        location.href="/login";
+        location.href = "/login";
     </script>
 </c:if>
 <div class="con wrap">
@@ -51,13 +51,14 @@
                 <c:choose>
                     <c:when test="${not empty reservations}">
                         <c:forEach var="resv" items="${reservations}" varStatus="i">
-
-                            <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
+                            <c:set var="nowNum" value="${fn:length(reservations)}"/>
+                            <fmt:parseDate value="${resv.rvDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime"
+                                           type="both"/>
                             <tr>
-                                <td>${i.count}</td>
-                                <td><a href="listDetail?id=${resv.rvFarmIdx}">${wfSubjectlist[i.index]}</a></td>
+                                <td>${nowNum - i.index}</td>
+                                <td><a href="mypageReservation?id=${resv.rvIdx}">${wfSubjectlist[i.index]}</a></td>
                                 <td>${resv.rvUseDate}년</td>
-                                <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/></td>
                             </tr>
                         </c:forEach>
                     </c:when>
@@ -89,12 +90,14 @@
                     <c:when test="${not empty reviews}">
                         <c:set var="nowNum" value="${fn:length(reviews)}"/>
                         <c:forEach var="review" items="${reviews}" varStatus="i">
-                            <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
+                            <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime"
+                                           type="both"/>
                             <tr>
                                 <td>${nowNum - i.index}</td>
                                 <td>${reviewWfSubjectlist[i.index]}</td>
-                                <td><a href="mypgReviewDetail?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>
-                                <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>
+                                <td><a href="mypgReviewDetail?id=${review.reviewIdx}"
+                                       class="ellipsis">${review.reviewSubject}</a></td>
+                                <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/></td>
                             </tr>
                         </c:forEach>
                     </c:when>
@@ -112,21 +115,17 @@
                 <h3>스토리</h3>
                 <a href="/mypgStory">더보기<i class="xi-angle-right-min"></i></a>
             </div>
-        </div>
-        <div class="my-story-wrap">
-            <div class="mypg_tt">
-                <h3>스토리</h3>
-                <a href="/mypgStory">더보기<i class="xi-angle-right-min"></i></a>
-            </div>
             <div class="story_wrap">
                 <c:choose>
                     <c:when test="${not empty stories}">
                         <c:forEach var="story" items="${stories}" varStatus="i">
-                            <fmt:parseDate value="${story.storyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+                            <fmt:parseDate value="${story.storyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime"
+                                           type="both"/>
                             <div class="story_items">
                                 <a href="/storyDetail?id=${story.storyIdx}">
                                     <div class="story_img">
-                                        <img src="/image/${story.storyIdx}/1" alt="Image" onerror="this.src='img/logoimg.png'">
+                                        <img src="/image/${story.storyIdx}/1" alt="Image"
+                                             onerror="this.src='img/logoimg.png'">
                                     </div>
                                     <div class="my-story_subject">
                                             ${story.storySubject}

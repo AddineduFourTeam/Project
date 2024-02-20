@@ -79,7 +79,7 @@ public class CommonService {
             result = farmRepository.findAll(pageable);
         }
         if(objClass.equals(Board.class)) {
-            result = boardRepository.findAll(pageable);
+            result = boardRepository.findAllOrderByBoardDateDesc(pageable);
         }
         if(objClass.equals(Story.class)) {
             result = storyRepository.findAll(pageable);
@@ -287,7 +287,7 @@ public class CommonService {
             result = reservationRepository.findByRvMemIdxOrderByRvDateDesc(idx,pageable);
         }else if(objClass.equals(Review.class)) {
             result = reviewRepository.findByReviewMemIdxOrderByReviewDateDesc(idx,pageable);
-            //model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(idx));
+            model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(idx));
         }
         listPage(model , result, objClass);
     }

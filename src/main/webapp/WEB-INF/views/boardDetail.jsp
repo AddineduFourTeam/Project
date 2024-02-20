@@ -14,6 +14,20 @@
     <div class="board_con board_view">
         <div class="board_tb">
             <div class="board_view_tt">${board.boardSubject}</div>
+            <div class="board_view_top flex">
+                <div class="board_view_writer">
+                    작성자 : 관리자
+                </div>
+                <div class="board_view_date">
+                    <span>
+                       조회수 : <span class="count">${board.boardCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    </span>
+                    <span>
+                        <fmt:parseDate value="${board.boardDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+                        <fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/>
+                    </span>
+                </div>
+            </div>
             <div class="board_view_con">${board.boardContent}</div>
         </div>
     </div>
