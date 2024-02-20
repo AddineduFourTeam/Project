@@ -16,7 +16,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByMemid(String memid);
 
-
     //List<Member> select(String idx, String input);
     /*List<Member> findByNameLike(String name);*/
     /*List<Member> findByEmailLike(String email);*/

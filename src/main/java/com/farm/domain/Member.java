@@ -21,33 +21,29 @@ public class Member {
     @Id
     @GeneratedValue(generator = "myBoardSEQ")
     @Column(name = "MEM_IDX")
-    private Long memIdx;
+    private Long memIdx; // 유저 회원번호(PK)
 
-    @NotBlank(message = "아이디는 필수 입력값 입니다")
-    private String memid;
+    private String memid; // 아이디
 
-    //@NonNull
-    private String pass;
-    //@NonNull
-    private String name;
+    private String pass; // 비밀번호
 
-    private String birth;
-    //@NonNull
-    private String phone;
+    private String name; // 이름
+    
+    private String birth; // 생년월일 6자
+   
+    private String phone; // 전화번호
 
-    private String email;
-    private String memImg;
+    private String email; // 이메일
+    
+    private String memImg; // 프로필 이미지
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime regdate;
+    private LocalDateTime regdate; // 회원 가입 시간
 
-    private LocalDateTime outdate;
+    private LocalDateTime outdate; // 회원 탈퇴 시간
 
     @Column(columnDefinition="varchar2(10) DEFAULT 'N'")
-    private String isOut ="N";
-
-   /* @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Story> stories = new ArrayList<>();*/
+    private String isOut ="N"; // 회원 탈퇴 여부 - 기본값 N
 
 }

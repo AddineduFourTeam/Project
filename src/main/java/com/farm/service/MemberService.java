@@ -42,17 +42,7 @@ public class MemberService {
     private String uploadDirectory;
 
     public void memInsert(Member member, MultipartFile file) throws Exception{
-        /*MultipartFile file) throws Exception추가함*/
-
         memberRepository.save(member);
-       /* try {
-
-            *//*프로필사진추가*//*
-           // uploadImage(file, member.getMemIdx());
-        }catch(IOException | IllegalStateException e){
-            throw new Exception("Faile to upload the file",e);
-        }*/
-
     }
 
     public Member login(String id) {
@@ -65,25 +55,11 @@ public class MemberService {
             }
     }
 
-    public boolean idChk(String memid) {
-        System.out.println("memberRepository.existsByMemid(memid) = " + memberRepository.existsByMemid(memid));
+    public boolean idCheck(String memid) {
+        System.out.println("idCheck 메서드 호출됨, memid: " + memid);
         return memberRepository.existsByMemid(memid);
+
     }
-
-
-    /* 회원가입시 유효성 체크 */
-    /* 안됨
-    @Transactional(readOnly = true)
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String,String> validatorResult = new HashMap<>();
-
-        *//* 유효성 검사에 실패한 필드 목록을 받음 *//*
-        for(FieldError error : errors.getFieldErrors()){
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName,error.getDefaultMessage());
-        }
-        return validatorResult;
-    }*/
 
     public Optional<Member> getMemberById(String memid) {
         Optional<Member> opMember = memberRepository.findByMemid(memid);
@@ -110,21 +86,6 @@ public class MemberService {
         );
     }
 
-    /*public Member updateMyInfo(Member iMyInfo, String memid) {
-        Optional<Member> opMember = memberRepository.findByMemid(memid);
-        opMember.ifPresent(
-                member->{
-                    member.setName(iMyInfo.getName());
-                    member.setBirth(iMyInfo.getBirth());
-                    member.setPhone(iMyInfo.getPhone());
-                    //member.setEmail(iMyInfo.getEmail());
-                    //member.setMemImg(iMyInfo.getMemImg());
-
-                    memberRepository.save(member);
-                }
-        );
-        return iMyInfo;
-    }*/
 
     public Member updateMyInfo(Member iMyInfo, String memid) {
         Optional<Member> opMember = memberRepository.findByMemid(memid);
@@ -154,13 +115,6 @@ public class MemberService {
         model.addAttribute("stories",storyRepository.findTop3ByStoryMemIdxOrderByStoryDateDesc(memIdx));
         model.addAttribute("reservations",reservationRepository.findTop5ByRvMemIdxOrderByRvDateDesc(memIdx));
         model.addAttribute("reviews",reviewRepository.findTop5ByReviewMemIdxOrderByReviewDateDesc(memIdx));
-
-        /*List<String> wfSubjects = reservationRepository.findFarmWfSubjectByRvMemIdx(memIdx);
-        model.addAttribute("wfSubjects",wfSubjects);*/
-        /*model.addAttribute("farmSubject",reservationRepository.findFarmSubjectsByRvMemIdx(memIdx));*/
-
-        /*model.addAttribute("wfSubject",reservationRepository.findWfSubjectByMemIdx(memIdx));
-        System.out.println("wfSubject = " + reservationRepository.findWfSubjectByMemIdx(memIdx));*/
 
         model.addAttribute("wfSubjectlist",reservationRepository.findWfSubjectByMemIdx(memIdx));
         model.addAttribute("reviewWfSubjectlist",reviewRepository.findWfSubjectByMemIdx(memIdx));

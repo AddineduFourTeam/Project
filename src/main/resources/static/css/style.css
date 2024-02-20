@@ -2604,7 +2604,37 @@ input:-webkit-autofill:active {
     color:#666;
 }
 
-.login-form .forgot-pass{
+.forgot-pass-form{
+    max-width:400px;
+    width: 100%;
+    padding:50px 30px;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgb(145, 115, 77,0.3);
+}
+
+.forgot-h{
+    text-align: center;
+}
+
+.forgot-input-box{
+    width:100%;
+    height:65px;
+    margin:15px 0;
+}
+
+.forgot-input-box input{
+    width:100%;
+    background: transparent;
+    outline: none;
+    border:2px solid rgba(0, 0, 0, .7);
+    border-radius: 40px;
+    padding:15px;
+}
+
+.forgot-pass-form .forgot-pass{
     display: flex;
     justify-content: flex-end;
     font-size:12px;
