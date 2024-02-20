@@ -21,8 +21,6 @@ public class Review {
     private String reviewImg1;
     private String reviewImg2;
     private String reviewImg3;
-
-    @Column(insertable=false, columnDefinition="NUMBER DEFAULT 0")
     private String reviewCount;
 
     @CreatedDate

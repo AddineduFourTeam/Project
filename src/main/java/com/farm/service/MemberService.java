@@ -65,7 +65,8 @@ public class MemberService {
             }
     }
 
-    public boolean idCheck(String memid) {
+    public boolean idChk(String memid) {
+        System.out.println("memberRepository.existsByMemid(memid) = " + memberRepository.existsByMemid(memid));
         return memberRepository.existsByMemid(memid);
     }
 
@@ -194,7 +195,9 @@ public class MemberService {
         /*orginalreview.setReviewImg1(review.getReviewImg1());
         orginalreview.setReviewImg2(review.getReviewImg2());
         orginalreview.setReviewImg3(review.getReviewImg3());*/
-        orginalreview.setReviewContent(review.getReviewContent());
+        orginalreview.setReviewContent(review.getReviewContent().replaceAll("\r\n","<br>"));
+        orginalreview.setReviewCount(review.getReviewCount());
+        /*orginalreview.setReviewContent(review.getReviewContent());*/
         orginalreview.setReviewSubject(review.getReviewSubject());
         return reviewRepository.save(orginalreview);
     }

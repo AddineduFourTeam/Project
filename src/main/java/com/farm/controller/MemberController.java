@@ -35,11 +35,11 @@ public class MemberController {
         return "/join";
     }
 
-    @GetMapping("/idCheck")
-    @ResponseBody
+    @PostMapping("/idChk")
     public boolean checkId(@RequestParam("id") String memid){
-
-        return memberService.idCheck(memid);
+        boolean bl = memberService.idChk(memid);
+        System.out.println("bl = " + bl);
+        return memberService.idChk(memid);
     }
 
     @PostMapping("/memInsert")
@@ -57,9 +57,10 @@ public class MemberController {
 
         memberService.memInsert(member, file);
 
-        redirectAttributes.addFlashAttribute("insertComplete", true);
+        //redirectAttributes.addFlashAttribute("insertComplete", true);
 
-        return "redirect:/login";
+        //return "redirect:/login";
+        return "login";
     }
 
     @GetMapping("/login")

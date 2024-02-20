@@ -9,7 +9,7 @@
 <div class="wrap con">
     <%@include file="../include/board_search.jsp" %>
     <div class="story_con">
-        <form action="<c:out value="${not empty param.sno ? 'storyUpdate' : ''}"/>" method="post" enctype="multipart/form-data">
+        <form action="<c:out value="${not empty param.sno ? 'storyUpdate' : 'storyForm'}"/>" method="post" enctype="multipart/form-data">
             <input type="hidden" id="storyIdx" name="storyIdx" value="${param.sno}">
             <div class="storyW_tt">
                 <label for="title" class="story_listtt">스토리 제목</label>
@@ -17,7 +17,7 @@
             </div>
             <div class="story_txt">
                 <label for="content" class="story_listtt">스토리 내용</label>
-                <textarea id="content" name="storyContent" required><c:out value="${fn:replace(story.storyContent, '<br>', '&lt;br&gt;')}" escapeXml="false" /></textarea>
+                <textarea id="content" name="storyContent" required>${fn:replace(story.storyContent, '<br>', '\\n')}</textarea>
             </div>
             <div class="story_farm">
                 <input type="hidden" id="farm_select" name="farm_select">
@@ -139,8 +139,10 @@
                     content = "<li class='nofarmlist'>해당 지역에 농장이 없습니다.</li>"
                 }else {
                     data.forEach(function (data, idx) {
-                        var checked = (data.wfIdx == ${story.storyWfIdx}) ? 'checked' : ''; // JSTL 변수를 JavaScript 변수로 사용
-
+                        var checked = "" ;
+                        <c:if test="${story.storyWfIdx ne null}">
+                        checked = (data.wfIdx === ${story.storyWfIdx}) ? 'checked' : ''; // JSTL 변수를 JavaScript 변수로 사용
+                        </c:if>
                         content += "<li>"+
                             "<input type='radio' id='storyWfIdx"+idx+"' "+ checked +" name='storyWfIdx' value='"+data.wfIdx+"' class=''>"+
                             "<label for='storyWfIdx"+idx+"'>"+

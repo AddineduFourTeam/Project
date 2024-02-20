@@ -53,6 +53,7 @@ public class StoryService {
         updatedStory.setStoryImg2(file2.getBytes());
         updatedStory.setStoryImg3(file3.getBytes());
         updatedStory.setStoryDate(originalStory.getStoryDate());
+        updatedStory.setStoryContent(originalStory.getStoryContent().replaceAll("\r\n","<br>"));
         BeanUtils.copyProperties(updatedStory,originalStory);
         //System.out.println("updatedStory = " + updatedStory.getStoryIdx() + " originalStory idx = " + originalStory.getStoryIdx());
         storyRepository.save(updatedStory);

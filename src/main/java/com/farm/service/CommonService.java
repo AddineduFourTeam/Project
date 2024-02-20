@@ -79,7 +79,7 @@ public class CommonService {
             result = farmRepository.findAll(pageable);
         }
         if(objClass.equals(Board.class)) {
-            result = boardRepository.findAllOrderByBoardDateDesc(pageable);
+            result = boardRepository.findAll(pageable);
         }
         if(objClass.equals(Story.class)) {
             result = storyRepository.findAll(pageable);

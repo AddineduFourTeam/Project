@@ -12,9 +12,12 @@
                                    onerror="this.src='img/profileImg.png'"></span>${loginUser.memid}
                     </div>
                     <div class="board_view_date">
-                        <%--<span>
-                           조회수 : <span class="count">${review.reviewCount}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                        </span>--%>
+                        <span>
+                            <c:forEach begin="1" end="${review.reviewCount}">
+                                <span class="active"><i class="fa-solid fa-star"></i></span>
+                            </c:forEach>
+                           (별점 : <span class="count">${review.reviewCount}</span>) &nbsp;&nbsp;|&nbsp;&nbsp;
+                        </span>
                         <span>
                             <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />
                             <fmt:formatDate pattern="yyyy.MM.dd H:mm" value="${parsedDateTime}"/>
@@ -112,6 +115,7 @@
 
                     </c:if>
                     <div class="story_detail_con">
+                        <%--${fn:replace(review.reviewContent, '<br>', '\\n')}--%>
                         ${review.reviewContent}
                     </div>
                 </div>

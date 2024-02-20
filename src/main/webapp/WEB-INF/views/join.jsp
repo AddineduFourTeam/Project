@@ -71,7 +71,7 @@
   </div>
 </div>
 <script>
-    $(()=>{
+    $(document).ready(function(){
         const $idInput = $("#memid");
         const $passInput = $("#pass");
         const $repassInput = $("#repass");
@@ -148,14 +148,16 @@
           }
         })
 
-        $idInput.keyup(function(){
+        $idInput.on("input",function(){
             if(idValidate.test($idInput.val())){
                 if($idInput.val().length >= 5){
                     $.ajax({
-                        url: "idCheck",
+                        url: "idChk",
                         data : {id: $idInput.val()},
-                        success:function(result){
-                            if(result){
+                        type:"post",
+                        success:function(is){
+                          console.log("data"+is);
+                            if(is){
                                 $("#checkIdResult").show().css("color","red").text("중복된 아이디가 존재합니다");
                                 $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
 

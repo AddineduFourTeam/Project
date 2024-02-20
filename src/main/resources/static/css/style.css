@@ -3379,9 +3379,19 @@ input:-webkit-autofill:active {
     text-align: center;
 }
 
-
-
-
+.storyW_con ,.star_list {
+    display: flex;
+}
+.star_list li {
+    cursor: pointer;
+    color:var(--pointColor)
+}
+.star_txt {
+    font-weight: 600;
+}
+.star_text {
+    margin-left: 10px;
+}
 
 
 

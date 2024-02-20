@@ -77,6 +77,19 @@
                     </div>
                 </div>
 
+                <div class="storyW_star">
+                    <label for="title" class="story_listtt">리뷰 평점</label>
+                    <div class="storyW_con">
+                        <input type="hidden" value="5" id="reviewCount" name="reviewCount">
+                       <ul class="star_list">
+                           <c:forEach begin="1" end="5">
+                           <li class="active"><i class="fa-solid fa-star"></i></li>
+                           </c:forEach>
+                       </ul>
+                        <div class="star_text"> (<span class="star_txt">${review.reviewCount ne null ? review.reviewCount : 5}</span>/5)</div>
+                    </div>
+                </div>
+
                 <div class="storyW_tt">
                     <label for="title" class="story_listtt">리뷰 제목</label>
                     <input type="text" id="title" name="reviewSubject" value="${review.reviewSubject}" required>
@@ -148,8 +161,24 @@
             $(this).parents("li").next("li").show();
             readURL(this);
         });
-    });
 
+        $('.star_list li').click(function() {
+            $(this).parent().children('li').removeClass('active');
+            $(this).parent().children('li').find("i").attr("class","fa-regular fa-star");
+            $(this).addClass('active').prevAll('li').addClass('active');
+            $(this).addClass('active').find("i").attr("class","fa-solid fa-star");
+            $(this).prevAll('li').find("i").attr("class","fa-solid fa-star");
+            var star_len = $(".star_list").find("li.active").length;
+            $(".star_text").find(".star_txt").text(star_len);
+            $("#reviewCount").val($(this).index()+1);
+        });
+        <c:if test="${review.reviewCount ne null}">
+        for(let i = 0; i < ${review.reviewCount} ; i++) {
+            $(".star_list li").eq(i).addClass("active").siblings("li").removeClass("active");
+        }
+        </c:if>
+
+    });
 
 
     function readURL(input) {

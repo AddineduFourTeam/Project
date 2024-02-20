@@ -58,8 +58,11 @@ public class StoryController {
     }
 
     @GetMapping("/storyWrite")
-    public String storywrite(Model model,@RequestParam(value="sno", defaultValue="1") Long sno) {
-        model.addAttribute("story", storyService.storyWrite(sno));
+    public String storywrite(Model model,@RequestParam(value="sno", required = false) Long sno) {
+        if (sno != null && sno > 0) {
+            model.addAttribute("story", storyService.storyWrite(sno));
+        }
+
         return "storyWrite";
     }
     @PostMapping("/storyForm")

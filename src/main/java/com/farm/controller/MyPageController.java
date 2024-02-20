@@ -254,6 +254,7 @@ public class MyPageController {
         }catch(IOException e){
             e.printStackTrace();
         }
+        review.setReviewContent(review.getReviewContent().replaceAll("\r\n","<br>"));
         review.setReviewMemIdx(memIdx);
         review.setReviewRvIdx(rno);
         Review savedReview = memberService.reviewForm(review,rno);
