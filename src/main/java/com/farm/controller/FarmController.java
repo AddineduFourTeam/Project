@@ -5,6 +5,7 @@ import com.farm.domain.Member;
 import com.farm.domain.Reservation;
 import com.farm.service.ListService;
 import com.farm.service.MemberService;
+import com.farm.service.ReservationService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,8 @@ public class FarmController {
     ListService listService;
     @Autowired
     MemberService memberService;
+    @Autowired
+    ReservationService reservationService;
 
     private Pageable createPageable(int page){
         return PageRequest.of(page -1, PAGE_SIZE, Sort.by("wfIdx").descending());
@@ -65,6 +68,12 @@ public class FarmController {
     public String reservationSave(Reservation reservation){
         listService.save(reservation);
         return "list";
+    }
+
+    @PostMapping("/reservationUpdate")
+    public String reservationUpdate(Reservation reservation , @RequestParam("rvIdx") Long rvIdx){
+        reservationService.updateReservation(reservation , rvIdx);
+        return "mypageReservation";
     }
 
     @PostMapping("/storyLocal")

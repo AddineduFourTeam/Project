@@ -3,6 +3,8 @@
 <div class="background">
     <div class="window">
         <div class="popup">
+            <input type="hidden" id="mypgModal" value="false">
+            <input type="hidden" id="rvIdx" value="">
             <button class="close"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-content-reservation modal-content" style="display: none">
                 <c:import url="../views/reservation.jsp"/>
@@ -32,14 +34,19 @@
         //galleryItems.addEventListener('click', () => showModal("gallery"));
         closeButton.addEventListener('click', () => closeModal(modal));
     });
-    function showModal(type){
-        console.log(".modal-content-"+type);
+    const wfidx = 0;
+    function showModal(type<c:if test="${folderName eq 'mypageReservation'}">, target</c:if>) {
+        <c:if test="${folderName eq 'mypageReservation'}">
+        document.getElementById("wfidx").value = target.getAttribute('data-wfidx');
+        </c:if>
+        //console.log(".modal-content-" + type);
         modal = document.querySelector(".background");
         modal.classList.add("show");
         document.querySelector("body").style.overflow = "hidden";
         document.querySelector(".popup").classList.add("popup", "animate__animated", "animate__zoomIn", "animate__faster");
-        document.querySelector(".modal-content-"+type).style.display = "block";
+        document.querySelector(".modal-content-" + type).style.display = "block";
     }
+
     const closeModal = (modal) => {
         document.querySelector("body").style.overflow = "auto";
         let mc = document.querySelectorAll(".modal-content");
@@ -55,8 +62,8 @@
 
     /*** 예약팝업내용 ***/
     $(document).ready(function () {
-        let price = "${farm.wfPrice}";
-        let option_price = "${farm.wfOptionPrice}";
+        let price = $("#price").val();
+        let option_price = $("#option_price").val();
         //console.log(option_price);
         let isChecked = $("input[name='feet']");
         let src;
@@ -89,6 +96,8 @@
         let option_leng = 0;
 
         $("input[type='checkbox']").change(function () {
+            let price = $("#price").val();
+            let option_price = $("#option_price").val();
             let name = $(this).attr("name");
 
             let count = $("input[name='feet']:checked").length * 3;
@@ -98,11 +107,21 @@
                 let value = content.siblings().children('.txt').text();
                 $(".rs_option").text(optionArr);
             } else {
+                yearArr = [];
+                $("input[name='year']").each(function(){
+                    if ($(this).is(":checked")) {
+                        yearArr.push($(this).val());
+                    }
+                });
                 year_leng = $("input[name='year']:checked").length;
-                $(".rs_year").text(year_leng);
-                $(".rs_feet").text(count);
+                $("#reYear").val(year_leng);
+                $("#reFeet").val(count);
+
+                $(".rs_year").text(year_leng + "년 (" + yearArr + ")");
+                $(".rs_feet").text(count + "평");
                 $('.feet > span').html(count);
             }
+            console.log(option_price);
             console.log((year_leng * count / 3 * price) + "/" + (option_leng * option_price));
             $(".rs_total_price").text(AddComma(parseInt((year_leng * count / 3 * price) + (option_leng * option_price))));
         });
@@ -129,22 +148,25 @@
             });
 
             console.log(arr);
+            let wfidx = $("#wfidx").val() !== null ? $("#wfidx").val() : 0 ;
             $.ajax({
                 type: 'POST',
-                url: "/reservationSave",
+                url: $("#mypgModal").val() ? "/reservationSave" : "/reservationUpdate",
                 data: {
+                    "rvIdx" : $("#rvIdx").val(),
                     "rvMemIdx" : ${loginUser.memIdx > 0 ? loginUser.memIdx : 0 },
-                    "rvFarmIdx" : ${param.id},
-                    "rvUseDate" : $(".rs_year").text(),
+                    "rvFarmIdx" : <c:if test="${param.id ne null}">${param.id}</c:if>
+                                    <c:if test="${empty param.id}">wfidx</c:if>,
+                    "rvUseDate" : $("#reYear").val(),
                     "status" : "Y",
                     "rvPrice" :  removeComma($(".rs_total_price").text()),
-                    "rvFeet" : $(".rs_feet").text(),
+                    "rvFeet" : $("#reFeet").val(),
                     "rvUseYearDate" : arr,
                     ...rvOptionsData
                 },
                 success: function (){
                     console.log("성공");
-                    window.location.href = "/myPage";
+                    window.location.href = "/mypageReservation";
                 },
                 error: function(){
                     console.log("실패");
@@ -170,4 +192,6 @@
             return true;
         }
     }
+
+
 </script>

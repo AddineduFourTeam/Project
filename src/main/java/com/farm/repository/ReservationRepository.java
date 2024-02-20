@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.net.ContentHandler;
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findTop5ByRvMemIdxOrderByRvDateDesc(Long memIdx);
@@ -29,6 +31,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 //    List<Reservation> findAllByrvMemIdx(Long id);
     List<Reservation> findAllByRvMemIdxOrderByRvDateDesc(Long id);
+
 
 }
 
