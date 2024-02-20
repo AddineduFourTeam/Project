@@ -71,49 +71,8 @@
   </div>
 </div>
 <script>
-  $(()=>{
-
-
-    const $idInput = $("#memid");
-    const idValidate = /^[a-z\d]{3,11}$/;
-
-    $idInput.keyup(function(){
-      if(idValidate.test($idInput.val())){
-        if($idInput.val().length >= 5){
-          $.ajax({
-            url: "idCheck",
-            data : {id: $idInput.val()},
-            success:function(result){
-              console.log("data"+$idInput.val());
-              console.log("result"+result);
-              if(result){
-                $("#checkIdResult").show().css("color","red").text("중복된 아이디가 존재합니다");
-                $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
-
-              }else{
-                $("#checkIdResult").show().css("color","#01b03f").text("사용가능한 아이디 입니다");
-                $("#joinForm :submit").attr("disabled", false).css("background","#01b03f");
-              }
-            },
-            error:function(){
-              console.log("아이디 중복체크용 ajax 실패");
-            }
-          })
-        }else{
-          $("#checkIdResult").show();
-          $("#checkIdResult").css("color","#ddd").text("아이디를 5자 이상 입력해주세요");
-          $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
-        }
-      }else{
-        $("#checkIdResult").show().css("color","red").text("영어 소문자+숫자로 5~13자로 작성해주세요");
-        $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
-      }
-    })
-  });
-</script>
-<script>
     $(()=>{
-        // const $idInput = $("#memid");
+        const $idInput = $("#memid");
         const $passInput = $("#pass");
         const $repassInput = $("#repass");
         const $nameInput = $("#name");
@@ -126,18 +85,17 @@
         const birthValidate = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
         const phoneValidate = /^01[0-9]{8,9}$/;
 
-
       //$("#joinForm :submit").attr("disabled",true).css("background","#ddd");
 
         $("#joinForm").submit(function(event){
-          /*if($idInput.val().trim() === ""){
+          if($idInput.val().trim() === ""){
             $idInput.focus().css("background", "#ddd").attr("placeholder", "아이디를 입력해주세요");
             $idInput.on('input', function(){
               $idInput.css("background", "").attr("placeholder", "");
             });
             event.preventDefault();
             return;
-          }else*/ if($passInput.val().trim() === ""){
+          }else if($passInput.val().trim() === ""){
             $passInput.focus().css("background", "#ddd").attr("placeholder", "비밀번호를 입력해주세요");
             $passInput.on('input', function(){
               $passInput.css("background", "").attr("placeholder", "");
@@ -189,7 +147,7 @@
           }
         });
 
-        /*$idInput.keyup(function(){
+        $idInput.keyup(function(){
             if(idValidate.test($idInput.val())){
                 if($idInput.val().length >= 5){
                     $.ajax({
@@ -200,7 +158,6 @@
                             if(result){
                                 $("#checkIdResult").show().css("color","red").text("중복된 아이디가 존재합니다");
                                 $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
-
                             }else{
                                 $("#checkIdResult").show().css("color","#01b03f").text("사용가능한 아이디 입니다");
                                 $("#joinForm :submit").attr("disabled", false).css("background","#01b03f");
@@ -219,7 +176,7 @@
                 $("#checkIdResult").show().css("color","red").text("영어 소문자+숫자로 5~13자로 작성해주세요");
                 $("#joinForm :submit").attr("disabled",true).css("background","#ddd");
             }
-        });*/
+        });
 
         $repassInput.keyup(function() {
           if ($passInput.val() !== $repassInput.val()) {
@@ -266,8 +223,6 @@
             }
           }
         });
-
-
     })
 
     $(function() {

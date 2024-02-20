@@ -56,7 +56,6 @@ public class MemberService {
     }
 
     public boolean idCheck(String memid) {
-        System.out.println("idCheck 메서드 호출됨, memid: " + memid);
         return memberRepository.existsByMemid(memid);
 
     }
@@ -85,7 +84,6 @@ public class MemberService {
                 }
         );
     }
-
 
     public Member updateMyInfo(Member iMyInfo, String memid) {
         Optional<Member> opMember = memberRepository.findByMemid(memid);

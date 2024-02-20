@@ -26,28 +26,28 @@
                         <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
                     </li>
                     <li>
-                        <input type="submit" class="btn-login m-top" value="회원 정보 확인">
+                        <input type="submit" class="btn-login" value="회원 정보 확인">
                     </li>
                 </ul>
             </form>
         </div>
-        <div class="m-top" id="forgotPass" style="display: none;">
+        <div id="forgotPass" style="display: none;">
             <%--${ChangePass == true}--%>
             <h3>비밀번호 재설정</h3>
                 <h4>새로 지정할 비밀번호를 입력해주세요</h4>
             <form action="forgotPass" method="post" id="forgetPass">
                 <ul>
-                    <li class="join-input-box m-top">
+                    <li class="forgot-input-box">
                         <p>새로운 비밀번호 입력</p>
                         <input type="password" name="pass" id="pass" placeholder="비밀번호를 입력해주세요">
                     </li>
-                    <li class="join-input-box m-top">
+                    <li class="forgot-input-box">
                         <p>비밀번호 확인</p>
                         <input type="password" name="repass" id="repass" placeholder="비밀번호를 한 번 더 입력해주세요">
                         <div id="checkRePassResult" style="font-size:0.8em; display:none;"></div>
                     </li>
                     <li>
-                        <input id="forgotPassBtn" class="btn-login m-top" type="submit" value="비밀번호 변경">
+                        <input id="forgotPassBtn" class="btn-login" type="submit" value="비밀번호 변경">
                     </li>
                 </ul>
                 <input type="hidden" name="memid">

@@ -7,11 +7,9 @@
     <div class="login-form">
         <c:choose>
             <c:when test="${loginUser != null}">
-                <b>${loginUser.memid}</b>님 환영
-                <a href="myPageForm">MYPAGE</a>
-                <a href="logout">LOGOUT</a>
+                <b>${loginUser.memid}</b>님 로그인
             </c:when>
-            <c:otherwise>
+            <c:when test="${loginUser == null}">
                 <form action="loginForm" method="post">
                     <ul>
                         <li>
@@ -52,7 +50,7 @@
                         </li>
                     </ul>
                 </form>
-            </c:otherwise>
+            </c:when>
         </c:choose>
     </div>
 </div>

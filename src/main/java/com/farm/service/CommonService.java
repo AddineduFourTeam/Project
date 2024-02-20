@@ -61,8 +61,7 @@ public class CommonService {
         if (!saveDirectory.exists()) {
             saveDirectory.mkdirs();
         }
-        //Member member = new Member();
-        //member.setMemImg("/files/"+fileName);
+
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
 
