@@ -3,10 +3,12 @@ package com.farm.controller;
 import com.farm.domain.Farm;
 import com.farm.domain.Member;
 import com.farm.domain.Reservation;
+import com.farm.domain.Review;
+import com.farm.dto.MemberReviewDto;
+import com.farm.service.CommonService;
 import com.farm.service.ListService;
 import com.farm.service.MemberService;
 import com.farm.service.ReservationService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class FarmController {
     private static final int PAGE_SIZE = 12;
@@ -30,7 +35,8 @@ public class FarmController {
     MemberService memberService;
     @Autowired
     ReservationService reservationService;
-
+    @Autowired
+    CommonService commonService;
     private Pageable createPageable(int page){
         return PageRequest.of(page -1, PAGE_SIZE, Sort.by("wfIdx").descending());
     }
@@ -48,6 +54,14 @@ public class FarmController {
     @GetMapping("/listDetail")
     public String listDetail(@RequestParam(value = "id") Long id, Model model){
         model.addAttribute("listDetail", listService.detail(id));
+        List<Review> reviewList = commonService.reviewList(id);
+        List<MemberReviewDto> memberReviewDtoList = new ArrayList<>();
+        for(Review review : reviewList){
+            Member member = memberService.findById(review.getReviewMemIdx());
+            MemberReviewDto memberReviewDto = new MemberReviewDto(member, review);
+            memberReviewDtoList.add(memberReviewDto);
+        }
+        model.addAttribute("listReview", memberReviewDtoList);
         return "listDetail";
     }
 
@@ -75,7 +89,6 @@ public class FarmController {
         reservationService.updateReservation(reservation , rvIdx);
         return "mypageReservation";
     }
-
     @PostMapping("/storyLocal")
     public ResponseEntity<?> storyLocal(@RequestParam(value="local") String local, Model model) {
         Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("wfIdx").descending());

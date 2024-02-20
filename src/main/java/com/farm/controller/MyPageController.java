@@ -322,7 +322,6 @@ public class MyPageController {
         Long id = ((Member)session.getAttribute("loginUser")).getMemIdx();
         model.addAttribute("reservations", listService.mypageReservation(id));
         model.addAttribute("wfSubjects",listService.reservationFarm(id));
-        /*model.addAttribute("hasReview",memberService.hasReview(id));*/
 
         try {
             commonService.myList(id,page,Reservation.class,model);
@@ -344,7 +343,8 @@ public class MyPageController {
     }
    @ResponseBody
    @GetMapping("/getReservation")
-   public ReservationFarmDto getReservation(@RequestParam("rvIdx") Long rvIdx) {
+   public ReservationFarmDto getReservation(@RequestParam("rvIdx") Long rvIdx,Model model) {
+       //model.addAttribute("hasReview",memberService.hasReview(rvIdx));
        return reservationService.detail(rvIdx);
    }
 }

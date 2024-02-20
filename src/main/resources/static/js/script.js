@@ -90,6 +90,15 @@ function scroll() {
     }
 }
 
+
+    $(".list_nav ul li a").click(function(event){
+        event.preventDefault();
+        $('html,body').animate({
+            scrollTop: $(this.hash).offset().top - 220
+        }, 50);
+    });
+
+
 function masonryLayout() {
     const masonryContainerStyle = getComputedStyle(
         document.querySelector(".story_list")

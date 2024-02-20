@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
@@ -21,5 +22,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "where rv.reviewMemIdx = :memIdx order by rv.reviewDate desc")
     List<String> findWfSubjectByMemIdx(Long memIdx);
 
-    Object findByReviewRvIdx(Long id);
+    Optional<Review> findByReviewRvIdx(Long id);
+    List<Review> findByReviewWfIdx(Long id);
 }

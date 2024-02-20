@@ -105,12 +105,16 @@
             local(※), url('../fonts/AppleSDGothicNeoH.woff') format('woff');
     font-weight: 800;
 }
+html{
+    scroll-behavior: smooth;
+}
 *{
     padding:0;
     margin:0;
     box-sizing: border-box;
     font-family: 'NanumSquareNeo','AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;
     /*font-family:'AppleSDGothicNeo', 'Roboto', 'Open Sans' ,sans-serif ;*/
+
 }
 h1,h2,h3,h4,h5,h6{
     font-weight:800;
@@ -2089,7 +2093,7 @@ body::-webkit-scrollbar-track {
     position: absolute;
     left: 0;
     top: 55px;
-    width: 50px;
+    width: 80px;
     height: 4px;
     background-color: var(--mainColor);
     transition: .2s;
@@ -2103,6 +2107,7 @@ body::-webkit-scrollbar-track {
 .list_nav > .wrap > .list_wrap > ul > li > a{
     font-size: 1rem;
     font-weight: bold;
+    padding: 20px 0;
 }
 .list_nav > .wrap:after {
     content: "";

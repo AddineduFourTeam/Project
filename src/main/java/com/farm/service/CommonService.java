@@ -281,7 +281,6 @@ public class CommonService {
                 log.error("계정 오류");
             }
         }
-
     }
 
     public void myList(Long idx,int page, Class<?> objClass, Model model) {
@@ -299,5 +298,8 @@ public class CommonService {
         listPage(model , result, objClass);
     }
 
+    public List<Review> reviewList(Long id) {
+        return reviewRepository.findByReviewWfIdx(id);
+    }
 }
 
