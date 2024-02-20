@@ -32,14 +32,19 @@
         //galleryItems.addEventListener('click', () => showModal("gallery"));
         closeButton.addEventListener('click', () => closeModal(modal));
     });
-    function showModal(type){
-        console.log(".modal-content-"+type);
+    const wfidx = 0;
+    function showModal(type<c:if test="${folderName eq 'mypageReservation'}">, target</c:if>) {
+        <c:if test="${folderName eq 'mypageReservation'}">
+        document.getElementById("wfidx").value = target.getAttribute('data-wfidx');
+        </c:if>
+        //console.log(".modal-content-" + type);
         modal = document.querySelector(".background");
         modal.classList.add("show");
         document.querySelector("body").style.overflow = "hidden";
         document.querySelector(".popup").classList.add("popup", "animate__animated", "animate__zoomIn", "animate__faster");
-        document.querySelector(".modal-content-"+type).style.display = "block";
+        document.querySelector(".modal-content-" + type).style.display = "block";
     }
+
     const closeModal = (modal) => {
         document.querySelector("body").style.overflow = "auto";
         let mc = document.querySelectorAll(".modal-content");
@@ -122,12 +127,14 @@
             });
 
             console.log(arr);
+            let wfidx = $("#wfidx").val() !== null ? $("#wfidx").val() : 0 ;
             $.ajax({
                 type: 'POST',
                 url: "/reservationSave",
                 data: {
                     "rvMemIdx" : ${loginUser.memIdx > 0 ? loginUser.memIdx : 0 },
-                    "rvFarmIdx" : ${param.id},
+                    "rvFarmIdx" : <c:if test="${param.id ne null}">${param.id}</c:if>
+                                    <c:if test="${empty param.id}">wfidx</c:if>,
                     "rvUseDate" : $(".rs_year").text(),
                     "status" : "Y",
                     "rvPrice" :  $(".rs_total_price").text(),
@@ -137,7 +144,7 @@
                 },
                 success: function (){
                     console.log("성공");
-                    window.location.href = "/myPage";
+                    window.location.href = "/mypageReservation";
                 },
                 error: function(){
                     console.log("실패");
@@ -163,4 +170,6 @@
             return true;
         }
     }
+
+
 </script>

@@ -2,14 +2,12 @@ package com.farm.controller;
 
 
 import com.farm.domain.Member;
+import com.farm.domain.Reservation;
 import com.farm.domain.Review;
 import com.farm.domain.Story;
 import com.farm.repository.ReservationRepository;
 import com.farm.repository.ReviewRepository;
-import com.farm.service.CommonService;
-import com.farm.service.ListService;
-import com.farm.service.MemberService;
-import com.farm.service.StoryService;
+import com.farm.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @SessionAttributes({"loginUser"})
@@ -43,6 +42,8 @@ public class MyPageController {
 
     @Autowired
     ReviewRepository reveiwRepository;
+    @Autowired
+    ReservationService reservationService;
 
     @GetMapping("/myPage")
     public String myInfoForm(HttpSession session, Model model){
@@ -292,4 +293,9 @@ public class MyPageController {
 //        model.addAttribute("farm", farm);
         return "mypageReservation";
     }
+   @ResponseBody
+   @GetMapping("/getReservation")
+   public Reservation getReservation(@RequestParam("rvIdx") Long rvIdx) {
+       return reservationService.detail(rvIdx);
+   }
 }

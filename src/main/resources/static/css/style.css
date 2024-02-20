@@ -3244,13 +3244,20 @@ input:-webkit-autofill:active {
 .rv_info .info_con ul li div.txt .option{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
 }
-.rv_info .info_con ul li div.txt span i{
+.rv_info .info_con ul li div.txt .option i{
     font-size: 2rem;
     color: #b5bfd9;
 }
-.rv_info .info_con ul li div.txt span i.on{
+.rv_info .info_con ul li div.txt .option span{
+    margin-top: 4px;
+    font-size: 1rem;
+    color: #b5bfd9;
+}
+.rv_info .info_con ul li div.txt .option.color span,
+.rv_info .info_con ul li div.txt .option.color i{
     color: var(--mainColor);
 }
 .rv_info .info_con ul li + li{
