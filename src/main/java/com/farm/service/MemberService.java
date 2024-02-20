@@ -37,6 +37,7 @@ public class MemberService {
     @Autowired
     FarmRepository farmRepository;
 
+
     /*프로필추가설정*/
     @Value("${upload.directory}")
     private String uploadDirectory;
@@ -158,7 +159,12 @@ public class MemberService {
         reviewRepository.deleteById(id);
     }
 
-    public Object hasReview(Long id) {
-        return reviewRepository.findByReviewRvIdx(id) != null;
+    public Boolean hasReview(Long id) {
+        System.out.println("reviewRepository.findByReviewRvIdx(id) = " + reviewRepository.findByReviewRvIdx(id));
+        return reviewRepository.findByReviewRvIdx(id).isPresent();
+    }
+
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElseGet(null);
     }
 }

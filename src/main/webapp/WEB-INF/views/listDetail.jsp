@@ -1,40 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../include/header.jsp" %>
 <c:set var="farm" value="${listDetail}"/>
+<%--${listReview.member.memid}--%>
+<%--${listReview.review}--%>
 <nav class="list_nav">
     <div class="wrap">
         <div class="list_wrap">
             <div class="line"></div>
             <ul>
-                <li><a href="#">소개</a></li>
-                <li><a href="#">나는</a></li>
-                <li><a href="#">지금</a></li>
-                <li><a href="#">위치</a></li>
-                <li><a href="#">리뷰</a></li>
+                <li><a href="#farmIntro">소개</a></li>
+                <li><a href="#farmService">서비스</a></li>
+                <li><a href="#farmInfo">농장주정보</a></li>
+                <li><a href="#farmMap">위치</a></li>
+                <li><a href="#farmReview">리뷰</a></li>
             </ul>
         </div>
         <div class="btn_wrap">
-<%--            <a href="/reservation?id=${listDetail.wfIdx}" id="dtn">--%>
-<%--                <span>예약하기</span>--%>
-<%--            </a>--%>
             <button class="rv_btn">
                 <span onclick="showModal('reservation')">예약하기</span>
             </button>
         </div>
     </div>
 </nav>
-<div class="wrap con list-detail">
-    <%--
-        이미지 /
-        농장이름 /
-        테마 /
-        리뷰
-        서비스/
-        농장소개 /
-        이용정보
-        위치 /
-    --%>
-
+<div id="farmIntro"  class="wrap con list-detail">
     <div class="gallery">
         <ul>
             <li><img src="${farm.wfImgUrl1}" alt="이미지1" onerror="this.src='/img/placeholder.png'"></li>
@@ -54,14 +42,15 @@
         <div class="preview_wrap">
             <div class="preview_swiper">
                 <ul class="swiper-wrapper">
-                    <c:forEach begin="0" end="10">
+                    <c:forEach var="preview" items="${listReview}">
                         <li class="swiper-slide">
                             <i class="fa-solid fa-quote-left"></i>
                             <div class="slide_wrap">
-                                <p>안녕하세요 지금은 배고픈 시간입니다 :)</p>
+                                <p>${preview.review.reviewSubject}</p>
                                 <div class="user_info">
-                                    <p class="nickname">이시영바보</p>
-                                    <span class="date">리뷰를 단 날짜가 들어가는 자리입니당</span>
+                                    <p class="nickname">${preview.member.memid}</p>
+                                    <fmt:parseDate value="${preview.review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both"/>
+                                    <span class="date"><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/></span>
                                 </div>
                             </div>
                         </li>
@@ -76,7 +65,7 @@
         <h2>농장 소개</h2>
         ${listDetail.wfContent}
     </div>
-    <div class="service">
+    <div id="farmService" class="service">
         <h2>서비스</h2>
         <div class="service_wrap">
             <div>
@@ -125,11 +114,11 @@
             </div>
         </div>
     </div>
-    <div class="farmer-info">
+    <div id="farmInfo" class="farmer-info">
         <h2>농장주정보</h2>
         <p><i class="fa-solid fa-phone"></i>${farm.wfTel}</p>
     </div>
-    <div class="map-wrap">
+    <div id="farmMap" class="map-wrap">
         <h2>농장 위치</h2>
         <div id="map" class="map"></div>
         <div class="zoomcontrol">
@@ -145,150 +134,66 @@
         </div>
         <div class="toast_message">복사가 완료되었어요!</div>
     </div>
-<%--    <c:choose>--%>
-<%--        <c:when test="${not empty reviews}">--%>
-<%--            <c:forEach var="review" items="${reviews}" varStatus="i">--%>
-<%--                <fmt:parseDate value="${review.reviewDate}" pattern="yy. M. d. a h:mm" var="parsedDateTime" type="both" />--%>
-<%--                <tr>--%>
-<%--                    <td>${i.count}</td>--%>
-<%--                    <td><a href="mypageReservation?id=${review.reviewIdx}" class="ellipsis">${review.reviewSubject}</a></td>--%>
-<%--                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}" /></td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--        </c:when>--%>
-<%--        <c:otherwise>--%>
-<%--            <tr>--%>
-<%--                <td colspan="3">자료가 없습니다.</td>--%>
-<%--            </tr>--%>
-<%--        </c:otherwise>--%>
-<%--    </c:choose>--%>
-    <div class="review">
+    <div id="farmReview" class="review">
         <h2>농장 후기</h2>
-        <c:forEach begin="0" end="5">
-            <div class="review_wrap">
-                <div class="user_info">
-                    <span class="user_img"><img src="img/profileImg.png"/></span>
-                    <p class="nickname">이시영바보</p>
-                    <span class="date">리뷰를 단 날짜</span>
-                </div>
-                <div class="review_flex">
-                    <div class="review_swiper_wrap">
-                        <div class="point">
-                            <i class="fa-solid fa-star"></i>
-                            <span>${listDetail.wfRating}</span>
+        <c:choose>
+            <c:when test="${listReview ne null}">
+                <c:forEach var="preview" items="${listReview}">
+                    <div class="review_wrap">
+                        <div class="user_info">
+                            <span class="user_img"><img src="${preview.member.memImg}"/></span>
+                            <p class="nickname">${preview.member.memid}</p>
+                            <span class="date"><fmt:formatDate pattern="yyyy.MM.dd" value="${parsedDateTime}"/></span>
                         </div>
-                        <div class="review_swiper">
-                            <ul class="swiper-wrapper">
-                                <c:forEach begin="0" end="10">
-                                    <li class="swiper-slide">
-                                        <div class="slide_wrap">
-                                            <img src="${farm.wfImgUrl1}" alt="이미지1" onerror="this.src='/img/placeholder.png'">
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                        <div class="review_flex">
+                            <div class="review_swiper_wrap">
+                                <div class="point">
+                                    <c:forEach begin="1" end="${preview.review.reviewCount}">
+                                    <i class="fa-solid fa-star"></i>
+                                    </c:forEach>
+                                    <span>${preview.review.reviewCount}</span>
+                                </div>
+                                <div class="review_swiper">
+                                    <ul class="swiper-wrapper">
+                                        <c:if test="${preview.review.reviewImg1 ne null}">
+                                            <li class="swiper-slide">
+                                                <div class="slide_wrap">
+                                                    <img src="${preview.review.reviewImg1}" alt="이미지" onerror="this.src='${farm.wfImgUrl1}'">
+                                                </div>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${preview.review.reviewImg2 ne null}">
+                                        <li class="swiper-slide">
+                                            <div class="slide_wrap">
+                                                <img src="${preview.review.reviewImg2}" alt="이미지1" onerror="this.src='${farm.wfImgUrl1}'">
+                                            </div>
+                                        </li>
+                                        </c:if>
+                                        <c:if test="${preview.review.reviewImg3 ne null}">
+                                        <li class="swiper-slide">
+                                            <div class="slide_wrap">
+                                                <img src="${preview.review.reviewImg3}" alt="이미지1" onerror="this.src='${farm.wfImgUrl1}'">
+                                            </div>
+                                        </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                                    <div class="review-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                                    <div class="review-button-next"><i class="fa-solid fa-angle-right"></i></div>
+                                </div>
+                            <div class="review_txt">
+                                <p>${preview.review.reviewContent}</p>
+                            </div>
                         </div>
-                            <div class="review-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-                            <div class="review-button-next"><i class="fa-solid fa-angle-right"></i></div>
-                        </div>
-                    <div class="review_txt">
-                        <p>솔직히 말할게 많이 기다려 왔어
-                            너도 그랬을 거라 믿어
-                            오늘이 오길
-                            매일같이 달력을 보면서
-                            솔직히 나에게도
-                            지금 이 순간은
-                            꿈만 같아 너와 함께라
-                            오늘을 위해
-                            꽤 많은 걸 준비해 봤어
-                            All about you and I
-                            다른 건 다 제쳐 두고
-                            Now come with me
-                            Take my hand
-                            아름다운 청춘의 한 장
-                            함께 써내려 가자
-                            너와의 추억들로
-                            가득 채울래
-                            (Come on!)
-                            아무 걱정도 하지는 마
-                            나에게 다 맡겨 봐
-                            지금 이 순간이
-                            다시 넘겨볼 수 있는
-                            한 페이지가 될 수 있게
-                            솔직히 말할게 많이 기다려 왔어
-                            너도 그랬을 거라 믿어
-                            오늘이 오길
-                            매일같이 달력을 보면서
-                            솔직히 나에게도
-                            지금 이 순간은
-                            꿈만 같아 너와 함께라
-                            오늘을 위해
-                            꽤 많은 걸 준비해 봤어
-                            All about you and I
-                            다른 건 다 제쳐 두고
-                            Now come with me
-                            Take my hand
-                            아름다운 청춘의 한 장
-                            함께 써내려 가자
-                            너와의 추억들로
-                            가득 채울래
-                            (Come on!)
-                            아무 걱정도 하지는 마
-                            나에게 다 맡겨 봐
-                            지금 이 순간이
-                            다시 넘겨볼 수 있는
-                            한 페이지가 될 수 있게
-                            솔직히 말할게 많이 기다려 왔어
-                            너도 그랬을 거라 믿어
-                            오늘이 오길
-                            매일같이 달력을 보면서
-                            솔직히 나에게도
-                            지금 이 순간은
-                            꿈만 같아 너와 함께라
-                            오늘을 위해
-                            꽤 많은 걸 준비해 봤어
-                            All about you and I
-                            다른 건 다 제쳐 두고
-                            Now come with me
-                            Take my hand
-                            아름다운 청춘의 한 장
-                            함께 써내려 가자
-                            너와의 추억들로
-                            가득 채울래
-                            (Come on!)
-                            아무 걱정도 하지는 마
-                            나에게 다 맡겨 봐
-                            지금 이 순간이
-                            다시 넘겨볼 수 있는
-                            한 페이지가 될 수 있게
-                            솔직히 말할게 많이 기다려 왔어
-                            너도 그랬을 거라 믿어
-                            오늘이 오길
-                            매일같이 달력을 보면서
-                            솔직히 나에게도
-                            지금 이 순간은
-                            꿈만 같아 너와 함께라
-                            오늘을 위해
-                            꽤 많은 걸 준비해 봤어
-                            All about you and I
-                            다른 건 다 제쳐 두고
-                            Now come with me
-                            Take my hand
-                            아름다운 청춘의 한 장
-                            함께 써내려 가자
-                            너와의 추억들로
-                            가득 채울래
-                            (Come on!)
-                            아무 걱정도 하지는 마
-                            나에게 다 맡겨 봐
-                            지금 이 순간이
-                            다시 넘겨볼 수 있는
-                            한 페이지가 될 수 있게
-                        </p>
                     </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <div>
+                    자료가 없습니다.
                 </div>
-            </div>
-        </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 <%-- 모달창 --%>
