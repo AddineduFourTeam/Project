@@ -121,9 +121,9 @@
                 $(".rs_feet").text(count + "평");
                 $('.feet > span').html(count);
             }
+            $(".rs_total_price").text(AddComma(parseInt((year_leng * count / 3 * price) + (option_leng * option_price))));
             console.log(option_price);
             console.log((year_leng * count / 3 * price) + "/" + (option_leng * option_price));
-            $(".rs_total_price").text(AddComma(parseInt((year_leng * count / 3 * price) + (option_leng * option_price))));
         });
 
     });

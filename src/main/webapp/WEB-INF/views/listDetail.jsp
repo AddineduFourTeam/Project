@@ -35,9 +35,13 @@
     <h4>${listDetail.wfTheme}</h4>
     <div class="preview">
         <div class="point">
+            <c:forEach begin="1" end="${preview.review.reviewCount}">
+                <i class="fa-solid fa-star"></i>
+            </c:forEach>
+            <span>${preview.review.reviewCount}</span>
            <i class="fa-solid fa-star"></i>
             <span>${listDetail.wfRating}</span>
-            <a href="#">리뷰보기</a>
+            <a href="#farmReview">리뷰보기</a>
         </div>
         <div class="preview_wrap">
             <div class="preview_swiper">
@@ -149,7 +153,7 @@
                             <div class="review_swiper_wrap">
                                 <div class="point">
                                     <c:forEach begin="1" end="${preview.review.reviewCount}">
-                                    <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
                                     </c:forEach>
                                     <span>${preview.review.reviewCount}</span>
                                 </div>

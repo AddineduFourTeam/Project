@@ -263,7 +263,7 @@ public class MyPageController {
             @RequestParam(value="file1",required = false) MultipartFile file1,
             @RequestParam(value="file2",required = false) MultipartFile file2,
             @RequestParam(value="file3",required = false) MultipartFile file3) {
-        System.out.println("file2 = " + file2.getOriginalFilename());
+        //System.out.println("file2 = " + file2.getOriginalFilename());
         //System.out.println("file1 = " + file1 + ", file2 = " + file2 + ", file3 = " + file3);
         Long memIdx = ((Member)session.getAttribute("loginUser")).getMemIdx();
 
@@ -275,13 +275,13 @@ public class MyPageController {
             }
             if(file2 != null && !file2.isEmpty()) {
                 String filename2 =  commonService.uploadImage(file2, memIdx);
-                System.out.println("file2"+filename2);
+                //System.out.println("file2"+filename2);
                 review.setReviewImg2(filename2);
             }
             if(file3 != null && !file3.isEmpty()) {
                 System.out.println("file3");
                 String filename3 =  commonService.uploadImage(file3, memIdx);
-                System.out.println("file3"+filename3);
+                //System.out.println("file3"+filename3);
                 review.setReviewImg3(filename3);
             }
 

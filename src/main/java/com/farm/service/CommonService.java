@@ -209,7 +209,7 @@ public class CommonService {
             MemInfoDto memInfoDto = new MemInfoDto(sr,member);
             memInfoDto.setStoryReply(storyReplyRepository.save(sr));
 
-            System.out.println(memInfoDto);
+            //System.out.println(memInfoDto);
             return memInfoDto;
         }else {
             return null;

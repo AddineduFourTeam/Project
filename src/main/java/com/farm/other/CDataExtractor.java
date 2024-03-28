@@ -13,7 +13,7 @@ public class CDataExtractor {
     }
 
     public static int extractNumberFromCData(String cdata) {
-        System.out.println(cdata);
+        //System.out.println(cdata);
         if(cdata.isEmpty()) {
             return 0;
         }
@@ -32,7 +32,7 @@ public class CDataExtractor {
     }
 
     public static String extractStringFromCData(String cdata) {
-        System.out.println(cdata);
+        //System.out.println(cdata);
         if(cdata.isEmpty()) {
             return "";
         }

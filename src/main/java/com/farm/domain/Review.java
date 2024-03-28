@@ -21,7 +21,7 @@ public class Review {
     private String reviewImg1;
     private String reviewImg2;
     private String reviewImg3;
-    private String reviewCount;
+    private int reviewCount;
 
     @CreatedDate
     private String reviewDate;

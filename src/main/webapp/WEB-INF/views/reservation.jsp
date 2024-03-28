@@ -118,8 +118,8 @@
         </div>
         <input type="hidden" id="reYear">
         <input type="hidden" id="reFeet">
-        <input type="hidden" id="price" value="${farm.wfPrice}">
-        <input type="hidden" id="option_price" value="${farm.wfOptionPrice}">
+        <input type="hidden" id="price" value="${listDetail.wfPrice}">
+        <input type="hidden" id="option_price" value="${listDetail.wfOptionPrice}">
 
         <button type="button" class="booking_btn">등록</button>
     </div>

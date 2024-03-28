@@ -103,10 +103,10 @@ public class StoryController {
     @PostMapping("/storyReplySave")
     @ResponseBody
     public MemInfoDto storyReplySave(StoryReply storyReply,@RequestParam("id") Long id) {
-        System.out.println("storyReply = " + storyReply);
+        //System.out.println("storyReply = " + storyReply);
         storyReply.setSrStoryIdx(id);
         MemInfoDto sr = (MemInfoDto)commonService.replySave(storyReply);
-        System.out.println("sr = " + sr);
+        //System.out.println("sr = " + sr);
         //System.out.println("storyReply = " + storyReply);
         return sr;
     }
