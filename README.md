@@ -13,15 +13,16 @@
 ## Getting Started
 ### 설치 및 실행 단계
 1. **프로젝트 클론하기**
-Git을 사용하여 이 프로젝트를 로컬 시스템으로 클론합니다.
-```
-https://github.com/AddineduFourTeam/Project.git
-```
+   Git을 사용하여 이 프로젝트를 로컬 시스템으로 클론합니다.
+   ```
+   https://github.com/AddineduFourTeam/Project.git
+   ```
 2. **웹사이트 접속**
-브라우저를 열고 http://localhost:1004로 접속합니다. 애플리케이션의 홈페이지가 표시됩니다.
+
+   브라우저를 열고 http://localhost:1004로 접속합니다. 애플리케이션의 홈페이지가 표시됩니다.
 
 ## 사용법
-테스트 아이디,비밀번호로 로그인하여 진행해 주세요
+테스트 아이디, 비밀번호로 로그인하여 진행해 주세요
 
 Test ID :
 
