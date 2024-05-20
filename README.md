@@ -28,6 +28,168 @@ Test ID :
 
 Test PW :
 
+## Architecture
+<details>
+<summary>Folder Structure</summary>
+<div markdown="1">
+
+```
+
+WeekendFarm/
+│
+├── .gradle/
+├── .idea/
+├── build/
+├── gradle/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── farm/
+│                   ├── config/
+│                   │   └── MemberPasswordEncoder.java
+│                   ├── controller/
+│                   │   ├── AddrController.java
+│                   │   ├── BoardController.java
+│                   │   ├── FarmController.java
+│                   │   ├── HomeController.java
+│                   │   ├── MemberController.java
+│                   │   ├── MyPageController.java
+│                   │   ├── OpenApiController.java
+│                   │   └── StoryController.java
+│                   ├── domain/
+│                   │   ├── Board.java
+│                   │   ├── Farm.java
+│                   │   ├── Member.java
+│                   │   ├── Reservation.java
+│                   │   ├── Review.java
+│                   │   ├── Story.java
+│                   │   └── StoryReply.java
+│                   ├── dto/
+│                   │   ├── MemberReviewDto.java
+│                   │   ├── MemInfoDto.java
+│                   │   └── ReservationFarmDto.java
+│                   ├── filter/
+│                   │   ├── CustomInterceptor.java
+│                   │   └── WebConfig.java
+│                   ├── other/
+│                   │   ├── CDataExtractor.java
+│                   │   └── TestMain.java
+│                   ├── repository/
+│                   │   ├── BoardRepository.java
+│                   │   ├── FarmRepository.java
+│                   │   ├── MemberRepository.java
+│                   │   ├── ReservationRepository.java
+│                   │   ├── ReviewRepository.java
+│                   │   ├── StoryReplyRepository.java
+│                   │   └── StoryRepository.java
+│                   ├── service/
+│                   │   ├── BoardService.java
+│                   │   ├── CommonService.java
+│                   │   ├── KakaoApiExplorer.java
+│                   │   ├── ListService.java
+│                   │   ├── MemberService.java
+│                   │   ├── OpenApiExplorer.java
+│                   │   ├── OpenApiService.java
+│                   │   ├── ReservationService.java
+│                   │   ├── StoryService.java
+│                   │   ├── ServletInitializer.java
+│                   │   └── WeekendFarmApplication.java
+│
+├── resources/
+│   └── static/
+│       ├── css/
+│       │   ├── animate.css
+│       │   ├── font.css
+│       │   ├── reset.css
+│       │   └── style.css
+│       ├── files/
+│       └── fonts/
+│           ├── AppleSDGothicNeoB.eot
+│           ├── AppleSDGothicNeoB.ttf
+│           ├── AppleSDGothicNeoB.woff
+│           ├── AppleSDGothicNeoB.woff2
+│           ├── AppleSDGothicNeoEB.eot
+│           ├── AppleSDGothicNeoEB.ttf
+│           ├── AppleSDGothicNeoEB.woff
+│           ├── AppleSDGothicNeoEB.woff2
+│           ├── AppleSDGothicNeoH.eot
+│           ├── AppleSDGothicNeoH.ttf
+│           ├── AppleSDGothicNeoH.woff
+│           ├── AppleSDGothicNeoH.woff2
+│           ├── AppleSDGothicNeoL.eot
+│           ├── AppleSDGothicNeoL.ttf
+│           ├── AppleSDGothicNeoL.woff
+│           ├── AppleSDGothicNeoL.woff2
+│           ├── AppleSDGothicNeoM.eot
+│           ├── AppleSDGothicNeoM.ttf
+│           ├── AppleSDGothicNeoM.woff
+│           ├── AppleSDGothicNeoM.woff2
+│           ├── AppleSDGothicNeoR.eot
+│           ├── AppleSDGothicNeoR.ttf
+│           ├── AppleSDGothicNeoR.woff
+│           ├── AppleSDGothicNeoR.woff2
+│           ├── AppleSDGothicNeoSB.eot
+│           ├── AppleSDGothicNeoSB.ttf
+│           ├── AppleSDGothicNeoSB.woff
+│           ├── AppleSDGothicNeoSB.woff2
+│           ├── AppleSDGothicNeoT.eot
+│           ├── AppleSDGothicNeoT.ttf
+│           ├── AppleSDGothicNeoT.woff
+│           ├── AppleSDGothicNeoT.woff2
+│           └── AppleSDGothicNeoUL.eot
+│           ├── AppleSDGothicNeoUL.ttf
+│           ├── AppleSDGothicNeoUL.woff
+│           └── AppleSDGothicNeoUL.woff2
+│       └── img/
+│           ├── bg01.jpg
+│           ├── bg02.jpg
+│           ├── bg03.jpg
+│           ├── busan.jpg
+│           ├── check.svg
+│           ├── chungcheong.jpg
+│           ├── favicon.ico
+│           ├── favicon.png
+│           ├── field.png
+│           ├── field_on.png
+│           ├── gangwon.jpg
+│           ├── gangwon02.jpg
+│           ├── gyeonggi.png
+│           ├── gyeongsang.png
+│           ├── jeolla.jpg
+│           ├── jeolla02.jpg
+│           ├── location.svg
+│           ├── logo.png
+│           ├── logo_w.png
+│           ├── logoimg.png
+│           ├── mainimg.jpg
+│           ├── mainimg2.jpg
+│           ├── placeholder.png
+│           ├── profileImg.png
+│           ├── profileImg_w.png
+│           ├── seoul.jpg
+│           ├── seoul02.jpg
+│           └── sprout.png
+│       └── js/
+│           ├── aos.min.js
+│           ├── script.js
+│           └── wow.min.js
+│   ├── application.properties
+│   └── webapp/
+│
+├── test/
+├── .gitignore
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── README.md
+└── settings.gradle
+
+```
+</div>
+</details>
+
+
 ## 3. 시스템 요구 사항
 - 웹 브라우저(권장: 최신 버전의 Chrome, Edge 등)
 - 데이터베이스 시스템 : Oracle 21c
