@@ -17,7 +17,11 @@
    ```
    https://github.com/AddineduFourTeam/Project.git
    ```
-2. **웹사이트 접속**
+2. **스프링 부트 애플리케이션을 실행하여 웹 서버 시작**
+   ```
+   ./gradlew bootRun
+   ```
+3. **웹사이트 접속**
 
    브라우저를 열고 `http://localhost:1004`로 접속합니다. 애플리케이션의 홈페이지가 표시됩니다.
 
