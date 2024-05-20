@@ -28,9 +28,9 @@
 ## 사용법
 테스트 아이디, 비밀번호로 로그인하여 진행해 주세요
 
-Test ID :
+Test ID :user01 
 
-Test PW :
+Test PW :1234
 
 ## Architecture
 <details>
